@@ -1,12 +1,13 @@
 # Thông tin về Tác giả
-Mã sinh viên: ...
-Họ tên: ...
+D20197 - Trần Văn Hòa <br>
+D20208 - Dương Thị Tường Vy<br>
+D20209 - Đỗ Nguyễn Duy Linh
 
 # Hướng dẫn cách sử dụng dự án
 ## Step 1: Clone source dự án
 Thực thi câu lệnh sau:
 ```
-git clone <link đường dẫn github>
+git clone https://github.com/tea1504/DoAnWeb3.git
 ```
 
 ## Step 2: Khởi tạo, kết nối database
@@ -15,9 +16,9 @@ Hiệu chỉnh file .env. Nếu chưa có thì copy file .env.example ra file .e
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=tendatabase
+DB_DATABASE=dbnhanluc
 DB_USERNAME=root
-DB_PASSWORD=matkhau
+DB_PASSWORD=
 ```
 - Nếu chưa có key thì chạy câu lệnh
 ```
@@ -38,15 +39,12 @@ php artisan db:seed
 ```
 
 ## Step 5: tạo domain ảo
-- Tạo domain ảo với <tengido.local>
+- Tạo domain ảo với qlnhanluc.local
 
 ## Step 6: thông tin tài khoản truy cập hệ thống
 Tài khoản Admin:
-admin / 123456
+admin / admin
 
-Tài khoản Quản lý kho:
-kho / 123456
-
-Tài khoản Khách hàng:
-khachhang / 123456
+Tài khoản Nhân viên:
+nhanvien / 123456
 ...
