@@ -6,7 +6,7 @@ D20209 - Đỗ Nguyễn Duy Linh
 ## Step 1: Clone source dự án
 Thực thi câu lệnh sau:
 ```
-git clone <link đường dẫn github>
+git clone https://github.com/tea1504/DoAnWeb3.git
 ```
 
 ## Step 2: Khởi tạo, kết nối database
@@ -15,13 +15,13 @@ Hiệu chỉnh file .env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=tendatabase
+DB_DATABASE=dbnhanluc
 DB_USERNAME=root
-DB_PASSWORD=matkhau
+DB_PASSWORD=
 ```
 
 ## Step 3: Tạo database, thực hiện migrate
-- Tạo database <tengido>, chuẩn bảng mã `utf8mb4_unicode_ci`
+- Tạo database dbnhanluc, chuẩn bảng mã `utf8mb4_unicode_ci`
 - Thực thi câu lệnh khởi tạo cấu trúc bảng
 ```
 php artisan migrate
@@ -34,15 +34,12 @@ php artisan db:seed
 ```
 
 ## Step 5: tạo domain ảo
-- Tạo domain ảo với <tengido.local>
+- Tạo domain ảo với <qlnhanluc.local>
 
 ## Step 6: thông tin tài khoản truy cập hệ thống
 Tài khoản Admin:
-admin / 123456
+admin / admin
 
-Tài khoản Quản lý kho:
-kho / 123456
-
-Tài khoản Khách hàng:
-khachhang / 123456
+Tài khoản Nhân viên:
+nhanvien / 123456
 ...
