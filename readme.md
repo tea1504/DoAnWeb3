@@ -1,7 +1,7 @@
 # Thông tin về Tác giả
-Mã sinh viên: ...
-Họ tên: ...
-
+D20197 - Trần Văn Hòa <br>
+D20208 - Dương Thị Tường Vy<br>
+D20209 - Đỗ Nguyễn Duy Linh
 # Hướng dẫn cách sử dụng dự án
 ## Step 1: Clone source dự án
 Thực thi câu lệnh sau:
