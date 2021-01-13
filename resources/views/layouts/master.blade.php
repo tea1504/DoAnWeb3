@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="vn">
 
 <head>
     <meta charset="utf-8">
@@ -15,16 +15,10 @@
     <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/jqvmap/jqvmap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('themes/AdminLTE/dist/css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/daterangepicker/daterangepicker.css') }}">
-    <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/summernote/summernote-bs4.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Các custom style dành riêng cho từng view -->
@@ -34,9 +28,9 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @include('layouts.partials.navbar');
+        @include('layouts.partials.navbar')
 
-        @include('layouts.partials.sidebar');
+        @include('layouts.partials.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -44,13 +38,11 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Dashboard</h1>
+                            <h1 class="m-0 text-dark">@yield('title')</h1>
                         </div><!-- /.col -->
+                        
                         <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>
+                            @yield('duongdan')
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -64,12 +56,7 @@
             <!-- /.content -->
         </div>
 
-        @include('layouts.partials.footer');
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+        @include('layouts.partials.footer')
     </div>
     <!-- ./wrapper -->
 
@@ -83,30 +70,14 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('themes/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- ChartJS -->
-    <script src="{{ asset('themes/AdminLTE/plugins/chart.js/Chart.min.js')}}"></script>
-    <!-- Sparkline -->
-    <script src="{{ asset('themes/AdminLTE/plugins/sparklines/sparkline.js')}}"></script>
-    <!-- JQVMap -->
-    <script src="{{ asset('themes/AdminLTE/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-    <script src="{{ asset('themes/AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{{ asset('themes/AdminLTE/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
     <!-- daterangepicker -->
     <script src="{{ asset('themes/AdminLTE/plugins/moment/moment.min.js')}}"></script>
-    <script src="{{ asset('themes/AdminLTE/plugins/daterangepicker/daterangepicker.js')}}"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="{{ asset('themes/AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-    <!-- Summernote -->
-    <script src="{{ asset('themes/AdminLTE/plugins/summernote/summernote-bs4.min.js')}}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('themes/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('themes/AdminLTE/dist/js/adminlte.js')}}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('themes/AdminLTE/dist/js/pages/dashboard.js')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('themes/AdminLTE/dist/js/demo.js')}}"></script>
     <!-- Các custom script dành riêng cho từng view -->
     @yield('custom-scripts')
 </body>
