@@ -50,4 +50,6 @@ nhanvien / 123456
 ...
 
 ## dbnhansu
-![img](\DoAnWeb3\public\images\dbnhansu.png)
+<p align="center">
+  <img src="./public/images/dbnhansu.png" alt="dbnhansu.png"/>
+</p>
