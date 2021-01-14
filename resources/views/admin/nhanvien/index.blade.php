@@ -11,8 +11,9 @@ Danh sách nhân viên
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid">
-    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+<div class="container-fluid" ng-controller="nhanvienController">
+        <button class="btn btn-outline-danger" ng-click="showTable()">Bấm <% show %></button>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1" ng-show="!show">
         @foreach($data as $d)
         <div class="col">
             <div class="card">
@@ -29,7 +30,42 @@ Danh sách nhân viên
         </div>
         @endforeach
     </div>
+    <div class="row" ng-show="show">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data as $d)
+                    <tr>
+                        <th>{{$loop->index+1}}</th>
+                        <th><img src="{{ asset('themes/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" height="50px" alt="User Image"></th>
+                        <th>{{$d}}</th>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 @endsection
 @section('custom-scripts')
+<script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+    app.controller('nhanvienController', function($scope) {
+        $scope.show = false;
+        $scope.showTable = function() {
+            $scope.show = !$scope.show;
+        }
+    });
+</script>
+
 @endsection
