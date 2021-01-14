@@ -27,7 +27,7 @@
                     <a href="{{ route('admin') }}" class="{{ request()->is('admin')?'active nav-link':'nav-link' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard 
+                            Dashboard
                         </p>
                     </a>
                 </li>
@@ -42,7 +42,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.nhanvien.index') }}" class="nav-link">
-                            <i class="fas fa-user nav-icon"></i>
+                                <i class="fas fa-user nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
                         </li>
@@ -59,6 +59,15 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
+                        <i class="nav-icon fas fa-chart-bar"></i>
+                        <p>
+                            Thống kê
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

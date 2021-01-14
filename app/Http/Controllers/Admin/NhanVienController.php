@@ -15,7 +15,7 @@ class NhanVienController extends Controller
     public function index()
     {
         $data = [
-            'a','b','c','d','e','f'
+            'a','b','c','d','e','f','i','j','k','l','m','n','o','p','q'
         ];
         return view('admin.nhanvien.index')
                 -> with('data', $data);
