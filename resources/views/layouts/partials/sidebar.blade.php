@@ -24,15 +24,15 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="{{ route('admin') }}" class="nav-link active">
+                    <a href="{{ route('admin') }}" class="{{ request()->is('admin')?'active nav-link':'nav-link' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            Dashboard 
                         </p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="{{ request()->is('admin/nhanvien')?'active nav-link':'nav-link' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Nhân viên

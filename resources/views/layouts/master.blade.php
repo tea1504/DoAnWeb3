@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vn">
+<html lang="vn" ng-app="app">
 
 <head>
     <meta charset="utf-8">
@@ -78,6 +78,14 @@
     <script src="{{ asset('themes/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('themes/AdminLTE/dist/js/adminlte.js')}}"></script>
+    <!-- AngularJS -->
+    <script src="{{ asset('vendor/angularjs/angular.min.js')}}"></script>
+    <script>
+        var app = angular.module('app', [],function($interpolateProvider) {
+                $interpolateProvider.startSymbol('<%');
+                $interpolateProvider.endSymbol('%>');
+            });
+    </script>
     <!-- Các custom script dành riêng cho từng view -->
     @yield('custom-scripts')
 </body>
