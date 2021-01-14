@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQlnhansuLoaiTable extends Migration
+class CreateDantocTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateQlnhansuLoaiTable extends Migration
      */
     public function up()
     {
-        Schema::create('qlnhansu_tongiao', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('dantoc', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->unsignedTinyInteger('dt_ma')->autoIncrement();
+            $table->string('dt_ten',50);
         });
     }
 
@@ -26,6 +27,6 @@ class CreateQlnhansuLoaiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qlnhansu_tongiao');
+        Schema::dropIfExists('dantoc');
     }
 }
