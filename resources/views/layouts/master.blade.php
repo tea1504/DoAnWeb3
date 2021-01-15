@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Các custom style dành riêng cho từng view -->
     @yield('custom-css')
 </head>
@@ -40,7 +43,7 @@
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">@yield('title')</h1>
                         </div><!-- /.col -->
-                        
+
                         <div class="col-sm-6">
                             @yield('duongdan')
                         </div><!-- /.col -->
@@ -81,11 +84,14 @@
     <!-- AngularJS -->
     <script src="{{ asset('vendor/angularjs/angular.min.js')}}"></script>
     <script>
-        var app = angular.module('app', [],function($interpolateProvider) {
-                $interpolateProvider.startSymbol('<%');
-                $interpolateProvider.endSymbol('%>');
-            });
+        var app = angular.module('app', [], function($interpolateProvider) {
+            $interpolateProvider.startSymbol('<%');
+            $interpolateProvider.endSymbol('%>');
+        });
     </script>
+    <!-- Sweet Alert 2 -->
+    <script src="{{ asset('themes/AdminLTE/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
     <!-- Các custom script dành riêng cho từng view -->
     @yield('custom-scripts')
 </body>
