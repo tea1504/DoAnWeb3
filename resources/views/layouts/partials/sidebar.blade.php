@@ -65,7 +65,14 @@
                         <i class="nav-icon fas fa-chart-bar"></i>
                         <p>
                             Thống kê
-                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.lienhe') }}" class="{{ request()->is('admin/lienhe')?'active nav-link':'nav-link' }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>
+                            Liên hệ
                         </p>
                     </a>
                 </li>

@@ -27,7 +27,7 @@ Danh sách nhân viên
 @endsection
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
-    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
     <li class="breadcrumb-item active">Danh sách nhân viên</li>
 </ol>
 @endsection
@@ -38,11 +38,11 @@ Danh sách nhân viên
             <button class="btn btn-outline-danger mb-3" ng-click="showTable()">Bấm <% show %></button>
         </div>
     </div>
-    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1" ng-show="!show">
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1" ng-show="!show" id="sortable">
         @foreach($data as $d)
         <div class="col">
             <div class="card my-card">
-                <div class="card-header bg-dark">
+                <div class="card-header bg-dark" style="cursor: move;">
                     <div class="image">
                         <img src="{{ asset('themes/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" height="50px" alt="User Image">
                         Featured
@@ -89,6 +89,10 @@ Danh sách nhân viên
 <script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     $(document).ready(function() {
+        $("#sortable").sortable({
+            cancel: '.card-body',
+        });
+        $("#sortable").disableSelection();
         $('#myTable').DataTable({
             dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
             buttons: [
