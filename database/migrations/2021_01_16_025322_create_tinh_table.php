@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNhommauTable extends Migration
+class CreateTinhTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateNhommauTable extends Migration
      */
     public function up()
     {
-        Schema::create('nhommau', function (Blueprint $table) {
+        Schema::create('tinh', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedTinyInteger('nm_ma')->autoIncrement();
-            $table->string('nm_ten',50);
+
+            $table->unsignedTinyInteger('t_ma')->autoIncrement();
+            $table->string('t_ten', 50);
         });
     }
 
@@ -27,6 +28,6 @@ class CreateNhommauTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nhommau');
+        Schema::dropIfExists('tinh');
     }
 }
