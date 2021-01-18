@@ -17,9 +17,9 @@ class CreateQuatrinhcongtacTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedInteger('qtct_ma')->autoIncrement()->comment('mã quá trình công tác');
             $table->string('nv_ma', 10);
-            $table->date('qtct_tungay');
-            $table->date('qtct_denngay');
-            $table->unsignedTinyInteger('chucVu_ma');
+            $table->date('qtct_tuNgay');
+            $table->date('qtct_denNgay');
+            $table->unsignedTinyInteger('cvu_ma');
             $table->unsignedTinyInteger('dv_ma');
             $table->unsignedTinyInteger('nb_ma');
             $table->timestamp('qtct_taoMoi')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -28,7 +28,7 @@ class CreateQuatrinhcongtacTable extends Migration
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('nb_ma')->references('nb_ma')->on('ngach_bac')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->foreign('chucVu_ma')->references('cvu_ma')->on('chucvu')
+            $table->foreign('cvu_ma')->references('cvu_ma')->on('chucvu')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('dv_ma')->references('dv_ma')->on('donvi')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
