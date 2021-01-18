@@ -19,7 +19,7 @@ class CreateQuanhegiadinhTable extends Migration
                     ->autoIncrement();
             $table->string('nv_ma', 10);
             $table->string('qhgd_ten', 50);
-            $table->string('qhgd_moiQuanhe', 50);
+            $table->string('qhgd_moiQuanHe', 50);
             $table->string('qhgd_namSinh', 4);
             $table->string('qhgd_diaChi', 100);
             $table->string('qhgd_ngheNghiep', 100);
