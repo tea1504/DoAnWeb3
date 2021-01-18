@@ -18,6 +18,6 @@ class Xa extends Model
         return $this->hasMany('App\QueQuan', 'x_ma', 'x_ma');
     }
     public function huyen(){
-        return $this->belongsTo('App\Tinh', 'h_ma', 'h_ma');
+        return $this->belongsTo('App\Huyen', 'h_ma', 'h_ma');
     }
 }

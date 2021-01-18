@@ -15,6 +15,8 @@ class QueQuan extends Model
 
     protected   $primaryKey     = 'qq_ma';
 
+    protected $dates            = ['qq_taoMoi', 'qq_capNhat'];
+    protected $dateFormat       = 'Y-m-d H:i:s';
     
     public function nhanVien(){
         return $this->belongsTo('App\NhanVien', 'nv_ma', 'nv_ma');
