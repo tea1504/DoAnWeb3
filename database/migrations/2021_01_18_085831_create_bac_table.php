@@ -19,6 +19,7 @@ class CreateBacTable extends Migration
             $table->string('b_ten', 50); 
             $table->timestamp('b_taoMoi')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('b_capNhat')->default(DB::raw('CURRENT_TIMESTAMP'));
+            
         });
     }
 

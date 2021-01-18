@@ -20,6 +20,7 @@ class CreatePhucapTable extends Migration
             $table->double('pc_heSoPhuCap', 3); 
             $table->timestamp('pc_taoMoi')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('pc_capNhat')->default(DB::raw('CURRENT_TIMESTAMP'));
+            
         });
     }
 

@@ -19,6 +19,7 @@ class CreateNgachTable extends Migration
             $table->string('ng_ten', 50); 
             $table->timestamp('ng_taoMoi')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('ng_capNhat')->default(DB::raw('CURRENT_TIMESTAMP'));
+            
         });
     }
 

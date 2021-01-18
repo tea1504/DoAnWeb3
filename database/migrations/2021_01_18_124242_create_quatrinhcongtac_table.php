@@ -32,6 +32,7 @@ class CreateQuatrinhcongtacTable extends Migration
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('dv_ma')->references('dv_ma')->on('donvi')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
+            
         });
     }
 

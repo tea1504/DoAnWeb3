@@ -25,6 +25,7 @@ class CreateNgachBacTable extends Migration
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('b_ma')->references('b_ma')->on('bac')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
+            
         });
     }
 

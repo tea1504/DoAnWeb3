@@ -35,7 +35,7 @@ class CreateLuongTable extends Migration
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('pc_ma')->references('pc_ma')->on('phucap')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
-        
+            
         });
     }
 
