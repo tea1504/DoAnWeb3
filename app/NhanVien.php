@@ -46,13 +46,21 @@ class NhanVien extends Model
     public function queQuan(){
         return $this->hasMany('App\QueQuan', 'nv_ma', 'nv_ma');
     }
-    //user-role
-    //user-quyen
+    public function userQuyen(){
+        return $this->hasMany('App\UserQuyen', 'nv_ma', 'nv_ma');
+    }
+    public function userRole(){
+        return $this->hasMany('App\UserRole', 'nv_ma', 'nv_ma');
+    }
     public function tuyenDung(){
         return $this->hasMany('App\QueQuan', 'nv_ma', 'nv_ma');
     }
-    //qua trinh cong tac
-    //luong
+    public function dsQuaTrinhCongTac(){
+        return $this->hasMany('App\QuaTrinhCongTac', 'nv_ma', 'nv_ma');
+    }
+    public function luong(){
+        return $this->hasMany('App\Luong', 'nv_ma', 'nv_ma');
+    }
     public function lichSuBanThan(){
         return $this->hasMany('App\LichSuBanThan', 'nv_ma', 'nv_ma');
     }
