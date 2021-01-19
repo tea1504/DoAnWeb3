@@ -17,4 +17,7 @@ class Ngach extends Model
 
     protected $dates        = ['ng_taoMoi', 'ng_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
+    public function ngach_nb(){
+        return $this->hasMany('App\Ngach_Bac', 'ng_ma', 'ng_ma');
+    }
 }

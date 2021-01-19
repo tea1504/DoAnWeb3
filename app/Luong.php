@@ -17,4 +17,19 @@ class Luong extends Model
 
     protected $dates        = ['l_taoMoi', 'l_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
+    public function nhanvien_luong(){
+        return $this->belongsTo('App\NhanVien','nv_ma','nv_ma');
+    }
+    public function chucvu_luong(){
+        return $this->belongsTo('App\ChucVu','cv_ma','cv_ma');
+    }
+    public function ngach_luong(){
+        return $this->belongsTo('App\Ngach','ng_ma','ng_ma');
+    }
+    public function bac_luong(){
+        return $this->belongsTo('App\Bac','b_ma','b_ma');
+    }
+    public function phucap_luong(){
+        return $this->belongsTo('App\PhuCap','pc_ma','pc_ma');
+    }
 }

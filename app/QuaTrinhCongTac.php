@@ -17,4 +17,13 @@ class QuaTrinhCongTac extends Model
 
     protected $dates        = ['qtct_taoMoi', 'qtct_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
+    public function chucvu_qtct(){
+        return $this->belongsTo('App\ChucVu','cv_ma','cv_ma');
+    }
+    public function donvi_qtct(){
+        return $this->belongsTo('App\DonVi','dv_ma','dv_ma');
+    }
+    public function nb_qtct(){
+        return $this->belongsTo('App\Ngach_Bac','nb_ma','nb_ma');
+    }
 }

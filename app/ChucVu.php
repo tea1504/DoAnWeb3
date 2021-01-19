@@ -21,5 +21,11 @@ class ChucVu extends Model
     public function dsTuyenDung(){
         return $this->hasMany('App\TuyenDung', 'cvu_ma', 'cvu_ma');
     }
+    public function dsLuong(){
+        return $this->hasMany('App\Luong', 'cvu_ma', 'cvu_ma');
+    }
+    public function dsQuaTrinhCongTac(){
+        return $this->hasMany('App\quatrinhcongtac', 'cvu_ma', 'cvu_ma');
+    }
     // Lương, Quá trình công tác
 }
