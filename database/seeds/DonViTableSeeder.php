@@ -12,7 +12,7 @@ class DonViTableSeeder extends Seeder
     public function run()
     {
         $list = [];
-        $types = [''];
+        $types = ['Ban giám đốc','Tổ phần ban','Tổ hành chánh','Nhân viên'];
         for($i=1; $i<=count($types); $i++){
             array_push($list, [
                 'dv_ma'     =>  $i, 

@@ -12,7 +12,7 @@ class Loai_vbccTableSeeder extends Seeder
     public function run()
     {
         $list = [];
-        $types = ['Bằng tốt nghiệp trung học cơ sở', 'Bằng tốt nghiệp trung học phổ thông', 'Bằng tốt nghiệp trung cấp', 'Bằng tốt nghiệp cao đẳng', 'Bằng cử nhân', 'Bằng thạc sĩ', 'Bằng tiến sĩ và văn bằng trình độ tương đương','Giấy công nhận'];
+        $types = ['Bằng tốt nghiệp trung học cơ sở', 'Bằng tốt nghiệp trung học phổ thông', 'Bằng tốt nghiệp trung cấp', 'Bằng tốt nghiệp đại học và cao đẳng', 'Bằng cử nhân', 'Bằng thạc sĩ', 'Bằng tiến sĩ và văn bằng trình độ tương đương','Giấy công nhận'];
         for($i=1;$i<=count($types);$i++){
             array_push($list, [
                 'loaiVBCC_ma'   => $i,
