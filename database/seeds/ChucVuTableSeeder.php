@@ -22,11 +22,11 @@ class ChucVuTableSeeder extends Seeder
 
         for ($i=1; $i <= count($types); $i++) {
             array_push($list, [
-                'cv_ma'      => $i,
-                'cv_ten'     => $types[$i][1],
-                'cv_moTa'     => $types[$i][2],
-                'cv_taoMoi'  => $today->format('Y-m-d H:i:s'),
-                'cv_capNhat' => $today->format('Y-m-d H:i:s')
+                'cvu_ma'      => $i,
+                'cvu_ten'     => $types[$i][1],
+                'cvu_moTa'     => $types[$i][2],
+                'cvu_taoMoi'  => $today->format('Y-m-d H:i:s'),
+                'cvu_capNhat' => $today->format('Y-m-d H:i:s')
             ]);
         }
         DB::table('chucvu')->insert($list);
