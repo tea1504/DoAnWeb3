@@ -17,4 +17,13 @@ class Ngach_Bac extends Model
 
     protected $dates        = ['nb_taoMoi', 'nb_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
+    public function bac_nb(){
+        return $this->belongsTo('App\Bac', 'b_ma', 'b_ma');
+    }
+    public function ngach_nb(){
+        return $this->belongsTo('App\Ngach', 'ng_ma', 'ng_ma');
+    }
+    public function qtct_nb(){
+        return $this->belongsTo('App\QuaTrinhCongTac','nb_ma','nb_ma');
+    }
 }

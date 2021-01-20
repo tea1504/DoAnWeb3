@@ -17,4 +17,7 @@ class Bac extends Model
 
     protected $dates        = ['b_taoMoi', 'b_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
+    public function bac_nb(){
+        return $this->hasMany('App\Ngach_Bac', 'b_ma', 'b_ma');
+    }
 }
