@@ -10,7 +10,7 @@ class Ngach extends Model
     const     UPDATED_AT    = 'ng_capNhat';
 
     protected $table        = 'ngach';
-    protected $fillable     = ['ng_ten','ng_taoMoi', 'ng_capNhat'];
+    protected $fillable     = ['ng_ten','ng_taoMoi', 'ng_capNhat','ng_moTa'];
     protected $guarded      = ['ng_ma'];
 
     protected $primaryKey   = 'ng_ma';

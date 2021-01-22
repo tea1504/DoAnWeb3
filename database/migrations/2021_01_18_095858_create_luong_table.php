@@ -18,7 +18,6 @@ class CreateLuongTable extends Migration
             $table->unsignedInteger('l_ma')->autoIncrement()->comment('mã lương');
             $table->string('nv_ma', 10);
             $table->unsignedTinyInteger('l_tinhTrang')->default('1');
-            $table->unsignedTinyInteger('chucVuHienTai_ma');
             $table->decimal('l_luongCanBan',13,3);
             $table->unsignedTinyInteger('ng_ma');
             $table->unsignedTinyInteger('b_ma');
@@ -30,8 +29,6 @@ class CreateLuongTable extends Migration
             $table->foreign('ng_ma')->references('ng_ma')->on('ngach')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('b_ma')->references('b_ma')->on('bac')
-            ->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->foreign('chucVuHienTai_ma')->references('cvu_ma')->on('chucvu')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('pc_ma')->references('pc_ma')->on('phucap')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
