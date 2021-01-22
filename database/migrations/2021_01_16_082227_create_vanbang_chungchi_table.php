@@ -20,7 +20,6 @@ class CreateVanbangChungchiTable extends Migration
                     ->autoIncrement();
             $table->string('nv_ma', 10);
             $table->string('vbcc_ten', 50);
-            $table->unsignedTinyInteger('loaiVBCC_ma');
             $table->string('vbcc_trinhDo', 50)->nullable();
             $table->date('vbcc_ngayCap');
             $table->timestamp('vbcc_taoMoi')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -29,11 +28,6 @@ class CreateVanbangChungchiTable extends Migration
             $table->foreign('nv_ma')
                     ->references('nv_ma')
                     ->on('nhanvien')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
-            $table->foreign('loaiVBCC_ma')
-                    ->references('loaiVBCC_ma')
-                    ->on('Loai_VBCC')
                     ->onDelete('CASCADE')
                     ->onUpdate('CASCADE');
         });

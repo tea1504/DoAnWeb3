@@ -30,8 +30,7 @@ class VbccTableSeeder extends Seeder
             array_push($list, [
                 'vbcc_ma' => $types[$i][0] ,
                 //'nv_ma' => $faker->numberBetween(1, 9),
-                'vbcc_ten' => $types[$i][1],
-                'loaiVBCC_ma'  => $faker->numberBetween(1, 9),  
+                'vbcc_ten' => $types[$i][1],  
                 'vbcc_trinhDo' => $types[$i][2],
                 'vbcc_ngayCap' => $today->format('Y-m-d H:i:s'),
                 'vbcc_taoMoi'  => $today->format('Y-m-d H:i:s'),

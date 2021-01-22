@@ -10,7 +10,7 @@ class VBCC extends Model
     const UPDATED_AT = 'vbcc_capNhat';
 
     protected   $table          = 'vanbang_chungchi';
-    protected   $fillable       = ['nv_ma', 'vbcc_ten', 'loaiVBCC_ma', 'vbcc_trinhDo', 'vbcc_ngayCap', 'vbcc_taoMoi', 'vbcc_capNhat'];
+    protected   $fillable       = ['nv_ma', 'vbcc_ten', 'vbcc_trinhDo', 'vbcc_ngayCap', 'vbcc_taoMoi', 'vbcc_capNhat'];
     protected   $guarded        = ['vbcc_ma'];
 
     protected   $primaryKey     = 'vbcc_ma';
@@ -20,8 +20,5 @@ class VBCC extends Model
 
     public function dnhanVien(){
         return $this->belongsTo('App\NhanVien', 'nv_ma', 'nv_ma');
-    }
-    public function loaiVBCC(){
-        return $this->belongsTo('App\LoaiVBCC', 'loaiVBCC_ma', 'loaiVBCC_ma');
     }
 }
