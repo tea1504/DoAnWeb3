@@ -20,7 +20,7 @@ class CreateNhanvienTable extends Migration
                     ->primary();
             $table->string('nv_hoTen', 50);
             $table->string('nv_tenGoiKhac', 50);
-            $table->unsignedTinyInteger('cvu_ma');
+            $table->string('nv_trinhDoChuyenMon')->nullable();
             $table->date('nv_ngaySinh');
             $table->unsignedTinyInteger('nv_noiSinh');
             $table->unsignedTinyInteger('dt_ma');
@@ -34,7 +34,7 @@ class CreateNhanvienTable extends Migration
             $table->string('nv_quanHam', 100)->nullable();
             $table->string('nv_sucKhoe', 100)->nullable();
             $table->decimal('nv_chieuCao', 3, 2);
-            $table->decimal('nv_canNang', 3, 2);
+            $table->decimal('nv_canNang', 5, 2);
             $table->unsignedTinyInteger('nm_ma');
             $table->string('nv_hangThuongBinh', 100);
             $table->string('nv_giaDinhChinhSach', 100);
@@ -43,17 +43,12 @@ class CreateNhanvienTable extends Migration
             $table->unsignedTinyInteger('td_ma');
             $table->string('username', 50)
                     ->unique();
-            $table->string('password', 50);
+            $table->string('password', 100);
             $table->timestamp('nv_taoMoi') 
                     ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('nv_capNhat') 
                     ->default(DB::raw('CURRENT_TIMESTAMP'));
             
-            $table->foreign('cvu_ma')
-                    ->references('cvu_ma')
-                    ->on('chucvu')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
             $table->foreign('nv_noiSinh')
                     ->references('t_ma')
                     ->on('tinh')

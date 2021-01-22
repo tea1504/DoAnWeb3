@@ -10,7 +10,7 @@ class NhanVien extends Model
     const UPDATED_AT = 'nv_capNhat';
 
     protected   $table          = 'nhanvien';
-    protected   $fillable       = ['nv_hoTen', 'nv_tenGoiKhac', 'cvu_ma', 'nv_ngaySinh', 'nv_noiSinh', 'dt_ma', 'tg_ma', 'nv_hoKhauThuongTru', 'nv_noiOHienNay', 'nv_ngayVaoDang', 'nv_ngayVaoDangChinhThuc', 'nv_ngayNhapNgu', 'nv_ngayXuatNgu', 'nv_quanHam', 'nv_sucKhoe', 'nv_chieuCao', 'nv_canNang', 'nm_ma', 'nv_hangThuongBinh', 'nv_giaDinhChinhSach', 'nv_cmnd', 'nv_bhxh', 'td_ma', 'username', 'password', 'nv_taoMoi', 'nv_capNhat', 'nv_anh'];
+    protected   $fillable       = ['nv_hoTen', 'nv_tenGoiKhac', 'nv_trinhDoChuyenMon', 'nv_ngaySinh', 'nv_noiSinh', 'dt_ma', 'tg_ma', 'nv_hoKhauThuongTru', 'nv_noiOHienNay', 'nv_ngayVaoDang', 'nv_ngayVaoDangChinhThuc', 'nv_ngayNhapNgu', 'nv_ngayXuatNgu', 'nv_quanHam', 'nv_sucKhoe', 'nv_chieuCao', 'nv_canNang', 'nm_ma', 'nv_hangThuongBinh', 'nv_giaDinhChinhSach', 'nv_cmnd', 'nv_bhxh', 'td_ma', 'username', 'password', 'nv_taoMoi', 'nv_capNhat', 'nv_anh', 'cvu_ma', 'nv_gioiTinh'];
     protected   $guarded        = ['nv_ma'];
 
     protected   $primaryKey     = 'nv_ma';
