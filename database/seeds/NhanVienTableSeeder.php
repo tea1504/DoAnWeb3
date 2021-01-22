@@ -20,7 +20,6 @@ class NhanVienTableSeeder extends Seeder
         $faker = Faker\Factory::create('vi_VN');
         $trinhdo = ['Kỹ sư Công nghệ thông tin', 'Cử nhân Kinh tế', 'Cử nhân Luật hành chính', 'Cử nhân Toán ứng dụng', 'Cử nhân kế toán', 'Kỹ sư Quản lý công nghiệp'];
         $today = new DateTime();
-        $aDate = null;
         for ($i = 1; $i <= 20; $i++) {
             $percent = $faker->numberBetween(1, 100);
 
@@ -57,15 +56,11 @@ class NhanVienTableSeeder extends Seeder
 
             //random Ngày vào Đảng
             $day_ns = $faker->date($format = 'Y-m-d', $max = '-25 years');
-            $day_seed = strtotime('+18 year', strtotime($day_ns));
-            $day_seed = date('Y-m-j', $day_seed);
-            $day_vd = $faker->date($format = 'Y-m-d', $max = '-1 years');
-
-            $day_vdct = strtotime('+1 year', strtotime($day_vd));
-            $day_vdct = date('Y-m-j', $day_vdct);
-            $day_nn = $faker->date($format = 'Y-m-d', $max = '-2 years');
-            $day_xn = strtotime('+2 year', strtotime($day_nn));
-            $day_xn = date('Y-m-j', $day_xn);
+            $day_seed = date('Y-m-d H:i:s', strtotime('+18 year', strtotime($day_ns)));
+            $day_vd = date('Y-m-d H:i:s', strtotime('+'.$faker->numberBetween(0,2020-getdate(strtotime($day_seed))['year']).' year +'.$faker->numberBetween(0,12).' month +'.$faker->numberBetween(0,31).' day', strtotime($day_seed)));
+            $day_vdct = date('Y-m-d H:i:s', strtotime('+1 year', strtotime($day_vd)));
+            $day_nn = date('Y-m-d H:i:s', strtotime('+'.$faker->numberBetween(0,2019-getdate(strtotime($day_seed))['year']).' year +'.$faker->numberBetween(0,12).' month +'.$faker->numberBetween(0,31).' day', strtotime($day_seed)));
+            $day_xn = date('Y-m-d H:i:s', strtotime('+2 year', strtotime($day_nn)));
             array_push($list, [
                 'nv_ma' => $ma . $i,
                 'nv_hoTen' => $name,
