@@ -11,7 +11,7 @@ class PhuCapTableSeeder extends Seeder
     public function run()
     {
         $list = [];
-        $types = ['Phụ cấp chức vụ, chức danh công việc','Phụ cấp trách nhiệm','Phụ cấp thâm niên','Phụ cấp khu vực','Phụ cấp nặng nhọc, độc hại, nguy hiểm','Phụ cấp lưu động','Phụ cấp thu hút','Phụ cấp mang tính chất tương tự'];
+        $types = ['Phụ cấp chức vụ, chức danh công việc','Phụ cấp trách nhiệm','Phụ cấp thâm niên','Phụ cấp khu vực','Phụ cấp nặng nhọc, độc hại, nguy hiểm','Phụ cấp lưu động','Phụ cấp thu hút','Phụ cấp khác'];
         $faker = Faker\Factory::create('vi_VN');
         for($i=1; $i<=count($types); $i++){
             array_push($list,[

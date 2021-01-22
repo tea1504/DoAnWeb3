@@ -18,7 +18,7 @@ class NhanVienTableSeeder extends Seeder
         $uFN = new VnFullname();
         $uPI = new VnPersonalInfo();
         $faker = Faker\Factory::create('vi_VN');
-        $trinhdo = ['Kỹ sư Công nghệ thông tin', 'Cử nhân Kinh tế', 'Cử nhân Luật hành chính', 'Cử nhân Toán ứng dụng', 'Cử nhân kế toán', 'Kỹ sư Quản lý công nghiệp', ''];
+        $trinhdo = ['Kỹ sư Công nghệ thông tin', 'Cử nhân Kinh tế', 'Cử nhân Luật hành chính', 'Cử nhân Toán ứng dụng', 'Cử nhân kế toán', 'Kỹ sư Quản lý công nghiệp'];
         $today = new DateTime();
         $aDate = null;
         for ($i = 1; $i <= 20; $i++) {
@@ -70,7 +70,7 @@ class NhanVienTableSeeder extends Seeder
                 'nv_ma' => $ma . $i,
                 'nv_hoTen' => $name,
                 'nv_tenGoiKhac' => $name,
-                'nv_trinhDoChuyenMon' => $trinhdo[$faker->numberBetween(0, 6)],
+                'nv_trinhDoChuyenMon' => $trinhdo[$faker->numberBetween(0, 5)],
                 'nv_ngaySinh' => $day_ns,
                 'nv_noiSinh' => $faker->numberBetween(1, 5),
                 'dt_ma' => $faker->numberBetween(1, 4),

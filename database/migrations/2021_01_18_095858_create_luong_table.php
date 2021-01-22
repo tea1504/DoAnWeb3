@@ -18,7 +18,6 @@ class CreateLuongTable extends Migration
             $table->unsignedInteger('l_ma')->autoIncrement()->comment('mã lương');
             $table->string('nv_ma', 10);
             $table->unsignedTinyInteger('l_tinhTrang')->default('1');
-            $table->decimal('l_luongCanBan',13,3);
             $table->unsignedTinyInteger('ng_ma');
             $table->unsignedTinyInteger('b_ma');
             $table->unsignedTinyInteger('pc_ma');

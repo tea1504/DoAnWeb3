@@ -24,5 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ChucVuTableSeeder::class);
         $this->call(NhanVienTableSeeder::class);
         $this->call(NgachTableSeeder::class);
+        $this->call(BacTableSeeder::class);
+        $this->call(NgachBacTableSeeder::class);
+        $this->call(PhuCapTableSeeder::class);
+        $this->call(LuongTableSeeder::class);
     }
 }

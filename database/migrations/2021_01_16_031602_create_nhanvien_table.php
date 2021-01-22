@@ -25,8 +25,8 @@ class CreateNhanvienTable extends Migration
             $table->unsignedTinyInteger('nv_noiSinh');
             $table->unsignedTinyInteger('dt_ma');
             $table->unsignedTinyInteger('tg_ma');
-            $table->string('nv_hoKhauThuongTru', 100);
-            $table->string('nv_noiOHienNay', 100);
+            $table->string('nv_hoKhauThuongTru', 200);
+            $table->string('nv_noiOHienNay', 200);
             $table->date('nv_ngayVaoDang')->nullable();
             $table->date('nv_ngayVaoDangChinhThuc')->nullable();
             $table->date('nv_ngayNhapNgu')->nullable();
