@@ -5,12 +5,12 @@ Danh sách nhân viên
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <style>
-    table {
+    table#myTable {
         height: 500px;
         width: 100%;
     }
 
-    table td {
+    table#myTable td {
         width: 500px;
     }
 
@@ -22,6 +22,10 @@ Danh sách nhân viên
         transform: scale(1.05, 1.05);
         z-index: 9999;
         box-shadow: 0px 0px 20px #000;
+    }
+
+    .avatar {
+        background-color: #fff;
     }
 </style>
 @endsection
@@ -38,18 +42,35 @@ Danh sách nhân viên
             <button class="btn btn-outline-danger mb-3" ng-click="showTable()">Bấm <% show %></button>
         </div>
     </div>
-    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1" ng-show="!show" id="sortable">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1" ng-show="!show" id="sortable">
         @foreach($data as $d)
         <div class="col">
             <div class="card my-card">
-                <div class="card-header bg-dark" style="cursor: move;">
-                    <div class="image">
-                        <img src="{{ asset('themes/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" height="50px" alt="User Image">
-                        Featured
+                <div class="card-header text-muted border-bottom-0 bg-cyan" style="cursor: move;">
+                    <h2 style="font-weight: bold;">{{ $d->nv_ma }}</h2>
+                </div>
+                <div class="card-body pt-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{ Storage::exists('public/avatar/' . $d->nv_anh) ? asset('storage/avatar/' . $d->nv_anh) : asset('storage/avatar/default.png') }}" class="img-fluid" alt="User Image">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="lead" style="font-style: italic;"><span>{{ $d->nv_hoTen }}</span></h5>
+                            <p class="text-muted text-sm"><b>Chức vụ: </b> {{ $d->chucVu->cvu_ten }} </p>
+                            <ul class="ml-4 mb-0 fa-ul text-muted">
+                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>Địa chỉ: {{ $d->nv_noiOHienNay }}</li>
+                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>Điện thoại: {{ $d->nv_sdt }}</li>
+                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-at"></i></span>Email: <a href="mailto:{{ $d->nv_email }}">{{ $d->nv_email }}</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    {{ $d }}
+                <div class="card-footer">
+                    <div class="text-right">
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fas fa-user"></i> Xem chi tiết
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,16 +84,32 @@ Danh sách nhân viên
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Image</th>
-                                <th>Name</th>
+                                <th>Mã nhân viên</th>
+                                <th>Ảnh</th>
+                                <th>Tên</th>
+                                <th>Chức vụ</th>
+                                <th>Địa chỉ</th>
+                                <th>Điện thoại</th>
+                                <th>Email</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($data as $d)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td><img src="{{ asset('themes/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" height="50px" alt="User Image"></td>
-                                <td>{{$d}}</td>
+                                <td>{{$d->nv_ma}}</td>
+                                <td><img src="{{ Storage::exists('public/avatar/' . $d->nv_anh) ? asset('storage/avatar/' . $d->nv_anh) : asset('storage/avatar/default.png') }}" class="img-circle elevation-2 avatar" height="50px" alt="User Image"></td>
+                                <td>{{$d->nv_hoTen}}</td>
+                                <td>{{$d->chucVu->cvu_ten}}</td>
+                                <td>{{$d->nv_noiOHienNay}}</td>
+                                <td>{{$d->nv_sdt}}</td>
+                                <td>{{$d->nv_email}}</td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-user"></i> Xem chi tiết
+                                    </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -91,6 +128,9 @@ Danh sách nhân viên
     $(document).ready(function() {
         $("#sortable").sortable({
             cancel: '.card-body',
+        });
+        $("#sortable").sortable({
+            cancel: '.card-footer',
         });
         $("#sortable").disableSelection();
         $('#myTable').DataTable({

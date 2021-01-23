@@ -44,6 +44,8 @@ class CreateNhanvienTable extends Migration
             $table->string('username', 50)
                     ->unique();
             $table->string('password', 100);
+            $table->string('nv_sdt', 12);
+            $table->string('nv_email', 200);
             $table->timestamp('nv_taoMoi') 
                     ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('nv_capNhat') 

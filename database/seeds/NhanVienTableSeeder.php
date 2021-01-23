@@ -91,7 +91,9 @@ class NhanVienTableSeeder extends Seeder
                 'nv_capNhat' => $today->format('Y-m-d H:i:s'),
                 'nv_anh' => 'user' . $i . '.png',
                 'cvu_ma' => $cv,
-                'nv_gioiTinh' => $gt
+                'nv_gioiTinh' => $gt,
+                'nv_sdt' => $faker->numberBetween(1000000000,9999999999),
+                'nv_email' => $faker->email()
             ]);
         }
         DB::table('nhanvien')->insert($list);

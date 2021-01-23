@@ -9,7 +9,7 @@ class ChucVu extends Model
     const CREATED_AT = 'cvu_taoMoi';
     const UPDATED_AT = 'cvu_capNhat';
 
-    protected   $table          = 'vanbang_chungchi';
+    protected   $table          = 'chucvu';
     protected   $fillable       = ['cvu_ten', 'cvu_moTa', 'cvu_taoMoi', 'cvu_capNhat'];
     protected   $guarded        = ['cvu_ma'];
 
