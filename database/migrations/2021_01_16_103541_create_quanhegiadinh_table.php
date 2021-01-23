@@ -21,7 +21,7 @@ class CreateQuanhegiadinhTable extends Migration
             $table->string('qhgd_ten', 50);
             $table->string('qhgd_moiQuanHe', 50);
             $table->string('qhgd_namSinh', 4);
-            $table->string('qhgd_diaChi', 100);
+            $table->string('qhgd_diaChi', 200);
             $table->string('qhgd_ngheNghiep', 100);
             $table->timestamp('qhgd_taoMoi')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('qhgd_capNhat')->default(DB::raw('CURRENT_TIMESTAMP'));
