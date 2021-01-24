@@ -18,6 +18,11 @@ class CreateCongviecTable extends Migration
             $table->unsignedTinyInteger('cv_ma')->autoIncrement();
             $table->string('cv_ten',50);
             $table->text('cv_moTa')->nullable();
+            
+            $table->timestamp('cv_taoMoi') 
+                    ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('cv_capNhat') 
+                    ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

@@ -32,16 +32,6 @@ class NhanVienTableSeeder extends Seeder
             else if ($i < 1000)
                 $ma .= '0';
 
-            //random chức vụ
-            if ($percent <= 60) {
-                $cv = 4;
-            } else if ($percent <= 90) {
-                $cv = 3;
-            } else if ($percent <= 95) {
-                $cv = 2;
-            } else {
-                $cv = 1;
-            }
 
             $percent = $faker->numberBetween(1, 100);
 
@@ -90,7 +80,7 @@ class NhanVienTableSeeder extends Seeder
                 'nv_taoMoi' => $today->format('Y-m-d H:i:s'),
                 'nv_capNhat' => $today->format('Y-m-d H:i:s'),
                 'nv_anh' => 'user' . $i . '.png',
-                'cvu_ma' => $cv,
+                'cvu_ma' => $faker->numberBetween(1,23),
                 'nv_gioiTinh' => $gt,
                 'nv_sdt' => $faker->numberBetween(1000000000,9999999999),
                 'nv_email' => $faker->email()
