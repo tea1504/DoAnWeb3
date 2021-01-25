@@ -16,7 +16,17 @@ class CreateDonviTable extends Migration
         Schema::create('donvi', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->unsignedTinyInteger('dv_ma')->autoIncrement();
-            $table->string('dv_ten',50);
+            $table->string('dv_ten', 100);
+            $table->unsignedTinyInteger('dvql_ma');
+            $table->timestamp('dv_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('dv_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->foreign('dvql_ma')
+                ->references('dvql_ma')
+                ->on('donviquanly')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 

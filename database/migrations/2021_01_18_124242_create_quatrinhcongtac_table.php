@@ -17,8 +17,8 @@ class CreateQuatrinhcongtacTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedInteger('qtct_ma')->autoIncrement()->comment('mã quá trình công tác');
             $table->string('nv_ma', 10);
-            $table->date('qtct_tuNgay');
-            $table->date('qtct_denNgay');
+            $table->string('qtct_tuNgay', 10);
+            $table->string('qtct_denNgay', 10);
             $table->unsignedTinyInteger('cvu_ma');
             $table->unsignedTinyInteger('dv_ma');
             $table->unsignedTinyInteger('nb_ma');

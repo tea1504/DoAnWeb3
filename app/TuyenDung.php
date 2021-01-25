@@ -10,7 +10,7 @@ class TuyenDung extends Model
     const UPDATED_AT = 'td_capNhat';
 
     protected   $table          = 'tuyendung';
-    protected   $fillable       = ['nv_ma', 'td_ngay', 'td_ngheTruocDay', 'dv_ma', 'cvu_ma', 'td_ngayLam', 'cv_ma', 'td_soTruong', 'td_taoMoi', 'td_capNhat'];
+    protected   $fillable       = ['nv_ma', 'td_ngay', 'td_ngheTruocDay', 'dv_ma', 'td_coQuanTuyen', 'cvu_ma', 'td_ngayLam', 'cv_ma', 'td_soTruong', 'td_taoMoi', 'td_capNhat'];
     protected   $guarded        = ['td_ma'];
 
     protected   $primaryKey     = 'td_ma';

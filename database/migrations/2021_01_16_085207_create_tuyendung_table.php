@@ -20,8 +20,9 @@ class CreateTuyendungTable extends Migration
                     ->autoIncrement();
             $table->string('nv_ma', 10);
             $table->date('td_ngay');
-            $table->string('td_ngheTruocDay', 50);
+            $table->string('td_ngheTruocDay', 100);
             $table->unsignedTinyInteger('dv_ma');
+            $table->string('td_coQuanTuyen', 100)->nullable();
             $table->unsignedTinyInteger('cvu_ma');
             $table->date('td_ngayLam');
             $table->unsignedTinyInteger('cv_ma');
