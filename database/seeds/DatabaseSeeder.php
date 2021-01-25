@@ -26,12 +26,13 @@ class DatabaseSeeder extends Seeder
         $this->call(HuyenTableSeeder::class);
         $this->call(XaTableSeeder::class);
         $this->call(NhanVienTableSeeder::class);
-        // $this->call(KyLuatTableSeeder::class);
-        // $this->call(KhenThuongTableSeeder::class);
+        $this->call(KyLuatTableSeeder::class);
+        $this->call(KhenThuongTableSeeder::class);
         $this->call(TuyenDungTableSeeder::class);
         $this->call(QuanHeGiaDinhTableSeeder::class);
-        // $this->call(LichSuBanThanTableSeeder::class);
+        $this->call(LichSuBanThanTableSeeder::class);
         $this->call(QueQuanTableSeeder::class);
+        $this->call(NoiSinhTableSeeder::class);
         // $this->call(QuyenTableSeeder::class);
         // $this->call(RoleTableSeeder::class);
         // $this->call(UserRoleTableSeeder::class);
@@ -41,7 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PhuCapTableSeeder::class);
         $this->call(NgachBacTableSeeder::class);
         $this->call(LuongTableSeeder::class);
-        // $this->call(QuaTrinhCongTacTableSeeder::class);
+        $this->call(QuaTrinhCongTacTableSeeder::class);
         $this->call(LoaiVBCCTableSeeder::class);
         $this->call(VbccTableSeeder::class);
 

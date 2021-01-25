@@ -6,7 +6,7 @@ Danh sách nhân viên
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <style>
     table#myTable {
-        height: 500px;
+        height: 540px;
         width: 100%;
     }
 
@@ -49,28 +49,32 @@ Danh sách nhân viên
         <div class="card-header">
             <form name="frmChucNang" class="row" novalidate>
                 <div class="col-sm-4 text-sm-left text-center mb-sm-0 mb-1">
-                    Xem
-                    <select name="number_card" id="number_card" ng-model="number_card">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="9999">tất cả</option>
-                    </select>
-                    mục
+                    <div class="row">
+                        <span class="col-sm-3 text-sm-right text-center">Xem</span>
+                        <div class="col-sm-6">
+                            <select name="number_card" id="number_card" ng-model="number_card" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="9999">tất cả</option>
+                            </select>
+                        </div>
+                        <span class="col-sm-3 text-sm-left text-center">mục</span>
+                    </div>
                 </div>
                 <div class="col-sm-4 text-center mb-sm-0 mb-1">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button class="btn btn-outline-danger" ng-disabled="start<=0" ng-click="start=start-1">Trước</button>
-                        <button class="btn btn-outline-danger" ng-hide="start <= 1" ng-click="start=start-2">...</button>
+                        <button class="btn btn-outline-danger" ng-hide="start <= 1 || countPage((data | filter: keyWord).length).length == 3" ng-click="start=start-2">...</button>
                         <button ng-repeat="i in countPage((data | filter: keyWord).length)" ng-click="page(i)" ng-class="start==i?'btn btn-outline-danger active':'btn btn-outline-danger'" ng-hide="an(start, i, countPage((data | filter: keyWord).length).length)"><% i + 1 %></button>
-                        <button class="btn btn-outline-danger" ng-hide="start >= countPage((data | filter: keyWord).length).length - 2" ng-click="start=start+2">...</button>
+                        <button class="btn btn-outline-danger" ng-hide="start >= countPage((data | filter: keyWord).length).length - 2 || countPage((data | filter: keyWord).length).length == 3" ng-click="start=start+2">...</button>
                         <button class="btn btn-outline-danger" ng-disabled="start>=countPage((data | filter: keyWord).length).length - 1" ng-click="start=start+1">Sau</button>
                     </div>
                 </div>
@@ -97,7 +101,14 @@ Danh sách nhân viên
                 <div class="col" ng-repeat="d in data | filter: keyWord | limitTo: number_card: start*number_card">
                     <div class="card my-card">
                         <div class="card-header text-muted border-bottom-0 bg-cyan" style="cursor: move;">
-                            <h2 style="font-weight: bold;"><%d.nv_ma%></h2>
+                            <div class="card-title">
+                                <h2 style="font-weight: bold;"><%d.nv_ma%></h2>
+                            </div>
+                            <div class="card-tools">
+                                <a href="#" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-user"></i> Xem chi tiết
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body pt-3">
                             <div class="row no-gutters">
@@ -113,13 +124,6 @@ Danh sách nhân viên
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-at"></i></span>Email: <a href="mailto:<%d.nv_email%>"><%d.nv_email%></a></li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Xem chi tiết
-                                </a>
                             </div>
                         </div>
                     </div>

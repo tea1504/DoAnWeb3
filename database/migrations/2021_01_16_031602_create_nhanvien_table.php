@@ -22,7 +22,6 @@ class CreateNhanvienTable extends Migration
             $table->string('nv_tenGoiKhac', 50);
             $table->string('nv_trinhDoChuyenMon')->nullable();
             $table->date('nv_ngaySinh');
-            $table->unsignedTinyInteger('nv_noiSinh');
             $table->unsignedTinyInteger('dt_ma');
             $table->unsignedTinyInteger('tg_ma');
             $table->string('nv_hoKhauThuongTru', 200);
@@ -39,6 +38,7 @@ class CreateNhanvienTable extends Migration
             $table->string('nv_hangThuongBinh', 100);
             $table->string('nv_giaDinhChinhSach', 100);
             $table->string('nv_cmnd', 20);
+            $table->date('nv_cmndNgayCap');
             $table->string('nv_bhxh', 20);
             $table->unsignedTinyInteger('td_ma');
             $table->string('username', 50)
@@ -51,11 +51,6 @@ class CreateNhanvienTable extends Migration
             $table->timestamp('nv_capNhat') 
                     ->default(DB::raw('CURRENT_TIMESTAMP'));
             
-            $table->foreign('nv_noiSinh')
-                    ->references('t_ma')
-                    ->on('tinh')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
             $table->foreign('dt_ma')
                     ->references('dt_ma')
                     ->on('dantoc')

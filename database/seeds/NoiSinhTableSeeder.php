@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class QueQuanTableSeeder extends Seeder
+class NoiSinhTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -56,14 +56,14 @@ class QueQuanTableSeeder extends Seeder
                     $dc = $faker->numberBetween(10, 1000).'B '.$types[$faker->numberBetween(0, count($types)-1)];
             }
             array_push($list,[
-                'qq_ma' => $i,
+                'ns_ma' => $i,
                 'nv_ma' => $ma.$i,
                 'x_ma' => $x,
                 'h_ma' => $h,
                 't_ma' => $t,
-                'qq_diaChi' => $dc
+                'ns_diaChi' => $dc
             ]);
         }
-        DB::table('quequan')->insert($list);
+        DB::table('noisinh')->insert($list);
     }
 }
