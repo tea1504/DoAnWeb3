@@ -47,7 +47,7 @@ Danh sách nhân viên
     </div>
     <div class="card" ng-show="!show">
         <div class="card-header">
-            <form name="frmChucNang" class="row">
+            <form name="frmChucNang" class="row" novalidate>
                 <div class="col-sm-4 text-sm-left text-center mb-sm-0 mb-1">
                     Xem
                     <select name="number_card" id="number_card" ng-model="number_card">
