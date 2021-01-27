@@ -46,6 +46,7 @@ class CreateNhanvienTable extends Migration
             $table->string('password', 100);
             $table->string('nv_sdt', 12);
             $table->string('nv_email', 200);
+            $table->unsignedInteger('role_ma');
             $table->timestamp('nv_taoMoi') 
                     ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('nv_capNhat') 
@@ -69,6 +70,11 @@ class CreateNhanvienTable extends Migration
             $table->foreign('nm_ma')
                     ->references('nm_ma')
                     ->on('nhommau')
+                    ->onDelete('CASCADE')
+                    ->onUpdate('CASCADE');
+            $table->foreign('role_ma')
+                    ->references('role_ma')
+                    ->on('role')
                     ->onDelete('CASCADE')
                     ->onUpdate('CASCADE');
         });

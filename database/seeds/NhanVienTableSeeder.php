@@ -1,5 +1,6 @@
 <?php
 
+use App\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\PhpVnDataGenerator\VnBase;
 use Illuminate\PhpVnDataGenerator\VnFullname;
@@ -43,7 +44,7 @@ class NhanVienTableSeeder extends Seeder
                 $gt = 0; //Nu
                 $name = $uFN->FullNames(VnBase::VnFemale, 1)[0];
             }
-
+            
             //random Ngày vào Đảng
             $day_ns = $faker->date($format = 'Y-m-d', $max = '-25 years');
             $day_seed = date('Y-m-d H:i:s', strtotime('+18 year', strtotime($day_ns)));
@@ -80,12 +81,52 @@ class NhanVienTableSeeder extends Seeder
                 'nv_taoMoi' => $today->format('Y-m-d H:i:s'),
                 'nv_capNhat' => $today->format('Y-m-d H:i:s'),
                 'nv_anh' => 'user' . $i . '.png',
-                'cvu_ma' => $faker->numberBetween(1,23),
+                'cvu_ma' => $faker->numberBetween(1,24),
                 'nv_gioiTinh' => $gt,
                 'nv_sdt' => $faker->numberBetween(1000000000,9999999999),
-                'nv_email' => $faker->email()
+                'nv_email' => $faker->email(),
+                'role_ma' =>$faker->numberBetween(1,2)
             ]);
+           
+          
+                
         }
+        //admin
+        array_push($list, [
+            'nv_ma' => 'CB100',
+            'nv_hoTen' => 'Quản trị hệ thống',
+            'nv_tenGoiKhac' => 'Admin',
+            'nv_trinhDoChuyenMon' => $trinhdo[$faker->numberBetween(0, 5)],
+            'nv_ngaySinh' => $day_ns,
+            'dt_ma' => $faker->numberBetween(1, 4),
+            'tg_ma' => $faker->numberBetween(1, 9),
+            'nv_hoKhauThuongTru' => $uPI->Address(),
+            'nv_noiOHienNay' => $uPI->Address(),
+            'nv_ngayVaoDang' => $day_vd,
+            'nv_ngayVaoDangChinhThuc' => $day_vdct,
+            'nv_ngayNhapNgu' => $day_nn,
+            'nv_ngayXuatNgu' => $day_xn,
+            'nv_quanHam' => 'Binh nhất',
+            'nv_sucKhoe' => 'Tốt',
+            'nv_chieuCao' => $faker->randomFloat($nbMaxDecimals = 2, $min = 1.5, $max = 2),
+            'nv_canNang' => $faker->randomFloat($nbMaxDecimals = 2, $min = 50, $max = 70),
+            'nm_ma' => $faker->numberBetween(1, 4),
+            'nv_giaDinhChinhSach' => $faker->numberBetween(0, 1),
+            'nv_cmnd' => $faker->numberBetween(100000000000, 999999999999),
+            'nv_cmndNgayCap' => $day_seed,
+            'nv_bhxh' => $faker->numberBetween(1000000000, 9999999999),
+            'td_ma' => 1,
+            'username' => 'Admin',
+            'password' => bcrypt('12345'),
+            'nv_taoMoi' => $today->format('Y-m-d H:i:s'),
+            'nv_capNhat' => $today->format('Y-m-d H:i:s'),
+            'nv_anh' => 'user' . $i . '.png',
+            'cvu_ma' => 24,
+            'nv_gioiTinh' => $gt,
+            'nv_sdt' => $faker->numberBetween(1000000000,9999999999),
+            'nv_email' => 'qlnhanluc@gmail.com',
+            'role_ma' => 1
+        ]);
         DB::table('nhanvien')->insert($list);
     }
 }

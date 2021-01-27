@@ -48,7 +48,7 @@ class NhanVien extends Model
         return $this->hasMany('App\UserQuyen', 'nv_ma', 'nv_ma');
     }
     public function userRole(){
-        return $this->hasMany('App\UserRole', 'nv_ma', 'nv_ma');
+        return $this->hasMany('App\Role', 'nv_ma', 'nv_ma');
     }
     public function tuyenDung(){
         return $this->hasMany('App\QueQuan', 'nv_ma', 'nv_ma');

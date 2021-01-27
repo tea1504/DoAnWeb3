@@ -11,10 +11,10 @@ class UserQuyen extends Model
     protected $fillable = ['nv_ma','q_ma'];
    
     public function quyen(){
-        return $this->hasMany('App\Quyen','q_ma','q_ma');
+        return $this->belongsTo('App\Quyen','q_ma','q_ma');
     }
     
     public function nhanVien(){
-        return $this->hasMany('App\NhanVien','nv_ma','nv_ma');
+        return $this->belongsTo('App\NhanVien','nv_ma','nv_ma');
     }
 }

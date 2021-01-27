@@ -36,7 +36,8 @@ class ChucVuTableSeeder extends Seeder
             [20,'Cộng tác viên',''],
             [21,'Thực tập sinh',''],
             [22,'Bảo vệ',''],
-            [23,'Lao Công','']
+            [23,'Lao Công',''],
+            [24,'Quản trị viên','']
         ];
 
         for ($i=0; $i < count($types); $i++) {
