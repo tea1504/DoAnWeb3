@@ -14,7 +14,8 @@ class RoleTableSeeder extends Seeder
         $list =[];
         $types =[
             [1,'Admin','Quản trị trang web ...'],
-            [2,'User','Người dùng với các quyền được cho phép']
+            [2,'User','Người dùng với các quyền được cho phép'],
+            [3,'Quản lý','Người dùng có chức vụ cao với các quyền được cho phép']
         ];
         for($i=0; $i < count($types);$i++){
             array_push($list,[

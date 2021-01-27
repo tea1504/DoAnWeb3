@@ -11,11 +11,11 @@ class RoleQuyen extends Model
     protected $fillable = ['role_ma','q_ma'];
    
     public function role(){
-        return $this->hasMany('App\Role','role_ma','role_ma');
+        return $this->belongsTo('App\Role','role_ma','role_ma');
     }
     
     public function quyen(){
-        return $this->hasMany('App\Quyen','q_ma','q_ma');
+        return $this->belongsTo('App\Quyen','q_ma','q_ma');
     }
 
 }
