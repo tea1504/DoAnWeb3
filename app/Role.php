@@ -17,7 +17,7 @@ class Role extends Model
     protected $dateFormat = ['Y-m-d H:i:s'];
 
     public function roleQuyen(){
-        return $this->belongsTo('App\RoleQuyen','role_ma','nv_ma');
+        return $this->hasMany('App\RoleQuyen','role_ma','nv_ma');
     }
     
     public function userQuyen(){
