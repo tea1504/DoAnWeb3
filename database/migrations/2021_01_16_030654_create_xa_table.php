@@ -20,6 +20,10 @@ class CreateXaTable extends Migration
                     ->autoIncrement();
             $table->string('x_ten', 50);
             $table->unsignedTinyInteger('h_ma');
+            $table->timestamp('x_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('x_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('h_ma')
                     ->references('h_ma')

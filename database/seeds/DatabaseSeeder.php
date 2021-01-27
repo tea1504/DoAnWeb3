@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QuaTrinhCongTacTableSeeder::class);
         $this->call(LoaiVBCCTableSeeder::class);
         $this->call(VbccTableSeeder::class); 
-        $this->call(UserQuyenTableSeeder::class);
+        // $this->call(UserQuyenTableSeeder::class);
 
     }
 }
