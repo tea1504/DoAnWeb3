@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\PhpVnDataGenerator\VnBase;
 use Illuminate\PhpVnDataGenerator\VnFullname;
 use Illuminate\PhpVnDataGenerator\VnPersonalInfo;
-
 class NhanVienTableSeeder extends Seeder
 {
     /**
@@ -44,7 +43,17 @@ class NhanVienTableSeeder extends Seeder
                 $gt = 0; //Nu
                 $name = $uFN->FullNames(VnBase::VnFemale, 1)[0];
             }
-            
+            // random chuc vu va role
+            $chucvu=$faker->numberBetween(1,24);
+            if($chucvu==24){
+                $role=1;
+            }
+            else if($chucvu >=1 && $chucvu< 7){
+                $role=3;
+            }
+            else{
+                $role=2;
+            }
             //random Ngày vào Đảng
             $day_ns = $faker->date($format = 'Y-m-d', $max = '-25 years');
             $day_seed = date('Y-m-d H:i:s', strtotime('+18 year', strtotime($day_ns)));
@@ -81,11 +90,11 @@ class NhanVienTableSeeder extends Seeder
                 'nv_taoMoi' => $today->format('Y-m-d H:i:s'),
                 'nv_capNhat' => $today->format('Y-m-d H:i:s'),
                 'nv_anh' => 'user' . $i . '.png',
-                'cvu_ma' => $faker->numberBetween(1,24),
+                'cvu_ma' => $chucvu,
                 'nv_gioiTinh' => $gt,
                 'nv_sdt' => $faker->numberBetween(1000000000,9999999999),
                 'nv_email' => $faker->email(),
-                'role_ma' =>$faker->numberBetween(1,2)
+                'role_ma' =>$role
             ]);
            
           

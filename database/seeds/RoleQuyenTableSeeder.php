@@ -21,7 +21,9 @@ class RoleQuyenTableSeeder extends Seeder
             [1,7],
             [2,5],
             [2,6],
-            [2,7]
+            [3,5],
+            [3,6],
+            [3,7]
         ];
         for($i=0; $i<count($types); $i++){
             array_push($list, [

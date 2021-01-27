@@ -21,6 +21,6 @@ class Role extends Model
     }
     
     public function userQuyen(){
-        return $this->belongsTo('App\NhanVien','role_ma','role_ma');
+        return $this->hasMany('App\NhanVien','role_ma','role_ma');
     }
 }
