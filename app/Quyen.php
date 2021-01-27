@@ -17,10 +17,10 @@ class Quyen extends Model
     protected $dateFormat = ['Y-m-d H:i:s'];
 
     public function userQuyen(){
-        return $this->belongsTo('App\UserQuyen','q_ma','q_ma');
+        return $this->hasMany('App\UserQuyen','q_ma','q_ma');
     }
     
     public function roleQuyen(){
-        return $this->belongsTo('App\RoleQuyen','q_ma','q_ma');
+        return $this->hasMany('App\RoleQuyen','q_ma','q_ma');
     }
 }
