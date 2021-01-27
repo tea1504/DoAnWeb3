@@ -17,6 +17,10 @@ class CreateTongiaoTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedTinyInteger('tg_ma')->autoIncrement();
             $table->string('tg_ten',50);
+            $table->timestamp('tg_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('tg_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

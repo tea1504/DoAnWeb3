@@ -16,7 +16,11 @@ class CreateNhommauTable extends Migration
         Schema::create('nhommau', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->unsignedTinyInteger('nm_ma')->autoIncrement();
-            $table->string('nm_ten',50);
+            $table->string('nm_ten', 50);
+            $table->timestamp('nm_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('nm_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

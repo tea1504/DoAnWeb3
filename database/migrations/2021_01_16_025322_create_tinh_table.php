@@ -18,6 +18,10 @@ class CreateTinhTable extends Migration
 
             $table->unsignedTinyInteger('t_ma')->autoIncrement();
             $table->string('t_ten', 50);
+            $table->timestamp('t_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('t_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

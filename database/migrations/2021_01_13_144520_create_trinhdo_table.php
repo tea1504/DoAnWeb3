@@ -17,6 +17,10 @@ class CreateTrinhdoTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedTinyInteger('td_ma')->autoIncrement();
             $table->string('td_ten',50);
+            $table->timestamp('td_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('td_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
