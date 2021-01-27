@@ -17,15 +17,19 @@ class CreateHuyenTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->unsignedTinyInteger('h_ma')
-                    ->autoIncrement();
+                ->autoIncrement();
             $table->string('h_ten', 50);
             $table->unsignedTinyInteger('t_ma');
+            $table->timestamp('h_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('h_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('t_ma')
-                    ->references('t_ma')
-                    ->on('tinh')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
+                ->references('t_ma')
+                ->on('tinh')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 

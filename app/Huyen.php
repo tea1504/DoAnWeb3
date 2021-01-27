@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Huyen extends Model
 {
-    public      $timestamps     = false;
+    const       CREATED_AT      = 'h_taoMoi';
+    const       UPDATED_AT      = 'h_capNhat';
 
     protected   $table          = 'huyen';
     protected   $fillable       = ['h_ten', 't_ma'];
     protected   $guarded        = ['h_ma'];
 
     protected   $primaryKey     = 'h_ma';
+    protected   $dates          = ['h_taoMoi', 'h_capNhat'];
+    protected   $dateFormat     = 'Y-m-d H:i:s';
 
     public function dsXa(){
         return $this->hasMany('App\Xa', 'h_ma', 'h_ma');

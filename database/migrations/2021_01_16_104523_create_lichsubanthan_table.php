@@ -16,17 +16,20 @@ class CreateLichsubanthanTable extends Migration
         Schema::create('lichsubanthan', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->unsignedInteger('lsbt_ma')
-                    ->autoIncrement();
+                ->autoIncrement();
             $table->string('nv_ma', 10);
             $table->text('lsbt_hanhViPhamToi');
             $table->text('lsbt_thamGiaToChucChinhTri');
-           
-            
+            $table->timestamp('lsbt_taoMoi')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('lsbt_capNhat')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+
             $table->foreign('nv_ma')
-                    ->references('nv_ma')
-                    ->on('nhanvien')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
+                ->references('nv_ma')
+                ->on('nhanvien')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 
