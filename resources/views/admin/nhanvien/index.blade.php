@@ -114,8 +114,8 @@ Danh sách nhân viên
                                 <h2 style="font-weight: bold;"><%d.nv_ma%></h2>
                             </div>
                             <div class="card-tools">
-                                <a href="#" class="btn btn-outline-light">
-                                <i class="fas fa-info-circle"></i> Thông tin thêm
+                                <a class="btn btn-outline-light" href="/admin/nhanvien/<%d.nv_ma%>">
+                                    <i class="fas fa-info-circle"></i> Thông tin thêm
                                 </a>
                             </div>
                         </div>
@@ -171,7 +171,7 @@ Danh sách nhân viên
                                 <td>{{$d->nv_sdt}}</td>
                                 <td>{{$d->nv_email}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-primary">
+                                    <a href="{{route('admin.nhanvien.show',['id'=>$d->nv_ma])}}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-user"></i> Xem chi tiết
                                     </a>
                                 </td>
@@ -233,7 +233,7 @@ Danh sách nhân viên
         document.getElementById('check').selected = "true";
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
-        })
+        });
     });
     app.directive('fallbackSrc', function() {
         return {

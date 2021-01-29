@@ -68,4 +68,7 @@ class NhanVien extends Model
     public function dsVBCC(){
         return $this->hasMany('App\VBCC', 'nv_ma', 'nv_ma');
     }
+    public function noiSinh(){
+        return $this->hasMany('App\NoiSinh', 'nv_ma', 'nv_ma');
+    }
 }

@@ -9,7 +9,7 @@ class NoiSinh extends Model
     const CREATED_AT = 'ns_taoMoi';
     const UPDATED_AT = 'ns_capNhat';
 
-    protected   $table          = 'quequan';
+    protected   $table          = 'noisinh';
     protected   $fillable       = ['nv_ma', 'x_ma', 'h_ma', 't_ma', 'ns_diaChi'];
     protected   $guarded        = ['ns_ma'];
 

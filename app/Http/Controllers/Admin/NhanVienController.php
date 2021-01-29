@@ -49,7 +49,9 @@ class NhanVienController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = NhanVien::find($id);
+        return view('admin.nhanvien.show')
+                ->with('nv',$result);
     }
 
     /**
