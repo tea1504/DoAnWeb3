@@ -36,62 +36,71 @@ Danh sách nhân viên
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="nhanvienController" ng-init="data = {{$data}}; start = 0;">
+<div class="container-fluid" ng-controller="nhanvienController" ng-init="start = 0;">
     <div class="row">
         <div class="col">
-            <button class="btn btn-outline-danger mb-3" ng-click="showTable()"><i class="fas <%icon%>"></i></button>
+            <button class="btn btn-dark mb-3" ng-click="showTable()"><i class="fas <%icon%>"></i></button>
         </div>
         <div class="col text-right">
-            <button class="btn">Nhóm phím chức năng</button>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
+                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></button>
+                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excell"><i class="fas fa-file-excel"></i></button>
+                <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></button>
+            </div>
         </div>
     </div>
     <div class="card" ng-show="!show">
         <div class="card-header">
             <form name="frmChucNang" class="row" novalidate>
                 <div class="col-sm-4 text-sm-left text-center mb-sm-0 mb-1">
-                    <div class="row">
-                        <span class="col-sm-3 text-sm-right text-center">Xem</span>
-                        <div class="col-sm-6">
-                            <select name="number_card" id="number_card" ng-model="number_card" class="form-control">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="9999">tất cả</option>
-                            </select>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Xem</div>
                         </div>
-                        <span class="col-sm-3 text-sm-left text-center">mục</span>
+                        <select name="number_card" id="number_card" ng-model="number_card" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="9999">tất cả</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">mục</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4 text-center mb-sm-0 mb-1">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button class="btn btn-outline-danger" ng-disabled="start<=0" ng-click="start=start-1">Trước</button>
-                        <button class="btn btn-outline-danger" ng-hide="start <= 1 || countPage((data | filter: keyWord).length).length == 3" ng-click="start=start-2">...</button>
-                        <button ng-repeat="i in countPage((data | filter: keyWord).length)" ng-click="page(i)" ng-class="start==i?'btn btn-outline-danger active':'btn btn-outline-danger'" ng-hide="an(start, i, countPage((data | filter: keyWord).length).length)"><% i + 1 %></button>
-                        <button class="btn btn-outline-danger" ng-hide="start >= countPage((data | filter: keyWord).length).length - 2 || countPage((data | filter: keyWord).length).length == 3" ng-click="start=start+2">...</button>
-                        <button class="btn btn-outline-danger" ng-disabled="start>=countPage((data | filter: keyWord).length).length - 1" ng-click="start=start+1">Sau</button>
+                        <button class="btn btn-outline-secondary" ng-disabled="start<=0" ng-click="start=start-1">Trước</button>
+                        <button class="btn btn-outline-secondary" ng-hide="start <= 1 || countPage((data | filter: keyWord).length).length == 3" ng-click="start=start-2">...</button>
+                        <button ng-repeat="i in countPage((data | filter: keyWord).length)" ng-click="page(i)" ng-class="start==i?'btn btn-outline-secondary active':'btn btn-outline-secondary'" ng-hide="an(start, i, countPage((data | filter: keyWord).length).length)"><% i + 1 %></button>
+                        <button class="btn btn-outline-secondary" ng-hide="start >= countPage((data | filter: keyWord).length).length - 2 || countPage((data | filter: keyWord).length).length == 3" ng-click="start=start+2">...</button>
+                        <button class="btn btn-outline-secondary" ng-disabled="start>=countPage((data | filter: keyWord).length).length - 1" ng-click="start=start+1">Sau</button>
                     </div>
                 </div>
                 <div class="col-sm-4 text-sm-right text-center">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <select name="" id="" class="form-control" style="border-radius: 2px 0 0 2px;" ng-model="field" ng-change="reset()">
-                                <option value="1">Name</option>
-                                <option value="2">Phone</option>
-                                <option value="3">Address</option>
+                            <select name="" id="" class="form-control" style="border-radius: .25rem 0 0 .25rem;" ng-model="field" ng-change="reset()">
+                                <option value="1" id="check">Name</option>
+                                <option value="2">Số ĐT</option>
+                                <option value="3">Địa chỉ</option>
                                 <option value="4">Email</option>
+                                <option value="5">Chức vụ</option>
                             </select>
                         </div>
-                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 2px 2px 0;" ng-model="keyWord.nv_hoTen" ng-show="field==1">
-                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 2px 2px 0;" ng-model="keyWord.nv_sdt" ng-show="field==2">
-                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 2px 2px 0;" ng-model="keyWord.nv_noiOHienNay" ng-show="field==3">
-                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 2px 2px 0;" ng-model="keyWord.nv_email" ng-show="field==4">
+                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_hoTen" ng-show="field==1">
+                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_sdt" ng-show="field==2">
+                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_noiOHienNay" ng-show="field==3">
+                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_email" ng-show="field==4">
+                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.cvu_ten" ng-show="field==5">
                     </div>
                 </div>
             </form>
@@ -105,19 +114,19 @@ Danh sách nhân viên
                                 <h2 style="font-weight: bold;"><%d.nv_ma%></h2>
                             </div>
                             <div class="card-tools">
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Xem chi tiết
+                                <a href="#" class="btn btn-outline-light">
+                                <i class="fas fa-info-circle"></i> Thông tin thêm
                                 </a>
                             </div>
                         </div>
                         <div class="card-body pt-3">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    <img ng-src="/storage/avatar/<%d.nv_anh%>" class="img-fluid" alt="User Image">
+                                    <img ng-src="/storage/avatar/<%d.nv_anh%>" class="img-fluid" alt="User Image" fallback-src="/storage/avatar/default.png">
                                 </div>
                                 <div class="col-md-8">
                                     <h5 class="lead" style="font-style: italic;"><span><%d.nv_hoTen%></span></h5>
-                                    <p class="text-muted text-sm"><b>Chức vụ: </b> Chưa hiển thị được</p>
+                                    <p class="text-muted text-sm"><b>Chức vụ: </b> <%d.cvu_ten%></p>
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>Địa chỉ: <%d.nv_noiOHienNay%></li>
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>Điện thoại: <%d.nv_sdt%></li>
@@ -221,8 +230,21 @@ Danh sách nhân viên
                 [10, 15, 20, 25, 50, 100, "Tất cả"]
             ]
         });
+        document.getElementById('check').selected = "true";
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     });
-    app.controller('nhanvienController', function($scope) {
+    app.directive('fallbackSrc', function() {
+        return {
+            link: function postLink(scope, element, attrs) {
+                element.bind('error', function() {
+                    angular.element(this).attr("src", attrs.fallbackSrc);
+                });
+            }
+        }
+    });
+    app.controller('nhanvienController', function($scope, $http) {
         $scope.show = false;
         $scope.number_card = 6;
         $scope.field = 1;
@@ -251,7 +273,6 @@ Danh sách nhân viên
             $scope.keyWord.nv_email = '';
         }
         $scope.an = function(n, i, max) {
-            console.log(n, i, max);
             if (n == 0 && (i == 0 || i == 1 || i == 2))
                 return false;
             if (n == max - 1 && (i == max - 1 || i == max - 2 || i == max - 3))
@@ -260,6 +281,19 @@ Danh sách nhân viên
                 return false;
             return true;
         }
+        $http({
+                url: "{{route('api.thongtin.nhanvien')}}",
+                method: "GET",
+            })
+            .then(
+                function success(respone) {
+                    // console.table(respone.data.result);
+                    $scope.data = respone.data.result;
+                },
+                function error(respone) {
+
+                }
+            );
     });
 </script>
 
