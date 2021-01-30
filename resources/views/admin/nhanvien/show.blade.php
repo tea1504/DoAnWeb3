@@ -57,167 +57,48 @@
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Thông tin chung</div>
                     <div class="card-body">
-                        <form>
-                            <div class="form-group row">
-                                <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Số hiệu cán bộ/công chức : </label>
-                                <div class="col-lg-10 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" value="{{$nv->nv_ma}}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Họ và tên : </label>
-                                <div class="col-lg-10 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" value="{{$nv->nv_hoTen}}" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên gọi khác : </label>
-                                <div class="col-lg-10 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" value="{{$nv->nv_tenGoiKhac}}" disabled>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <label class="col col-form-label">Sinh ngày </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{getdate(strtotime($nv->nv_ngaySinh))['mday']}}" disabled>
-                                        </div>
-                                        <label class="col col-form-label text-right">tháng </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{getdate(strtotime($nv->nv_ngaySinh))['mon']}}" disabled>
-                                        </div>
-                                        <label class="col col-form-label text-right">năm </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{getdate(strtotime($nv->nv_ngaySinh))['year']}}" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <label class="col-md-2 col-sm-4 col-form-label">, Giới tính : </label>
-                                        <div class="col-md-10 col-sm-8">
-                                            <input type="text" class="form-control" value="{{$nv->nv_gioiTinh == 1 ? 'Nam' : 'Nữ'}}" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-1 col-md-2 col-sm-4 col-form-label">Nơi sinh : </label>
-                                <div class="col-lg-11 col-md-10 col-sm-8">
-                                    <div class="row">
-                                        <label class="col-md-1 col-form-label text-md-right">Xã </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{$nv->noiSinh[0]->xa->x_ten}}" disabled>
-                                        </div>
-                                        <label class="col-md-1 col-form-label text-md-right">, Huyện </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{$nv->noiSinh[0]->huyen->h_ten}}" disabled>
-                                        </div>
-                                        <label class="col-md-1 col-form-label text-md-right">, Tỉnh </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{$nv->noiSinh[0]->tinh->t_ten}}" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-1 col-md-2 col-sm-4 col-form-label">Quê quán : </label>
-                                <div class="col-lg-11 col-md-10 col-sm-8">
-                                    <div class="row">
-                                        <label class="col-md-1 col-form-label text-md-right">Xã </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{$nv->queQuan[0]->xa->x_ten}}" disabled>
-                                        </div>
-                                        <label class="col-md-1 col-form-label text-md-right">, Huyện </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{$nv->queQuan[0]->huyen->h_ten}}" disabled>
-                                        </div>
-                                        <label class="col-md-1 col-form-label text-md-right">, Tỉnh </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" value="{{$nv->queQuan[0]->tinh->t_ten}}" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <label class="col-md-2 col-sm-4 col-form-label">Dân tộc : </label>
-                                        <div class="col-md-10 col-sm-8">
-                                            <input type="text" class="form-control" value="{{$nv->danToc->dt_ten}}" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <label class="col-md-2 col-sm-4 col-form-label">Tôn giáo : </label>
-                                        <div class="col-md-10 col-sm-8">
-                                            <input type="text" class="form-control" value="{{$nv->tonGiao->tg_ten}}" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        @include('admin.nhanvien.thongtinchung')
                     </div>
                 </div>
             </div>
             <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="khenThuong" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Khen thưởng/Kỷ luật</div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        @include('admin.nhanvien.khenthuong')
+                    </div>
                 </div>
             </div>
             <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="trinhDo" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Trình độ</div>
                     <div class="card-body">
-                        <form>
-
-                        </form>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Tên trường</th>
-                                    <th>Chuyên ngành đào tạo, bồi dưỡng</th>
-                                    <th class="text-center">Từ tháng, năm đến tháng, năm</th>
-                                    <th class="text-center">Hình thức đào tạo</th>
-                                    <th class="text-center">Văn bằng, chứng chỉ, trình độ gì</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($nv->dsVBCC as $vbcc)
-                                <tr>
-                                    <td>{{$vbcc->vbcc_tenTruong}}</td>
-                                    <td>{{$vbcc->vbcc_ten}}</td>
-                                    <td class="text-center">{{$vbcc->vbcc_tuNgay}} - {{$vbcc->vbcc_denNgay}}</td>
-                                    <td class="text-center">{{$vbcc->vbcc_hinhThuc}}</td>
-                                    <td class="text-center">{{$vbcc->vbcc_trinhDo}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        @include('admin.nhanvien.trinhdo')
                     </div>
                 </div>
             </div>
             <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="giaDinh" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Quan hệ gia đình</div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                    @include('admin.nhanvien.giadinh')
+                    </div>
                 </div>
             </div>
             <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="luong" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Lương/Phụ cấp</div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                    @include('admin.nhanvien.luong')
+                    </div>
                 </div>
             </div>
             <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="tuyenDung" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Thông tin tuyển dụng</div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        @include('admin.nhanvien.tuyendung')
+                        </div>
                 </div>
             </div>
         </div>
