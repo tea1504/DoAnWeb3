@@ -17,6 +17,6 @@ class LichSuBanThan extends Model
     protected   $dateFormat     = 'Y-m-d H:i:s';
     
      public function nhanVien(){
-         return $this->hasMany('App\NhanVien','nv_ma','nv_ma');
+         return $this->belongsTo('App\NhanVien','nv_ma','nv_ma');
      }
 }

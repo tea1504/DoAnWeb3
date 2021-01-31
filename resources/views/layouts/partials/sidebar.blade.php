@@ -47,6 +47,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('admin.khenthuong.index') }}" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Khen thưởng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.kyluat.index') }}" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Kỷ luật</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="pages/charts/flot.html" class="nav-link">
                                 <i class="fas fa-user-plus nav-icon"></i>
                                 <p>Thêm mới</p>

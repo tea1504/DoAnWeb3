@@ -38,9 +38,19 @@ class NhanVien extends Model
     public function dsKhenThuong(){
         return $this->hasMany('App\KhenThuong', 'nv_ma', 'nv_ma');
     }
+    
+    public function dsNguoiKyKT(){
+        return $this->hasMany('App\KhenThuong', 'nv_ma', 'kt_nguoiKy');
+    }
+    
     public function dsKyLuat(){
         return $this->hasMany('App\KyLuat', 'nv_ma', 'nv_ma');
     }
+
+    public function dsNguoiKyKL(){
+        return $this->hasMany('App\KyLuat', 'nv_ma', 'kt_nguoiKy');
+    }
+
     public function queQuan(){
         return $this->hasMany('App\QueQuan', 'nv_ma', 'nv_ma');
     }
