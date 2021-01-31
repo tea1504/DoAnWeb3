@@ -14,6 +14,7 @@ class Ngach_Bac extends Model
     protected $guarded      = ['nb_ma','b_ma','ng_ma'];
 
     protected $primaryKey   = ['nb_ma','b_ma','ng_ma'];
+    public $incrementing = false;
 
     protected $dates        = ['nb_taoMoi', 'nb_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';

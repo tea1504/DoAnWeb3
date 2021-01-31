@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col-xl-10 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" id="vungChua">
-            <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
+            <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Thông tin chung</div>
                     <div class="card-body">
@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="luong" data-parent="#vungChua">
+            <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="luong" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Lương/Phụ cấp</div>
                     <div class="card-body">
