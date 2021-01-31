@@ -40,7 +40,7 @@ class NhanVien extends Model
     }
     
     public function dsNguoiKyKT(){
-        return $this->hasMany('App\KhenThuong', 'nv_ma', 'kt_nguoiKy');
+        return $this->hasMany('App\KhenThuong', 'nv_ma','kt_nguoiKy');
     }
     
     public function dsKyLuat(){
@@ -48,7 +48,7 @@ class NhanVien extends Model
     }
 
     public function dsNguoiKyKL(){
-        return $this->hasMany('App\KyLuat', 'nv_ma', 'kt_nguoiKy');
+        return $this->hasMany('App\KyLuat', 'nv_ma','kl_nguoiKy');
     }
 
     public function queQuan(){

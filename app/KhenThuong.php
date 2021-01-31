@@ -21,6 +21,6 @@ class KhenThuong extends Model
     }
     
     public function nguoiKy(){
-         return $this->belongsTo('App\NhanVien','nv_ma','kt_nguoiKy');
+         return $this->belongsTo('App\NhanVien','kt_nguoiKy','nv_ma');
     }
 }
