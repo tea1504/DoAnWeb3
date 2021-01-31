@@ -21,6 +21,6 @@ class KhenThuong extends Model
     }
     
     public function nguoiKy(){
-         return $this->hasMany('App\NhanVien','kt_nguoiKy','nv_ma');
+         return $this->hasMany('App\NhanVien','nv_ma','kt_nguoiKy');
     }
 }

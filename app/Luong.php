@@ -10,10 +10,10 @@ class Luong extends Model
     const     UPDATED_AT    = 'l_capNhat';
 
     protected $table        = 'luong';
-    protected $fillable     = ['l_tinhTrang','ng_ma','b_ma','pc_ma','l_taoMoi', 'l_capNhat'];
-    protected $guarded      = ['l_ma','nv_ma'];
+    protected $fillable     = ['l_tinhTrang','nv_ma','ng_ma','b_ma','pc_ma','l_taoMoi', 'l_capNhat'];
+    protected $guarded      = ['l_ma'];
 
-    protected $primaryKey   = ['nb_ma','nv_ma'];
+    protected $primaryKey   = 'l_ma';
 
     protected $dates        = ['l_taoMoi', 'l_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
