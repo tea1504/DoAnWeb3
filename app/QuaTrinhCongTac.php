@@ -13,7 +13,7 @@ class QuaTrinhCongTac extends Model
     protected $fillable     = ['qtct_tungay','qtct_denNgay','cvu_ma','dv_ma','nb_ma','qtct_taoMoi', 'qtct_capNhat'];
     protected $guarded      = ['qtct_ma','nv_ma'];
 
-    protected $primaryKey   = ['qtct_ma','nv_ma'];
+    protected $primaryKey   = 'qtct_ma';
 
     protected $dates        = ['qtct_taoMoi', 'qtct_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';

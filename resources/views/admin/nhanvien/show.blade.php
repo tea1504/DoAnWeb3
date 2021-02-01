@@ -50,10 +50,13 @@
                 <button type="button" class="list-group-item list-group-item-action" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#tuyenDung" aria-controls="tuyenDung">
                     Thông tin tuyển dụng
                 </button>
+                <button type="button" class="list-group-item list-group-item-action" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#congTac" aria-controls="tuyenDung">
+                    Quá trình công tác
+                </button>
             </div>
         </div>
         <div class="col-xl-10 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" id="vungChua">
-            <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
+            <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Thông tin chung</div>
                     <div class="card-body">
@@ -98,6 +101,14 @@
                     <div class="card-header h1 bg-cyan font-weight-bold">Thông tin tuyển dụng</div>
                     <div class="card-body">
                         @include('admin.nhanvien.tuyendung')
+                        </div>
+                </div>
+            </div>
+            <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="congTac" data-parent="#vungChua">
+                <div class="card">
+                    <div class="card-header h1 bg-cyan font-weight-bold">Quá trình công tác</div>
+                    <div class="card-body">
+                        @include('admin.nhanvien.congtac')
                         </div>
                 </div>
             </div>
