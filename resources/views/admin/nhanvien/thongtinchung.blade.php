@@ -56,15 +56,15 @@
             <div class="row">
                 <label class="col-md-1 col-form-label text-md-right">Xã </label>
                 <div class="col">
-                    <input type="text" class="form-control" value="{{$nv->noiSinh[0]->xa->x_ten}}" disabled>
+                    <input type="text" class="form-control" value="{{$nv->noiSinh->xa->x_ten}}" disabled>
                 </div>
                 <label class="col-md-1 col-form-label text-md-right">, Huyện </label>
                 <div class="col">
-                    <input type="text" class="form-control" value="{{$nv->noiSinh[0]->huyen->h_ten}}" disabled>
+                    <input type="text" class="form-control" value="{{$nv->noiSinh->huyen->h_ten}}" disabled>
                 </div>
                 <label class="col-md-1 col-form-label text-md-right">, Tỉnh </label>
                 <div class="col">
-                    <input type="text" class="form-control" value="{{$nv->noiSinh[0]->tinh->t_ten}}" disabled>
+                    <input type="text" class="form-control" value="{{$nv->noiSinh->tinh->t_ten}}" disabled>
                 </div>
             </div>
         </div>
@@ -76,15 +76,15 @@
             <div class="row">
                 <label class="col-md-1 col-form-label text-md-right">Xã </label>
                 <div class="col">
-                    <input type="text" class="form-control" value="{{$nv->queQuan[0]->xa->x_ten}}" disabled>
+                    <input type="text" class="form-control" value="{{$nv->queQuan->xa->x_ten}}" disabled>
                 </div>
                 <label class="col-md-1 col-form-label text-md-right">, Huyện </label>
                 <div class="col">
-                    <input type="text" class="form-control" value="{{$nv->queQuan[0]->huyen->h_ten}}" disabled>
+                    <input type="text" class="form-control" value="{{$nv->queQuan->huyen->h_ten}}" disabled>
                 </div>
                 <label class="col-md-1 col-form-label text-md-right">, Tỉnh </label>
                 <div class="col">
-                    <input type="text" class="form-control" value="{{$nv->queQuan[0]->tinh->t_ten}}" disabled>
+                    <input type="text" class="form-control" value="{{$nv->queQuan->tinh->t_ten}}" disabled>
                 </div>
             </div>
         </div>

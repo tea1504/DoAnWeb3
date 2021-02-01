@@ -52,7 +52,7 @@ class NhanVien extends Model
     }
 
     public function queQuan(){
-        return $this->hasMany('App\QueQuan', 'nv_ma', 'nv_ma');
+        return $this->hasOne('App\QueQuan', 'nv_ma', 'nv_ma');
     }
     public function userQuyen(){
         return $this->belongsTo('App\UserQuyen', 'nv_ma', 'nv_ma');
@@ -61,13 +61,13 @@ class NhanVien extends Model
         return $this->belongsTo('App\Role', 'nv_ma', 'nv_ma');
     }
     public function tuyenDung(){
-        return $this->hasMany('App\TuyenDung', 'nv_ma', 'nv_ma');
+        return $this->hasOne('App\TuyenDung', 'nv_ma', 'nv_ma');
     }
     public function dsQuaTrinhCongTac(){
         return $this->hasMany('App\QuaTrinhCongTac', 'nv_ma', 'nv_ma');
     }
     public function luong(){
-        return $this->hasMany('App\Luong', 'nv_ma', 'nv_ma');
+        return $this->hasOne('App\Luong', 'nv_ma', 'nv_ma');
     }
     public function lichSuBanThan(){
         return $this->hasMany('App\LichSuBanThan', 'nv_ma', 'nv_ma');
@@ -79,6 +79,6 @@ class NhanVien extends Model
         return $this->hasMany('App\VBCC', 'nv_ma', 'nv_ma');
     }
     public function noiSinh(){
-        return $this->hasMany('App\NoiSinh', 'nv_ma', 'nv_ma');
+        return $this->hasOne('App\NoiSinh', 'nv_ma', 'nv_ma');
     }
 }

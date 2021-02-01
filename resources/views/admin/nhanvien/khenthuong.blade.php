@@ -13,7 +13,7 @@
             @foreach($nv->dsKhenThuong as $kt)
             <tr>
                 <td>{{$kt->kt_lyDo}}</td>
-                <td>{{$kt->nguoiKy[0]->nv_hoTen}}</td>
+                <td>{{$kt->nguoiKy->nv_hoTen}}</td>
                 <td>{{$kt->kt_ngayKy->format('d/m/Y')}}</td>
             </tr>
             @endforeach
@@ -36,7 +36,7 @@
             @foreach($nv->dsKyLuat as $kl)
             <tr>
                 <td>{{$kl->kl_lyDo}}</td>
-                <td>{{$kl->nguoiKy[0]->nv_hoTen}}</td>
+                <td>{{$kl->nguoiKy->nv_hoTen}}</td>
                 <td>{{$kl->kl_ngayKy->format('d/m/Y')}}</td>
             </tr>
             @endforeach

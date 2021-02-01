@@ -20,4 +20,10 @@ class Bac extends Model
     public function bac_nb(){
         return $this->hasMany('App\Ngach_Bac', 'b_ma', 'b_ma');
     }
+    public function bac_luong(){
+        return $this->hasMany('App\Luong', 'b_ma', 'b_ma');
+    }
+    public function dsNgach(){
+        return $this->belongsToMany('App\Ngach', 'ngach_bac', 'ng_ma', 'b_ma');
+    }
 }

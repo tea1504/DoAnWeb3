@@ -20,4 +20,10 @@ class Ngach extends Model
     public function ngach_nb(){
         return $this->hasMany('App\Ngach_Bac', 'ng_ma', 'ng_ma');
     }
+    public function ngach_luong(){
+        return $this->hasMany('App\Luong', 'ng_ma', 'ng_ma');
+    }
+    public function dsBac(){
+        return $this->belongsToMany('App\Bac', 'ngach_bac', 'b_ma', 'ng_ma')->withPivot('nb_heSoLuong');
+    }
 }

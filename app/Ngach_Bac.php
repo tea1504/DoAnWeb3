@@ -10,11 +10,10 @@ class Ngach_Bac extends Model
     const     UPDATED_AT    = 'nb_capNhat';
 
     protected $table        = 'ngach_bac';
-    protected $fillable     = ['nb_heSoLuong','nb_taoMoi', 'nb_capNhat'];
-    protected $guarded      = ['nb_ma','b_ma','ng_ma'];
+    protected $fillable     = ['nb_heSoLuong','b_ma','ng_ma','nb_taoMoi', 'nb_capNhat'];
+    protected $guarded      = ['nb_ma'];
 
-    protected $primaryKey   = ['nb_ma','b_ma','ng_ma'];
-    public $incrementing = false;
+    protected $primaryKey   = 'nb_ma';
 
     protected $dates        = ['nb_taoMoi', 'nb_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
