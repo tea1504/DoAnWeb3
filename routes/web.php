@@ -28,7 +28,10 @@ Route::get('/admin', 'Admin\AdminController@dashboard')->name('admin');
 Route::get('/admin/lienhe', 'Admin\AdminController@lienHe')->name('admin.lienhe');
 Route::post('/admin/lienhe/guiloinhan', 'Admin\AdminController@guiMaiTuLienHe')->name('admin.lienhe.guiloinhan');
 
+Route::get('/admin/nhanvien/print-chitiet/{id}', 'Admin\NhanVienController@printDetail')->name('admin.nhanvien.print.chitiet');
 Route::resource('/admin/nhanvien', 'Admin\NhanVienController', ['as' => 'admin']);
+
 Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'admin']);
+
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin']);
 

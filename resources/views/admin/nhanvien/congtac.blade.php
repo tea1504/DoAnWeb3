@@ -1,4 +1,5 @@
-<table class="table">
+@if(count($nv->dsQuaTrinhCongTac) > 0)
+<table class="table table-bordered">
     <theah class="thead-light">
         <tr>
             <th>Từ tháng năm đến tháng năm</th>
@@ -7,10 +8,13 @@
     </theah>
     <tbody>
         @foreach($nv->dsQuaTrinhCongTac as $ct)
-            <tr>{{$ct}}
+            <tr>    
                 <td>{{$ct->qtct_tuNgay}} - {{$ct->qtct_denNgay}}</td>
-                <td></td>
+                <td>chức vụ : {{$ct->chucvu_qtct->cvu_ten}}, đơn vị công tác: {{$ct->donvi_qtct->dv_ten}}</td>
             </tr>
         @endforeach
     </tbody>
 </table>
+@else
+Chưa có dữ liệu
+@endif
