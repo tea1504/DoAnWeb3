@@ -70,7 +70,7 @@ class NhanVien extends Model
         return $this->hasOne('App\Luong', 'nv_ma', 'nv_ma');
     }
     public function lichSuBanThan(){
-        return $this->hasMany('App\LichSuBanThan', 'nv_ma', 'nv_ma');
+        return $this->hasOne('App\LichSuBanThan', 'nv_ma', 'nv_ma');
     }
     public function dsQuanHeGiaDinh(){
         return $this->hasMany('App\QuanHeGiaDinh', 'nv_ma', 'nv_ma');

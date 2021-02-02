@@ -22,6 +22,11 @@
 @section('content')
 <div class="container-fluid" ng-controller="chitietnhanvienController">
     <div class="row">
+        <div class="col-md-12 mb-3">
+            <a href="{{route('admin.nhanvien.print.chitiet',['id'=>$nv->nv_ma])}}" class="btn btn-secondary">
+                <i class="fas fa-print"></i> in thông tin
+            </a>
+        </div>
         <div class="col-xl-2 col-lg-3 col-md-4">
             <div class="card">
                 <div class="card-body p-0">
