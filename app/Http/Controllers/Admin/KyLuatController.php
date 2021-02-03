@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\KyLuat;
+use App\NhanVien;
 
 class KyLuatController extends Controller
 {
@@ -18,6 +19,7 @@ class KyLuatController extends Controller
         $kl = KyLuat::all();
         return view('admin.kyluat.index')
         ->with('kl',$kl);
+        
     }
 
     /**
@@ -27,9 +29,9 @@ class KyLuatController extends Controller
      */
     public function create()
     {
-        $kl = KyLuat::all();
+        $nv = NhanVien::all();
         return view('admin.kyluat.create')
-        ->with('kl',$kl);
+        ->with('nv',$nv);
     }
 
     /**
@@ -40,7 +42,17 @@ class KyLuatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kl = new KyLuat();
+        $kl->nv_ma = $request->nv_ma;
+        $kl->kl_ngayKy = $request->kl_ngayKy;
+        $kl->kl_nguoiKy = $request->nv_ma;
+        $kl->kl_lyDo = $request->kl_lyDo;
+        $kl->kl_taoMoi = $request->kl_taoMoi;
+        $kl->kl_capNhat = $request->kl_capNhat;
+
+        $kl->save();
+        return redirect()->route('admin.kyluat.index');
+        dd($kl->kl_ngayKy);
     }
 
     /**

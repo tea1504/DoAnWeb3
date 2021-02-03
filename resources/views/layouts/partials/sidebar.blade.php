@@ -45,19 +45,7 @@
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.khenthuong.index') }}" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
-                                <p>Khen thưởng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.kyluat.index') }}" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
-                                <p>Kỷ luật</p>
-                            </a>
-                        </li>
+                        </li>                        
                         <li class="nav-item">
                             <a href="pages/charts/flot.html" class="nav-link">
                                 <i class="fas fa-user-plus nav-icon"></i>
@@ -71,7 +59,47 @@
                             </a>
                         </li>
                     </ul>
+                 
                 </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="{{ request()->is('admin/khenthuong')?'active nav-link':'nav-link' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Khen thưởng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.khenthuong.index') }}" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>                        
+                    </ul>
+                 
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="{{ request()->is('admin/khenthuong')?'active nav-link':'nav-link' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Kỷ luật
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.kyluat.index') }}" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>                        
+                    </ul>
+                 
+                </li>
+                
+               
+                
                 <li class="nav-item has-treeview">
                     <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                         <i class="nav-icon fas fa-chart-bar"></i>

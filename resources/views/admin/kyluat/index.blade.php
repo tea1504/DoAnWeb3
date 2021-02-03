@@ -40,7 +40,7 @@ Danh sách kỷ luật
     <div class="row">
         <div class="col text-right">
             <div class="btn-group" role="group">
-                <a href="{{ route('admin.khenthuong.create') }}">
+                <a href="{{ route('admin.kyluat.create') }}">
                     <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
                 </a>                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></button>
                 <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excell"><i class="fas fa-file-excel"></i></button>
@@ -56,7 +56,7 @@ Danh sách kỷ luật
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Mã khen thưởng</th>
+                                <th>Mã kỷ luật</th>
                                 <th>Tên</th>
                                 <th>Ngày ký</th>
                                 <th>Người ký</th>
@@ -71,7 +71,7 @@ Danh sách kỷ luật
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$d->kl_ma}}</td>
-                                <td>{{$d->nhanVien->nv_hoTen}}</td>
+                                <td>{{$d->nhanVienKL->nv_hoTen}}</td>
                                 <td>{{$d->kl_ngayKy}}</td>
                                 <td></td>
                                 <td>{{$d->kl_lyDo}}</td>                         

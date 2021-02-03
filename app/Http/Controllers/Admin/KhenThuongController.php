@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\KhenThuong;
+use App\NhanVien;
 
 class KhenThuongController extends Controller
 {
@@ -27,9 +28,9 @@ class KhenThuongController extends Controller
      */
     public function create()
     {
-        $kt = KhenThuong::all();
+        $nv = NhanVien::all();
         return view('admin.khenthuong.create')
-        ->with('kt',$kt);
+        ->with('nv',$nv);
     }
 
     /**
@@ -40,7 +41,17 @@ class KhenThuongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kt = new KhenThuong();
+        $kt->nv_ma = $request->nv_ma;
+        $kt->kt_ngayKy = $request->kt_ngayKy;
+        $kt->kt_nguoiKy = $request->nv_ma;
+        $kt->kt_lyDo = $request->kt_lyDo;
+        $kt->kt_taoMoi = $request->kt_taoMoi;
+        $kt->kt_capNhat = $request->kt_capNhat;
+
+        $kt->save();
+        return redirect()->route('admin.khenthuong.index');
+        
     }
 
     /**
