@@ -31,6 +31,8 @@ Route::post('/admin/lienhe/guiloinhan', 'Admin\AdminController@guiMaiTuLienHe')-
 Route::get('/admin/nhanvien/print-chitiet/{id}', 'Admin\NhanVienController@printDetail')->name('admin.nhanvien.print.chitiet');
 Route::get('/admin/nhanvien/print', 'Admin\NhanVienController@print')->name('admin.nhanvien.print');
 Route::get('/admin/nhanvien/pdf-chitiet/{id}', 'Admin\NhanVienController@pdfDetail')->name('admin.nhanvien.pdf.chitiet');
+Route::get('/admin/nhanvien/pdf', 'Admin\NhanVienController@pdf')->name('admin.nhanvien.pdf');
+Route::get('/admin/nhanvien/excel', 'Admin\NhanVienController@excel')->name('admin.nhanvien.excel');
 Route::resource('/admin/nhanvien', 'Admin\NhanVienController', ['as' => 'admin']);
 
 Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'admin']);
