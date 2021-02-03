@@ -1,56 +1,45 @@
-@extends('print.layouts.paper')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title')
-Biểu mẫu Phiếu in danh sách sản phẩm
-@endsection
+<head>
+    <title>{{$nv->nv_ma}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        * {
+            font-size: 11px;
+            font-family: DejaVu Sans, sans-serif;
+        }
 
-@section('paper-size') A4 @endsection
-@section('paper-class') A4 @endsection
-@section('paper-toolbar-top')
-<input type="button" value="Quay về" onClick="window.location='{{route('admin.nhanvien.show', ['id' => $nv->nv_ma])}}'" /><br>
-@endsection
-@section('paper-toolbar-bottom')
-<input type="button" value="Quay về" onClick="window.location='{{route('admin.nhanvien.show', ['id' => $nv->nv_ma])}}'" /><br>
-@endsection
-@section('custom-css')
-<style>
-    * {
-        font-size: 12px;
-        font-family: 'Times New Roman', Times, serif;
-    }
+        td {
+            vertical-align: top;
+            line-height: 14px;
+        }
 
-    td {
-        vertical-align: top;
-        line-height: 20px;
-    }
+        table {
+            page-break-inside: auto
+        }
 
-    table {
-        page-break-inside: auto
-    }
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
 
-    tr {
-        page-break-inside: avoid;
-        page-break-after: auto
-    }
+        thead {
+            display: table-header-group
+        }
 
-    thead {
-        display: table-header-group
-    }
+        tfoot {
+            display: table-footer-group
+        }
 
-    tfoot {
-        display: table-footer-group
-    }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
 
-    .page-break {
-        page-break-after: always;
-    }
-</style>
-@endsection
-
-@section('content')
-<section class="sheet padding-20mm">
-    <article>
-        <table border="0" cellpadding="0" cellspacing="0">
+<body>
+<table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
             <tr>
                 <td width="5%"></td>
                 <td width="5%"></td>
@@ -84,22 +73,22 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                 <td colspan="14">{{$nv->tuyenDung->donVi->dv_ten}}</td>
             </tr>
             <tr>
-                <td colspan="20">&ensp;</td>
+                <td colspan="20"></td>
             </tr>
             <tr>
                 <td colspan="5" rowspan="13" align="center">
                     <img src="{{ Storage::exists('public/avatar/' . $nv->nv_anh) ? asset('storage/avatar/' . $nv->nv_anh) : asset('storage/avatar/default.png') }}" width="151.18px" height="226.77px" alt="User Image">
                 </td>
-                <td colspan="15">&ensp;</td>
+                <td colspan="15"></td>
             </tr>
             <tr>
                 <td colspan="15" align="center" style="font-weight: bold; font-size: 16px;">SƠ YẾU LÝ LỊCH CÁN BỘ, CÔNG CHỨC</td>
             </tr>
             <tr>
-                <td colspan="15">&ensp;</td>
+                <td colspan="15"></td>
             </tr>
             <tr>
-                <td colspan="15">&ensp;</td>
+                <td colspan="15"></td>
             </tr>
             <tr>
                 <td colspan="7">1. Họ và tên khai sinh (viết chữ in hoa):</td>
@@ -120,10 +109,10 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                 <td colspan="2">{{$nv->nv_gioiTinh == 1 ? 'nam' : 'nữ'}}</td>
             </tr>
             <tr>
-                <td colspan="15">&ensp;</td>
+                <td colspan="15"></td>
             </tr>
             <tr>
-                <td colspan="15">&ensp;</td>
+                <td colspan="15"></td>
             </tr>
             <tr>
                 <td colspan="2">4. Nơi sinh :</td>
@@ -135,19 +124,19 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                 <td colspan="3">{{$nv->noiSinh->tinh->t_ten}}</td>
             </tr>
             <tr>
-                <td colspan="2">5. Quê quán: </td>
+                <td colspan="3">5. Quê quán: </td>
                 <td colspan="1">Xã </td>
                 <td colspan="3">{{$nv->queQuan->xa->x_ten}}</td>
                 <td colspan="2">, Huyện </td>
                 <td colspan="2">{{$nv->queQuan->huyen->h_ten}}</td>
                 <td colspan="2">, Tỉnh </td>
-                <td colspan="3">{{$nv->queQuan->tinh->t_ten}}</td>
+                <td colspan="2">{{$nv->queQuan->tinh->t_ten}}</td>
             </tr>
             <tr>
-                <td colspan="15">&ensp;</td>
+                <td colspan="15"></td>
             </tr>
             <tr>
-                <td colspan="15">&ensp;</td>
+                <td colspan="15"></td>
             </tr>
             <tr>
                 <td colspan="2">6. Dân tộc : </td>
@@ -193,8 +182,8 @@ Biểu mẫu Phiếu in danh sách sản phẩm
             <tr>
                 <td colspan="6">14. Ngạch công chức (viên chức) : </td>
                 <td colspan="4">{{$nv->luong->ngach_luong->ng_ten}}</td>
-                <td colspan="2">, Mã ngạch : </td>
-                <td colspan="8">{{$nv->luong->ngach_luong->ng_ma}}</td>
+                <td colspan="3">, Mã ngạch : </td>
+                <td colspan="7">{{$nv->luong->ngach_luong->ng_ma}}</td>
             </tr>
             <tr>
                 <td colspan="2">Bậc lương:</td>
@@ -236,8 +225,8 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                     echo $trinhdovbcc;
                     ?>
                 </td>
-                <td colspan="4">, 15.4. Quản lý nhà nước: </td>
-                <td colspan="6">
+                <td colspan="5">, 15.4. Quản lý nhà nước: </td>
+                <td colspan="5">
                     <?php
                     $trinhdovbcc = '';
                     foreach ($nv->dsVBCC as $vbcc) {
@@ -304,8 +293,8 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                 <td colspan="20">(Ngày tham gia tổ chức: Đoàn, Hội,…. Và làm việc gì trong tổ chức đó)</td>
             </tr>
         </table>
-        <div class="page-break"></div>
-        <table border="0" cellpadding="0" cellspacing="0">
+        <!-- <div class="page-break"></div> -->
+        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
             <tr>
                 <td width="5%"></td>
                 <td width="5%"></td>
@@ -384,8 +373,8 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                 <td colspan="2">{{$nv->nhomMau->nm_ten}}</td>
             </tr>
             <tr>
-                <td colspan="4">24. Là thương binh hạng :</td>
-                <td colspan="5">{{$nv->nv_hangThuongBinh}}</td>
+                <td colspan="5">24. Là thương binh hạng :</td>
+                <td colspan="4">{{$nv->nv_hangThuongBinh}}</td>
                 <td colspan="6">, Là con gia đình chính sách() :</td>
                 <td colspan="5">{{$nv->nv_giaDinhChinhSach}}</td>
             </tr>
@@ -408,7 +397,7 @@ Biểu mẫu Phiếu in danh sách sản phẩm
             </tr>
             <tr>
                 <td colspan="20" align="center">
-                    <table border="1" cellpadding="5" cellspacing="0">
+                    <table border="1" cellpadding="5" cellspacing="0" align="center" width="100%">
                         <thead>
                             <tr>
                                 <th>Tên trường</th>
@@ -430,11 +419,11 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                             @endforeach
                             @for($i = 1; $i <= 9 - count($nv->dsVBCC); $i++)
                                 <tr>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
+                                    <td style="height: 20px;"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 @endfor
                         </tbody>
@@ -445,8 +434,8 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                 <td colspan="20">Ghi chú: Hình thức đào tạo: chính quy, tại chức, chuyên tu, bồi dưỡng . . . . . . . . . . . . / Văn bằng: TSKH, TS, Ths, Cử nhân, Kỹ sư . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</td>
             </tr>
         </table>
-        <div class="page-break"></div>
-        <table border="0" cellpadding="0" cellspacing="0">
+        <!-- <div class="page-break"></div> -->
+        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
             <tr>
                 <td width="5%"></td>
                 <td width="5%"></td>
@@ -474,7 +463,7 @@ Biểu mẫu Phiếu in danh sách sản phẩm
             </tr>
             <tr>
                 <td colspan="20">
-                    <table border="1" cellspacing="0">
+                    <table border="1" cellspacing="0" align="center" width="100%">
                         <thead>
                             <tr>
                                 <th>Từ tháng, năm đến tháng, năm</th>
@@ -490,8 +479,8 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                             @endforeach
                             @for($i = 1; $i <= 7 - count($nv->dsQuaTrinhCongTac); $i++)
                                 <tr>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
+                                    <td style="height: 20px;"></td>
+                                    <td></td>
                                 </tr>
                                 @endfor
                         </tbody>
@@ -533,7 +522,7 @@ Biểu mẫu Phiếu in danh sách sản phẩm
             </tr>
             <tr>
                 <td colspan="20">
-                    <table border="1" cellspacing="0" cellpadding="2">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
                         <thead>
                             <tr>
                                 <th>Mối quan hệ</th>
@@ -553,10 +542,10 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                             @endforeach
                             @for($i = 1; $i <= 16 - count($nv->dsQuanHeGiaDinh); $i++)
                                 <tr>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
-                                    <td>&ensp;</td>
+                                    <td style="height: 20px;"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 @endfor
                         </tbody>
@@ -564,8 +553,8 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                 </td>
             </tr>
         </table>
-        <div class="page-break"></div>
-        <table border="0" cellpadding="0" cellspacing="0">
+        <!-- <div class="page-break"></div> -->
+        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
             <tr>
                 <td width="5%"></td>
                 <td width="5%"></td>
@@ -595,7 +584,7 @@ Biểu mẫu Phiếu in danh sách sản phẩm
             </tr>
             <tr>
                 <td colspan="20">
-                    <table border="1" cellspacing="0" cellpadding="2">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
                         <thead>
                             <tr>
                                 <th>Mối quan hệ</th>
@@ -605,82 +594,65 @@ Biểu mẫu Phiếu in danh sách sản phẩm
                             </tr>
                         </thead>
                         <tbody>
-                            @for($i = 1; $i <= 16; $i++) <tr>
-                                <td>&ensp;</td>
-                                <td>&ensp;</td>
-                                <td>&ensp;</td>
-                                <td>&ensp;</td>
+                            @for($i = 1; $i <= 16; $i++) 
+                            <tr>
+                                <td style="height: 20px;"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            @endfor
+                        </tbody>
+                    </table>
+                </td>
             </tr>
-            @endfor
-            </tbody>
+            <tr>
+                <td colspan="20">31. Nhận xét, đánh giá của cơ quan, đơn vị quản lý và sử dụng cán bộ công chức</td>
+            </tr>
+            <tr>
+                <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    <table align="center">
+                        <tr align="center">
+                            <td>Người khai</td>
+                        </tr>
+                        <tr align="center">
+                            <td>Tôi xin cam đoan những lời khai trên đây là đúng sự thật</td>
+                        </tr>
+                        <tr align="center">
+                            <td>(Ký tên, ghi rõ họ tên)</td>
+                        </tr>
+                    </table>
+                </td>
+                <td colspan="10">
+                    <table align="center">
+                        <tr align="center">
+                            <td>. . . . . . ., Ngày . . . . . . . tháng . . . . . . . năm 20 . . .</td>
+                        </tr>
+                        <tr align="center">
+                            <td>Thủ trưởng cơ quan, đơn vị quản lý và sử dụng CBCC</td>
+                        </tr>
+                        <tr align="center">
+                            <td>(Ký tên, đóng dấu)</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="20"></td>
+            </tr>
+            <tr>
+                <td colspan="20"></td>
+            </tr>
+            <tr>
+                <td colspan="20"></td>
+            </tr>
+            <tr>
+                <td colspan="20"></td>
+            </tr>
         </table>
-        </td>
-        </tr>
-        <tr>
-            <td colspan="20">31. Nhận xét, đánh giá của cơ quan, đơn vị quản lý và sử dụng cán bộ công chức</td>
-        </tr>
-        <tr>
-            <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-        </tr>
-        <tr>
-            <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-        </tr>
-        <tr>
-            <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-        </tr>
-        <tr>
-            <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-        </tr>
-        <tr>
-            <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-        </tr>
-        <tr>
-            <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-        </tr>
-        <tr>
-            <td colspan="20">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-        </tr>
-        <tr>
-            <td colspan="10">
-                <table align="center">
-                    <tr align="center">
-                        <td>Người khai</td>
-                    </tr>
-                    <tr align="center">
-                        <td>Tôi xin cam đoan những lời khai trên đây là đúng sự thật</td>
-                    </tr>
-                    <tr align="center">
-                        <td>(Ký tên, ghi rõ họ tên)</td>
-                    </tr>
-                </table>
-            </td>
-            <td colspan="10">
-                <table align="center">
-                    <tr align="center">
-                        <td>. . . . . . ., Ngày . . . . . . . tháng . . . . . . . năm 20 . . .</td>
-                    </tr>
-                    <tr align="center">
-                        <td>Thủ trưởng cơ quan, đơn vị quản lý và sử dụng CBCC</td>
-                    </tr>
-                    <tr align="center">
-                        <td>(Ký tên, đóng dấu)</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="20">&ensp;</td>
-        </tr>
-        <tr>
-            <td colspan="20">&ensp;</td>
-        </tr>
-        <tr>
-            <td colspan="20">&ensp;</td>
-        </tr>
-        <tr>
-            <td colspan="20">&ensp;</td>
-        </tr>
-        </table>
-    </article>
-</section>
-@endsection
+</body>
+
+</html>

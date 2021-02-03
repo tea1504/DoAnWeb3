@@ -23,9 +23,12 @@
 <div class="container-fluid" ng-controller="chitietnhanvienController">
     <div class="row">
         <div class="col-md-12 mb-3">
-            <a href="{{route('admin.nhanvien.print.chitiet',['id'=>$nv->nv_ma])}}" class="btn btn-secondary">
-                <i class="fas fa-print"></i> in thông tin
-            </a>
+            <div class="btn-group" role="group">
+                <a href="{{route('admin.nhanvien.print.chitiet',['id'=>$nv->nv_ma])}}" class="btn btn-secondary">
+                    <i class="fas fa-print"></i> in thông tin
+                </a>
+                <a href="{{route('admin.nhanvien.pdf.chitiet',['id'=>$nv->nv_ma])}}" class="btn btn-warning"><i class="fas fa-file-pdf"></i> xuất file PDF</a>
+            </div>
         </div>
         <div class="col-xl-2 col-lg-3 col-md-4">
             <div class="card">
