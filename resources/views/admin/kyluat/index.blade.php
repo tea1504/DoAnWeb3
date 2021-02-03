@@ -73,7 +73,7 @@ Danh sách kỷ luật
                                 <td>{{$d->kl_ma}}</td>
                                 <td>{{$d->nhanVienKL->nv_hoTen}}</td>
                                 <td>{{$d->kl_ngayKy}}</td>
-                                <td></td>
+                                <td>{{$d->nguoiKy->nv_hoTen }}</td>
                                 <td>{{$d->kl_lyDo}}</td>                         
                                 <td>{{$d->kl_taoMoi}}</td>                         
                                 <td>{{$d->kl_capNhat}}</td>                         
