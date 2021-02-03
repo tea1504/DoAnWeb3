@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\NhanVien;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\NhanVienExport;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class NhanVienController extends Controller
 {
@@ -101,12 +103,27 @@ class NhanVienController extends Controller
             'nv' => $result,
         ];
         $pdf = PDF::loadView('admin.nhanvien.pdf-chitiet', $data);
-        return $pdf->download('NhanVien' . $result->nv_ma . '.pdf');
+        return $pdf->download('CanBo' . $result->nv_ma . '.pdf');
     }
     public function print()
     {
         $result = NhanVien::all();
         return view('admin.nhanvien.print')
             ->with('dsnv', $result);
+    }
+    public function pdf()
+    {
+        $result = NhanVien::all();
+        $data = [
+            'dsnv' => $result,
+        ];
+        // return view('admin.nhanvien.pdf')->with("dsnv", $result);
+        $pdf = PDF::loadView('admin.nhanvien.pdf', $data);
+        return $pdf->download('DanhSachCanBo.pdf');
+    }
+    public function excel()
+    {
+        // return view('admin.nhanvien.excel')->with("dsnv", NhanVien::all());
+        return Excel::download(new NhanVienExport, 'DanhSachCanBo.xlsx');
     }
 }

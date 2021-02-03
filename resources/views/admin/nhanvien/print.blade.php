@@ -6,8 +6,12 @@ Phiếu in danh sách cán bộ công chức
 
 @section('paper-size') A4 @endsection
 @section('paper-class') A4 landscape @endsection
-@section('paper-toolbar-top') @endsection
-@section('paper-toolbar-bottom') @endsection
+@section('paper-toolbar-top')
+<input type="button" value="Quay về" onClick="window.location='{{route('admin.nhanvien.index')}}'" /><br>
+@endsection
+@section('paper-toolbar-bottom')
+<input type="button" value="Quay về" onClick="window.location='{{route('admin.nhanvien.index')}}'" /><br>
+@endsection
 @section('custom-css')
 <style>
     * {
