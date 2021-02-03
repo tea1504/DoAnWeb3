@@ -44,7 +44,7 @@ Danh sách nhân viên
         <div class="col text-right">
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
-                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></button>
+                <a href="{{route('admin.nhanvien.print')}}" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
                 <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excell"><i class="fas fa-file-excel"></i></button>
                 <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></button>
             </div>

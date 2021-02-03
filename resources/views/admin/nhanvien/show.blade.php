@@ -22,6 +22,14 @@
 @section('content')
 <div class="container-fluid" ng-controller="chitietnhanvienController">
     <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="btn-group" role="group">
+                <a href="{{route('admin.nhanvien.print.chitiet',['id'=>$nv->nv_ma])}}" class="btn btn-secondary">
+                    <i class="fas fa-print"></i> in thông tin
+                </a>
+                <a href="{{route('admin.nhanvien.pdf.chitiet',['id'=>$nv->nv_ma])}}" class="btn btn-warning"><i class="fas fa-file-pdf"></i> xuất file PDF</a>
+            </div>
+        </div>
         <div class="col-xl-2 col-lg-3 col-md-4">
             <div class="card">
                 <div class="card-body p-0">
@@ -56,7 +64,7 @@
             </div>
         </div>
         <div class="col-xl-10 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" id="vungChua">
-            <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
+            <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Thông tin chung</div>
                     <div class="card-body">
@@ -84,7 +92,7 @@
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Quan hệ gia đình</div>
                     <div class="card-body">
-                    @include('admin.nhanvien.giadinh')
+                        @include('admin.nhanvien.giadinh')
                     </div>
                 </div>
             </div>
@@ -92,7 +100,7 @@
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Lương/Phụ cấp</div>
                     <div class="card-body">
-                    @include('admin.nhanvien.luong')
+                        @include('admin.nhanvien.luong')
                     </div>
                 </div>
             </div>
@@ -101,15 +109,15 @@
                     <div class="card-header h1 bg-cyan font-weight-bold">Thông tin tuyển dụng</div>
                     <div class="card-body">
                         @include('admin.nhanvien.tuyendung')
-                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="congTac" data-parent="#vungChua">
+            <div class="collapse multi-collapse" aria-labelledby="headingTwo" id="congTac" data-parent="#vungChua">
                 <div class="card">
                     <div class="card-header h1 bg-cyan font-weight-bold">Quá trình công tác</div>
                     <div class="card-body">
                         @include('admin.nhanvien.congtac')
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

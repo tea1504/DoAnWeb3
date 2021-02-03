@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\NhanVien;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class NhanVienController extends Controller
 {
@@ -17,7 +18,7 @@ class NhanVienController extends Controller
     {
         $data = NhanVien::all();
         return view('admin.nhanvien.index')
-                -> with('data', $data);
+            ->with('data', $data);
     }
 
     /**
@@ -51,7 +52,7 @@ class NhanVienController extends Controller
     {
         $result = NhanVien::find($id);
         return view('admin.nhanvien.show')
-                ->with('nv',$result);
+            ->with('nv', $result);
     }
 
     /**
@@ -86,5 +87,26 @@ class NhanVienController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function printDetail($id)
+    {
+        $result = NhanVien::find($id);
+        return view('admin.nhanvien.print-chitiet')
+            ->with('nv', $result);
+    }
+    public function pdfDetail($id)
+    {
+        $result = NhanVien::find($id);
+        $data = [
+            'nv' => $result,
+        ];
+        $pdf = PDF::loadView('admin.nhanvien.pdf-chitiet', $data);
+        return $pdf->download('NhanVien' . $result->nv_ma . '.pdf');
+    }
+    public function print()
+    {
+        $result = NhanVien::all();
+        return view('admin.nhanvien.print')
+            ->with('dsnv', $result);
     }
 }
