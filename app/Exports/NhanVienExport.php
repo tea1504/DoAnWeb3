@@ -30,7 +30,20 @@ class NhanVienExport implements FromView, WithDrawings, WithEvents, ShouldAutoSi
     public function drawings()
     {
         $arrDrawings = [];
-        $startRow = 6;
+
+        $drawingLogo = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawingLogo->setName('Logo');
+        $drawingLogo->setDescription('Logo');
+        $drawingLogo->setPath(public_path('storage/images/logo.png'));
+        $drawingLogo->setHeight(100);
+        $drawingLogo->setCoordinates('F1');
+        $offsetX = 30; //pixels
+        $offsetY = 10; //pixels
+        $drawingLogo->setOffsetX($offsetX); //pixels
+        $drawingLogo->setOffsetY($offsetY); //pixels
+        $arrDrawings[] = $drawingLogo;
+
+        $startRow = 7;
         $dsnv = NhanVien::all();
         foreach ($dsnv as $index => $nv) {
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -77,7 +90,8 @@ class NhanVienExport implements FromView, WithDrawings, WithEvents, ShouldAutoSi
     {
         $event->sheet->getDelegate()->getPageSetup()
             ->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-        $event->sheet->getDelegate()->getStyle('A1:H1')->applyFromArray(
+        $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(100);
+        $event->sheet->getDelegate()->getStyle('A6:H6')->applyFromArray(
             [
                 'font' => [
                     'bold' => true,
@@ -93,7 +107,7 @@ class NhanVienExport implements FromView, WithDrawings, WithEvents, ShouldAutoSi
                 ]
             ]
         );
-        $startRow = 6;
+        $startRow = 7;
         $dsnv = NhanVien::all();
         foreach ($dsnv as $index => $nv) {
             $currentRow = $startRow + $index;
