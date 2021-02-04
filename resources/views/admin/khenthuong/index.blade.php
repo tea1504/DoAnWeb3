@@ -68,26 +68,26 @@ Danh sách khen thưởng
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($kt as $d)
+                            @foreach($kt as $kt)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td>{{$d->kt_ma}}</td>
-                                <td>{{$d->nhanVien->nv_hoTen}}</td>
-                                <td>{{$d->kt_ngayKy}}</td>
-                                <td>{{$d->nguoiKy->nv_hoTen}}</td>
-                                <td>{{$d->kt_lyDo}}</td>                         
-                                <td>{{$d->kt_taoMoi}}</td>                         
-                                <td>{{$d->kt_capNhat}}</td>                         
+                                <td>{{$kt->kt_ma}}</td>
+                                <td>{{$kt->nhanVien->nv_hoTen}}</td>
+                                <td>{{$kt->kt_ngayKy}}</td>
+                                <td>{{$kt->nguoiKy->nv_hoTen}}</td>
+                                <td>{{$kt->kt_lyDo}}</td>                         
+                                <td>{{$kt->kt_taoMoi}}</td>                         
+                                <td>{{$kt->kt_capNhat}}</td>                         
                                 <td>
-                                   <!--  <a href="{{route('admin.nhanvien.show',['id'=>$d->nv_ma])}}" class="btn btn-sm btn-primary">
+                                   <!--  <a href="{{route('admin.nhanvien.show',['id'=>$kt->nv_ma])}}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-user"></i> Xem chi tiết
                                     </a> -->
-                                    <a href="" class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Sửa">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true">Xóa</i>
+                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Sửa">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true">Sửa</i>
                                     </a>
                                     
                                     <a href="#" class="btn btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="xóa">
-                                        <i class="fa fa-trash-o" aria-hidden="true">Sửa</i>
+                                        <i class="fa fa-trash-o" aria-hidden="true">Xóa</i>
                                     </a>
                                 </td>
                             </tr>
