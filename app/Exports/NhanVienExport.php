@@ -30,7 +30,7 @@ class NhanVienExport implements FromView, WithDrawings, WithEvents, ShouldAutoSi
     public function drawings()
     {
         $arrDrawings = [];
-        $startRow = 2;
+        $startRow = 6;
         $dsnv = NhanVien::all();
         foreach ($dsnv as $index => $nv) {
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -93,7 +93,7 @@ class NhanVienExport implements FromView, WithDrawings, WithEvents, ShouldAutoSi
                 ]
             ]
         );
-        $startRow = 2;
+        $startRow = 6;
         $dsnv = NhanVien::all();
         foreach ($dsnv as $index => $nv) {
             $currentRow = $startRow + $index;

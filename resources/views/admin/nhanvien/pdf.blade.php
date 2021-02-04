@@ -41,13 +41,35 @@
             margin: 20mm;
         }
 
-        tbody tr:nth-child(odd) {
+        tbody#content tr:nth-child(odd) {
             background: #ddd;
         }
     </style>
 </head>
 
 <body>
+    <table align="center">
+        <tr>
+            <td align="center" width="100px">
+                <img src="{{ asset('storage/images/logo.png') }}" alt="Logo" height="100px">
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <span class="slogan"><b>Shin</b> <b>H</b>uman <b>R</b>esource <b>M</b>anagement</span>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <span class="slogan">Hệ thống quản lý nhân sự</span>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <span class="slogan">Website: <i><b>http://qlnhanluc.local</b></i></span>
+            </td>
+        </tr>
+    </table>
     <table border="1" cellspacing="0" cellpadding="3" style="border: none;">
         <thead>
             <tr>
@@ -64,7 +86,7 @@
                 <th width="130px">Email</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="content">
             @foreach($dsnv as $nv)
             <tr>
                 <td align="center"><b>{{$loop->index + 1}}</b></td>

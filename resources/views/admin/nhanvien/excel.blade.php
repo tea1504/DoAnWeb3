@@ -17,6 +17,28 @@
 </head>
 
 <body>
+    <table>
+        <tr>
+            <td align="center">
+                
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                Shin Human Resource Management
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <span class="slogan">Hệ thống quản lý nhân sự</span>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <span class="slogan">Website: <i><b>http://qlnhanluc.local</b></i></span>
+            </td>
+        </tr>
+    </table>
     <table border="1" cellspacing="0" cellpadding="3">
         <thead>
             <tr>
