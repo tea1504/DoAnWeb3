@@ -41,18 +41,18 @@ Sửa khen thưởng
         <div class="">
             <div class=" h1 bg-cyan font-weight-bold">Nhập thông tin mới</div>
                 <div class="">
-                    <form method="post" action="{{ route('admin.khenthuong.update',['id' => $kt->kt_ma] ) }}"  enctype="multipart/form-data">
+                    <form method="post" action="{{ route('admin.khenthuong.update',['id' => $kl->kl_ma] ) }}"  enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT" />
                         {{ csrf_field() }}
                         <div class="form-group row">
                                 <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên nhân viên : </label>
                                 <div class="col-lg-10 col-md-9 col-sm-8">
                                     <select name="nv_ma" class="form-control">
-                                    @foreach($nv as $nv)
-                                        @if($nv->nv_ma == $kt->nv_ma)
-                                        <option value="{{ $nv->nv_ma }}" selected>{{ $nv->nv_hoTen }}</option>
+                                    @foreach($nv as $dsnv)
+                                        @if($dsnv->nv_ma == $kl->nv_ma)
+                                        <option value="{{ $dsnv->nv_ma }}" selected>{{ $dsnv->nv_hoTen }}</option>
                                         @else
-                                        <option value="{{ $nv->nv_ma }}">{{ $nv->nv_hoTen }}</option>
+                                        <option value="{{ $dsnv->nv_ma }}">{{ $dsnv->nv_hoTen }}</option>
                                         @endif
                                     @endforeach
                                     </select>
@@ -62,39 +62,33 @@ Sửa khen thưởng
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label" >Ngày ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_ngayKy" name="kt_ngayKy" class="form-control" value="{{ old('kt_ngayKy', $kt->kt_ngayKy) }}" data-mask-datetime>
+                                <input type="text" id="kl_ngayKy" name="kl_ngayKy" class="form-control" value="{{ old('kl_ngayKy', $kl->kl_ngayKy) }}" data-mask-datetime>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
                                 <select name="nv_ma" class="form-control">
-                                    @foreach($nv as $dsnv)
-                                        @if($dsnv->nv_ma == $kt->kt_nguoiKy)
-                                        <option value="{{ $dsnv->nv_ma }}" selected>{{ $dsnv->nv_hoTen }}</option>
-                                        @else
-                                        <option value="{{ $dsnv->nv_ma }}">{{ $dsnv->nv_hoTen }}</option>
-                                        @endif
-                                    @endforeach
+                                    
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Lý do : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_lyDo" name="kt_lyDo" class="form-control" value="{{ old('$kt_lyDo', $kt->kt_lyDo) }}" />
+                                <input type="text" id="kl_lyDo" name="kl_lyDo" class="form-control" value="{{ old('$kl_lyDo', $kl->kl_lyDo) }}" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_taoMoi" name="kt_taoMoi" class="form-control" value="{{ old('$kt_taoMoi', $kt->kt_taoMoi) }}" data-mask-datetime>
+                                <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ old('$kl_taoMoi', $kl->kl_taoMoi) }}" data-mask-datetime>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_capNhat" name="kt_capNhat" class="form-control" value="{{ old('$kt_capNhat', $kt->kt_capNhat) }}" data-mask-datetime>
+                                <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ old('$kl_capNhat', $kl->kl_capNhat) }}" data-mask-datetime>
                             </div>
                         </div>
                         
@@ -122,13 +116,13 @@ Sửa khen thưởng
    
 
     // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày tạo mới
-    $('#kt_taoMoi').inputmask({
+    $('#kl_taoMoi').inputmask({
       alias: 'datetime',
       inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
     });
 
     // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày cập nhật
-    $('#kt_capNhat').inputmask({
+    $('#kl_capNhat').inputmask({
       alias: 'datetime',
       inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
     });
