@@ -45,25 +45,19 @@
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
-                        </li>                        
+                        </li>
                         <li class="nav-item">
                             <a href="pages/charts/flot.html" class="nav-link">
                                 <i class="fas fa-user-plus nav-icon"></i>
                                 <p>Thêm mới</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
-                                <i class="fas fa-search nav-icon"></i>
-                                <p>Tìm kiếm</p>
-                            </a>
-                        </li>
                     </ul>
-                 
+
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="#" class="{{ request()->is('admin/nhanvien')?'active nav-link':'nav-link' }}">
-                        <i class="nav-icon fas fa-users"></i>
+                    <a href="#" class="{{ (request()->is('admin/khenthuong')||request()->is('admin/kyluat'))?'active nav-link':'nav-link' }}">
+                        <i class="nav-icon fas fa-medal"></i>
                         <p>
                             Khen thưởng/kỷ luật
                             <i class="right fas fa-angle-left"></i>
@@ -71,53 +65,53 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('admin.khenthuong.index') }}" class="nav-link">
-                                <i class="fas fa-user "></i>
+                            <a href="{{ route('admin.khenthuong.index') }}" class="{{ request()->is('admin/khenthuong')?'active nav-link':'nav-link' }}">
+                                <i class="nav-icon fas fa-check-circle"></i>
                                 <p>Khen thưởng</p>
+                                <i class="right fas fa-angle-left"></i>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('admin.khenthuong.index') }}" class="nav-link">
-                                        <i class="fas fa-user nav-icon"></i>
+                                        <i class="nav-icon fas fa-list-alt"></i>
                                         <p>Danh sách</p>
                                     </a>
-                                </li>                        
+                                </li>
                                 <li class="nav-item">
                                     <a href="pages/charts/flot.html" class="nav-link">
-                                        <i class="fas fa-user-plus nav-icon"></i>
+                                        <i class="nav-icon fas fa-plus-circle"></i>
                                         <p>Thêm mới</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>                        
+                        </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.kyluat.index') }}" class="nav-link">
-                                <i class="fas fa-user "></i>
+                            <a href="{{ route('admin.kyluat.index') }}" class="{{ request()->is('admin/kyluat')?'active nav-link':'nav-link' }}">
+                                <i class="nav-icon fas fa-exclamation-circle"></i>
                                 <p>Kỷ luật</p>
+                                <i class="right fas fa-angle-left"></i>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('admin.kyluat.index') }}" class="nav-link">
-                                        <i class="fas fa-user nav-icon"></i>
+                                        <i class="nav-icon fas fa-list-alt"></i>
                                         <p>Danh sách</p>
                                     </a>
-                                </li>                        
+                                </li>
                                 <li class="nav-item">
                                     <a href="pages/charts/flot.html" class="nav-link">
-                                        <i class="fas fa-user-plus nav-icon"></i>
+                                        <i class="nav-icon fas fa-plus-circle"></i>
                                         <p>Thêm mới</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>                        
-                        
+                        </li>
                     </ul>
-                 
                 </li>
-               
-                
-               
-                
+
+
+
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                         <i class="nav-icon fas fa-chart-bar"></i>
