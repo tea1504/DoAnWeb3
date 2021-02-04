@@ -73,7 +73,11 @@ class KhenThuongController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kt = KhenThuong::where("kt_ma",$id)->first();
+        $nv = NhanVien::all();
+        return view('admin.khenthuong.edit')
+        ->with('kt',$kt)
+        ->with('nv',$nv);
     }
 
     /**
