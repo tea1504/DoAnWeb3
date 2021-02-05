@@ -47,8 +47,8 @@ Thêm khen thưởng
                                 <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên nhân viên : </label>
                                 <div class="col-lg-10 col-md-9 col-sm-8">
                                     <select name="nv_ma" class="form-control">
-                                    @foreach($nv as $d)
-                                    <option value="{{ $d->nv_ma }}">{{ $d->nv_hoTen }}</option>
+                                    @foreach($danhsachnhanvien as $nhanvien)
+                                    <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                     @endforeach
                                     </select>
                                 </div>
@@ -63,8 +63,8 @@ Thêm khen thưởng
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
                                 <select name="nv_ma" class="form-control">
-                                    @foreach($nv as $d)
-                                    <option value="{{ $d->nv_ma }}">{{ $d->nv_hoTen }}</option>
+                                    @foreach($danhsachnhanvien as $nhanvien)
+                                    <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                     @endforeach
                                 </select>
                             </div>

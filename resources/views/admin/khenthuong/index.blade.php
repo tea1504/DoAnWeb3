@@ -68,7 +68,7 @@ Danh sách khen thưởng
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($kt as $kt)
+                            @foreach($danhsachkhenthuong as $kt)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$kt->kt_ma}}</td>
@@ -79,16 +79,18 @@ Danh sách khen thưởng
                                 <td>{{$kt->kt_taoMoi}}</td>                         
                                 <td>{{$kt->kt_capNhat}}</td>                         
                                 <td>
-                                   <!--  <a href="{{route('admin.nhanvien.show',['id'=>$kt->nv_ma])}}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-user"></i> Xem chi tiết
-                                    </a> -->
                                     <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Sửa">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true">Sửa</i>
                                     </a>
                                     
-                                    <a href="#" class="btn btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="xóa">
+                                    <!-- <a href="#" class="btn btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="xóa">
                                         <i class="fa fa-trash-o" aria-hidden="true">Xóa</i>
-                                    </a>
+                                    </a> -->
+                                    <form method="post" action="{{ route('admin.khenthuong.destroy', ['id' => $kt->kt_ma]) }}" class="pull-left">
+                                        <input type="hidden" name="_method" value="DELETE" />                                      
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger btnDelete">Xóa</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

@@ -16,9 +16,10 @@ class KhenThuongController extends Controller
      */
     public function index()
     {
-        $kt = KhenThuong::all();
+        $ds_kt = KhenThuong::all();
+        //$ds_kt = KhenThuong::paginate(5);
         return view('admin.khenthuong.index')
-        ->with('kt',$kt);
+        ->with('danhsachkhenthuong',$ds_kt);
     }
 
     /**
@@ -28,9 +29,9 @@ class KhenThuongController extends Controller
      */
     public function create()
     {
-        $nv = NhanVien::all();
+        $ds_nv = NhanVien::all();
         return view('admin.khenthuong.create')
-        ->with('nv',$nv);
+        ->with('danhsachnhanvien',$ds_nv);
     }
 
     /**
@@ -73,11 +74,14 @@ class KhenThuongController extends Controller
      */
     public function edit($id)
     {
-        $kt = KhenThuong::where("kt_ma",$id)->first();
-        $nv = NhanVien::all();
+
+        $ds_kt = KhenThuong::where("kt_ma",$id)->first();
+        
+        $ds_nv = NhanVien::all();
         return view('admin.khenthuong.edit')
-        ->with('kt',$kt)
-        ->with('nv',$nv);
+        ->with('kt',$ds_kt)
+        ->with('danhsachnhanvien',$ds_nv);
+        
     }
 
     /**
@@ -89,13 +93,23 @@ class KhenThuongController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kt = KhenThuong::where("kt_ma", $id)->first();
+
+        $kt = KhenThuong::where('kt_ma', $id)->first();
+        //$kt = KhenThuong::find($id);
+
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
         $kt->kt_nguoiKy = $request->nv_ma;
         $kt->kt_lyDo = $request->kt_lyDo;
         $kt->kt_taoMoi = $request->kt_taoMoi;
         $kt->kt_capNhat = $request->kt_capNhat;
+        //dd($kt->kt_ma);
+        //dd($id);
+        $kt->save();
+        return redirect()->route('admin.khenthuong.index');
+        
+       
+
     }
 
     /**
@@ -106,6 +120,12 @@ class KhenThuongController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kt = KhenThuong::where("kt_ma",$id)->first();
+        $kt2 = KhenThuong::where("kt_ma",$id);
+        dd($kt->kt_ma);
+        //dd($id);
+        $kt2->delete();
+        return redirect()->route('admin.khenthuong.index');
+
     }
 }

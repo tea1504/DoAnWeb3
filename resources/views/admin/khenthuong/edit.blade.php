@@ -36,23 +36,23 @@ Sửa khen thưởng
 </ol>
 @endsection
 @section('content')
-<div class="col-xl-12 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" id="vungChua">
+<div class="col-xl-12 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" >
     <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
         <div class="">
             <div class=" h1 bg-cyan font-weight-bold">Nhập thông tin mới</div>
                 <div class="">
-                    <form method="post" action="{{ route('admin.khenthuong.update',['id' => $kt->kt_ma] ) }}"  enctype="multipart/form-data">
+                    <form method="post" name="frmEdit" id="frmEdit" action="{{ route('admin.khenthuong.update',['id' => $kt->kt_ma] ) }}"  enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT" />
                         {{ csrf_field() }}
                         <div class="form-group row">
                                 <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên nhân viên : </label>
                                 <div class="col-lg-10 col-md-9 col-sm-8">
                                     <select name="nv_ma" class="form-control">
-                                    @foreach($nv as $nv)
-                                        @if($nv->nv_ma == $kt->nv_ma)
-                                        <option value="{{ $nv->nv_ma }}" selected>{{ $nv->nv_hoTen }}</option>
+                                    @foreach($danhsachnhanvien as $nhanvien)
+                                        @if($nhanvien->nv_ma == $kt->nv_ma)
+                                        <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
                                         @else
-                                        <option value="{{ $nv->nv_ma }}">{{ $nv->nv_hoTen }}</option>
+                                        <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                         @endif
                                     @endforeach
                                     </select>
@@ -69,11 +69,11 @@ Sửa khen thưởng
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
                                 <select name="nv_ma" class="form-control">
-                                    @foreach($nv as $dsnv)
-                                        @if($dsnv->nv_ma == $kt->kt_nguoiKy)
-                                        <option value="{{ $dsnv->nv_ma }}" selected>{{ $dsnv->nv_hoTen }}</option>
+                                    @foreach($danhsachnhanvien as $nhanvien)
+                                        @if($nhanvien->nv_ma == $kt->kt_nguoiKy)
+                                        <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
                                         @else
-                                        <option value="{{ $dsnv->nv_ma }}">{{ $dsnv->nv_hoTen }}</option>
+                                        <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                         @endif
                                     @endforeach
                                 </select>

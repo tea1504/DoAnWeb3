@@ -16,9 +16,9 @@ class KyLuatController extends Controller
      */
     public function index()
     {
-        $kl = KyLuat::all();
+        $ds_kl = KyLuat::all();
         return view('admin.kyluat.index')
-        ->with('kl',$kl);
+        ->with('danhsachkyluat',$ds_kl);
         
     }
 
@@ -75,10 +75,11 @@ class KyLuatController extends Controller
     public function edit($id)
     {
         $kl = KyLuat::where("kl_ma",$id)->first();
-        $nv = NhanVien::all();
+        $ds_nv = NhanVien::all();
         return view('admin.kyluat.edit')
         ->with('kl',$kl)
-        ->with('nv',$nv);
+        ->with('danhsachnv',$ds_nv);
+        
     }
 
     /**
@@ -97,6 +98,8 @@ class KyLuatController extends Controller
         $kl->kl_lyDo = $request->kl_lyDo;
         $kl->kl_taoMoi = $request->kl_taoMoi;
         $kl->kl_capNhat = $request->kl_capNhat;
+        //dd($id);
+        $kl->save();
     }
 
     /**

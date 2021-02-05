@@ -67,7 +67,7 @@ Danh sách kỷ luật
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($kl as $kl)
+                            @foreach($danhsachkyluat as $kl)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$kl->kl_ma}}</td>
