@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class NhanVien extends Model
+class NhanVien extends Model implements AuthenticatableContract
 {
     const CREATED_AT = 'nv_taoMoi';
     const UPDATED_AT = 'nv_capNhat';
@@ -19,6 +20,39 @@ class NhanVien extends Model
     protected   $dates            = ['nv_taoMoi', 'nv_capNhat', 'nv_cmndNgayCap', 'nv_ngaySinh', 'nv_ngayVaoDang', 'nv_ngayVaoDangChinhThuc', 'nv_ngayNhapNgu', 'nv_ngayXuatNgu'];
     protected   $dateFormat       = 'Y-m-d H:i:s';
 
+    protected $rememberTokenName = 'nv_ghinhodangnhap';
+    public function getAuthIdentifierName()
+    {
+        return $this->getKeyName();
+    }
+    public function getAuthIdentifier()
+    {
+        return $this->{$this->getAuthIdentifierName()};
+    }
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+    public function getRememberToken()
+    {
+        if (! empty($this->getRememberTokenName())) {
+            return (string) $this->{$this->getRememberTokenName()};
+        }
+    }
+    public function setRememberToken($value)
+    {
+        if (! empty($this->getRememberTokenName())) {
+            $this->{$this->getRememberTokenName()} = $value;
+        }
+    }
+    public function getRememberTokenName()
+    {
+        return $this->rememberTokenName;
+    }
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
     public function chucVu(){
         return $this->belongsTo('App\ChucVu', 'cvu_ma', 'cvu_ma');
     }

@@ -39,3 +39,7 @@ Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'adm
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin']);
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
