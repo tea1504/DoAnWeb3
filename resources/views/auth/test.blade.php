@@ -17,11 +17,11 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: linear-gradient(to left bottom, #0000, #fff), url("https://cdn.myxteam.com/uploads/human_resources_management-1024x683.jpeg");
+            background-image: linear-gradient(to left bottom,#0000,#fff), url("https://cdn.myxteam.com/uploads/human_resources_management-1024x683.jpeg");
             background-size: cover;
         }
 
-        #body {
+        #body{
             border-radius: 10px;
             background-color: #fff5;
         }

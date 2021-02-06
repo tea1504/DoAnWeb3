@@ -16,4 +16,15 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    public function layTenNhanVienDangNhap(Request $request){
+        $parameter = [
+            'username' => $request->username
+        ];
+        $result = DB::select('SELECT nv_hoTen, nv_anh FROM nhanvien WHERE username=:username', $parameter);
+        // dd($result);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }

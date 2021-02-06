@@ -17,3 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/nhanvien', 'Api\ApiController@layThongTinNhanVien')->name('api.thongtin.nhanvien');
+Route::get('/nhanvien/ten', 'Api\ApiController@layTenNhanVienDangNhap')->name('api.ten.nhanvien');
