@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Sửa khen thưởng
+Thêm danh sách quan hệ gia đình
 @endsection
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -32,7 +32,7 @@ Sửa khen thưởng
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Sửa khen thưởng</li>
+    <li class="breadcrumb-item active">Thêm danh sách quan hệ gia đình</li>
 </ol>
 @endsection
 @section('content')
@@ -41,62 +41,68 @@ Sửa khen thưởng
         <div class="">
             <div class=" h1 bg-cyan font-weight-bold">Nhập thông tin mới</div>
                 <div class="">
-                    <form method="post" action="{{ route('admin.kyluat.update',['id' => $kl->kl_ma] ) }}"  enctype="multipart/form-data">
-                        <input type="hidden" name="_method" value="PUT" />
-                        {{ csrf_field() }}
+                    <form method="post" action="{{ route('admin.quanhegiadinh.store') }}"  enctype="multipart/form-data">
+                    {{ csrf_field() }}
                         <div class="form-group row">
                                 <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên nhân viên : </label>
                                 <div class="col-lg-10 col-md-9 col-sm-8">
                                     <select name="nv_ma" class="form-control">
-                                    @foreach($danhsachnv as $nhanvien)
-                                        @if($nhanvien->nv_ma == $kl->nv_ma)
-                                        <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
-                                        @else
-                                        <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
-                                        @endif
+                                    @foreach($danhsachnhanvien as $nhanvien)
+                                    <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                     @endforeach
                                     </select>
-                                   
                                 </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label" >Ngày ký : </label>
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên quan hệ : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_ngayKy" name="kl_ngayKy" class="form-control" value="{{ old('kl_ngayKy', $kl->kl_ngayKy) }}" data-mask-datetime>
+                                <input type="text" id="qhgd_ten" name="qhgd_ten" class="form-control" value="{{ old('qhgd_ten') }}" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Mối quan hệ : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <select name="nv_ma" class="form-control">
-                                    @foreach($danhsachnv as $nhanvien)
-                                        @if($nhanvien->nv_ma == $kl->kl_nguoiKy)
-                                        <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
-                                        @else
-                                        <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <input type="text" id="qhgd_moiQuanHe" name="qhgd_moiQuanHe" class="form-control" value="{{ old('qhgd_moiQuanHe') }}" >
+                            </div>
+                        </div>
+                   
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Năm sinh : </label>
+                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                <input type="text" id="qhgd_" name="qhgd_namSinh" class="form-control" value="{{ old('qhgd_namSinh') }}" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Lý do : </label>
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Địa chỉ : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_lyDo" name="kl_lyDo" class="form-control" value="{{ old('$kl_lyDo', $kl->kl_lyDo) }}" />
+                                <input type="text" id="qhgd_diaChi" name="qhgd_diaChi" class="form-control" value="{{ old('qhgd_diaChi') }}" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Nghề nghiệp : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ old('$kl_taoMoi', $kl->kl_taoMoi) }}" data-mask-datetime>
+                                <input type="text" id="qhgd_ngheNghiep" name="qhgd_ngheNghiep" class="form-control" value="{{ old('qhgd_ngheNghiep') }}" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Nước ngoài : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ old('$kl_capNhat', $kl->kl_capNhat) }}" data-mask-datetime>
+                                    <input type="number" id="qhgd_nuocNgoai" name="qhgd_nuocNgoai" min="0" max="10" class="form-control" value="{{ old('qhgd_nuocNgoai') }}" >                            
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tạo mới : </label>
+                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                <input type="date" id="qhgd_taoMoi" name="qhgd_taoMoi" class="form-control" value="{{ old('qhgd_taoMoi') }}" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Cập nhật : </label>
+                            <div class="col-lg-10 col-md-9 col-sm-8">
+                                <input type="date" id="qhgd_capNhat" name="qhgd_capNhat" class="form-control" value="{{ old('qhgd_capNhat') }}" >
+                            </div>
+                        </div>
+                       
                         
                         
                         <button type="sumbit" class="btn btn-primary">Thêm mới</button>
@@ -122,13 +128,13 @@ Sửa khen thưởng
    
 
     // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày tạo mới
-    $('#kl_taoMoi').inputmask({
+    $('#kt_taoMoi').inputmask({
       alias: 'datetime',
       inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
     });
 
     // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày cập nhật
-    $('#kl_capNhat').inputmask({
+    $('#kt_capNhat').inputmask({
       alias: 'datetime',
       inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
     });

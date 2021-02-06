@@ -33,6 +33,7 @@ Route::resource('/admin/nhanvien', 'Admin\NhanVienController', ['as' => 'admin']
 Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'admin']);
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin']);
+Route::resource('/admin/quanhegiadinh', 'Admin\QuanHeGiaDinhController', ['as' => 'admin']);
 
 
 Auth::routes();
