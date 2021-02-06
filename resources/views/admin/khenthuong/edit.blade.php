@@ -41,7 +41,7 @@ Sửa khen thưởng
         <div class="">
             <div class=" h1 bg-cyan font-weight-bold">Nhập thông tin mới</div>
                 <div class="">
-                    <form method="post" name="frmEdit" id="frmEdit" action="{{ route('admin.khenthuong.update',['id' => $kt->kt_ma] ) }}"  enctype="multipart/form-data">
+                    <form method="post" name="frmEdit" id="frmEdit" action="{{ route('admin.khenthuong.update', ['id' => $kt->kt_ma]) }}"  enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT" />
                         {{ csrf_field() }}
                         <div class="form-group row">
@@ -65,6 +65,9 @@ Sửa khen thưởng
                                 <input type="text" id="kt_ngayKy" name="kt_ngayKy" class="form-control" value="{{ old('kt_ngayKy', $kt->kt_ngayKy) }}" data-mask-datetime>
                             </div>
                         </div>
+                            <!-- ------------------------------------------------------- -->
+                            
+                        
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">

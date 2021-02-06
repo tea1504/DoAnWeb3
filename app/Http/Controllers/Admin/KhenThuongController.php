@@ -61,9 +61,9 @@ class KhenThuongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+       
     }
 
     /**
@@ -82,6 +82,7 @@ class KhenThuongController extends Controller
         ->with('kt',$ds_kt)
         ->with('danhsachnhanvien',$ds_nv);
         
+        
     }
 
     /**
@@ -95,7 +96,6 @@ class KhenThuongController extends Controller
     {
 
         $kt = KhenThuong::where('kt_ma', $id)->first();
-        //$kt = KhenThuong::find($id);
 
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
@@ -104,10 +104,11 @@ class KhenThuongController extends Controller
         $kt->kt_taoMoi = $request->kt_taoMoi;
         $kt->kt_capNhat = $request->kt_capNhat;
         //dd($kt->kt_ma);
-        //dd($id);
+        dd($kt);
         $kt->save();
-        return redirect()->route('admin.khenthuong.index');
+        return redirect()->route('admin.khenthuong.index'); 
         
+       
        
 
     }
@@ -122,7 +123,7 @@ class KhenThuongController extends Controller
     {
         $kt = KhenThuong::where("kt_ma",$id)->first();
         $kt2 = KhenThuong::where("kt_ma",$id);
-        dd($kt->kt_ma);
+        //dd($kt->kt_ma);
         //dd($id);
         $kt2->delete();
         return redirect()->route('admin.khenthuong.index');
