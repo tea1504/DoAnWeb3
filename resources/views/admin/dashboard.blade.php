@@ -8,7 +8,12 @@ Dashboard
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            nội dung
+            <a href="{{ route('login') }}">Login</a>
+            <br>
+            Xin chào
+            @if(Session::has('user'))
+            {{Session::get('user')[0]->nv_hoTen}}
+            @endif
         </div>
     </div>
 </div>
