@@ -34,6 +34,8 @@ Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'adm
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin']);
 
+Route::get('/admin/vanbang/create_id/{id?}','Admin\VanBangController@create_id')->name('admin.vanbang.create_id');
+Route::resource('/admin/vanbang','Admin\VanBangController', ['as' => 'admin']);
 
 Auth::routes();
 

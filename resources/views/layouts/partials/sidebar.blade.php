@@ -123,11 +123,33 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="#" class="{{ request()->is('admin/vanbang')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <p>
+                        Văn bằng/Chứng chỉ
+                    </p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.vanbang.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
 
 
-
-            <li class="nav-item has-treeview">
+            <li class="nav-item">
                 <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
                     <p>
@@ -135,7 +157,7 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item has-treeview">
+            <li class="nav-item">
                 <a href="{{ route('admin.lienhe') }}" class="{{ request()->is('admin/lienhe')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-envelope"></i>
                     <p>
