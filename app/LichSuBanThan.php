@@ -12,7 +12,7 @@ class LichSuBanThan extends Model
     protected   $table          = 'lichsubanthan';
     protected $fillable = ['nv_ma','lsbt_hanhViPhamToi','lsbt_thamGiaToChucChinhTri'];
     protected $guarded = ['lsbt_ma'];
-    protected $primarykey ='lsbt_ma';
+    protected $primaryKey ='lsbt_ma';
 
     protected   $dates          = ['lsbt_taoMoi', 'lsbt_capNhat'];
     protected   $dateFormat     = 'Y-m-d H:i:s';

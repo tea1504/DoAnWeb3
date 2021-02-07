@@ -75,7 +75,7 @@ class KhenThuongController extends Controller
     public function edit($id)
     {
 
-        $ds_kt = KhenThuong::where("kt_ma",$id)->first();
+        $ds_kt = KhenThuong::find($id);
         
         $ds_nv = NhanVien::all();
         return view('admin.khenthuong.edit')
@@ -95,7 +95,7 @@ class KhenThuongController extends Controller
     public function update(Request $request, $id)
     {
 
-        $kt = KhenThuong::where('kt_ma', $id)->first();
+        $kt = KhenThuong::find($id);
 
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
@@ -104,7 +104,7 @@ class KhenThuongController extends Controller
         $kt->kt_taoMoi = $request->kt_taoMoi;
         $kt->kt_capNhat = $request->kt_capNhat;
         //dd($kt->kt_ma);
-        dd($kt);
+        //dd($kt);
         $kt->save();
         return redirect()->route('admin.khenthuong.index'); 
         

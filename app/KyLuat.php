@@ -12,7 +12,7 @@ class KyLuat extends Model
     protected $table = 'kyluat';
     protected $fillable = ['nv_ma','kl_ngayKy','kl_nguoiKy','kl_lyDo','kl_taoMoi','kl_capNhat'];
     protected $guarded = ['kl_ma'];
-    protected $primarykey ='kl_ma';
+    protected $primaryKey ='kl_ma';
     protected $dates =['kl_ngayKy','kl_taoMoi','kl_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
     

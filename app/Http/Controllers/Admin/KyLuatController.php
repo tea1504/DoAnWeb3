@@ -91,7 +91,7 @@ class KyLuatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kl = KyLuat::where("kl_ma", $id)->first();
+        $kl = KyLuat::find($id);
         $kl->nv_ma = $request->nv_ma;
         $kl->kl_ngayKy = $request->kl_ngayKy;
         $kl->kl_nguoiKy = $request->nv_ma;
@@ -100,6 +100,8 @@ class KyLuatController extends Controller
         $kl->kl_capNhat = $request->kl_capNhat;
         //dd($id);
         $kl->save();
+        return redirect()->route('admin.kyluat.index'); 
+
     }
 
     /**
@@ -110,6 +112,10 @@ class KyLuatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kl = KyLuat::find($id);
+
+
+        $kl->delete();
+        return redirect()->route('admin.kyluat.index'); 
     }
 }
