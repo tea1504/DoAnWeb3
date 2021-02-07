@@ -172,7 +172,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('admin.vanbang.create_id')}}" class="nav-link">
                             <i class="nav-icon fas fa-plus-circle"></i>
                             <p>Thêm mới</p>
                         </a>

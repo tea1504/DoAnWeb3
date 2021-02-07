@@ -55,6 +55,7 @@
 
             <!-- Main content -->
             <section class="content">
+                @include('layouts.partials.error')
                 @yield('content')
             </section>
             <!-- /.content -->

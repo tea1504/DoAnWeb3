@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VanBangCreateRequest;
 use App\VBCC;
 use App\NhanVien;
+use App\LoaiVBCC;
 
 class VanBangController extends Controller
 {
@@ -31,7 +33,10 @@ class VanBangController extends Controller
     }
     public function create_id($id = null)
     {
-        return isset($id)?$id:'khong co id';
+        return view('admin.vanbang.create')
+            ->with('dsnv', NhanVien::all())
+            ->with('dslvbcc', LoaiVBCC::all())
+            ->with('id', $id);
     }
 
     /**
@@ -40,9 +45,9 @@ class VanBangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VanBangCreateRequest $request)
     {
-        //
+        // dd($request->all());
     }
 
     /**
@@ -87,6 +92,8 @@ class VanBangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vb = VBCC::find($id);
+        $vb->delete();
+        return 'ok';
     }
 }
