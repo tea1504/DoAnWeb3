@@ -74,9 +74,8 @@ class KhenThuongController extends Controller
      */
     public function edit($id)
     {
-
-        $ds_kt = KhenThuong::find($id);
-        
+        $mytime = Carbon::now();
+        $ds_kt = KhenThuong::find($id);   
         $ds_nv = NhanVien::all();
         return view('admin.khenthuong.edit')
         ->with('kt',$ds_kt)

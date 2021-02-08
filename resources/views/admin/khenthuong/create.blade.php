@@ -107,22 +107,7 @@ Thêm khen thưởng
 <script src="{{ asset('vendor/input-mask/jquery.inputmask.min.js') }}"></script>
 <script src="{{ asset('vendor/input-mask/bindings/inputmask.binding.js') }}"></script>
 <script>
-  /* $(document).ready(function() {
-    
-   
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày tạo mới
-    $('#kt_taoMoi').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày cập nhật
-    $('#kt_capNhat').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-  }); */
+  
 </script>
 
 @endsection

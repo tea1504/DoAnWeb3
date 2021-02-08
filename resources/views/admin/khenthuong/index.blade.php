@@ -149,70 +149,9 @@ Danh sách khen thưởng
                 [10, 15, 20, 25, 50, 100, "Tất cả"]
             ]
         });
-        document.getElementById('check').selected = "true";
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
-        });
-    });
-    app.directive('fallbackSrc', function() {
-        return {
-            link: function postLink(scope, element, attrs) {
-                element.bind('error', function() {
-                    angular.element(this).attr("src", attrs.fallbackSrc);
-                });
-            }
-        }
-    });
-    app.controller('khuyenthuongController', function($scope, $http) {
-        $scope.show = true;
-        $scope.number_card = 6;
-        $scope.field = 1;
-        $scope.icon = 'fa-th-large';
-        $scope.showTable = function() {
-            $scope.show = !$scope.show;
-            if ($scope.show)
-                $scope.icon = 'fa-bars';
-            else
-                $scope.icon = 'fa-th-large';
-        }
-        $scope.countPage = function(n) {
-            var n = Math.ceil(n / $scope.number_card);
-            var arr = [];
-            for (var i = 0; i < n; i++)
-                arr.push(i);
-            return arr;
-        }
-        $scope.page = function(i) {
-            $scope.start = i;
-        }
-        $scope.reset = function() {
-            $scope.keyWord.nv_hoTen = '';
-            $scope.keyWord.nv_sdt = '';
-            $scope.keyWord.nv_noiOHienNay = '';
-            $scope.keyWord.nv_email = '';
-        }
-        $scope.an = function(n, i, max) {
-            if (n == 0 && (i == 0 || i == 1 || i == 2))
-                return false;
-            if (n == max - 1 && (i == max - 1 || i == max - 2 || i == max - 3))
-                return false;
-            if ((Math.abs(n - i) <= 1))
-                return false;
-            return true;
-        }
-        $http({
-                url: "{{route('api.thongtin.nhanvien')}}",
-                method: "GET",
-            })
-            .then(
-                function success(respone) {
-                    // console.table(respone.data.result);
-                    $scope.data = respone.data.result;
-                },
-                function error(respone) {
-
-                }
-            );
+        })
     });
 </script>
 
