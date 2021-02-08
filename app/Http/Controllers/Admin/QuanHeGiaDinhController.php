@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\NhanVien;
 use App\QuanHeGiaDinh;
+use Carbon\Carbon;
+
 class QuanHeGiaDinhController extends Controller
 {
     /**
@@ -49,8 +51,8 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->qhgd_diaChi = $request->qhgd_diaChi; 
         $qhgd->qhgd_ngheNghiep = $request->qhgd_ngheNghiep; 
         $qhgd->qhgd_nuocNgoai = $request->qhgd_nuocNgoai; 
-        $qhgd->qhgd_taoMoi = $request->qhgd_taoMoi; 
-        $qhgd->qhgd_capNhat = $request->qhgd_capNhat; 
+        $qhgd->qhgd_taoMoi = Carbon::now(); 
+        $qhgd->qhgd_capNhat = Carbon::now();
 
         $qhgd->save();
 

@@ -83,7 +83,7 @@
                         <a href="{{ route('admin.quanhegiadinh.index') }}" class="{{ request()->is('admin/quanhegiadinh')?'active nav-link':'nav-link' }}">
                             <i class="nav-icon fas fa-check-circle"></i>
                             <p>Quan hệ gia đình</p>
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right ple ple-angle-left"></i>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">

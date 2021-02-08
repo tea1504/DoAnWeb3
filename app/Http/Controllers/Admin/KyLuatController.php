@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\KyLuat;
 use App\NhanVien;
-
+use Carbon\Carbon;
+use App\Http\Requests\KyLuatCreateRequest;
 class KyLuatController extends Controller
 {
     /**
@@ -29,9 +30,12 @@ class KyLuatController extends Controller
      */
     public function create()
     {
+
+        $mytime = Carbon::now();
         $nv = NhanVien::all();
         return view('admin.kyluat.create')
-        ->with('nv',$nv);
+        ->with('danhsachnhanvien',$nv)
+        ->with('mytime',$mytime);
     }
 
     /**
@@ -40,19 +44,19 @@ class KyLuatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KyLuatCreateRequest $request)
     {
         $kl = new KyLuat();
         $kl->nv_ma = $request->nv_ma;
         $kl->kl_ngayKy = $request->kl_ngayKy;
         $kl->kl_nguoiKy = $request->nv_ma;
         $kl->kl_lyDo = $request->kl_lyDo;
-        $kl->kl_taoMoi = $request->kl_taoMoi;
-        $kl->kl_capNhat = $request->kl_capNhat;
+        $kl->kl_taoMoi = Carbon::now();
+        $kl->kl_capNhat = Carbon::now();
 
         $kl->save();
         return redirect()->route('admin.kyluat.index');
-        dd($kl->kl_ngayKy);
+        dd($kl);
     }
 
     /**
@@ -74,11 +78,13 @@ class KyLuatController extends Controller
      */
     public function edit($id)
     {
+        $mytime = Carbon::now();
         $kl = KyLuat::where("kl_ma",$id)->first();
         $ds_nv = NhanVien::all();
         return view('admin.kyluat.edit')
         ->with('kl',$kl)
-        ->with('danhsachnv',$ds_nv);
+        ->with('danhsachnhanvien',$ds_nv)
+        ->with('mytime',$mytime);
         
     }
 
