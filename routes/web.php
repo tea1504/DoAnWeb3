@@ -36,6 +36,9 @@ Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin']);
 Route::resource('/admin/quanhegiadinh', 'Admin\QuanHeGiaDinhController', ['as' => 'admin']);
 
 Route::get('/admin/vanbang/create_id/{id?}','Admin\VanBangController@create_id')->name('admin.vanbang.create_id');
+Route::get('/admin/vanbang/print/{id?}','Admin\VanBangController@print')->name('admin.vanbang.print');
+Route::get('/admin/vanbang/pdf/{id?}','Admin\VanBangController@pdf')->name('admin.vanbang.pdf');
+Route::get('/admin/vanbang/excel','Admin\VanBangController@excel')->name('admin.vanbang.excel');
 Route::resource('/admin/vanbang','Admin\VanBangController', ['as' => 'admin']);
 
 Auth::routes();

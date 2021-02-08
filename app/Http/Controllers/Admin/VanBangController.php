@@ -10,6 +10,9 @@ use Session;
 use App\VBCC;
 use App\NhanVien;
 use App\LoaiVBCC;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\VanBangExport;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class VanBangController extends Controller
 {
@@ -59,8 +62,8 @@ class VanBangController extends Controller
         $vb->vbcc_trinhDo = $request->vbcc_trinhDo;
         $vb->vbcc_hinhThuc = $request->vbcc_hinhThuc;
         $vb->vbcc_tenTruong = $request->vbcc_tenTruong;
-        $vb->vbcc_taoMoi = Carbon::now();
-        $vb->vbcc_capNhat = Carbon::now();
+        $vb->vbcc_taoMoi = Carbon::now('Asia/Ho_Chi_Minh');
+        $vb->vbcc_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
         $vb->save();
         Session::flash('alert', 'Đã thêm mới thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect(route('admin.vanbang.create_id'));
@@ -109,7 +112,7 @@ class VanBangController extends Controller
         $vb->vbcc_trinhDo = $request->vbcc_trinhDo;
         $vb->vbcc_hinhThuc = $request->vbcc_hinhThuc;
         $vb->vbcc_tenTruong = $request->vbcc_tenTruong;
-        $vb->vbcc_capNhat = Carbon::now();
+        $vb->vbcc_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
         $vb->save();
         Session::flash('alert', 'Đã cập nhật thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return view('admin.vanbang.edit')
@@ -129,5 +132,27 @@ class VanBangController extends Controller
         $vb = VBCC::find($id);
         $vb->delete();
         return 'ok';
+    }
+    public function print($id = null)
+    {
+        return view('admin.vanbang.print')
+            ->with('dsvbcc', VBCC::all())
+            ->with('id', $id);
+    }
+    public function pdf($id = null)
+    {
+        $result = VBCC::all();
+        $data = [
+            'dsvbcc' => $result,
+            'id' => $id,
+        ];
+        // return view('admin.vanbang.pdf')->with("dsvbcc", $result);
+        $pdf = PDF::loadView('admin.vanbang.pdf', $data);
+        return $pdf->download('DanhSachVanBang.pdf');
+    }
+    public function excel()
+    {
+        // return view('admin.vanbang.excel')->with("dsvbcc", VBCC::all());
+        return Excel::download(new VanBangExport, 'DanhSachVanBang.xlsx');
     }
 }

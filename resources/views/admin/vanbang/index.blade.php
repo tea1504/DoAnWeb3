@@ -35,9 +35,9 @@ Danh sách văn bằng chứng chỉ
         <div class="col text-right">
             <div class="btn-group" role="group">
                 <a href="" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
-                <a href="{{route('admin.nhanvien.print')}}" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
-                <a href="{{route('admin.nhanvien.excel')}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
-                <a href="{{route('admin.nhanvien.pdf')}}" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                <a href="" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
+                <a href="{{route('admin.vanbang.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
+                <a href="" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
             </div>
         </div>
     </div>
@@ -75,6 +75,9 @@ Danh sách văn bằng chứng chỉ
 <script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('themes/AdminLTE/plugins/toastr/toastr.min.js') }}"></script>
 <script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
     var table = $('#myTable').DataTable({
         ajax: {
             url: "{{route('api.nhanvien.vbcc')}}",
@@ -110,13 +113,31 @@ Danh sách văn bằng chứng chỉ
             {
                 data: "vbcc_taoMoi",
                 render: function(data, type, row, meta) {
-                    return (new Date(data)).toLocaleDateString("vn");
+                    var d = new Date(data);
+                    // return d.getMonth().padding();
+                    return [(d.getMonth() + 1),
+                            d.getDate(),
+                            d.getFullYear()
+                        ].join('/') +
+                        ' ' + [d.getHours(),
+                            d.getMinutes(),
+                            d.getSeconds()
+                        ].join(':');
                 }
             },
             {
                 data: "vbcc_capNhat",
                 render: function(data, type, row, meta) {
-                    return (new Date(data)).toLocaleDateString("vn");
+                    var d = new Date(data);
+                    // return d.getMonth().padding();
+                    return [(d.getMonth() + 1),
+                            d.getDate(),
+                            d.getFullYear()
+                        ].join('/') +
+                        ' ' + [d.getHours(),
+                            d.getMinutes(),
+                            d.getSeconds()
+                        ].join(':');
                 }
             },
             {
@@ -253,13 +274,16 @@ Danh sách văn bằng chứng chỉ
         table.ajax.url("{{route('api.nhanvien.vbcc')}}" + "?nv_ma=" + $(this).val());
         table.ajax.reload();
         $('#add').attr('href', getLink() + "/" + $('#nhanVien').val())
+        $('#print').attr('href', "{{route('admin.vanbang.print')}}" + "/" + $('#nhanVien').val());
+        $('#pdf').attr('href', "{{route('admin.vanbang.pdf')}}" + "/" + $('#nhanVien').val());
     });
 
     function getLink() {
         return "{{route('admin.vanbang.create_id')}}"
     }
     $('#add').attr('href', getLink() + "/" + $('#nhanVien').val());
-
+    $('#print').attr('href', "{{route('admin.vanbang.print')}}" + "/" + $('#nhanVien').val());
+    $('#pdf').attr('href', "{{route('admin.vanbang.pdf')}}" + "/" + $('#nhanVien').val());
 
     function xoa(id) {
         Swal.fire({

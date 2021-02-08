@@ -14,7 +14,7 @@ Thêm mới văn bằng chứng chỉ
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="trinhdothemmoiController">
+<div class="container-fluid" ng-controller="trinhdothemmoiController" ng-init="nv_ma='{{$id}}'">
     @if (Session::has('alert'))
     <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
         <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
@@ -41,21 +41,25 @@ Thêm mới văn bằng chứng chỉ
                         <div class="form-group">
                             <label for="nv_ma">Tên nhân viên:</label>
                             <select name="nv_ma" id="nv_ma" ng-class="frmCreate.nv_ma.$touched?frmCreate.nv_ma.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="nv_ma" ng-required="true">
-                                <option value=""></option>
+                                
                                 @if(old('nv_ma')==null)
-                                @if(isset($id))
-                                @foreach($dsnv as $nv)
-                                <option value="{{$nv->nv_ma}}" {{$nv->nv_ma==$id?'selected':''}}>{{$nv->nv_hoTen}}</option>
-                                @endforeach
+                                    @if(isset($id))
+                                        @foreach($dsnv as $nv)
+                                            @if($id == $nv->nv_ma)
+                                                <option value="{{$nv->nv_ma}}" selected>{{$nv->nv_hoTen}}</option>
+                                            @else
+                                                <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        @foreach($dsnv as $nv)
+                                            <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
+                                        @endforeach
+                                    @endif
                                 @else
-                                @foreach($dsnv as $nv)
-                                <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
-                                @endforeach
-                                @endif
-                                @else
-                                @foreach($dsnv as $nv)
-                                <option value="{{$nv->nv_ma}}" {{old('nv_ma')==$nv->nv_ma?'selected':''}}>{{$nv->nv_hoTen}}</option>
-                                @endforeach
+                                    @foreach($dsnv as $nv)
+                                        <option value="{{$nv->nv_ma}}" {{old('nv_ma')==$nv->nv_ma?'selected':''}}>{{$nv->nv_hoTen}}</option>
+                                    @endforeach
                                 @endif
                             </select>
                             <div class="invalid-feedback">
