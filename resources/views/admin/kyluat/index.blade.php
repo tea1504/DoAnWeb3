@@ -72,22 +72,19 @@ Danh sách kỷ luật
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$kl->kl_ma}}</td>
                                 <td>{{$kl->nhanVienKL->nv_hoTen}}</td>
-                                <td>{{$kl->kl_ngayKy}}</td>
+                                <td>{{$kl->kl_ngayKy->format('d/m/Y')}}</td>
                                 <td>{{$kl->nguoiKy->nv_hoTen }}</td>
                                 <td>{{$kl->kl_lyDo}}</td>                         
-                                <td>{{$kl->kl_taoMoi}}</td>                         
-                                <td>{{$kl->kl_capNhat}}</td>                         
+                                <td>{{$kl->kl_taoMoi->format('d/m/Y')}}</td>                         
+                                <td>{{$kl->kl_capNhat->format('d/m/Y')}}</td>                         
                                 <td>
-                                    <!-- <a href="{{route('admin.nhanvien.show',['id'=>$kl->nv_ma])}}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-user"></i> Xem chi tiết
-                                    </a> -->
-                                    <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Sửa">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true">Sửa</i>
-                                    </a>
+                                    <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-danger pull-left" data-toggle="tooltip" data-placement="top" title="Sửa">Sửa</a>
                                     
-                                    <a href="#" class="btn btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="xóa">
-                                        <i class="fa fa-trash-o" aria-hidden="true">Xóa</i>
-                                    </a>
+                                    <form class="fDelete btn p-0" method="POST" action="{{ route('admin.kyluat.destroy', ['id' => $kl->kl_ma]) }}" data-id="{{ $kl->kl_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
+                                    {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="DELETE" />
+                                                <button type="sumbit" class="btn btn-warning"  >Xóa</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

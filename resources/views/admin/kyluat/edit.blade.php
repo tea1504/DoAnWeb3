@@ -1,54 +1,51 @@
 @extends('layouts.master')
 @section('title')
-Sửa khen thưởng
+Chỉnh sửa danh sách kỷ luật
 @endsection
 @section('custom-css')
-<link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <style>
-    table#myTable {
-        height: 540px;
-        width: 100%;
-    }
-
-    table#myTable td {
-        width: 500px;
-    }
-
-    .my-card {
-        transition: .2s;
-    }
-
-    .my-card:hover {
-        transform: scale(1.05, 1.05);
-        z-index: 9999;
-        box-shadow: 0px 0px 20px #000;
-    }
-
-    .avatar {
-        background-color: #fff;
-    }
 </style>
 @endsection
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Sửa khen thưởng</li>
+    <li class="breadcrumb-item"><a href="{{route('admin.kyluat.index')}}">Danh sách kỷ luật</a></li>
+    <li class="breadcrumb-item active">Chỉnh sửa danh sách kỷ luật
+</li>
 </ol>
 @endsection
 @section('content')
-<div class="col-xl-12 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" id="vungChua">
-    <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
-        <div class="">
-            <div class=" h1 bg-cyan font-weight-bold">Nhập thông tin mới</div>
-                <div class="">
-                    <form method="post" action="{{ route('admin.kyluat.update',['id' => $kl->kl_ma] ) }}"  enctype="multipart/form-data">
-                        <input type="hidden" name="_method" value="PUT" />
+<div class="container-fluid" ng-controller="khenthuongcapnhatController">
+    @if (Session::has('alert'))
+    <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
+        <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+            <div class="toast-header">
+                <img src="{{asset('storage/images/shin.gif')}}" class="rounded mr-2 bg-light" height="30px" alt="...">
+                <strong class="mr-auto">Thành công</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            {{Session::get('alert')}}
+            </div>
+        </div>
+    </div>
+    @endif
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-cyan h1 font-weight-bold">Chỉnh sửa danh sách kỷ luật</div>
+                <div class="card-body">
+                    <form name="frmEdit" id="frmEdit" method="POST" action="{{route('admin.kyluat.update', ['id' => $kl->kl_ma])}}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="nv_ma" id="nv_ma" value="{{$kl->nv_ma}}">
                         <div class="form-group row">
                                 <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên nhân viên : </label>
                                 <div class="col-lg-10 col-md-9 col-sm-8">
-                                    <select name="nv_ma" class="form-control">
-                                    @foreach($danhsachnv as $nhanvien)
+                                    <select name="nv_ma" class="form-control" disabled>
+                                    @foreach($danhsachnhanvien as $nhanvien)
                                         @if($nhanvien->nv_ma == $kl->nv_ma)
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
                                         @else
@@ -65,11 +62,14 @@ Sửa khen thưởng
                                 <input type="text" id="kl_ngayKy" name="kl_ngayKy" class="form-control" value="{{ old('kl_ngayKy', $kl->kl_ngayKy) }}" data-mask-datetime>
                             </div>
                         </div>
+                            <!-- ------------------------------------------------------- -->
+                            
+                        
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
                                 <select name="nv_ma" class="form-control">
-                                    @foreach($danhsachnv as $nhanvien)
+                                    @foreach($danhsachnhanvien as $nhanvien)
                                         @if($nhanvien->nv_ma == $kl->kl_nguoiKy)
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
                                         @else
@@ -88,51 +88,30 @@ Sửa khen thưởng
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ old('$kl_taoMoi', $kl->kl_taoMoi) }}" data-mask-datetime>
+                                <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ $mytime }}" data-mask-datetime>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ old('$kl_capNhat', $kl->kl_capNhat) }}" data-mask-datetime>
+                                <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ $mytime }}" data-mask-datetime>
                             </div>
                         </div>
                         
                         
                         <button type="sumbit" class="btn btn-primary">Thêm mới</button>
+                        <a href="{{route('admin.kyluat.index')}}" class="btn btn-secondary">Trở về</a>
 
-                    </form>   
+                    </form>
                 </div>
-            </div>   
+            </div>
         </div>
-     </div>
-           
+    </div>
 </div>
 @endsection
 @section('custom-scripts')
-<script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<!-- Các script dành cho thư viện Mặt nạ nhập liệu InputMask -->
-<script src="{{ asset('vendor/input-mask/jquery.inputmask.min.js') }}"></script>
-<script src="{{ asset('vendor/input-mask/bindings/inputmask.binding.js') }}"></script>
 <script>
-  /* $(document).ready(function() {
-    
-   
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày tạo mới
-    $('#kl_taoMoi').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày cập nhật
-    $('#kl_capNhat').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-  }); */
+    $('.toast').toast('show');
+    app.controller('khenthuongnhatController', function($scope, $http) {});
 </script>
-
 @endsection

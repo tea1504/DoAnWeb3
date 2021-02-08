@@ -73,23 +73,18 @@ Danh sách khen thưởng
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$kt->kt_ma}}</td>
                                 <td>{{$kt->nhanVien->nv_hoTen}}</td>
-                                <td>{{$kt->kt_ngayKy}}</td>
+                                <td>{{$kt->kt_ngayKy->format('d/m/Y')}}</td>
                                 <td>{{$kt->nguoiKy->nv_hoTen}}</td>
                                 <td>{{$kt->kt_lyDo}}</td>                         
-                                <td>{{$kt->kt_taoMoi}}</td>                         
-                                <td>{{$kt->kt_capNhat}}</td>                         
-                                <td>
-                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Sửa">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true">Sửa</i>
-                                    </a>
+                                <td>{{$kt->kt_taoMoi->format('d/m/Y')}}</td>                         
+                                <td>{{$kt->kt_capNhat->format('d/m/Y')}}</td>                         
+                                <td>                               
+                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-danger pull-left" data-toggle="tooltip" data-placement="top" title="Sửa">Sửa</a>
                                     
-                                    <!-- <a href="#" class="btn btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="xóa">
-                                        <i class="fa fa-trash-o" aria-hidden="true">Xóa</i>
-                                    </a> -->
-                                    <form method="post" action="{{ route('admin.khenthuong.destroy', ['id' => $kt->kt_ma]) }}" class="pull-left">
-                                        <input type="hidden" name="_method" value="DELETE" />                                      
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-danger btnDelete">Xóa</button>
+                                    <form class="fDelete btn p-0" method="POST" action="{{ route('admin.khenthuong.destroy', ['id' => $kt->kt_ma]) }}" data-id="{{ $kt->kt_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
+                                    {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="DELETE" />
+                                                <button type="sumbit" class="btn btn-warning"  >Xóa</button>
                                     </form>
                                 </td>
                             </tr>
@@ -149,6 +144,106 @@ Danh sách khen thưởng
                 [10, 15, 20, 25, 50, 100, "Tất cả"]
             ]
         });
+        document.getElementById('check').selected = "true";
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    });
+    app.directive('fallbackSrc', function() {
+        return {
+            link: function postLink(scope, element, attrs) {
+                element.bind('error', function() {
+                    angular.element(this).attr("src", attrs.fallbackSrc);
+                });
+            }
+        }
+    });
+    app.controller('khuyenthuongController', function($scope, $http) {
+        $scope.show = true;
+        $scope.number_card = 6;
+        $scope.field = 1;
+        $scope.icon = 'fa-th-large';
+        $scope.showTable = function() {
+            $scope.show = !$scope.show;
+            if ($scope.show)
+                $scope.icon = 'fa-bars';
+            else
+                $scope.icon = 'fa-th-large';
+        }
+        $scope.countPage = function(n) {
+            var n = Math.ceil(n / $scope.number_card);
+            var arr = [];
+            for (var i = 0; i < n; i++)
+                arr.push(i);
+            return arr;
+        }
+        $scope.page = function(i) {
+            $scope.start = i;
+        }
+        $scope.reset = function() {
+            $scope.keyWord.nv_hoTen = '';
+            $scope.keyWord.nv_sdt = '';
+            $scope.keyWord.nv_noiOHienNay = '';
+            $scope.keyWord.nv_email = '';
+        }
+        $scope.an = function(n, i, max) {
+            if (n == 0 && (i == 0 || i == 1 || i == 2))
+                return false;
+            if (n == max - 1 && (i == max - 1 || i == max - 2 || i == max - 3))
+                return false;
+            if ((Math.abs(n - i) <= 1))
+                return false;
+            return true;
+        }
+        $http({
+                url: "{{route('api.thongtin.nhanvien')}}",
+                method: "GET",
+            })
+            .then(
+                function success(respone) {
+                    // console.table(respone.data.result);
+                    $scope.data = respone.data.result;
+                },
+                function error(respone) {
+
+                }
+            );
+        
+        
+        
+        
+        /* $('.fDelete').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Bạn muốn xóa?',
+                text: "Dữ liệu sẽ không thể phục hồi lại được",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Chấp nhận',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: {
+                            id: $(this).data('id'),
+                            _token: $(this).find('[name="_token"]').val(),
+                            _method: $(this).find('[name="_method"]').val()
+                        },
+                        success: function(data, textStatus, jqXHR) {
+                            location.href = "{{ route('admin.khenthuong.index') }}";
+                        }
+                    })
+                } else {
+                    Swal.fire(
+                        'Đã hủy xóa!'
+                    )
+                }
+            })
+        }); */
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
         })
