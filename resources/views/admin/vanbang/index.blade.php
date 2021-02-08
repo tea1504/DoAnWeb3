@@ -122,12 +122,13 @@ Danh sách văn bằng chứng chỉ
             {
                 data: {
                     'nv_ma': 'nv_ma',
+                    'nv_hoTen': 'nv_hoTen',
                     'vbcc_ma': 'vbcc_ma'
                 },
                 render: function(data, type, row, meta) {
                     return `<a href="/admin/vanbang/${data['vbcc_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 
-                                <form class="fDelete btn p-0" method="POST" action="vanbang/${data['vbcc_ma']}" data-id="${data['vbcc_ma']}" id="vb_${data['vbcc_ma']}" onclick="xoa(${data['vbcc_ma']})">
+                                <form class="fDelete btn p-0" method="POST" action="vanbang/${data['vbcc_ma']}" data-id="${data['vbcc_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['vbcc_ma']}" onclick="xoa(${data['vbcc_ma']})">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE" />
                                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -262,8 +263,8 @@ Danh sách văn bằng chứng chỉ
 
     function xoa(id) {
         Swal.fire({
-            title: 'Bạn có chắc chắn muốn xóa?',
-            text: 'Dữ liệu sẽ không thể phục hồi lại được',
+            title: 'Bạn có chắc chắn muốn xóa ?',
+            html: 'Dữ liệu văn bằng của nhân viên <strong>' + $('#vb_' + id).data('nv') + '</strong> sẽ không thể phục hồi lại được',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

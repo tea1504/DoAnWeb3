@@ -1,7 +1,7 @@
 @if ($errors->any())
 <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
     @foreach ($errors->all() as $error)
-    <div class="toast bg-danger m-2" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast bg-danger m-2" data-delay="{{2000 + 500*(count($errors) - $loop->index)}}" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
         <div class="toast-header">
             <img src="{{asset('storage/images/shin.gif')}}" class="rounded mr-2 bg-light" height="30px" alt="...">
             <strong class="mr-auto">Lỗi</strong>

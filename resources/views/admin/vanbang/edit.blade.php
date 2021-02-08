@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Thêm mới văn bằng chứng chỉ
+Chỉnh sửa văn bằng chứng chỉ
 @endsection
 @section('custom-css')
 <style>
@@ -10,7 +10,7 @@ Thêm mới văn bằng chứng chỉ
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{route('admin.vanbang.index')}}">Danh sách văn bằng chứng chỉ</a></li>
-    <li class="breadcrumb-item active">Thêm mới văn bằng chứng chỉ</li>
+    <li class="breadcrumb-item active">Chỉnh sửa văn bằng chứng chỉ</li>
 </ol>
 @endsection
 @section('content')
