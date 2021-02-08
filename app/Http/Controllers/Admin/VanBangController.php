@@ -98,8 +98,24 @@ class VanBangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VanBangCreateRequest $request, $id)
     {
+        $vb = VBCC::find($id);
+        $vb->nv_ma = $request->nv_ma;
+        $vb->vbcc_ten = $request->vbcc_ten;
+        $vb->lvbcc_ma = $request->lvbcc_ma;
+        $vb->vbcc_tuNgay = $request->vbcc_tuNgay;
+        $vb->vbcc_denNgay = $request->vbcc_denNgay;
+        $vb->vbcc_trinhDo = $request->vbcc_trinhDo;
+        $vb->vbcc_hinhThuc = $request->vbcc_hinhThuc;
+        $vb->vbcc_tenTruong = $request->vbcc_tenTruong;
+        $vb->vbcc_capNhat = Carbon::now();
+        $vb->save();
+        Session::flash('alert', 'Đã cập nhật thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+        return view('admin.vanbang.edit')
+            ->with('dsnv', NhanVien::all())
+            ->with('dslvbcc', LoaiVBCC::all())
+            ->with('vb', $vb);
     }
 
     /**

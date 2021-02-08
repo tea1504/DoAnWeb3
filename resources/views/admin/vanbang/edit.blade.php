@@ -14,7 +14,7 @@ Chỉnh sửa văn bằng chứng chỉ
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="trinhdothemmoiController">
+<div class="container-fluid" ng-controller="trinhdcapnhatController">
     @if (Session::has('alert'))
     <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
         <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
@@ -34,42 +34,32 @@ Chỉnh sửa văn bằng chứng chỉ
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-cyan h1 font-weight-bold">Thêm mới văn bằng chứng chỉ</div>
+                <div class="card-header bg-cyan h1 font-weight-bold">Chỉnh sửa văn bằng chứng chỉ</div>
                 <div class="card-body">
-                    <form name="frmCreate" id="frmCreate" method="POST" action="{{route('admin.vanbang.store')}}">
+                    <form name="frmEdit" id="frmEdit" method="POST" action="{{route('admin.vanbang.update', ['id' => $vb->vbcc_ma])}}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="nv_ma" id="nv_ma" value="{{$vb->nv_ma}}">
                         <div class="form-group">
-                            <label for="nv_ma">Tên nhân viên:</label>
-                            <select name="nv_ma" id="nv_ma" class="form-control">
+                            <label for="nv_ma2">Tên nhân viên:</label>
+                            <select name="nv_ma2" id="nv_ma2" class="form-control" disabled>
                                 <option value=""></option>
-                                @if(old('nv_ma')==null)
-                                @if(isset($id))
                                 @foreach($dsnv as $nv)
-                                <option value="{{$nv->nv_ma}}" {{$nv->nv_ma==$id?'selected':''}}>{{$nv->nv_hoTen}}</option>
+                                <option value="{{$nv->nv_ma}}" {{old('nv_ma', $vb->nv_ma)==$nv->nv_ma?'selected':''}}>{{$nv->nv_hoTen}}</option>
                                 @endforeach
-                                @else
-                                @foreach($dsnv as $nv)
-                                <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
-                                @endforeach
-                                @endif
-                                @else
-                                @foreach($dsnv as $nv)
-                                <option value="{{$nv->nv_ma}}" {{old('nv_ma')==$nv->nv_ma?'selected':''}}>{{$nv->nv_hoTen}}</option>
-                                @endforeach
-                                @endif
                             </select>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <label for="vbcc_ten">Tên văn bằng:</label>
-                                <input type="text" name="vbcc_ten" id="vbcc_id" value="{{old('vbcc_ten')}}" class="form-control">
+                                <input type="text" name="vbcc_ten" id="vbcc_id" value="{{old('vbcc_ten',$vb->vbcc_ten)}}" class="form-control">
                             </div>
                             <div class="col-md-6">
                                 <label for="lvbcc_ma">Loại văn bằng:</label>
                                 <select name="lvbcc_ma" id="lvbcc_ma" class="form-control">
                                     <option value=""></option>
                                     @foreach($dslvbcc as $lvbcc)
-                                    <option value="{{$lvbcc->lvbcc_ma}}" {{old('lvbcc_ma')==$lvbcc->lvbcc_ma?'selected':''}}>{{$lvbcc->lvbcc_ten}}</option>
+                                    <option value="{{$lvbcc->lvbcc_ma}}" {{old('lvbcc_ma', $vb->lvbcc_ma)==$lvbcc->lvbcc_ma?'selected':''}}>{{$lvbcc->lvbcc_ten}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -77,29 +67,29 @@ Chỉnh sửa văn bằng chứng chỉ
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <label for="vbcc_tuNgay">Từ ngày:</label>
-                                <input type="text" class="form-control" name="vbcc_tuNgay" id="vbcc_tuNgay" value="{{old('vbcc_tuNgay')}}">
+                                <input type="text" class="form-control" name="vbcc_tuNgay" id="vbcc_tuNgay" value="{{old('vbcc_tuNgay', $vb->vbcc_tuNgay)}}">
                             </div>
                             <div class="col-md-6">
                                 <label for="vbcc_denNgay">Đến ngày:</label>
-                                <input type="text" class="form-control" name="vbcc_denNgay" id="vbcc_denNgay" value="{{old('vbcc_denNgay')}}">
+                                <input type="text" class="form-control" name="vbcc_denNgay" id="vbcc_denNgay" value="{{old('vbcc_denNgay', $vb->vbcc_denNgay)}}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <label for="vbcc_trinhDo">Trình độ:</label>
-                                <input type="text" class="form-control" name="vbcc_trinhDo" id="vbcc_trinhDo" value="{{old('vbcc_trinhDo')}}">
+                                <input type="text" class="form-control" name="vbcc_trinhDo" id="vbcc_trinhDo" value="{{old('vbcc_trinhDo', $vb->vbcc_trinhDo)}}">
                             </div>
                             <div class="col-md-6">
                                 <label for="vbcc_hinhThuc">Hình thức đào tạo:</label>
-                                <input type="text" class="form-control" name="vbcc_hinhThuc" id="vbcc_hinhThuc" value="{{old('vbcc_hinhThuc')}}">
+                                <input type="text" class="form-control" name="vbcc_hinhThuc" id="vbcc_hinhThuc" value="{{old('vbcc_hinhThuc', $vb->vbcc_hinhThuc)}}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="vbcc_tenTruong">Tên trường:</label>
-                            <input type="text" name="vbcc_tenTruong" id="vbcc_tenTruong" class="form-control" value="{{old('vbcc_tenTruong')}}">
+                            <input type="text" name="vbcc_tenTruong" id="vbcc_tenTruong" class="form-control" value="{{old('vbcc_tenTruong', $vb->vbcc_tenTruong)}}">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary">Thêm mới</button>
+                            <button class="btn btn-primary">Cập nhật</button>
                             <a href="{{route('admin.vanbang.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
                     </form>
@@ -112,6 +102,6 @@ Chỉnh sửa văn bằng chứng chỉ
 @section('custom-scripts')
 <script>
     $('.toast').toast('show');
-    app.controller('trinhdothemmoiController', function($scope, $http) {});
+    app.controller('trinhdcapnhatController', function($scope, $http) {});
 </script>
 @endsection
