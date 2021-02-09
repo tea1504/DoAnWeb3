@@ -10,10 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // Route::get('/test', function(){
 //     return view('auth.test');
@@ -32,6 +31,7 @@ Route::resource('/admin/nhanvien', 'Admin\NhanVienController', ['as' => 'admin']
 Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'admin'])->middleware('auth');
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin'])->middleware('auth');
+
 Route::resource('/admin/quanhegiadinh', 'Admin\QuanHeGiaDinhController', ['as' => 'admin'])->middleware('auth');
 
 Route::get('/admin/vanbang/create_id/{id?}', 'Admin\VanBangController@create_id')->name('admin.vanbang.create_id')->middleware('auth');
@@ -39,6 +39,8 @@ Route::get('/admin/vanbang/print/{id?}', 'Admin\VanBangController@print')->name(
 Route::get('/admin/vanbang/pdf/{id?}', 'Admin\VanBangController@pdf')->name('admin.vanbang.pdf')->middleware('auth');
 Route::get('/admin/vanbang/excel', 'Admin\VanBangController@excel')->name('admin.vanbang.excel')->middleware('auth');
 Route::resource('/admin/vanbang', 'Admin\VanBangController', ['as' => 'admin'])->middleware('auth');
+
+Route::resource('/admin/luong', 'Admin\LuongController', ['as' => 'admin'])->middleware('auth');
 
 Auth::routes();
 

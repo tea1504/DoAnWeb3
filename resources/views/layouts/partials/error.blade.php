@@ -1,3 +1,4 @@
+@if(isset($errors))
 @if ($errors->any())
 <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
     @foreach ($errors->all() as $error)
@@ -15,4 +16,5 @@
     </div>
     @endforeach
 </div>
+@endif
 @endif

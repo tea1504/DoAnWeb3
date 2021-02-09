@@ -1,8 +1,8 @@
 <!-- /.content-wrapper -->
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
+    <strong>Copyright &copy; <script> document.write(new Date().getFullYear()); </script> <a href="{{route('welcome')}}">ShinHRM</a>.</strong>
+    Phần mềm quản trị nguồn nhân lực
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.0.5
+        <b>Phiên bản</b> 1.0.0
     </div>
 </footer>
