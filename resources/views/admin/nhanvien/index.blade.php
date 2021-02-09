@@ -50,6 +50,9 @@ Danh sách nhân viên
             </div>
         </div>
     </div>
+    @can('xemDSNV')
+        Bạn có quyền xem
+    @endcan
     <div class="card" ng-show="!show">
         <div class="card-header">
             <form name="frmChucNang" class="row" novalidate>

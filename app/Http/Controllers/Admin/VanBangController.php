@@ -13,6 +13,7 @@ use App\LoaiVBCC;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Exports\VanBangExport;
 use Maatwebsite\Excel\Facades\Excel as Excel;
+use App\Policies\VanBangPolicy;
 
 class VanBangController extends Controller
 {
@@ -23,6 +24,7 @@ class VanBangController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', VBCC::class);
         $result = NhanVien::all();
         return view('admin.vanbang.index')
             ->with('dsnv', $result);
@@ -38,6 +40,7 @@ class VanBangController extends Controller
     }
     public function create_id($id = null)
     {
+        $this->authorize('create', VBCC::class);
         return view('admin.vanbang.create')
             ->with('dsnv', NhanVien::all())
             ->with('dslvbcc', LoaiVBCC::all())
@@ -53,6 +56,7 @@ class VanBangController extends Controller
     public function store(VanBangCreateRequest $request)
     {
         // dd($request->all());
+        $this->authorize('create', VBCC::class);
         $vb = new VBCC();
         $vb->nv_ma = $request->nv_ma;
         $vb->vbcc_ten = $request->vbcc_ten;
@@ -88,10 +92,12 @@ class VanBangController extends Controller
      */
     public function edit($id)
     {
+        $vb = VBCC::find($id);
+        $this->authorize('update', $vb);
         return view('admin.vanbang.edit')
             ->with('dsnv', NhanVien::all())
             ->with('dslvbcc', LoaiVBCC::all())
-            ->with('vb', VBCC::find($id));
+            ->with('vb', $vb);
     }
 
     /**
@@ -104,6 +110,7 @@ class VanBangController extends Controller
     public function update(VanBangCreateRequest $request, $id)
     {
         $vb = VBCC::find($id);
+        $this->authorize('update', $vb);
         $vb->nv_ma = $request->nv_ma;
         $vb->vbcc_ten = $request->vbcc_ten;
         $vb->lvbcc_ma = $request->lvbcc_ma;
@@ -130,17 +137,20 @@ class VanBangController extends Controller
     public function destroy($id)
     {
         $vb = VBCC::find($id);
+        $this->authorize('delete', $vb);
         $vb->delete();
         return 'ok';
     }
     public function print($id = null)
     {
+        $this->authorize('inAn', VBCC::class);
         return view('admin.vanbang.print')
             ->with('dsvbcc', VBCC::all())
             ->with('id', $id);
     }
     public function pdf($id = null)
     {
+        $this->authorize('inAn', VBCC::class);
         $result = VBCC::all();
         $data = [
             'dsvbcc' => $result,
@@ -152,6 +162,7 @@ class VanBangController extends Controller
     }
     public function excel()
     {
+        $this->authorize('inAn', VBCC::class);
         // return view('admin.vanbang.excel')->with("dsvbcc", VBCC::all());
         return Excel::download(new VanBangExport, 'DanhSachVanBang.xlsx');
     }

@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Http\Controllers\Auth\CustomUserProvider;
+use App\NhanVien;
+use App\VBCC;
+use App\Policies\VanBangPolicy;
+use App\Policies\NhanVienPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        VBCC::class => VanBangPolicy::class,
+        NhanVien::class => NhanVienPolicy::class,
     ];
 
     /**
@@ -28,6 +33,9 @@ class AuthServiceProvider extends ServiceProvider
 
         //
         
+        Gate::define('xemDSNV', function($user){
+            return $user->userRole->roleQuyen->where('q_ma', 1)->first()!==null;
+        });
         $this->app->auth->provider('custom', function ($app, array $config) {
             return new CustomUserProvider($app['hash'], $config['model']);
         });

@@ -34,10 +34,12 @@ Danh sách văn bằng chứng chỉ
         </div>
         <div class="col text-right">
             <div class="btn-group" role="group">
+                @can('inAn', App\VBCC::class)
                 <a href="" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
                 <a href="" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
                 <a href="{{route('admin.vanbang.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
                 <a href="" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                @endcan
             </div>
         </div>
     </div>
@@ -115,8 +117,8 @@ Danh sách văn bằng chứng chỉ
                 render: function(data, type, row, meta) {
                     var d = new Date(data);
                     // return d.getMonth().padding();
-                    return [(d.getMonth() + 1),
-                            d.getDate(),
+                    return [d.getDate(),
+                            (d.getMonth() + 1),
                             d.getFullYear()
                         ].join('/') +
                         ' ' + [d.getHours(),
@@ -130,8 +132,8 @@ Danh sách văn bằng chứng chỉ
                 render: function(data, type, row, meta) {
                     var d = new Date(data);
                     // return d.getMonth().padding();
-                    return [(d.getMonth() + 1),
-                            d.getDate(),
+                    return [d.getDate(),
+                            (d.getMonth() + 1),
                             d.getFullYear()
                         ].join('/') +
                         ' ' + [d.getHours(),
@@ -147,7 +149,8 @@ Danh sách văn bằng chứng chỉ
                     'vbcc_ma': 'vbcc_ma'
                 },
                 render: function(data, type, row, meta) {
-                    return `<a href="/admin/vanbang/${data['vbcc_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    return `
+                            <a href="/admin/vanbang/${data['vbcc_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 
                                 <form class="fDelete btn p-0" method="POST" action="vanbang/${data['vbcc_ma']}" data-id="${data['vbcc_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['vbcc_ma']}" onclick="xoa(${data['vbcc_ma']})">
                                     {{ csrf_field() }}

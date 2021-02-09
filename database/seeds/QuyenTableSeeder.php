@@ -12,7 +12,7 @@ class QuyenTableSeeder extends Seeder
     public function run()
     {
         $list = [];
-        $types = ['Xem danh sách nhân viên', 'Thêm nhân viên', 'Sửa nhân viên', 'Xóa nhân viên','Xem Thông tin','Sửa thông tin','Xóa thông tin'];
+        $types = ['Xem danh sách nhân viên', 'Thêm nhân viên', 'Sửa nhân viên', 'Xóa nhân viên','Xem Thông tin','Sửa thông tin','Xóa thông tin','Thêm thông tin'];
         for($i=1; $i<=count($types); $i++){
             array_push($list, [
                 'q_ma'     =>  $i, 

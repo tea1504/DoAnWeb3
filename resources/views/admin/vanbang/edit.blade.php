@@ -105,7 +105,7 @@ Chỉnh sửa văn bằng chứng chỉ
                             </div>
                             <div class="col-md-6">
                                 <label for="vbcc_hinhThuc">Hình thức đào tạo:</label>
-                                <input type="text" ng-class="frmEdit.vbcc_hinhThuc.$touched?frmEdit.vbcc_hinhThuc.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="vbcc_hinhThuc" id="vbcc_hinhThuc" value="{{old('vbcc_hinhThuc', $vb->vbcc_hinhThuc)}}" ng-model="vbcc_hinhThuc" ng-minlength="3" ng-maxlength="100">
+                                <input type="text" ng-class="frmEdit.vbcc_hinhThuc.$invalid?'form-control is-invalid':'form-control is-valid'" name="vbcc_hinhThuc" id="vbcc_hinhThuc" value="{{old('vbcc_hinhThuc', $vb->vbcc_hinhThuc)}}" ng-model="vbcc_hinhThuc" ng-minlength="3" ng-maxlength="100">
                                 <div class="invalid-feedback">
                                     <span ng-show="frmEdit.vbcc_hinhThuc.$error.minlength">Tên hình thức quá ngắn, phải chứa ít nhất 3 ký tự</span>
                                     <span ng-show="frmEdit.vbcc_hinhThuc.$error.maxlength">Tên hình thức quá dài, chỉ chứa nhiều nhất 100 ký tự</span>
