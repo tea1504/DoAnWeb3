@@ -44,4 +44,15 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    public function layBacTheoNgach(Request $request)
+    {
+        $parameter = [
+            'ng_ma' => $request->ng_ma
+        ];
+        $result = DB::select('SELECT * FROM ngach_bac AS a, bac AS b WHERE ng_ma = :ng_ma AND a.b_ma = b.b_ma', $parameter);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }

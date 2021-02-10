@@ -4,7 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LuongCreateRequest;
+use App\Http\Requests\LuongUpdateRequest;
+use Session;
+use Carbon\Carbon;
 use App\Luong;
+use App\Ngach;
+use App\NhanVien;
+use App\PhuCap;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel as Excel;
+use App\Exports\LuongExport;
 
 class LuongController extends Controller
 {
@@ -26,7 +36,10 @@ class LuongController extends Controller
      */
     public function create()
     {
-        return view('admin.luong.create');
+        return view('admin.luong.create')
+            ->with('dsn', Ngach::all())
+            ->with('dspc', PhuCap::all())
+            ->with('dsnv', NhanVien::all());
     }
 
     /**
@@ -35,9 +48,18 @@ class LuongController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LuongCreateRequest $request)
     {
-        //
+        $l = new Luong();
+        $l->nv_ma = $request->nv_ma;
+        $l->ng_ma = $request->ng_ma;
+        $l->b_ma = $request->b_ma;
+        $l->pc_ma = $request->pc_ma;
+        $l->l_taoMoi = Carbon::now('Asia/Ho_Chi_Minh');
+        $l->l_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
+        $l->save();
+        Session::flash('alert', 'Đã tạo thành công dữ liệu lương của nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+        return redirect(route('admin.luong.create'));
     }
 
     /**
@@ -48,7 +70,6 @@ class LuongController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -59,7 +80,11 @@ class LuongController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.luong.edit');
+        return view('admin.luong.edit')
+            ->with('l', Luong::find($id))
+            ->with('dsn', Ngach::all())
+            ->with('dspc', PhuCap::all())
+            ->with('dsnv', NhanVien::all());
     }
 
     /**
@@ -69,9 +94,20 @@ class LuongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LuongUpdateRequest $request, $id)
     {
-        //
+        $l = Luong::find($id);
+        $l->ng_ma = $request->ng_ma;
+        $l->b_ma = $request->b_ma;
+        $l->pc_ma = $request->pc_ma;
+        $l->l_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
+        $l->save();
+        Session::flash('alert', 'Đã cập nhật thành công dữ liệu lương của nhân viên');
+        return view('admin.luong.edit')
+            ->with('l', Luong::find($id))
+            ->with('dsn', Ngach::all())
+            ->with('dspc', PhuCap::all())
+            ->with('dsnv', NhanVien::all());
     }
 
     /**
@@ -82,6 +118,31 @@ class LuongController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $l = Luong::find($id);
+        $l->delete();
+        Session::flash('alert', 'Đã xóa dữ liệu thành công');
+        return redirect(route('admin.luong.index'));
+    }
+
+    public function print()
+    {
+        return view('admin.luong.print')
+            ->with('dsl', Luong::all());
+    }
+
+    public function pdf()
+    {
+        $result = Luong::all();
+        $data = [
+            'dsl' => $result,
+        ];
+        $pdf = PDF::loadView('admin.luong.pdf', $data);
+        return $pdf->download('DanhSachLuong.pdf');
+    }
+
+    public function excel()
+    {
+        // return view('admin.luong.excel')->with("dsl", Luong::all());
+        return Excel::download(new LuongExport, 'DanhSachLuong.xlsx');
     }
 }

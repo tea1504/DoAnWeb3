@@ -27,9 +27,9 @@ Danh sách lương/phụ cấp
         <div class="col text-right">
             <div class="btn-group" role="group">
                 <a href="{{route('admin.luong.create')}}" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
-                <a href="" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
-                <a href="{{route('admin.vanbang.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
-                <a href="" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                <a href="{{route('admin.luong.print')}}" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
+                <a href="{{route('admin.luong.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
+                <a href="{{route('admin.luong.pdf')}}" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@ Danh sách lương/phụ cấp
                                 <td class="text-center align-middle">
                                     <a href="{{route('admin.luong.edit', ['id'=>$l->l_ma])}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
 
-                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.luong.edit', ['id'=>$l->l_ma])}}" data-id="${data['vbcc_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['vbcc_ma']}" novalidate>
+                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.luong.destroy', ['id'=>$l->l_ma])}}" data-id="{{$l->l_ma}}" data-nv="{{$l->nhanvien_luong->nv_hoTen}}" novalidate>
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="DELETE" />
                                         <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -87,37 +87,88 @@ Danh sách lương/phụ cấp
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     });
-    var table = $('#myTable').DataTable({
-        dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
-        buttons: [
-            'copy', 'excel', 'pdf'
-        ],
-        language: {
-            "sProcessing": "Đang xử lý...",
-            "sLengthMenu": "Xem _MENU_ mục",
-            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-            "sInfoPostFix": "",
-            "sSearch": "Tìm:",
-            "sUrl": "",
-            "oPaginate": {
-                "sFirst": "Đầu",
-                "sPrevious": "Trước",
-                "sNext": "Tiếp",
-                "sLast": "Cuối"
-            },
-            buttons: {
-                "copy": "Sao chép",
-                "excel": "Xuất ra file Excel",
-                "pdf": "Xuất ra file PDF",
+    $('.fDelete').click(function(e) {
+        e.preventDefault();
+        var dataSend = {
+            'id': $(this).data('id'),
+            '_token': '{{csrf_token()}}',
+            '_method': 'DELETE'
+        };
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa ?',
+            html: 'Dữ liệu văn bằng của nhân viên <strong>' + $(this).data('nv') + '</strong> sẽ không thể phục hồi lại được',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'post',
+                    url: $(this).attr('action'),
+                    data: dataSend,
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Đã xóa thành công'
+                        }).then(function() {
+                            window.location = "{{route('admin.luong.index')}}"
+                        })
+                    },
+                    error: function(response) {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger',
+                            title: '<i class="fas fa-exclamation-circle"></i> Thất bại',
+                            autohide: true,
+                            delay: 2000,
+                            body: "Đã xảy ra lỗi trong khi xóa dữ liệu. Hãy thử lại sau."
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Đã hủy xóa',
+                    icon: 'info',
+                    timer: 1000,
+                })
             }
-        },
-        "lengthMenu": [
-            [10, 15, 20, 25, 50, 100, -1],
-            [10, 15, 20, 25, 50, 100, "Tất cả"]
-        ]
+        })
+    });
+    $(document).ready(function() {
+        var table = $('#myTable').DataTable({
+            dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ],
+            language: {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_ mục",
+                "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                },
+                buttons: {
+                    "copy": "Sao chép",
+                    "excel": "Xuất ra file Excel",
+                    "pdf": "Xuất ra file PDF",
+                }
+            },
+            "lengthMenu": [
+                [10, 15, 20, 25, 50, 100, -1],
+                [10, 15, 20, 25, 50, 100, "Tất cả"]
+            ]
+        });
     });
     app.controller('luongController', function($scope, $http) {});
 </script>

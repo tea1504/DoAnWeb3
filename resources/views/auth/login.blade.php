@@ -56,7 +56,7 @@
 </head>
 
 <body>
-    <div id="body" class="container p-5" ng-controller="DangNhapController">
+    <div id="body" class="container p-5" ng-controller="DangNhapController" ng-init="hideshow = false">
         <div class="row">
             <div class="col-md-12">
                 <div id="infor-user" class="text-center">
@@ -88,8 +88,14 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <div class="col-md-10 offset-md-1">
-                                <input id="password" type="password" ng-class="dangNhap.password.$touched?dangNhap.password.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="password" ng-model="password" placeholder="Mật khẩu" ng-required="true" ng-maxlength="100" ng-minlength="3">
+                            <div class="col-md-10 offset-md-1" style="position: relative;">
+                                <input id="password" type="password" ng-class="dangNhap.password.$touched?dangNhap.password.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="password" ng-model="password" placeholder="Mật khẩu" ng-required="true" ng-maxlength="100" ng-minlength="3" ng-show="!hideshow">
+                                <input id="showpassword" type="text" ng-class="dangNhap.password.$touched?dangNhap.password.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="showpassword" ng-model="password" placeholder="Mật khẩu" ng-required="true" ng-maxlength="100" ng-minlength="3" style="border-radius: 25px;padding: 25px;" ng-show="hideshow">
+                                <label for="hideshow" style="position: absolute; top: 13px; right:40px;">
+                                    <i class="fas fa-eye" ng-if="!hideshow"></i>
+                                    <i class="fas fa-eye-slash" ng-if="hideshow"></i>
+                                </label>
+                                <input type="checkbox" name="hideshow" id="hideshow" ng-model="hideshow" ng-show="false">
                                 <div class="invalid-feedback">
                                     <span ng-show="dangNhap.password.$error.required">
                                         Chưa nhập mật khẩu

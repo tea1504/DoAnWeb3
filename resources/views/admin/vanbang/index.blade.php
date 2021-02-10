@@ -47,7 +47,7 @@ Danh sách văn bằng chứng chỉ
         <div class="col-md-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100  order-column" id="myTable">
+                    <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100  order-column" id="myTable" onmouseover="showtooltip()">
                         <thead>
                             <tr class="w-100">
                                 <th>#</th>
@@ -146,9 +146,9 @@ Danh sách văn bằng chứng chỉ
                     },
                     render: function(data, type, row, meta) {
                         return `
-                            <a href="/admin/vanbang/${data['vbcc_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true" onmouseover="showtooltip()" onmouseleave="hidetooltip()"></i></a>
+                            <a href="/admin/vanbang/${data['vbcc_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 
-                                <form class="fDelete btn p-0" method="POST" action="vanbang/${data['vbcc_ma']}" data-id="${data['vbcc_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['vbcc_ma']}" onclick="xoa(${data['vbcc_ma']})">
+                                <form class="fDelete btn p-0" method="POST" action="vanbang/${data['vbcc_ma']}" data-id="${data['vbcc_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['vbcc_ma']}" onclick="xoa(${data['vbcc_ma']})" onmouseleave="hidetooltip()">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE" />
                                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>

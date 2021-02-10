@@ -40,6 +40,9 @@ Route::get('/admin/vanbang/pdf/{id?}', 'Admin\VanBangController@pdf')->name('adm
 Route::get('/admin/vanbang/excel', 'Admin\VanBangController@excel')->name('admin.vanbang.excel')->middleware('auth');
 Route::resource('/admin/vanbang', 'Admin\VanBangController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/luong/print', 'Admin\LuongController@print')->name('admin.luong.print')->middleware('auth');
+Route::get('/admin/luong/pdf', 'Admin\LuongController@pdf')->name('admin.luong.pdf')->middleware('auth');
+Route::get('/admin/luong/excel', 'Admin\LuongController@excel')->name('admin.luong.excel')->middleware('auth');
 Route::resource('/admin/luong', 'Admin\LuongController', ['as' => 'admin'])->middleware('auth');
 
 Auth::routes();
