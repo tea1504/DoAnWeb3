@@ -24,7 +24,7 @@ class VanBangController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', VBCC::class);
+        // $this->authorize('viewAny', VBCC::class);
         $result = NhanVien::all();
         return view('admin.vanbang.index')
             ->with('dsnv', $result);

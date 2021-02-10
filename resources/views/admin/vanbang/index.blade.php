@@ -24,9 +24,13 @@ Danh sách văn bằng chứng chỉ
             <div class="row">
                 <div class="col-md-6">
                     <select name="nhanVien" id="nhanVien" class="form-control">
+                        @can('view',App\VBCC::where('nv_ma', 'CB0001')->first())
                         <option value="" selected>Tất cả</option>
+                        @endcan
                         @foreach($dsnv as $nv)
+                        @can('view',App\VBCC::where('nv_ma', $nv->nv_ma)->first())
                         <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
+                        @endcan
                         @endforeach
                     </select>
                 </div>
@@ -268,6 +272,9 @@ Danh sách văn bằng chứng chỉ
                 cell.innerHTML = i + 1;
             });
         }).draw();
+        table.ajax.url("{{route('api.nhanvien.vbcc')}}" + "?nv_ma=" + $('#nhanVien').val());
+        table.ajax.reload();
+        console.log();
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
         });
@@ -278,7 +285,7 @@ Danh sách văn bằng chứng chỉ
                 that.tooltip('show');
                 setTimeout(function() {
                     that.tooltip('hide');
-                }, 2000);
+                }, 1000);
             });
         }
 

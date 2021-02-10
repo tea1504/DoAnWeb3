@@ -18,5 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('/nhanvien', 'Api\ApiController@layThongTinNhanVien')->name('api.thongtin.nhanvien');
 Route::get('/nhanvien/ten', 'Api\ApiController@layTenNhanVienDangNhap')->name('api.ten.nhanvien');
+Route::get('/nhanvien/soluong', 'Api\ApiController@laySoLuongNhanVien')->name('api.nhanvien.soluong');
+Route::get('/nhanvien/soluong/nu', 'Api\ApiController@laySoLuongNhanVienNu')->name('api.nhanvien.soluong.nu');
+Route::get('/nhanvien/tuoi/trungbinh', 'Api\ApiController@laySoTuoiTrungBinh')->name('api.nhanvien.tuoi.trungbinh');
+Route::get('/tuyendung/ngaylam/trungbinh', 'Api\ApiController@laySoNamLamViecTrungBinh')->name('api.tuyendung.ngaylam.trungbinh');
 Route::get('/vbcc', 'Api\ApiController@layVBCCNhanVien')->name('api.nhanvien.vbcc');
 Route::get('/ngach/bac', 'Api\ApiController@layBacTheoNgach')->name('api.ngach.bac');
+Route::get('/luong/heso', 'Api\ApiController@layHeSoLonNhat')->name('api.luong.heso');
+Route::get('/quatrinhlamviec', 'Api\ApiController@layQuaTrinhLamViec')->name('api.nhanvien.quatrinhlamviec');

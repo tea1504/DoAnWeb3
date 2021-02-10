@@ -3,39 +3,33 @@
 namespace App\Policies;
 
 use App\Nhanvien;
-use App\VBCC;
+use App\Luong;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class VanBangPolicy
+class LuongPolicy
 {
     use HandlesAuthorization;
 
     public function before($user)
     {
-        if ($user->role_ma === 1) {
+        if ($user->role_ma === 1)
             return true;
-        }
     }
 
     /**
-     * Determine whether the user can view the vBCC.
+     * Determine whether the user can view the luong.
      *
      * @param  \App\Nhanvien  $user
-     * @param  \App\VBCC  $vBCC
+     * @param  \App\Luong  $luong
      * @return mixed
      */
-    public function view(Nhanvien $user, VBCC $vBCC)
-    {
-        return $user->nv_ma === $vBCC->nv_ma;
-    }
-
-    public function viewAny(Nhanvien $user)
+    public function view(Nhanvien $user)
     {
         return $user->userRole->roleQuyen->where('q_ma', 5)->first() !== null;
     }
 
     /**
-     * Determine whether the user can create vBCCs.
+     * Determine whether the user can create luongs.
      *
      * @param  \App\Nhanvien  $user
      * @return mixed
@@ -46,28 +40,29 @@ class VanBangPolicy
     }
 
     /**
-     * Determine whether the user can update the vBCC.
+     * Determine whether the user can update the luong.
      *
      * @param  \App\Nhanvien  $user
-     * @param  \App\VBCC  $vBCC
+     * @param  \App\Luong  $luong
      * @return mixed
      */
-    public function update(Nhanvien $user, VBCC $vBCC)
+    public function update(Nhanvien $user, Luong $luong)
     {
         return $user->userRole->roleQuyen->where('q_ma', 6)->first() !== null;
     }
 
     /**
-     * Determine whether the user can delete the vBCC.
+     * Determine whether the user can delete the luong.
      *
      * @param  \App\Nhanvien  $user
-     * @param  \App\VBCC  $vBCC
+     * @param  \App\Luong  $luong
      * @return mixed
      */
-    public function delete(Nhanvien $user, VBCC $vBCC)
+    public function delete(Nhanvien $user, Luong $luong)
     {
         return $user->userRole->roleQuyen->where('q_ma', 7)->first() !== null;
     }
+
     public function inAn(Nhanvien $user)
     {
         return false;

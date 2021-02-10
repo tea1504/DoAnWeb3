@@ -25,6 +25,7 @@ class LuongController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Luong::class);
         return view('admin.luong.index')
             ->with('dsl', Luong::all());
     }
@@ -36,6 +37,7 @@ class LuongController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Luong::class);
         return view('admin.luong.create')
             ->with('dsn', Ngach::all())
             ->with('dspc', PhuCap::all())
@@ -50,6 +52,7 @@ class LuongController extends Controller
      */
     public function store(LuongCreateRequest $request)
     {
+        $this->authorize('create', Luong::class);
         $l = new Luong();
         $l->nv_ma = $request->nv_ma;
         $l->ng_ma = $request->ng_ma;
@@ -80,6 +83,7 @@ class LuongController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', Luong::find($id));
         return view('admin.luong.edit')
             ->with('l', Luong::find($id))
             ->with('dsn', Ngach::all())
@@ -96,6 +100,7 @@ class LuongController extends Controller
      */
     public function update(LuongUpdateRequest $request, $id)
     {
+        $this->authorize('update', Luong::find($id));
         $l = Luong::find($id);
         $l->ng_ma = $request->ng_ma;
         $l->b_ma = $request->b_ma;
@@ -119,6 +124,7 @@ class LuongController extends Controller
     public function destroy($id)
     {
         $l = Luong::find($id);
+        $this->authorize('delete', $l);
         $l->delete();
         Session::flash('alert', 'Đã xóa dữ liệu thành công');
         return redirect(route('admin.luong.index'));
@@ -126,12 +132,14 @@ class LuongController extends Controller
 
     public function print()
     {
+        $this->authorize('inAn', Luong::class);
         return view('admin.luong.print')
             ->with('dsl', Luong::all());
     }
 
     public function pdf()
     {
+        $this->authorize('inAn', Luong::class);
         $result = Luong::all();
         $data = [
             'dsl' => $result,
@@ -142,6 +150,7 @@ class LuongController extends Controller
 
     public function excel()
     {
+        $this->authorize('inAn', Luong::class);
         // return view('admin.luong.excel')->with("dsl", Luong::all());
         return Excel::download(new LuongExport, 'DanhSachLuong.xlsx');
     }

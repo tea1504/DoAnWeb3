@@ -46,6 +46,7 @@
                     </p>
                 </a>
             </li>
+            @can('viewAny', App\VBCC::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/nhanvien')||request()->is('admin/nhanvien/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-users"></i>
@@ -68,8 +69,8 @@
                         </a>
                     </li>
                 </ul>
-
             </li>
+            @endcan
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ (request()->is('admin/quanhegiadinh'))?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-medal"></i>
@@ -158,6 +159,7 @@
                     </li>
                 </ul>
             </li>
+            @can('viewAny', App\VBCC::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/vanbang')||request()->is('admin/vanbang/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>
@@ -181,6 +183,8 @@
                     </li>
                 </ul>
             </li>
+            @endcan
+            @can('view', App\Luong::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/luong')||request()->is('admin/luong/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>
@@ -204,9 +208,8 @@
                     </li>
                 </ul>
             </li>
-
-
-
+            @endcan
+            @can('xemThongKe')
             <li class="nav-item">
                 <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
@@ -215,6 +218,7 @@
                     </p>
                 </a>
             </li>
+            @endcan
             <li class="nav-item">
                 <a href="{{ route('admin.lienhe') }}" class="{{ request()->is('admin/lienhe')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-envelope"></i>
