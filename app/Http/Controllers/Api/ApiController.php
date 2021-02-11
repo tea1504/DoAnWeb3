@@ -106,4 +106,15 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    public function layCongViecHienTai(Request $request)
+    {
+        $parameter = [
+            'nv_ma' => $request->nv_ma
+        ];
+        $result = DB::select('SELECT d.nb_heSoLuong, g.cvu_ten, f.dv_ten, e.dvql_ten FROM nhanvien AS a, luong AS b, tuyendung AS c, ngach_bac AS d, donviquanly AS e, donvi AS f, chucvu AS g WHERE a.nv_ma = :nv_ma AND a.nv_ma = b.nv_ma AND a.nv_ma = c.nv_ma AND b.ng_ma = d.ng_ma AND b.b_ma = d.b_ma AND a.cvu_ma = g.cvu_ma AND c.dv_ma = f.dv_ma AND f.dvql_ma = e.dvql_ma', $parameter);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }

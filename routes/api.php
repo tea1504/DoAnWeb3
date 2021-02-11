@@ -26,3 +26,4 @@ Route::get('/vbcc', 'Api\ApiController@layVBCCNhanVien')->name('api.nhanvien.vbc
 Route::get('/ngach/bac', 'Api\ApiController@layBacTheoNgach')->name('api.ngach.bac');
 Route::get('/luong/heso', 'Api\ApiController@layHeSoLonNhat')->name('api.luong.heso');
 Route::get('/quatrinhlamviec', 'Api\ApiController@layQuaTrinhLamViec')->name('api.nhanvien.quatrinhlamviec');
+Route::get('/congviechientai', 'Api\ApiController@layCongViecHienTai')->name('api.nhanvien.congviechientai');
