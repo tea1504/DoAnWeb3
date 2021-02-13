@@ -107,6 +107,7 @@ class KhenThuongController extends Controller
 
         $kt = KhenThuong::find($id);
 
+        $kt = KhenThuong::where("kt_ma", $id)->first();
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
         $kt->kt_nguoiKy = $request->nv_ma;
@@ -121,6 +122,8 @@ class KhenThuongController extends Controller
        
        
 
+        $kt->kt_taoMoi = $request->kt_taoMoi;
+        $kt->kt_capNhat = $request->kt_capNhat;
     }
 
     /**
