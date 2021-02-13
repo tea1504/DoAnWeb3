@@ -12,7 +12,7 @@ class KhenThuong extends Model
     protected $table = 'khenthuong';
     protected $fillable = ['nv_ma','kt_ngayKy','kt_nguoiKy','kt_lyDo','kt_taoMoi','kt_capNhat'];
     protected $guarded = ['kt_ma'];
-    protected $primarykey ='kt_ma';
+    protected $primaryKey ='kt_ma';
     protected $dates =['kt_ngayKy','kt_taoMoi','kt_capNhat'];
     protected $dateFormat   = 'Y-m-d H:i:s';
     

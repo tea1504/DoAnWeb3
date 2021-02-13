@@ -11,7 +11,7 @@ class NhanVien extends Model implements AuthenticatableContract
     const UPDATED_AT = 'nv_capNhat';
 
     protected   $table          = 'nhanvien';
-    protected   $fillable       = ['nv_hoTen', 'nv_cmndNgayCap', 'nv_tenGoiKhac', 'nv_trinhDoChuyenMon', 'nv_ngaySinh', 'dt_ma', 'tg_ma', 'nv_hoKhauThuongTru', 'nv_noiOHienNay', 'nv_ngayVaoDang', 'nv_ngayVaoDangChinhThuc', 'nv_ngayNhapNgu', 'nv_ngayXuatNgu', 'nv_quanHam', 'nv_sucKhoe', 'nv_chieuCao', 'nv_canNang', 'nm_ma', 'nv_hangThuongBinh', 'nv_giaDinhChinhSach', 'nv_cmnd', 'nv_bhxh', 'td_ma', 'username', 'password', 'nv_taoMoi', 'nv_capNhat', 'nv_anh', 'cvu_ma', 'nv_gioiTinh', 'nv_sdt', 'nv_email'];
+    protected   $fillable       = ['nv_hoTen', 'nv_cmndNgayCap', 'nv_tenGoiKhac', 'nv_trinhDoChuyenMon', 'nv_ngaySinh', 'dt_ma', 'tg_ma', 'nv_hoKhauThuongTru', 'nv_noiOHienNay', 'nv_ngayVaoDang', 'nv_ngayVaoDangChinhThuc', 'nv_ngayNhapNgu', 'nv_ngayXuatNgu', 'nv_quanHam', 'nv_sucKhoe', 'nv_chieuCao', 'nv_canNang', 'nm_ma', 'nv_hangThuongBinh', 'nv_giaDinhChinhSach', 'nv_cmnd', 'nv_bhxh', 'td_ma', 'username', 'password', 'nv_taoMoi', 'nv_capNhat', 'nv_anh', 'cvu_ma', 'nv_gioiTinh', 'nv_sdt', 'nv_email', 'role_ma'];
     protected   $guarded        = ['nv_ma'];
 
     protected   $primaryKey     = 'nv_ma';
@@ -92,7 +92,7 @@ class NhanVien extends Model implements AuthenticatableContract
         return $this->belongsTo('App\UserQuyen', 'nv_ma', 'nv_ma');
     }
     public function userRole(){
-        return $this->belongsTo('App\Role', 'nv_ma', 'nv_ma');
+        return $this->belongsTo('App\Role', 'role_ma', 'role_ma');
     }
     public function tuyenDung(){
         return $this->hasOne('App\TuyenDung', 'nv_ma', 'nv_ma');

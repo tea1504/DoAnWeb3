@@ -68,27 +68,24 @@ Danh sách khen thưởng
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($kt as $kt)
+                            @foreach($danhsachkhenthuong as $kt)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{{$kt->kt_ma}}</td>
                                 <td>{{$kt->nhanVien->nv_hoTen}}</td>
-                                <td>{{$kt->kt_ngayKy}}</td>
+                                <td>{{$kt->kt_ngayKy->format('d/m/Y')}}</td>
                                 <td>{{$kt->nguoiKy->nv_hoTen}}</td>
                                 <td>{{$kt->kt_lyDo}}</td>                         
-                                <td>{{$kt->kt_taoMoi}}</td>                         
-                                <td>{{$kt->kt_capNhat}}</td>                         
-                                <td>
-                                   <!--  <a href="{{route('admin.nhanvien.show',['id'=>$kt->nv_ma])}}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-user"></i> Xem chi tiết
-                                    </a> -->
-                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Sửa">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true">Sửa</i>
-                                    </a>
+                                <td>{{$kt->kt_taoMoi->format('d/m/Y')}}</td>                         
+                                <td>{{$kt->kt_capNhat->format('d/m/Y')}}</td>                         
+                                <td>                               
+                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-danger pull-left" data-toggle="tooltip" data-placement="top" title="Sửa">Sửa</a>
                                     
-                                    <a href="#" class="btn btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="xóa">
-                                        <i class="fa fa-trash-o" aria-hidden="true">Xóa</i>
-                                    </a>
+                                    <form class="fDelete btn p-0" method="POST" action="{{ route('admin.khenthuong.destroy', ['id' => $kt->kt_ma]) }}" data-id="{{ $kt->kt_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
+                                    {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="DELETE" />
+                                                <button type="sumbit" class="btn btn-warning"  >Xóa</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -211,6 +208,45 @@ Danh sách khen thưởng
 
                 }
             );
+        
+        
+        
+        
+        /* $('.fDelete').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Bạn muốn xóa?',
+                text: "Dữ liệu sẽ không thể phục hồi lại được",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Chấp nhận',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: {
+                            id: $(this).data('id'),
+                            _token: $(this).find('[name="_token"]').val(),
+                            _method: $(this).find('[name="_method"]').val()
+                        },
+                        success: function(data, textStatus, jqXHR) {
+                            location.href = "{{ route('admin.khenthuong.index') }}";
+                        }
+                    })
+                } else {
+                    Swal.fire(
+                        'Đã hủy xóa!'
+                    )
+                }
+            })
+        }); */
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     });
 </script>
 

@@ -18,6 +18,7 @@ class NhanVienController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', NhanVien::class);
         $data = NhanVien::all();
         return view('admin.nhanvien.index')
             ->with('data', $data);
@@ -30,7 +31,7 @@ class NhanVienController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('update', NhanVien::class);
     }
 
     /**
@@ -41,7 +42,7 @@ class NhanVienController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('update', NhanVien::class);
     }
 
     /**
@@ -52,6 +53,7 @@ class NhanVienController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', NhanVien::class);
         $result = NhanVien::find($id);
         return view('admin.nhanvien.show')
             ->with('nv', $result);
@@ -92,12 +94,14 @@ class NhanVienController extends Controller
     }
     public function printDetail($id)
     {
+        $this->authorize('inAn', NhanVien::class);
         $result = NhanVien::find($id);
         return view('admin.nhanvien.print-chitiet')
             ->with('nv', $result);
     }
     public function pdfDetail($id)
     {
+        $this->authorize('inAn', NhanVien::class);
         $result = NhanVien::find($id);
         $data = [
             'nv' => $result,
@@ -107,6 +111,7 @@ class NhanVienController extends Controller
     }
     public function print()
     {
+        $this->authorize('inAn', NhanVien::class);
         $result = NhanVien::all();
         return view('admin.nhanvien.print')
             ->with('dsnv', $result);

@@ -1,7 +1,7 @@
 @extends('print.layouts.paper')
 
 @section('title')
-Biểu mẫu Phiếu in danh sách sản phẩm
+Biểu mẫu Phiếu in danh sách cán bộ
 @endsection
 
 @section('paper-size') A4 @endsection

@@ -14,10 +14,10 @@ class Role extends Model
     protected $guarded = ['role_ma'];
     protected $primarykey ='role_ma';
     protected $dates = ['role_taoMoi','role_capNhat'];
-    protected $dateFormat = ['Y-m-d H:i:s'];
+    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function roleQuyen(){
-        return $this->hasMany('App\RoleQuyen','role_ma','nv_ma');
+        return $this->hasMany('App\RoleQuyen','role_ma','role_ma');
     }
     
     public function userQuyen(){

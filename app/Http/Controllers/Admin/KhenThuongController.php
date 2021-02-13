@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\KhenThuong;
 use App\NhanVien;
+use Carbon\Carbon;
+use Session;
+use App\Http\Requests\KhenThuongCreateRequest;
+
+
 
 class KhenThuongController extends Controller
 {
@@ -16,9 +21,10 @@ class KhenThuongController extends Controller
      */
     public function index()
     {
-        $kt = KhenThuong::all();
+        $ds_kt = KhenThuong::all();
+        //$ds_kt = KhenThuong::paginate(5);
         return view('admin.khenthuong.index')
-        ->with('kt',$kt);
+        ->with('danhsachkhenthuong',$ds_kt);
     }
 
     /**
@@ -28,9 +34,11 @@ class KhenThuongController extends Controller
      */
     public function create()
     {
-        $nv = NhanVien::all();
+        $mytime = Carbon::now();
+        $ds_nv = NhanVien::all();
         return view('admin.khenthuong.create')
-        ->with('nv',$nv);
+        ->with('danhsachnhanvien',$ds_nv)
+        ->with('mytime',$mytime);
     }
 
     /**
@@ -39,19 +47,22 @@ class KhenThuongController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KhenThuongCreateRequest $request)
     {
         $kt = new KhenThuong();
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
         $kt->kt_nguoiKy = $request->nv_ma;
         $kt->kt_lyDo = $request->kt_lyDo;
-        $kt->kt_taoMoi = $request->kt_taoMoi;
-        $kt->kt_capNhat = $request->kt_capNhat;
+        $kt->kt_taoMoi = Carbon::now();
+        $kt->kt_capNhat = Carbon::now();
 
         $kt->save();
+        Session::flash('alert', 'Đã thêm mới thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+
         return redirect()->route('admin.khenthuong.index');
         
+
     }
 
     /**
@@ -60,9 +71,9 @@ class KhenThuongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+       
     }
 
     /**
@@ -73,11 +84,15 @@ class KhenThuongController extends Controller
      */
     public function edit($id)
     {
-        $kt = KhenThuong::where("kt_ma",$id)->first();
-        $nv = NhanVien::all();
+        $mytime = Carbon::now();
+        $ds_kt = KhenThuong::find($id);   
+        $ds_nv = NhanVien::all();
         return view('admin.khenthuong.edit')
-        ->with('kt',$kt)
-        ->with('nv',$nv);
+        ->with('kt',$ds_kt)
+        ->with('danhsachnhanvien',$ds_nv)
+        ->with('mytime',$mytime);
+        
+        
     }
 
     /**
@@ -89,7 +104,23 @@ class KhenThuongController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $kt = KhenThuong::find($id);
+
+        $kt->nv_ma = $request->nv_ma;
+        $kt->kt_ngayKy = $request->kt_ngayKy;
+        $kt->kt_nguoiKy = $request->nv_ma;
+        $kt->kt_lyDo = $request->kt_lyDo;
+        $kt->kt_taoMoi =  Carbon::now();
+        $kt->kt_capNhat =  Carbon::now();
+        //dd($kt->kt_ma);
+        //dd($kt);
+        $kt->save();
+        return redirect()->route('admin.khenthuong.index'); 
+        
+       
+       
+
     }
 
     /**
@@ -100,6 +131,12 @@ class KhenThuongController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kt = KhenThuong::where("kt_ma",$id)->first();
+        $kt2 = KhenThuong::where("kt_ma",$id);
+        //dd($kt->kt_ma);
+        //dd($id);
+        $kt2->delete();
+        return redirect()->route('admin.khenthuong.index');
+
     }
 }
