@@ -33,12 +33,17 @@ Route::get('/admin/nhanvien/print', 'Admin\NhanVienController@print')->name('adm
 Route::get('/admin/nhanvien/pdf-chitiet/{id}', 'Admin\NhanVienController@pdfDetail')->name('admin.nhanvien.pdf.chitiet');
 Route::get('/admin/nhanvien/pdf', 'Admin\NhanVienController@pdf')->name('admin.nhanvien.pdf');
 Route::get('/admin/nhanvien/excel', 'Admin\NhanVienController@excel')->name('admin.nhanvien.excel');
+Route::get('/admin/tuyendung/print', 'Admin\TuyenDungController@print')->name('admin.tuyendung.print');
+Route::get('/admin/tuyendung/pdf', 'Admin\TuyenDungController@pdf')->name('admin.tuyendung.pdf');
+Route::get('/admin/tuyendung/excel', 'Admin\TuyenDungController@excel')->name('admin.tuyendung.excel');
+Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin']);
 Route::resource('/admin/nhanvien', 'Admin\NhanVienController', ['as' => 'admin']);
 
 Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'admin']);
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin']);
 
+Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create');
 
 Auth::routes();
 
