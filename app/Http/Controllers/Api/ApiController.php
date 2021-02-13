@@ -106,6 +106,22 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    public function layQuaTrinhCongTac(Request $request)
+    {
+        if (!isset($request->nv_ma)) {
+            $result = DB::select('SELECT * FROM quatrinhcongtac AS a, chucvu AS b, donvi AS c, donviquanly AS d, ngach_bac AS e, ngach AS f, bac AS g, nhanvien AS h WHERE a.cvu_ma = b.cvu_ma AND a.dv_ma = c.dv_ma AND c.dvql_ma = d.dvql_ma AND a.nb_ma = e.nb_ma AND e.ng_ma = f.ng_ma AND e.b_ma = g.b_ma AND a.nv_ma = h.nv_ma');
+        }
+        else{
+            $parameter = [
+                'nv_ma' => $request->nv_ma
+            ];
+            $result = DB::select('SELECT * FROM quatrinhcongtac AS a, chucvu AS b, donvi AS c, donviquanly AS d, ngach_bac AS e, ngach AS f, bac AS g, nhanvien AS h WHERE a.cvu_ma = b.cvu_ma AND a.dv_ma = c.dv_ma AND c.dvql_ma = d.dvql_ma AND a.nb_ma = e.nb_ma AND e.ng_ma = f.ng_ma AND e.b_ma = g.b_ma AND a.nv_ma = h.nv_ma AND a.nv_ma = :nv_ma', $parameter);
+        }
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
     public function layCongViecHienTai(Request $request)
     {
         $parameter = [

@@ -36,7 +36,7 @@ Danh sách nhân viên
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="nhanvienController" ng-init="start = 0;">
+<div class="container-fluid" ng-controller="nhanvienController" ng-init="start = 0; number_card = 6;">
     <div class="row">
         <div class="col">
             <button class="btn btn-dark mb-3" ng-click="showTable()"><i class="fas <%icon%>"></i></button>
@@ -50,9 +50,6 @@ Danh sách nhân viên
             </div>
         </div>
     </div>
-    @can('xemDSNV')
-        Bạn có quyền xem
-    @endcan
     <div class="card" ng-show="!show">
         <div class="card-header">
             <form name="frmChucNang" class="row" novalidate>
@@ -61,7 +58,7 @@ Danh sách nhân viên
                         <div class="input-group-prepend">
                             <div class="input-group-text">Xem</div>
                         </div>
-                        <select name="number_card" id="number_card" ng-model="number_card" class="form-control">
+                        <select name="number_card" id="number_card" ng-model="number_card" class="form-control" value="6">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

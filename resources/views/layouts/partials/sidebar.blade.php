@@ -187,7 +187,7 @@
             @can('view', App\Luong::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/luong')||request()->is('admin/luong/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                <i class="nav-icon fas fa-money-bill-wave"></i>
                     <p>
                         Lương/phụ cấp
                         <i class="right fas fa-angle-left"></i>
@@ -209,6 +209,29 @@
                 </ul>
             </li>
             @endcan
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/quatrinhcongtac')||request()->is('admin/quatrinhcongtac/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <p>
+                        Quá trình công tác
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.quatrinhcongtac.index')}}" class="{{ request()->is('admin/quatrinhcongtac')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.quatrinhcongtac.create')}}" class="{{ request()->is('admin/quatrinhcongtac/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             @can('xemThongKe')
             <li class="nav-item">
                 <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">

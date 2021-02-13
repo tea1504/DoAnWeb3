@@ -46,32 +46,31 @@ Danh sách văn bằng chứng chỉ
                 @endcan
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 mt-3">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100  order-column" id="myTable" onmouseover="showtooltip()">
-                        <thead>
-                            <tr class="w-100">
-                                <th>#</th>
-                                <th>Nhân viên</th>
-                                <th>Trường đào tạo</th>
-                                <th>Tên văn bằng</th>
-                                <th>Loại văn bằng</th>
-                                <th>Hình thức</th>
-                                <th>Trình độ</th>
-                                <th>Từ ngày</th>
-                                <th>Đến ngày</th>
-                                <th>Thêm mới</th>
-                                <th>Cập nhật</th>
-                                <th width="100px">Action</th>
-                            </tr>
-                        </thead>
-                    </table>
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100  order-column" id="myTable" onmouseover="showtooltip()">
+                            <thead>
+                                <tr class="w-100">
+                                    <th>#</th>
+                                    <th>Nhân viên</th>
+                                    <th>Trường đào tạo</th>
+                                    <th>Tên văn bằng</th>
+                                    <th>Loại văn bằng</th>
+                                    <th>Hình thức</th>
+                                    <th>Trình độ</th>
+                                    <th>Từ ngày</th>
+                                    <th>Đến ngày</th>
+                                    <th>Thêm mới</th>
+                                    <th>Cập nhật</th>
+                                    <th width="100px">Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
     @endsection
