@@ -80,7 +80,7 @@ Dashboard
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="card bg-gradient-indigo">
                         <div class="card-header border-0">
                             <h3 class="card-title">
@@ -96,6 +96,20 @@ Dashboard
                             <div ng-class="{detail: show, 'hide-detail': !show}" style="height: 100%; width:100%; background-color: #0008; display: flex; justify-content: center; align-items: center; position: absolute; top: 0; left: 0; transition: .2s;">
                                 <a href="" class="text-white"><h1>Đi đến <i class="fas fa-arrow-circle-right"></h1></i></a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-gradient-indigo">
+                        <div class="card-header border-0">
+                            <h3 class="card-title">
+                                Trang cá nhân
+                            </h3>
+                            <div class="card-tools">
+                                <a href="" class="btn btn-sm bg-indigo">Đi đến <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
                         </div>
                     </div>
                 </div>
@@ -141,10 +155,11 @@ Dashboard
                                 </button>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="max-height: 490px!important; overflow: auto;">
                             <div class="timeline">
                             </div>
                         </div>
+                        <div class="card-footer" style="background-color: #0000;"></div>
                     </div>
                 </div>
             </div>

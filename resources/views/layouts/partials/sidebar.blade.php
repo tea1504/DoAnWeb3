@@ -225,7 +225,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('admin.quatrinhcongtac.create')}}" class="{{ request()->is('admin/quatrinhcongtac/*')?'active nav-link':'nav-link' }}">
+                        <a href="{{route('admin.quatrinhcongtac.create_id')}}" class="{{ request()->is('admin/quatrinhcongtac/*')?'active nav-link':'nav-link' }}">
                             <i class="nav-icon fas fa-plus-circle"></i>
                             <p>Thêm mới</p>
                         </a>

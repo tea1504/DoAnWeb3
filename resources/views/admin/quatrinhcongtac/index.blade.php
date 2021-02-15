@@ -52,17 +52,17 @@ Danh sách quá trình công tác
                     <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100  order-column" id="myTable">
                         <thead>
                             <tr class="w-100">
-                                <th>#</th>
-                                <th width="150px">Nhân viên</th>
-                                <th>Từ ngày</th>
-                                <th>Đến ngày</th>
-                                <th width="250px">Chức vụ</th>
-                                <th>Đơn vị</th>
-                                <th width="100px">Ngạch</th>
-                                <th width="100px">Bậc</th>
-                                <th>Thêm mới</th>
-                                <th>Cập nhật</th>
-                                <th width="100px">Action</th>
+                                <th class="align-middle text-center" width="50px">#</th>
+                                <th class="align-middle text-center" width="150px">Nhân viên</th>
+                                <th class="align-middle text-center">Từ ngày</th>
+                                <th class="align-middle text-center">Đến ngày</th>
+                                <th class="align-middle text-center" width="350px">Chức vụ</th>
+                                <th class="align-middle text-center">Đơn vị</th>
+                                <th class="align-middle text-center" width="100px">Ngạch</th>
+                                <th class="align-middle text-center" width="100px">Bậc</th>
+                                <th class="align-middle text-center">Thêm mới</th>
+                                <th class="align-middle text-center">Cập nhật</th>
+                                <th class="align-middle text-center" width="100px">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -147,13 +147,13 @@ Danh sách quá trình công tác
                 },
                 render: function(data, type, row, meta) {
                     return `
-                            <a href="/admin/vanbang/${data['qtct_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseover="showtooltip()" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                            <a href="/admin/quatrinhcongtac/${data['qtct_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseover="showtooltip()" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 
-                                <form class="fDelete btn p-0" method="POST" action="vanbang/${data['qtct_ma']}" data-id="${data['qtct_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['qtct_ma']}" onclick="xoa(${data['qtct_ma']})" onmouseleave="hidetooltip()">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="DELETE" />
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                </form>`;
+                            <form class="fDelete btn p-0" method="POST" action="quatrinhcongtac/${data['qtct_ma']}" data-id="${data['qtct_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['qtct_ma']}" onclick="xoa(${data['qtct_ma']})" onmouseleave="hidetooltip()">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </form>`;
                 }
             },
         ],
@@ -172,13 +172,13 @@ Danh sách quá trình công tác
             {
                 targets: 2,
                 createdCell: function(td, cellData, rowData, row, col) {
-                    $(td).addClass('align-middle');
+                    $(td).addClass('align-middle text-center');
                 }
             },
             {
                 targets: 3,
                 createdCell: function(td, cellData, rowData, row, col) {
-                    $(td).addClass('align-middle');
+                    $(td).addClass('align-middle text-center');
                 }
             },
             {
@@ -196,7 +196,7 @@ Danh sách quá trình công tác
             {
                 targets: 6,
                 createdCell: function(td, cellData, rowData, row, col) {
-                    $(td).addClass('align-middle');
+                    $(td).addClass('align-middle text-center');
                 }
             },
             {
@@ -292,6 +292,56 @@ Danh sách quá trình công tác
     $('#print').attr('href', "{{route('admin.vanbang.print')}}" + "/" + $('#nhanVien').val());
     $('#pdf').attr('href', "{{route('admin.vanbang.pdf')}}" + "/" + $('#nhanVien').val());
 
+    function xoa(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa ?',
+            html: 'Dữ liệu văn bằng của nhân viên <strong>' + $('#vb_' + id).data('nv') + '</strong> sẽ không thể phục hồi lại được',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'post',
+                    url: $('#vb_' + id).attr('action'),
+                    data: {
+                        'id': $('#vb_' + id).data('id'),
+                        '_token': $('#vb_' + id + ' input[name="_token"]').val(),
+                        '_method': $('#vb_' + id + ' input[name="_method"]').val()
+                    },
+                    success: function(response) {
+                        table.ajax.url("{{route('api.nhanvien.quatrinhcongtac')}}" + "?nv_ma=" + $('#nhanVien').val());
+                        table.ajax.reload();
+                        $(document).Toasts('create', {
+                            class: 'bg-success',
+                            title: '<i class="fas fa-check-circle"></i> Thành công',
+                            autohide: true,
+                            delay: 2000,
+                            body: "Đã xóa dữ liệu thành công"
+                        })
+                    },
+                    error: function(response) {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger',
+                            title: '<i class="fas fa-exclamation-circle"></i> Thất bại',
+                            autohide: true,
+                            delay: 2000,
+                            body: "Đã xảy ra lỗi trong khi xóa dữ liệu. Hãy thử lại sau."
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Đã hủy xóa',
+                    icon: 'info',
+                    timer: 1000,
+                })
+            }
+        })
+    }
     app.controller('quatrinhcongtacController', function($scope, $http) {});
 </script>
 @endsection

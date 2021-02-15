@@ -100,7 +100,13 @@ class QuaTrinhCongTacController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.quatrinhcongtac.edit')
+            ->with('dscvu', ChucVu::all())
+            ->with('dsdv', DonVi::all())
+            ->with('dsng', Ngach::all())
+            ->with('dsb', Bac::all())
+            ->with('dsnv', NhanVien::all())
+            ->with('qt', QuaTrinhCongTac::find($id));
     }
 
     /**
@@ -110,9 +116,29 @@ class QuaTrinhCongTacController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuaTrinhCongTacRequest $request, $id)
     {
-        //
+        $parameter = [
+            'ng_ma' => $request->ng_ma,
+            'b_ma' => $request->b_ma,
+        ];
+        $qtct = QuaTrinhCongTac::find($id);
+        $qtct->nv_ma = $request->nv_ma;
+        $qtct->qtct_tuNgay = $request->qtct_tuNgay;
+        $qtct->qtct_denNgay = $request->qtct_denNgay;
+        $qtct->cvu_ma = $request->cvu_ma;
+        $qtct->dv_ma = $request->dv_ma;
+        $qtct->nb_ma = DB::select('SELECT nb_ma FROM ngach_bac WHERE ng_ma = :ng_ma AND b_ma = :b_ma', $parameter)[0]->nb_ma;
+        $qtct->qtct_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
+        $qtct->save();
+        Session::flash('alert', 'Đã cập nhật thành công dữ liệu lương của nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+        return view('admin.quatrinhcongtac.edit')
+            ->with('dscvu', ChucVu::all())
+            ->with('dsdv', DonVi::all())
+            ->with('dsng', Ngach::all())
+            ->with('dsb', Bac::all())
+            ->with('dsnv', NhanVien::all())
+            ->with('qt', QuaTrinhCongTac::find($id));
     }
 
     /**
@@ -123,6 +149,7 @@ class QuaTrinhCongTacController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $qtct = QuaTrinhCongTac::find($id);
+        $qtct->delete();
     }
 }

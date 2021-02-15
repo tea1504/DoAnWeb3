@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Thêm mới quá trình công tác
+Cập nhật quá trình công tác
 @endsection
 @section('custom-css')
 <style>
@@ -10,11 +10,11 @@ Thêm mới quá trình công tác
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{route('admin.quatrinhcongtac.index')}}">Danh sách quá trình công tác</a></li>
-    <li class="breadcrumb-item active">Thêm mới quá trình công tác</li>
+    <li class="breadcrumb-item active">Cập nhật quá trình công tác</li>
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="quatrinhcongtacthemoiController" ng-init="nv_ma = '{{old('nv_ma',$id)}}'; dv_ma = '{{old('dv_ma')}}'; cvu_ma = '{{old('cvu_ma')}}'; ng_ma = '{{old('ng_ma')}}'; b_ma = '{{old('b_ma')}}'; qtct_tuNgay = '{{old('qtct_tuNgay')}}'; qtct_denNgay = '{{old('qtct_denNgay')}}';">
+<div class="container-fluid" ng-controller="quatrinhcongtaccapnhatController" ng-init="">
     @if (Session::has('alert'))
     <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
         <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
@@ -34,21 +34,20 @@ Thêm mới quá trình công tác
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-cyan h1 font-weight-bold">Thêm mới quá trình công tác</div>
+                <div class="card-header bg-cyan h1 font-weight-bold">Cập nhật quá trình công tác</div>
                 <div class="card-body">
-                    <form name="frmCreate" id="frmCreate" method="POST" action="{{route('admin.quatrinhcongtac.store')}}" novalidate>
+                    <form name="frmCreate" id="frmCreate" method="POST" action="{{route('admin.quatrinhcongtac.update', ['id' => $qt->qtct_ma])}}" novalidate>
                         {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="nv_ma" value="{{$qt->nv_ma}}" >
                         <div class="form-group">
-                            <label for="nv_ma">Tên nhân viên:</label>
-                            <select name="nv_ma" id="nv_ma" ng-class="frmCreate.nv_ma.$touched?frmCreate.nv_ma.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="nv_ma" ng-required="true">
+                            <label for="nv_ma1">Tên nhân viên:</label>
+                            <select name="nv_ma1" id="nv_ma1" class="form-control" ng-model="nv_ma1" disabled>
                                 <option value=""></option>
                                 @foreach($dsnv as $nv)
                                 <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback">
-                                <span ng-show="frmCreate.nv_ma.$error.required">Bạn phải chọn nhân viên</span>
-                            </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6">
@@ -125,7 +124,7 @@ Thêm mới quá trình công tác
                             </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Thêm mới</button>
+                            <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Cập nhật</button>
                             <a href="{{route('admin.quatrinhcongtac.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
                     </form>
@@ -141,7 +140,7 @@ Thêm mới quá trình công tác
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
-    app.controller('quatrinhcongtacthemoiController', function($scope, $http) {
+    app.controller('quatrinhcongtaccapnhatController', function($scope, $http) {
         $scope.getBac = function() {
             $http({
                 method: 'GET',
@@ -151,13 +150,20 @@ Thêm mới quá trình công tác
                 $scope.dsbac = response.data.result;
             }, function errorCallback(response) {});
         }
+        $scope.ng_ma = "{{old('ng_ma', $qt->nb_qtct->ng_ma)}}";
         $http({
             method: 'GET',
-            url: "{{route('api.ngach.bac')}}?ng_ma=" + $('#ng_ma').val()
+            url: "{{route('api.ngach.bac')}}?ng_ma=" + $scope.ng_ma
         }).then(function successCallback(response) {
             // console.log(response.data);
             $scope.dsbac = response.data.result;
         }, function errorCallback(response) {});
+        $scope.nv_ma1 = "{{old('nv_ma', $qt->nv_ma)}}";
+        $scope.qtct_tuNgay = "{{old('qtct_tuNgay', $qt->qtct_tuNgay)}}";
+        $scope.qtct_denNgay = "{{old('qtct_denNgay', $qt->qtct_denNgay)}}";
+        $scope.cvu_ma = "{{old('cvu_ma', $qt->cvu_ma)}}";
+        $scope.dv_ma = "{{old('dv_ma', $qt->dv_ma)}}";
+        $scope.b_ma = "{{old('b_ma', $qt->nb_qtct->b_ma)}}";
     });
 </script>
 @endsection
