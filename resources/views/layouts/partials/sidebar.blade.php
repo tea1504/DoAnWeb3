@@ -209,6 +209,7 @@
                 </ul>
             </li>
             @endcan
+            @can('viewAny', App\QuaTrinhCongTac::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/quatrinhcongtac')||request()->is('admin/quatrinhcongtac/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>
@@ -232,6 +233,7 @@
                     </li>
                 </ul>
             </li>
+            @endcan
             @can('xemThongKe')
             <li class="nav-item">
                 <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">

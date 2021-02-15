@@ -7,11 +7,28 @@ Dashboard
     .detail {
         opacity: 1;
     }
+
     .hide-detail {
         opacity: 0;
     }
-    .opacity-50{
+
+    .opacity-50 {
         opacity: .5;
+    }
+
+    .icon img {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        height: 80px;
+        opacity: .3;
+        transition: 1s;
+    }
+
+    .small-box:hover .icon img {
+        top: 10px;
+        right: 10px;
+        height: 100px;
     }
 </style>
 @endsection
@@ -81,36 +98,34 @@ Dashboard
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card bg-gradient-indigo">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">
-                                Trang cá nhân
-                            </h3>
-                            <div class="card-tools">
-                                <a href="" class="btn btn-sm bg-indigo">Đi đến <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
+                    <div class="small-box bg-gradient-indigo" ng-mouseover="show=true" ng-mouseleave="show=false" style="position: relative;">
+                        <div class="inner">
+                            <h3 ng-class="{'opacity-50': show}">Trang cá nhân</h3>
+
+                            <p ng-class="{'opacity-50': show}">{{Session::get('user')[0]->nv_hoTen}}</p>
                         </div>
-                        <div class="card-body text-center" ng-mouseover="show=true" ng-mouseleave="show=false" style="position: relative;">
+                        <div class="icon">
                             <img src="{{asset('storage/avatar/'.Session::get('user')[0]->nv_anh)}}" alt="user image" ng-class="['img-circle elevation-2 bg-white', {'opacity-50': show}]" height="100px">
-                            <h1 ng-class="{'opacity-50': show}">{{Session::get('user')[0]->nv_hoTen}}</h1>
-                            <div ng-class="{detail: show, 'hide-detail': !show}" style="height: 100%; width:100%; background-color: #0008; display: flex; justify-content: center; align-items: center; position: absolute; top: 0; left: 0; transition: .2s;">
-                                <a href="" class="text-white"><h1>Đi đến <i class="fas fa-arrow-circle-right"></h1></i></a>
-                            </div>
                         </div>
+                        <div ng-class="{detail: show, 'hide-detail': !show}" style="height: 100%; width:100%; background-color: #0008; display: flex; justify-content: center; align-items: center; position: absolute; top: 0; left: 0; transition: .2s;">
+                            <a href="" class="text-white">
+                                <h1>Đi đến <i class="fas fa-arrow-circle-right"></i></h1>
+                            </a>
+                        </div>
+                        <a href="" ng-class="['small-box-footer', {'opacity-50': show}]">Đi đến</a>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card bg-gradient-indigo">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">
-                                Trang cá nhân
-                            </h3>
-                            <div class="card-tools">
-                                <a href="" class="btn btn-sm bg-indigo">Đi đến <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
+                    <div class="small-box bg-gradient-danger">
+                        <div class="inner">
+                            <h3>Email</h3>
+
+                            <p>Liên hệ với quản trị viên</p>
                         </div>
-                        <div class="card-body text-center">
+                        <div class="icon">
+                            <i class="fas fa-envelope-open-text"></i>
                         </div>
+                        <a href="{{route('admin.lienhe')}}" class="small-box-footer">Liên hệ</a>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -147,6 +162,9 @@ Dashboard
                                 Quá trình làm việc
                             </h3>
                             <div class="card-tools">
+                                <button type="button" class="btn bg-info btn-sm" data-toggle="tooltip" data-placement="top" title="Chi tiết">
+                                    <a href="{{route('admin.quatrinhcongtac.index')}}"><i class="fas fa-eye"></i></a>
+                                </button>
                                 <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse" data-toggle="tooltip" data-placement="top" title="Thu nhỏ/Phóng to">
                                     <i class="fas fa-minus"></i>
                                 </button>

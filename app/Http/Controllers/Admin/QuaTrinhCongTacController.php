@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Bac;
 use App\ChucVu;
 use App\DonVi;
+use App\Exports\QuaTrinhCongTacExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuaTrinhCongTacRequest;
@@ -14,6 +15,8 @@ use App\QuaTrinhCongTac;
 use DB;
 use Carbon\Carbon;
 use Session;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class QuaTrinhCongTacController extends Controller
 {
@@ -40,6 +43,7 @@ class QuaTrinhCongTacController extends Controller
 
     public function create_id($id = null)
     {
+        $this->authorize('create', QuaTrinhCongTac::class);
         return view('admin.quatrinhcongtac.create')
             ->with('dscvu', ChucVu::all())
             ->with('dsdv', DonVi::all())
@@ -57,6 +61,7 @@ class QuaTrinhCongTacController extends Controller
      */
     public function store(QuaTrinhCongTacRequest $request)
     {
+        $this->authorize('create', QuaTrinhCongTac::class);
         $parameter = [
             'ng_ma' => $request->ng_ma,
             'b_ma' => $request->b_ma,
@@ -100,6 +105,7 @@ class QuaTrinhCongTacController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('create', QuaTrinhCongTac::find($id));
         return view('admin.quatrinhcongtac.edit')
             ->with('dscvu', ChucVu::all())
             ->with('dsdv', DonVi::all())
@@ -123,6 +129,7 @@ class QuaTrinhCongTacController extends Controller
             'b_ma' => $request->b_ma,
         ];
         $qtct = QuaTrinhCongTac::find($id);
+        $this->authorize('create', $qtct);
         $qtct->nv_ma = $request->nv_ma;
         $qtct->qtct_tuNgay = $request->qtct_tuNgay;
         $qtct->qtct_denNgay = $request->qtct_denNgay;
@@ -150,6 +157,32 @@ class QuaTrinhCongTacController extends Controller
     public function destroy($id)
     {
         $qtct = QuaTrinhCongTac::find($id);
+        $this->authorize('delete', $qtct);
         $qtct->delete();
+    }
+    public function print($id = null)
+    {
+        $this->authorize('inAn', QuaTrinhCongTac::class);
+        return view('admin.quatrinhcongtac.print')
+            ->with('dsqtct', QuaTrinhCongTac::all())
+            ->with('id', $id);
+    }
+    public function pdf($id = null)
+    {
+        $this->authorize('inAn', QuaTrinhCongTac::class);
+        $result = QuaTrinhCongTac::all();
+        $data = [
+            'dsqtct' => $result,
+            'id' => $id,
+        ];
+        // return view('admin.quatrinhcongtac.pdf')->with("dsqtct", $result);
+        $pdf = PDF::loadView('admin.quatrinhcongtac.pdf', $data);
+        return $pdf->download('DanhSachQuaTrinhCongTac.pdf');
+    }
+    public function excel()
+    {
+        $this->authorize('inAn', QuaTrinhCongTac::class);
+        // return view('admin.quatrinhcongtac.excel')->with("dsqtct", QuaTrinhCongTac::all());
+        return Excel::download(new QuaTrinhCongTacExport, 'DanhSachQuaTrinhCongTac.xlsx');
     }
 }

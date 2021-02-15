@@ -28,9 +28,13 @@ Danh sách quá trình công tác
             <div class="row">
                 <div class="col-md-6">
                     <select name="nhanVien" id="nhanVien" class="form-control">
+                        @can('view',App\VBCC::where('nv_ma', 'CB0001')->first())
                         <option value="" selected>Tất cả</option>
+                        @endcan
                         @foreach($dsnv as $nv)
+                        @can('view',App\VBCC::where('nv_ma', $nv->nv_ma)->first())
                         <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
+                        @endcan
                         @endforeach
                     </select>
                 </div>
@@ -38,10 +42,14 @@ Danh sách quá trình công tác
         </div>
         <div class="col text-right">
             <div class="btn-group" role="group">
+                @can('create', App\QuaTrinhCongTac::class)
                 <a href="" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
+                @endcan
+                @can('inAn', App\QuaTrinhCongTac::class)
                 <a href="" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
-                <a href="" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
+                <a href="{{route('admin.quatrinhcongtac.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
                 <a href="" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                @endcan
             </div>
         </div>
     </div>
@@ -270,6 +278,8 @@ Danh sách quá trình công tác
         table.ajax.url("{{route('api.nhanvien.quatrinhcongtac')}}" + "?nv_ma=" + $(this).val());
         table.ajax.reload();
         $('#add').attr('href', "{{route('admin.quatrinhcongtac.create_id')}}" + "/" + $('#nhanVien').val());
+    $('#print').attr('href', "{{route('admin.quatrinhcongtac.print')}}" + "/" + $('#nhanVien').val());
+    $('#pdf').attr('href', "{{route('admin.quatrinhcongtac.pdf')}}" + "/" + $('#nhanVien').val());
     });
 
     function showtooltip() {
@@ -289,8 +299,8 @@ Danh sách quá trình công tác
     }
 
     $('#add').attr('href', "{{route('admin.quatrinhcongtac.create_id')}}" + "/" + $('#nhanVien').val());
-    $('#print').attr('href', "{{route('admin.vanbang.print')}}" + "/" + $('#nhanVien').val());
-    $('#pdf').attr('href', "{{route('admin.vanbang.pdf')}}" + "/" + $('#nhanVien').val());
+    $('#print').attr('href', "{{route('admin.quatrinhcongtac.print')}}" + "/" + $('#nhanVien').val());
+    $('#pdf').attr('href', "{{route('admin.quatrinhcongtac.pdf')}}" + "/" + $('#nhanVien').val());
 
     function xoa(id) {
         Swal.fire({

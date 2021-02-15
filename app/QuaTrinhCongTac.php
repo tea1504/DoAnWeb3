@@ -10,8 +10,8 @@ class QuaTrinhCongTac extends Model
     const     UPDATED_AT    = 'qtct_capNhat';
 
     protected $table        = 'quatrinhcongtac';
-    protected $fillable     = ['qtct_tungay','qtct_denNgay','cvu_ma','dv_ma','nb_ma','qtct_taoMoi', 'qtct_capNhat'];
-    protected $guarded      = ['qtct_ma','nv_ma'];
+    protected $fillable     = ['qtct_tungay','qtct_denNgay','cvu_ma','dv_ma','nb_ma','qtct_taoMoi', 'qtct_capNhat', 'nv_ma'];
+    protected $guarded      = 'qtct_ma';
 
     protected $primaryKey   = 'qtct_ma';
 
@@ -25,5 +25,8 @@ class QuaTrinhCongTac extends Model
     }
     public function nb_qtct(){
         return $this->belongsTo('App\Ngach_Bac','nb_ma','nb_ma');
+    }
+    public function nv_qtct(){
+        return $this->belongsTo('App\NhanVien','nv_ma','nv_ma');
     }
 }

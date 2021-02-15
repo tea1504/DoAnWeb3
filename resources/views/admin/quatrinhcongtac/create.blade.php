@@ -53,7 +53,7 @@ Thêm mới quá trình công tác
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <label for="qtct_tuNgay">Từ ngày:</label>
-                                <input type="text" ng-class="frmCreate.qtct_tuNgay.$touched?frmCreate.qtct_tuNgay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="qtct_tuNgay" id="qtct_tuNgay" ng-model="qtct_tuNgay" ng-required="true" ng-pattern="/^[0-9][1-9]\/[0-9]{4}/" data-toggle="tooltip" data-placement="top" title="Điền theo định dạng tháng/năm. VD: 02/2020" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"></div></div>'>
+                                <input type="text" ng-class="frmCreate.qtct_tuNgay.$touched?frmCreate.qtct_tuNgay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="qtct_tuNgay" id="qtct_tuNgay" ng-model="qtct_tuNgay" ng-required="true" ng-pattern="/^[0-9]{2}\/[0-9]{4}/" data-toggle="tooltip" data-placement="top" title="Điền theo định dạng tháng/năm. VD: 02/2020" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"></div></div>'>
                                 <div class="invalid-feedback">
                                     <span ng-show="frmCreate.qtct_tuNgay.$error.required">Bạn phải điền từ ngày</span>
                                     <span ng-show="frmCreate.qtct_tuNgay.$error.pattern">Nhập chưa đúng định dạng</span>
@@ -61,7 +61,7 @@ Thêm mới quá trình công tác
                             </div>
                             <div class="col-md-6">
                                 <label for="qtct_denNgay">Đến ngày:</label>
-                                <input type="text" ng-class="frmCreate.qtct_denNgay.$touched?frmCreate.qtct_denNgay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="qtct_denNgay" id="qtct_denNgay" ng-model="qtct_denNgay" ng-required="true" ng-pattern="/^[0-9][1-9]\/[0-9]{4}/" data-toggle="tooltip" data-placement="top" title="Điền theo định dạng tháng/năm. VD: 02/2020" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"></div></div>'>
+                                <input type="text" ng-class="frmCreate.qtct_denNgay.$touched?frmCreate.qtct_denNgay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" name="qtct_denNgay" id="qtct_denNgay" ng-model="qtct_denNgay" ng-required="true" ng-pattern="/^[0-9]{2}\/[0-9]{4}/" data-toggle="tooltip" data-placement="top" title="Điền theo định dạng tháng/năm. VD: 02/2020" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"></div></div>'>
                                 <div class="invalid-feedback">
                                     <span ng-show="frmCreate.qtct_denNgay.$error.required">Bạn phải điền từ ngày</span>
                                     <span ng-show="frmCreate.qtct_denNgay.$error.pattern">Nhập chưa đúng định dạng</span>
