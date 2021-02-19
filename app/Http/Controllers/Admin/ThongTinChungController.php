@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ChucVu;
+use App\DanToc;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ThongTinChungCreateRequest;
 use App\NhanVien;
+use App\NhomMau;
+use App\Role;
+use App\TonGiao;
+use App\TrinhDo;
 
 class ThongTinChungController extends Controller
 {
@@ -26,7 +33,13 @@ class ThongTinChungController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.thongtinchung.create')
+            ->with('dsrole', Role::all())
+            ->with('dscvu', ChucVu::all())
+            ->with('dstd', TrinhDo::all())
+            ->with('dsnm', NhomMau::all())
+            ->with('dstg', TonGiao::all())
+            ->with('dsdt', DanToc::all());
     }
 
     /**
@@ -35,9 +48,9 @@ class ThongTinChungController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ThongTinChungCreateRequest $request)
     {
-        //
+        return $request->all();
     }
 
     /**
