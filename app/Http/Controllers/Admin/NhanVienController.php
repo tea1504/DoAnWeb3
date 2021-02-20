@@ -7,7 +7,12 @@ use App\Http\Controllers\Controller;
 use App\NhanVien;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Exports\NhanVienExport;
+use App\Luong;
+use App\NoiSinh;
+use App\QueQuan;
+use App\TuyenDung;
 use Maatwebsite\Excel\Facades\Excel as Excel;
+use Session;
 
 class NhanVienController extends Controller
 {
@@ -55,6 +60,22 @@ class NhanVienController extends Controller
     {
         $this->authorize('view', NhanVien::class);
         $result = NhanVien::find($id);
+        if (Luong::where('nv_ma', $id)->first() == null) {
+            Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về LƯƠNG');
+            return redirect(route('admin.nhanvien.index'));
+        }
+        if (TuyenDung::where('nv_ma', $id)->first() == null) {
+            Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về TUYỂN DỤNG');
+            return redirect(route('admin.nhanvien.index'));
+        }
+        if (QueQuan::where('nv_ma', $id)->first() == null) {
+            Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về QUÊ QUÁN');
+            return redirect(route('admin.nhanvien.index'));
+        }
+        if (NoiSinh::where('nv_ma', $id)->first() == null) {
+            Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về NƠI SINH');
+            return redirect(route('admin.nhanvien.index'));
+        }
         return view('admin.nhanvien.show')
             ->with('nv', $result);
     }

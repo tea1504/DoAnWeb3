@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ThongTinChungCreateRequest extends FormRequest
+class ThongTinChungUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,6 @@ class ThongTinChungCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nv_ma' => 'required|min:6|max:6|unique:nhanvien',
             'nv_anh' => 'file',
             'nv_hoTen' => 'required|min:3|max:50',
             'nv_tenGoiKhac' => 'nullable|min:3|max:50',
@@ -49,8 +48,6 @@ class ThongTinChungCreateRequest extends FormRequest
             'nv_cmndNgayCap' => 'required|date',
             'nv_bhxh' => 'required|digits:10',
             'td_ma' => 'required',
-            'username' => 'required|min:3|max:50|unique:nhanvien',
-            'password' => 'required|min:3|max:100',
             'nv_sdt' => 'required|digits:10',
             'nv_email' => 'required|min:3|max:200',
             'role_ma' => 'required',

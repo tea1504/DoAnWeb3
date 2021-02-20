@@ -78,22 +78,11 @@ class KyLuatController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        $mytime = Carbon::now();
-        $kl = KyLuat::where("kl_ma",$id)->first();
-        $ds_nv = NhanVien::all();
-        return view('admin.kyluat.edit')
-        ->with('kl',$kl)
-        ->with('danhsachnhanvien',$ds_nv)
-        ->with('mytime',$mytime);
-        
-=======
         $kl = KyLuat::where("kl_ma",$id)->first();
         $nv = NhanVien::all();
         return view('admin.kyluat.edit')
         ->with('kl',$kl)
         ->with('nv',$nv);
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
     }
 
     /**
@@ -105,24 +94,13 @@ class KyLuatController extends Controller
      */
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
-        $kl = KyLuat::find($id);
-=======
         $kl = KyLuat::where("kl_ma", $id)->first();
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
         $kl->nv_ma = $request->nv_ma;
         $kl->kl_ngayKy = $request->kl_ngayKy;
         $kl->kl_nguoiKy = $request->nv_ma;
         $kl->kl_lyDo = $request->kl_lyDo;
         $kl->kl_taoMoi = $request->kl_taoMoi;
         $kl->kl_capNhat = $request->kl_capNhat;
-<<<<<<< HEAD
-        //dd($id);
-        $kl->save();
-        return redirect()->route('admin.kyluat.index'); 
-
-=======
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
     }
 
     /**

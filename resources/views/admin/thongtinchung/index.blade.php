@@ -102,7 +102,7 @@ Danh sách thông tin chung
                             @foreach($dsttc as $ttc)
                             <tr>
                                 <td class="align-middle text-center">{{$loop->index + 1}}</td>
-                                <td class="align-middle"><img src="{{ Storage::exists('public/avatar/' . $ttc->nv_anh) ? asset('storage/avatar/' . $ttc->nv_anh) : asset('storage/avatar/default.png') }}" class="img-circle border bg-white" height="100px" alt="User Image"></td>
+                                <td class="align-middle"><img src="{{ Storage::exists('public/avatar/' . $ttc->nv_anh) && ($ttc->nv_anh!=null) ? asset('storage/avatar/' . $ttc->nv_anh) : asset('storage/avatar/default.png') }}" class="img-circle border bg-white" height="100px" alt="User Image"></td>
                                 <td class="align-middle">{{$ttc->nv_hoTen}}</td>
                                 <td class="align-middle">{{$ttc->nv_gioiTinh==1?'Nam':'Nữ'}}</td>
                                 <td class="align-middle">{{$ttc->nv_ngaySinh->format('d/m/Y')}}</td>
@@ -113,10 +113,8 @@ Danh sách thông tin chung
                                 <td class="align-middle">{{$ttc->nv_capNhat->format('d/m/Y H:m:s')}}</td>
                                 <td class="align-middle text-center">
                                     <button ng-click="layThongTin('{{$ttc->nv_ma}}')" type="button" class="btn btn-secondary btn-show btn-sm" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
-                                    <a href="" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <form class="fDelete btn p-0" method="POST" action="">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="_method" value="DELETE" />
+                                    <a href="{{route('admin.thongtinchung.edit', ['id' => $ttc->nv_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.thongtinchung.destroy', ['id' => $ttc->nv_ma])}}" data-nv="{{$ttc->nv_hoTen}}" data-id="{{$ttc->nv_ma}}">
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
@@ -172,12 +170,61 @@ Danh sách thông tin chung
             ]
         });
     });
+    $('.fDelete').click(function(e) {
+        e.preventDefault();
+        var dataSend = {
+            'id': $(this).data('id'),
+            '_token': '{{csrf_token()}}',
+            '_method': 'DELETE'
+        };
+        console.log(dataSend);
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa ?',
+            html: 'Dữ liệu của nhân viên <strong>' + $(this).data('nv') + '</strong> sẽ không thể phục hồi lại được. Bao gồm dữ liệu về <strong>(thông tin chung, lương, tuyển dụng, quê quán, ...)</strong>',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'post',
+                    url: $(this).attr('action'),
+                    data: dataSend,
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Đã xóa thành công'
+                        }).then(function() {
+                            window.location = "{{route('admin.thongtinchung.index')}}"
+                        })
+                    },
+                    error: function(response) {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger',
+                            title: '<i class="fas fa-exclamation-circle"></i> Thất bại',
+                            autohide: true,
+                            delay: 2000,
+                            body: "Đã xảy ra lỗi trong khi xóa dữ liệu. Hãy thử lại sau."
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Đã hủy xóa',
+                    icon: 'info',
+                    timer: 1000,
+                })
+            }
+        })
+    });
     app.directive('fallbackSrc', function() {
         return {
             link: function postLink(scope, element, attrs) {
                 element.bind('error', function() {
                     angular.element(this).attr("src", attrs.fallbackSrc);
-                    console.log(attrs);
                 });
             }
         }

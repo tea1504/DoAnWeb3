@@ -32,8 +32,8 @@
         </div>
         <div class="col-xl-2 col-lg-3 col-md-4">
             <div class="card">
-                <div class="card-body p-0">
-                    <img src="{{ Storage::exists('public/avatar/' . $nv->nv_anh) ? asset('storage/avatar/' . $nv->nv_anh) : asset('storage/avatar/default.png') }}" class="img-fluid" height="50px" alt="User Image">
+                <div class="card-body text-center p-0">
+                    <img src="{{ Storage::exists('public/avatar/' . $nv->nv_anh) && isset($nv->nv_anh) ? asset('storage/avatar/' . $nv->nv_anh) : asset('storage/avatar/default.png') }}" class="img-fluid" height="50px" alt="User Image">
                 </div>
                 <div class="card-footer bg-cyan">
                     <b>{{$nv->nv_hoTen}}</b>

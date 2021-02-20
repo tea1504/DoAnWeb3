@@ -274,7 +274,6 @@ Danh sách văn bằng chứng chỉ
     }).draw();
     table.ajax.url("{{route('api.nhanvien.vbcc')}}" + "?nv_ma=" + $('#nhanVien').val());
     table.ajax.reload();
-    console.log();
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     });

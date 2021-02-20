@@ -37,6 +37,22 @@ Danh sách nhân viên
 @endsection
 @section('content')
 <div class="container-fluid" ng-controller="nhanvienController" ng-init="start = 0; number_card = 6;">
+    @if (Session::has('alert-error'))
+    <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
+        <div class="toast bg-danger m-2" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+            <div class="toast-header">
+                <img src="{{asset('storage/images/shin.gif')}}" class="rounded mr-2 bg-light" height="30px" alt="...">
+                <strong class="mr-auto">Lỗi</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{Session::get('alert-error')}}
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col">
             <button class="btn btn-dark mb-3" ng-click="showTable()"><i class="fas <%icon%>"></i></button>
@@ -190,6 +206,7 @@ Danh sách nhân viên
 <script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script>
+    $('.toast').toast('show');
     $(document).ready(function() {
         $("#sortable").sortable({
             cancel: '.card-body',
