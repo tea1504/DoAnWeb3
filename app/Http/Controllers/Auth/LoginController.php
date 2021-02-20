@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Session;
+use DB;
 
 class LoginController extends Controller
 {
@@ -50,6 +52,8 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
+        Session::put('user', DB::table('nhanvien')->where('username', $request['username'])->get());
+        $request->session()->regenerate();
         $this->validate($request, [
             $this->username() => 'required|string',
             'password' => 'required|string',
