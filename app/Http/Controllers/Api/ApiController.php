@@ -133,4 +133,15 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    public function layThongTinNhanVienDayDu(Request $request)
+    {
+        $parameter = [
+            'nv_ma' => $request->nv_ma
+        ];
+        $result = DB::select('SELECT * FROM nhanvien AS a, dantoc AS b, tongiao AS c, nhommau AS d, trinhdo AS e, chucvu AS f WHERE a.nv_ma = :nv_ma AND a.dt_ma = b.dt_ma AND a.tg_ma = c.tg_ma AND a.nm_ma = d.nm_ma AND a.td_ma = e.td_ma AND a.cvu_ma = f.cvu_ma', $parameter);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }

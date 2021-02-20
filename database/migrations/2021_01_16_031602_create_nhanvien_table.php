@@ -19,7 +19,7 @@ class CreateNhanvienTable extends Migration
             $table->string('nv_ma', 10)
                     ->primary();
             $table->string('nv_hoTen', 50);
-            $table->string('nv_tenGoiKhac', 50);
+            $table->string('nv_tenGoiKhac', 50)->nullable();
             $table->string('nv_trinhDoChuyenMon')->nullable();
             $table->date('nv_ngaySinh');
             $table->unsignedTinyInteger('dt_ma');
@@ -36,7 +36,7 @@ class CreateNhanvienTable extends Migration
             $table->decimal('nv_canNang', 5, 2);
             $table->unsignedTinyInteger('nm_ma');
             $table->string('nv_hangThuongBinh', 100);
-            $table->string('nv_giaDinhChinhSach', 100);
+            $table->string('nv_giaDinhChinhSach', 100)->nullable();
             $table->string('nv_cmnd', 20);
             $table->date('nv_cmndNgayCap');
             $table->string('nv_bhxh', 20);
