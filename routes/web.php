@@ -65,6 +65,11 @@ Route::get('/admin/quatrinhcongtac/pdf/{id?}', 'Admin\QuaTrinhCongTacController@
 Route::get('/admin/quatrinhcongtac/excel', 'Admin\QuaTrinhCongTacController@excel')->name('admin.quatrinhcongtac.excel')->middleware('auth');
 Route::resource('admin/quatrinhcongtac', 'Admin\QuaTrinhCongTacController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/thongtinchung/print', 'Admin\ThongTinChungController@print')->name('admin.thongtinchung.print')->middleware('auth');
+Route::get('/admin/thongtinchung/pdf', 'Admin\ThongTinChungController@pdf')->name('admin.thongtinchung.pdf')->middleware('auth');
+Route::get('/admin/thongtinchung/excel', 'Admin\ThongTinChungController@excel')->name('admin.thongtinchung.excel')->middleware('auth');
+Route::resource('admin/thongtinchung', 'Admin\ThongTinChungController', ['as' => 'admin'])->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
