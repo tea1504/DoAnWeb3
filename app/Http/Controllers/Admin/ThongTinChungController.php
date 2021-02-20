@@ -173,7 +173,7 @@ class ThongTinChungController extends Controller
             $fileSaved = $file->storeAs('public/avatar', $ttc->nv_anh);
         }
         $ttc->save();
-        Session::flash('alert', 'Đã cập nhật thành công thông tin chung của nhân viên '.$request->nv_hoTen);
+        Session::flash('alert', 'Đã cập nhật thành công thông tin chung của nhân viên ' . $request->nv_hoTen);
         return view('admin.thongtinchung.edit')
             ->with('ttc', $ttc)
             ->with('dsrole', Role::all())
@@ -194,5 +194,11 @@ class ThongTinChungController extends Controller
     {
         $ttc = NhanVien::find($id);
         $ttc->delete();
+    }
+
+    public function print()
+    {
+        return view('admin.thongtinchung.print')
+            ->with('dsttc', NhanVien::all());
     }
 }
