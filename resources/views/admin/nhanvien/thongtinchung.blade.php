@@ -148,7 +148,7 @@
             <div class="row">
                 <label class="col-lg-6 col-form-label">Ngày vào Đảng cộng sản Việt Nam : </label>
                 <div class="col-lg-6">
-                    <input type="text" class="form-control" value="{{$nv->nv_ngayVaoDang->format('d/m/Y')}}" disabled>
+                    <input type="text" class="form-control" value="{{isset($nv->nv_ngayVaoDang)?$nv->nv_ngayVaoDang->format('d/m/Y'):''}}" disabled>
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@
             <div class="row">
                 <label class="col-lg-6 col-form-label">Ngày chính thức : </label>
                 <div class="col-lg-6">
-                    <input type="text" class="form-control" value="{{$nv->nv_ngayVaoDangChinhThuc->format('d/m/Y')}}" disabled>
+                    <input type="text" class="form-control" value="{{isset($nv->nv_ngayVaoDangChinhThuc)?$nv->nv_ngayVaoDangChinhThuc->format('d/m/Y'):''}}" disabled>
                 </div>
             </div>
         </div>
@@ -174,7 +174,7 @@
             <div class="row">
                 <label for="" class="col-md-4 col-form-label">Ngày nhập ngũ : </label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" disabled value="{{$nv->nv_ngayNhapNgu->format('d/m/Y')}}">
+                    <input type="text" class="form-control" disabled value="{{isset($nv->nv_ngayNhapNgu)?$nv->nv_ngayNhapNgu->format('d/m/Y'):''}}">
                 </div>
             </div>
         </div>
@@ -182,7 +182,7 @@
             <div class="row">
                 <label for="" class="col-md-4 col-form-label">Ngày xuất ngũ : </label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" disabled value="{{$nv->nv_ngayXuatNgu->format('d/m/Y')}}">
+                    <input type="text" class="form-control" disabled value="{{isset($nv->nv_ngayXuatNgu)?$nv->nv_ngayXuatNgu->format('d/m/Y'):''}}">
                 </div>
             </div>
         </div>
