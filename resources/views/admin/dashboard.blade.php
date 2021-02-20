@@ -101,7 +101,6 @@ Dashboard
                     <div class="small-box bg-gradient-indigo" ng-mouseover="show=true" ng-mouseleave="show=false" style="position: relative;">
                         <div class="inner">
                             <h3 ng-class="{'opacity-50': show}">Trang cá nhân</h3>
-
                             <p ng-class="{'opacity-50': show}">{{Session::get('user')[0]->nv_hoTen}}</p>
                         </div>
                         <div class="icon">
