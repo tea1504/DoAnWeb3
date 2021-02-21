@@ -75,6 +75,11 @@ Route::get('/admin/thongtinchung/pdf', 'Admin\ThongTinChungController@pdf')->nam
 Route::get('/admin/thongtinchung/excel', 'Admin\ThongTinChungController@excel')->name('admin.thongtinchung.excel')->middleware('auth');
 Route::resource('admin/thongtinchung', 'Admin\ThongTinChungController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/quequan/print', 'Admin\QueQuanController@print')->name('admin.quequan.print')->middleware('auth');
+Route::get('/admin/quequan/pdf', 'Admin\QueQuanController@pdf')->name('admin.quequan.pdf')->middleware('auth');
+Route::get('/admin/quequan/excel', 'Admin\QueQuanController@excel')->name('admin.quequan.excel')->middleware('auth');
+Route::resource('admin/quequan', 'Admin\QueQuanController', ['as' => 'admin'])->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -71,7 +71,7 @@
                 </ul>
             </li>
             @endcan
-            @can('viewAny', App\QuaTrinhCongTac::class)
+            @can('view', App\User::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/thongtinchung')||request()->is('admin/thongtinchung/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>
@@ -259,6 +259,29 @@
                 </ul>
             </li>
             @endcan
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/quequan')||request()->is('admin/quequan/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <p>
+                        Quê quán
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.quequan.index')}}" class="{{ request()->is('admin/quequan')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.quequan.create')}}" class="{{ request()->is('admin/quequan/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             @can('viewAny', App\TuyenDung::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/tuyendung')||request()->is('admin/tuyendung/*')?'active nav-link':'nav-link' }}">

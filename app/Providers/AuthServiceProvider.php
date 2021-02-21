@@ -12,7 +12,9 @@ use App\VBCC;
 use App\Policies\VanBangPolicy;
 use App\Policies\NhanVienPolicy;
 use App\Policies\QuaTrinhCongTacPolicy;
+use App\Policies\ThongTinChungPolicy;
 use App\QuaTrinhCongTac;
+use App\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         NhanVien::class => NhanVienPolicy::class,
         Luong::class => LuongPolicy::class,
         QuaTrinhCongTac::class => QuaTrinhCongTacPolicy::class,
+        User::class => ThongTinChungPolicy::class,
     ];
 
     /**
