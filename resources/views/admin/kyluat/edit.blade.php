@@ -116,17 +116,13 @@ Sửa khen thưởng
                                 <input type="text" id="kl_ngayKy" name="kl_ngayKy" class="form-control" value="{{ old('kl_ngayKy', $kl->kl_ngayKy) }}" data-mask-datetime>
                             </div>
                         </div>
-<<<<<<< HEAD
                             <!-- ------------------------------------------------------- -->
                             
                         
-=======
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
                                 <select name="nv_ma" class="form-control">
-<<<<<<< HEAD
                                     @foreach($danhsachnhanvien as $nhanvien)
                                         @if($nhanvien->nv_ma == $kl->kl_nguoiKy)
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
@@ -134,9 +130,6 @@ Sửa khen thưởng
                                         <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                         @endif
                                     @endforeach
-=======
-                                    
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
                                 </select>
                             </div>
                         </div>
@@ -149,27 +142,18 @@ Sửa khen thưởng
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-<<<<<<< HEAD
                                 <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ $mytime }}" data-mask-datetime>
-=======
-                                <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ old('$kl_taoMoi', $kl->kl_taoMoi) }}" data-mask-datetime>
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-<<<<<<< HEAD
                                 <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ $mytime }}" data-mask-datetime>
-=======
-                                <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ old('$kl_capNhat', $kl->kl_capNhat) }}" data-mask-datetime>
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
                             </div>
                         </div>
                         
                         
                         <button type="sumbit" class="btn btn-primary">Thêm mới</button>
-<<<<<<< HEAD
                         <a href="{{route('admin.kyluat.index')}}" class="btn btn-secondary">Trở về</a>
 
                     </form>
@@ -184,41 +168,4 @@ Sửa khen thưởng
     $('.toast').toast('show');
     app.controller('khenthuongnhatController', function($scope, $http) {});
 </script>
-=======
-
-                    </form>   
-                </div>
-            </div>   
-        </div>
-     </div>
-           
-</div>
-@endsection
-@section('custom-scripts')
-<script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<!-- Các script dành cho thư viện Mặt nạ nhập liệu InputMask -->
-<script src="{{ asset('vendor/input-mask/jquery.inputmask.min.js') }}"></script>
-<script src="{{ asset('vendor/input-mask/bindings/inputmask.binding.js') }}"></script>
-<script>
-  /* $(document).ready(function() {
-    
-   
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày tạo mới
-    $('#kl_taoMoi').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày cập nhật
-    $('#kl_capNhat').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-  }); */
-</script>
-
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
 @endsection
