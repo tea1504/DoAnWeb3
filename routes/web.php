@@ -80,6 +80,11 @@ Route::get('/admin/quequan/pdf', 'Admin\QueQuanController@pdf')->name('admin.que
 Route::get('/admin/quequan/excel', 'Admin\QueQuanController@excel')->name('admin.quequan.excel')->middleware('auth');
 Route::resource('admin/quequan', 'Admin\QueQuanController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/noisinh/print', 'Admin\NoiSinhController@print')->name('admin.noisinh.print')->middleware('auth');
+Route::get('/admin/noisinh/pdf', 'Admin\NoiSinhController@pdf')->name('admin.noisinh.pdf')->middleware('auth');
+Route::get('/admin/noisinh/excel', 'Admin\NoiSinhController@excel')->name('admin.noisinh.excel')->middleware('auth');
+Route::resource('admin/noisinh', 'Admin\NoiSinhController', ['as' => 'admin'])->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

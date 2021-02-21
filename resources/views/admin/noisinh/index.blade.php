@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Danh sách quê quán
+Danh sách nơi sinh
 @endsection
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -10,7 +10,7 @@ Danh sách quê quán
         height: 540px;
     }
 
-    table#myTable thead tr th{
+    table#myTable thead tr th {
         width: 540px;
         text-align: center;
     }
@@ -19,7 +19,7 @@ Danh sách quê quán
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Danh sách quê quán</li>
+    <li class="breadcrumb-item active">Danh sách nơi sinh</li>
 </ol>
 @endsection
 @section('content')
@@ -28,12 +28,12 @@ Danh sách quê quán
         <div class="col text-right">
             <div class="btn-group" role="group">
                 @can('create', App\QueQuan::class)
-                <a href="{{route('admin.quequan.create')}}" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
+                <a href="{{route('admin.noisinh.create')}}" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
                 @endcan
                 @can('inAn', App\QueQuan::class)
-                <a href="{{route('admin.quequan.print')}}" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
-                <a href="{{route('admin.quequan.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
-                <a href="{{route('admin.quequan.pdf')}}" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                <a href="{{route('admin.noisinh.print')}}" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
+                <a href="{{route('admin.noisinh.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
+                <a href="{{route('admin.noisinh.pdf')}}" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
                 @endcan
             </div>
         </div>
@@ -57,19 +57,19 @@ Danh sách quê quán
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dsqq as $qq)
+                            @foreach($dsns as $ns)
                             <tr>
                                 <td class="align-middle text-center">{{$loop->index + 1}}</td>
-                                <td class="align-middle">{{$qq->nhanVien->nv_hoTen}}</td>
-                                <td class="align-middle">{{$qq->xa->x_ten}}</td>
-                                <td class="align-middle">{{$qq->huyen->h_ten}}</td>
-                                <td class="align-middle">{{$qq->tinh->t_ten}}</td>
-                                <td class="align-middle">{{$qq->qq_diaChi}}</td>
-                                <td class="align-middle text-center">{{$qq->qq_taoMoi->format('d/m/Y H:m:s')}}</td>
-                                <td class="align-middle text-center">{{$qq->qq_capNhat->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle">{{$ns->nhanVien->nv_hoTen}}</td>
+                                <td class="align-middle">{{$ns->xa->x_ten}}</td>
+                                <td class="align-middle">{{$ns->huyen->h_ten}}</td>
+                                <td class="align-middle">{{$ns->tinh->t_ten}}</td>
+                                <td class="align-middle">{{$ns->ns_diaChi}}</td>
+                                <td class="align-middle text-center">{{$ns->ns_taoMoi->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle text-center">{{$ns->ns_capNhat->format('d/m/Y H:m:s')}}</td>
                                 <td class="align-middle text-center">
-                                <a href="{{route('admin.quequan.edit', ['id' => $qq->qq_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.quequan.destroy', ['id'=>$qq->qq_ma])}}" data-nv="{{$qq->nhanVien->nv_hoTen}}">
+                                    <a href="{{route('admin.noisinh.edit', ['id' => $ns->ns_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.noisinh.destroy', ['id'=>$ns->ns_ma])}}" data-nv="{{$ns->nhanVien->nv_hoTen}}">
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
@@ -151,7 +151,7 @@ Danh sách quê quán
                             icon: 'success',
                             title: 'Đã xóa thành công'
                         }).then(function() {
-                            window.location = "{{route('admin.quequan.index')}}"
+                            window.location = "{{route('admin.noisinh.index')}}"
                         })
                     },
                     error: function(response) {
@@ -174,7 +174,7 @@ Danh sách quê quán
         })
     });
     app.controller('thongtinController', function($scope, $http) {
-        
+
     });
 </script>
 @endsection
