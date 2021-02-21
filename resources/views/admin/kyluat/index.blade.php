@@ -95,7 +95,6 @@ Danh sách kỷ luật
                                 <td>{{$kl->kl_capNhat->format('d/m/Y')}}</td>                         
                                 <td>
                                     <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    
                                     <form class="fDelete btn p-0" method="POST" action="{{ route('admin.kyluat.destroy', ['id' => $kl->kl_ma]) }}" data-id="{{ $kl->kl_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
                                     {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="DELETE" />
