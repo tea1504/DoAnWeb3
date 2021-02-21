@@ -17,10 +17,10 @@ Không tìm thấy trang
 
     <div class="error-content">
         <h3><i class="fas fa-exclamation-triangle text-warning"></i> Lỗi!!! Không tìm thấy trang.</h3>
-        <br>
         <p>
-            Chúng tôi không thể tìm thấy trang bạn yêu cầu.<br>
-            Bạn có thể trở về trang chủ <a href="{{route('admin')}}">tại đây</a>
+            Bạn không có quyền truy cập vào đây. <br>
+            Hãy quay lại <a href="{{route('admin')}}" class="text-warning">trang chủ</a> <br>
+            Hoặc <a href="{{route('admin.lienhe')}}" class="text-warning">liên hệ</a> với quản trị viên
         </p>
     </div>
     <!-- /.error-content -->

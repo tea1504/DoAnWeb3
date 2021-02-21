@@ -144,4 +144,26 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    public function layHuyen(Request $request)
+    {
+        $parameter = [
+            't_ma' => $request->t_ma
+        ];
+        $result = DB::select('SELECT * FROM huyen WHERE t_ma = :t_ma', $parameter);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
+    public function layXa(Request $request)
+    {
+        $parameter = [
+            'h_ma' => $request->h_ma
+        ];
+        $result = DB::select('SELECT * FROM xa WHERE h_ma = :h_ma', $parameter);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }
