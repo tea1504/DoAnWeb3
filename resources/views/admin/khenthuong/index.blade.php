@@ -37,6 +37,22 @@ Danh sách khen thưởng
 @endsection
 @section('content')
 <div class="container-fluid" ng-controller="khuyenthuongController" ng-init="start = 0;">
+    @if (Session::has('alert'))
+    <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
+        <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+            <div class="toast-header">
+                <img src="{{asset('storage/images/shin.gif')}}" class="rounded mr-2 bg-light" height="30px" alt="...">
+                <strong class="mr-auto">Thành công</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{Session::get('alert')}}
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col text-right">
             <div class="btn-group" role="group">
@@ -104,6 +120,9 @@ Danh sách khen thưởng
 <script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script>
+
+    $('.toast').toast('show');
+
     $(document).ready(function() {
         $("#sortable").sortable({
             cancel: '.card-body',

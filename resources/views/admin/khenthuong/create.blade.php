@@ -56,7 +56,7 @@ Thêm khen thưởng
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-cyan h1 font-weight-bold">Thêm mới văn bằng chứng chỉ</div>
+                <div class="card-header bg-cyan h1 font-weight-bold">Thêm mới khen thưởng</div>
                 <div class="card-body">
                     <form name="frmCreate" id="frmCreate" method="POST" action="{{route('admin.khenthuong.store')}}" novalidate>
                         {{ csrf_field() }}
@@ -107,24 +107,11 @@ Thêm khen thưởng
                                 </div>                            
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_taoMoi" name="kt_taoMoi" class="form-control" value="{{ $mytime }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_capNhat" name="kt_capNhat" class="form-control" value="{{ $mytime  }}" >
-                            </div>
-                        </div>
                         <div class="form-group">
                             <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Thêm mới</button>
                             <a href="{{route('admin.vanbang.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
-                    </form>
-                       
+                    </form>                      
                 </div>
             </div>
         </div>

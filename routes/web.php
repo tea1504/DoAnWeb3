@@ -44,7 +44,12 @@ Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin'
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/quanhegiadinh/create_id/{id?}', 'Admin\QuanHeGiaDinhController@create_id')->name('admin.quanhegiadinh.create_id')->middleware('auth');
+Route::get('/admin/quanhegiadinh/print/{id?}', 'Admin\QuanHeGiaDinhController@print')->name('admin.quanhegiadinh.print')->middleware('auth');
+Route::get('/admin/quanhegiadinh/pdf/{id?}', 'Admin\QuanHeGiaDinhController@pdf')->name('admin.quanhegiadinh.pdf')->middleware('auth');
+Route::get('/admin/quanhegiadinh/excel', 'Admin\QuanHeGiaDinhController@excel')->name('admin.quanhegiadinh.excel')->middleware('auth');
 Route::resource('/admin/quanhegiadinh', 'Admin\QuanHeGiaDinhController', ['as' => 'admin'])->middleware('auth');
+
 
 Route::get('/admin/vanbang/create_id/{id?}', 'Admin\VanBangController@create_id')->name('admin.vanbang.create_id')->middleware('auth');
 Route::get('/admin/vanbang/print/{id?}', 'Admin\VanBangController@print')->name('admin.vanbang.print')->middleware('auth');

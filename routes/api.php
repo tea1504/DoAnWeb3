@@ -29,3 +29,4 @@ Route::get('/quatrinhlamviec', 'Api\ApiController@layQuaTrinhLamViec')->name('ap
 Route::get('/quatrinhcongtac', 'Api\ApiController@layQuaTrinhCongTac')->name('api.nhanvien.quatrinhcongtac');
 Route::get('/congviechientai', 'Api\ApiController@layCongViecHienTai')->name('api.nhanvien.congviechientai');
 Route::get('/nhanvien/daydu', 'Api\ApiController@layThongTinNhanVienDayDu')->name('api.nhanvien.daydu');
+Route::get('/quanhegiadinh', 'Api\ApiController@layQuanHeGiaDinh')->name('api.nhanvien.qhgd');

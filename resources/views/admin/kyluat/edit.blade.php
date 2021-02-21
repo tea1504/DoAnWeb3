@@ -1,45 +1,14 @@
 @extends('layouts.master')
 @section('title')
-<<<<<<< HEAD
 Chỉnh sửa danh sách kỷ luật
 @endsection
 @section('custom-css')
 <style>
-=======
-Sửa khen thưởng
-@endsection
-@section('custom-css')
-<link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<style>
-    table#myTable {
-        height: 540px;
-        width: 100%;
-    }
-
-    table#myTable td {
-        width: 500px;
-    }
-
-    .my-card {
-        transition: .2s;
-    }
-
-    .my-card:hover {
-        transform: scale(1.05, 1.05);
-        z-index: 9999;
-        box-shadow: 0px 0px 20px #000;
-    }
-
-    .avatar {
-        background-color: #fff;
-    }
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
 </style>
 @endsection
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-<<<<<<< HEAD
     <li class="breadcrumb-item"><a href="{{route('admin.kyluat.index')}}">Danh sách kỷ luật</a></li>
     <li class="breadcrumb-item active">Chỉnh sửa danh sách kỷ luật
 </li>
@@ -81,29 +50,6 @@ Sửa khen thưởng
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
                                         @else
                                         <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
-=======
-    <li class="breadcrumb-item active">Sửa khen thưởng</li>
-</ol>
-@endsection
-@section('content')
-<div class="col-xl-12 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" id="vungChua">
-    <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
-        <div class="">
-            <div class=" h1 bg-cyan font-weight-bold">Nhập thông tin mới</div>
-                <div class="">
-                    <form method="post" action="{{ route('admin.khenthuong.update',['id' => $kl->kl_ma] ) }}"  enctype="multipart/form-data">
-                        <input type="hidden" name="_method" value="PUT" />
-                        {{ csrf_field() }}
-                        <div class="form-group row">
-                                <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên nhân viên : </label>
-                                <div class="col-lg-10 col-md-9 col-sm-8">
-                                    <select name="nv_ma" class="form-control">
-                                    @foreach($nv as $dsnv)
-                                        @if($dsnv->nv_ma == $kl->nv_ma)
-                                        <option value="{{ $dsnv->nv_ma }}" selected>{{ $dsnv->nv_hoTen }}</option>
-                                        @else
-                                        <option value="{{ $dsnv->nv_ma }}">{{ $dsnv->nv_hoTen }}</option>
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
                                         @endif
                                     @endforeach
                                     </select>

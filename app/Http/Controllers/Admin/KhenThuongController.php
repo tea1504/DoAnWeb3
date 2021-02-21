@@ -56,7 +56,7 @@ class KhenThuongController extends Controller
         $kt->kt_lyDo = $request->kt_lyDo;
         $kt->kt_taoMoi = Carbon::now();
         $kt->kt_capNhat = Carbon::now();
-
+        //dd($kt);
         $kt->save();
         Session::flash('alert', 'Đã thêm mới thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
 
@@ -107,7 +107,7 @@ class KhenThuongController extends Controller
 
         $kt = KhenThuong::find($id);
 
-        $kt = KhenThuong::where("kt_ma", $id)->first();
+        //$kt = KhenThuong::where("kt_ma", $id)->first();
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
         $kt->kt_nguoiKy = $request->nv_ma;
@@ -122,8 +122,7 @@ class KhenThuongController extends Controller
        
        
 
-        $kt->kt_taoMoi = $request->kt_taoMoi;
-        $kt->kt_capNhat = $request->kt_capNhat;
+       
     }
 
     /**

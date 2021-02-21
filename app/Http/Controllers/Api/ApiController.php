@@ -144,4 +144,18 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+
+    public function layQuanHeGiaDinh(Request $request)
+    {
+        $parameter = [
+            'nv_ma' => $request->nv_ma
+        ];
+        $result = DB::select('SELECT * FROM quanhegiadinh AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma',$parameter);
+         return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }
+
+
