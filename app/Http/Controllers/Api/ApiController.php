@@ -144,4 +144,15 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    public function layThongTinTuyenDung(Request $request)
+    {
+        $parameter = [
+            'td_ma' => $request->td_ma
+        ];
+        $result = DB::select('SELECT * FROM tuyendung AS a, nhanvien AS b, donvi AS c, chucvu AS d, congviec AS e WHERE a.nv_ma = :nv_ma AND a.dv_ma = b.dv_ma AND a.cvu_ma = c.cvu_ma AND a.cv_ma = d.cv_ma ', $parameter);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }

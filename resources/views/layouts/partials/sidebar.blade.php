@@ -264,7 +264,7 @@
                 <a href="#" class="{{ request()->is('admin/tuyendung')||request()->is('admin/tuyendung/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>
                     <p>
-                        Quá trình công tác
+                        Tuyển dụng
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>

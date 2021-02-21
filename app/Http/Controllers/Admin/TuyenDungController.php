@@ -68,8 +68,8 @@ class TuyenDungController extends Controller
         $td->td_ngayLam=$request->td_ngayLam;
         $td->cv_ma=$request->cv_ma;
         $td->td_soTruong=$request->td_soTruong;
-        $td->td_taoMoi=Carbon::now();
-        $td->td_capNhat=Carbon::now();
+        $td->td_taoMoi=Carbon::now('Asia/Ho_Chi_Minh');
+        $td->td_capNhat=Carbon::now('Asia/Ho_Chi_Minh');
         $td->save();
         Session::flash('alert','Thêm mới thành công dữ liệu tuyển dụng của nhân viên'. NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect(route('admin.tuyendung.create'));
@@ -94,7 +94,19 @@ class TuyenDungController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dsnv= NhanVien :: all();
+        $dscv= ChucVu :: all();
+        $dscviec= CongViec :: all();
+        $dsdv= DonVi :: all();
+        $td = TuyenDung::find($id);
+        $this->authorize('update', $td);
+        return view('admin.tuyendung.edit')
+        ->with('dsnv',$dsnv)
+        ->with('dscv',$dscv)
+        ->with('dscviec',$dscviec)
+        ->with('dsdv',$dsdv)
+        ->with('td', $td);
+
     }
 
     /**
@@ -104,9 +116,33 @@ class TuyenDungController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TuyenDungCreateRequest $request, $id)
     {
-        //
+        $dsnv= NhanVien :: all();
+        $dscv= ChucVu :: all();
+        $dscviec= CongViec :: all();
+        $dsdv= DonVi :: all();
+        $td = TuyenDung::find($id);
+        $this->authorize('update', $td);
+        $td->nv_ma=$request->nv_ma;
+        $td->td_ngay=$request->td_ngay;
+        $td->td_ngheTruocDay=$request->td_ngheTruocDay;
+        $td->dv_ma=$request->dv_ma;
+        $td->td_coQuanTuyen=$request->td_coQuanTuyen;
+        $td->cvu_ma=$request->cvu_ma;
+        $td->td_ngayLam=$request->td_ngayLam;
+        $td->cv_ma=$request->cv_ma;
+        $td->td_soTruong=$request->td_soTruong;
+        $td->td_taoMoi=Carbon::now('Asia/Ho_Chi_Minh');
+        $td->td_capNhat=Carbon::now('Asia/Ho_Chi_Minh');
+        $td->save();
+        Session::flash('alert', 'Đã cập nhật thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+        return view('admin.tuyendung.edit')
+        ->with('dsnv',$dsnv)
+        ->with('dscv',$dscv)
+        ->with('dscviec',$dscviec)
+        ->with('dsdv',$dsdv)
+        ->with('td', $td);
     }
 
     /**
@@ -117,7 +153,10 @@ class TuyenDungController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $td = TuyenDung::find($id);
+        $this->authorize('delete', $td);
+        $td->delete();
+        return 'ok';
     }
     public function print()
     {
