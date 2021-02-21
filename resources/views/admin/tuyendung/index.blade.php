@@ -4,52 +4,11 @@ Danh sách tuyển dụng
 @endsection
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+
 <style>
     table#myTable {
         height: 540px;
         width: 100%;
-    }
-
-    table#myTable td {
-        width: 500px;
-    }
-
-    .my-card {
-        transition: .2s;
-    }
-
-    .my-card:hover {
-        transform: scale(1.05, 1.05);
-        z-index: 9999;
-        box-shadow: 0px 0px 20px #000;
-    }
-
-    .avatar {
-        background-color: #fff;
-    }
-</style><style>
-    table#myTable {
-        height: 540px;
-        width: 100%;
-    }
-
-    table#myTable td {
-        width: 500px;
-    }
-
-    .my-card {
-        transition: .2s;
-    }
-
-    .my-card:hover {
-        transform: scale(1.05, 1.05);
-        z-index: 9999;
-        box-shadow: 0px 0px 20px #000;
-    }
-
-    .avatar {
-        background-color: #fff;
     }
 </style>
 @endsection
@@ -67,7 +26,7 @@ Danh sách tuyển dụng
         </div>
         <div class="col text-right">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
+                <a href="{{route('admin.tuyendung.create') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
                 <a href="{{route('admin.tuyendung.print') }}" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
                 <a href="{{route('admin.tuyendung.excel') }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></button>
                 <a href="{{route('admin.tuyendung.pdf') }}" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
@@ -78,10 +37,10 @@ Danh sách tuyển dụng
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-responsive table-head-fixed" id="myTable">
+                    <table class="table table-responsive table-head-fixed" id="myTable" >
                         <thead>
                             <tr>
-                                <th>Mã tuyển dụng</th>
+                                <th width="5px">Mã tuyển dụng</th>
                                 <th>Mã nhân viên</th>
                                 <th>Ngày tuyển dụng</th>
                                 <th>Nghề nghiệp trước đó</th>
@@ -89,7 +48,7 @@ Danh sách tuyển dụng
                                 <th>Chức vụ</th>
                                 <th>Ngày vào làm</th>
                                 <th>Công việc</th>
-                                <th>Sở trường</th>
+                                <th width="20px">Sở trường</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Hành động</th>
@@ -100,21 +59,21 @@ Danh sách tuyển dụng
                             <tr>
                                 <td>{{$td -> td_ma}}</td>
                                 <td>{{$td -> nv_ma}}</td>
-                                <td>{{$td -> td_ngay}}</td>
+                                <td>{{$td -> td_ngay->format('d/m/Y')}}</td>
                                 <td>{{$td -> td_ngheTruocDay}}</td>
                                 <td>{{$td -> td_coQuanTuyen}}</td>
-                                <td>{{$td -> cvu_ma}}</td>
-                                <td>{{$td -> td_ngayLam}}</td>
-                                <td>{{$td -> cv_ma}}</td>
+                                <td>{{$td ->chucVu->cvu_ten}}</td>
+                                <td>{{$td -> td_ngayLam->format('d/m/Y')}}</td>
+                                <td>{{$td ->congViec->cv_ten}}</td>
                                 <td>{{$td -> td_soTruong}}</td>
-                                <td>{{$td -> td_taoMoi}}</td>
-                                <td>{{$td -> td_capNhat}}</td>
+                                <td>{{$td -> td_taoMoi->format('d/m/Y  H:i:s')}}</td>
+                                <td>{{$td -> td_capNhat->format('d/m/Y H:i:s')}}</td>
                                 <td>
                                     <a href="#" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Sửa">
-                                        <i class="fas fa-pencil-square-o" aria-hidden="true"></i>
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
                                     <a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -176,5 +135,8 @@ Danh sách tuyển dụng
             $('[data-toggle="tooltip"]').tooltip()
         });
     });
+</script>
+<script>
+   
 </script>
 @endsection

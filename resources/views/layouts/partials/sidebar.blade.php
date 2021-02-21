@@ -259,6 +259,31 @@
                 </ul>
             </li>
             @endcan
+            @can('viewAny', App\TuyenDung::class)
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/tuyendung')||request()->is('admin/tuyendung/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <p>
+                        Quá trình công tác
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.tuyendung.index')}}" class="{{ request()->is('admin/tuyendung')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.tuyendung.create')}}" class="{{ request()->is('admin/tuyendung/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
             @can('xemThongKe')
             <li class="nav-item">
                 <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">

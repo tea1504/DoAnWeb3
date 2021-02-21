@@ -41,6 +41,7 @@ Route::get('/admin/tuyendung/print', 'Admin\TuyenDungController@print')->name('a
 Route::get('/admin/tuyendung/pdf', 'Admin\TuyenDungController@pdf')->name('admin.tuyendung.pdf');
 Route::get('/admin/tuyendung/excel', 'Admin\TuyenDungController@excel')->name('admin.tuyendung.excel');
 Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin']);
+Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create');
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin'])->middleware('auth');
 
@@ -57,7 +58,7 @@ Route::get('/admin/vanbang/pdf/{id?}', 'Admin\VanBangController@pdf')->name('adm
 Route::get('/admin/vanbang/excel', 'Admin\VanBangController@excel')->name('admin.vanbang.excel')->middleware('auth');
 Route::resource('/admin/vanbang', 'Admin\VanBangController', ['as' => 'admin'])->middleware('auth');
 
-Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create');
+
 Route::get('/admin/luong/print', 'Admin\LuongController@print')->name('admin.luong.print')->middleware('auth');
 Route::get('/admin/luong/pdf', 'Admin\LuongController@pdf')->name('admin.luong.pdf')->middleware('auth');
 Route::get('/admin/luong/excel', 'Admin\LuongController@excel')->name('admin.luong.excel')->middleware('auth');
