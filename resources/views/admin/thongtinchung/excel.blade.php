@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Danh sách thông tin chng</title>
+    <title>Danh sách thông tin chung</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
         * {

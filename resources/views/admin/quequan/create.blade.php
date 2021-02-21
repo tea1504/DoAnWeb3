@@ -11,7 +11,7 @@ Thêm mới quê quán
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{route('admin.thongtinchung.index')}}">Danh sách quê quán</a></li>
+    <li class="breadcrumb-item"><a href="{{route('admin.noisinh.index')}}">Danh sách quê quán</a></li>
     <li class="breadcrumb-item active">Thêm mới quê quán</li>
 </ol>
 @endsection

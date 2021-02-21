@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\QueQuanExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QueQuanCreateRequest;
@@ -23,6 +24,7 @@ class QueQuanController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', QueQuan::class);
         return view('admin.quequan.index')
             ->with('dsqq', QueQuan::all());
     }
@@ -34,6 +36,7 @@ class QueQuanController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', QueQuan::class);
         return view('admin.quequan.create')
             ->with('dst', Tinh::all())
             ->with('dsnv', NhanVien::all());
@@ -47,6 +50,7 @@ class QueQuanController extends Controller
      */
     public function store(QueQuanCreateRequest $request)
     {
+        $this->authorize('create', QueQuan::class);
         $qq = new QueQuan();
         $qq->nv_ma = $request->nv_ma;
         $qq->t_ma = $request->t_ma;
@@ -79,6 +83,7 @@ class QueQuanController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', QueQuan::find($id));
         return view('admin.quequan.edit')
             ->with('qq', QueQuan::find($id))
             ->with('dst', Tinh::all())
@@ -95,6 +100,7 @@ class QueQuanController extends Controller
     public function update(QueQuanUpdateRequest $request, $id)
     {
         $qq = QueQuan::find($id);
+        $this->authorize('update', $qq);
         $qq->t_ma = $request->t_ma;
         $qq->h_ma = $request->h_ma;
         $qq->x_ma = $request->x_ma;
@@ -117,16 +123,19 @@ class QueQuanController extends Controller
     public function destroy($id)
     {
         $qq = QueQuan::find($id);
+        $this->authorize('delete', $qq);
         $qq->delete();
     }
 
     public function print()
     {
+        $this->authorize('inAn', QueQuan::class);
         return view('admin.quequan.print')
             ->with('dsqq', QueQuan::all());
     }
     public function pdf()
     {
+        $this->authorize('inAn', QueQuan::class);
         $result = QueQuan::all();
         $data = [
             'dsqq' => $result,
@@ -137,8 +146,9 @@ class QueQuanController extends Controller
     }
     public function excel()
     {
-        // return view('admin.thongtinchung.excel')
-        //     ->with('dsttc', NhanVien::all());
-        return Excel::download(new ThongTinChungExport, 'DanhSachThongTinChung.xlsx');
+        $this->authorize('inAn', QueQuan::class);
+        // return view('admin.quequan.excel')
+        //     ->with('dsqq', QueQuan::all());
+        return Excel::download(new QueQuanExport, 'DanhSachQueQuan.xlsx');
     }
 }

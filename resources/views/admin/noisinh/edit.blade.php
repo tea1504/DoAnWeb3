@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Cập nhật quê quán
+Cập nhật nơi sinh
 @endsection
 @section('custom-css')
 <link href="{{ asset('vendor/bootstrap-fileinput/css/fileinput.css') }}" media="all" rel="stylesheet" type="text/css" />
@@ -11,12 +11,12 @@ Cập nhật quê quán
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{route('admin.noisinh.index')}}">Danh sách quê quán</a></li>
-    <li class="breadcrumb-item active">Cập nhật quê quán</li>
+    <li class="breadcrumb-item"><a href="{{route('admin.noisinh.index')}}">Danh sách nơi sinh</a></li>
+    <li class="breadcrumb-item active">Cập nhật nơi sinh</li>
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="quequanthemmoiController" ng-init="nv_ma = '{{old('nv_ma', $qq->nv_ma)}}'; t_ma = '{{old('t_ma', $qq->t_ma)}}'; qq_diaChi = '{{old('qq_diaChi', $qq->qq_diaChi)}}';">
+<div class="container-fluid" ng-controller="noisinhthemmoiController" ng-init="nv_ma = '{{old('nv_ma', $ns->nv_ma)}}'; t_ma = '{{old('t_ma', $ns->t_ma)}}'; ns_diaChi = '{{old('ns_diaChi', $ns->ns_diaChi)}}';">
     @if (Session::has('alert'))
     <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
         <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
@@ -36,9 +36,9 @@ Cập nhật quê quán
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-cyan h1 font-weight-bold">Cập nhật quê quán</div>
+                <div class="card-header bg-cyan h1 font-weight-bold">Cập nhật nơi sinh</div>
                 <div class="card-body">
-                    <form name="frmEdit" id="frmEdit" method="POST" action="{{route('admin.quequan.update', ['id' => $qq->qq_ma])}}" enctype="multipart/form-data" novalidate>
+                    <form name="frmEdit" id="frmEdit" method="POST" action="{{route('admin.noisinh.update', ['id' => $ns->ns_ma])}}" enctype="multipart/form-data" novalidate>
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
                         <div class="form-group">
@@ -94,17 +94,17 @@ Cập nhật quê quán
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="qq_diaChi">Địa chỉ :</label>
-                            <input type="text" name="qq_diaChi" id="qq_diaChi" ng-model="qq_diaChi" ng-class="['form-control', frmEdit.qq_diaChi.$touched?frmEdit.qq_diaChi.$valid?'is-valid':'is-invalid':'']" ng-required="true" ng-minlength="3" ng-maxlength="100">
+                            <label for="ns_diaChi">Địa chỉ :</label>
+                            <input type="text" name="ns_diaChi" id="ns_diaChi" ng-model="ns_diaChi" ng-class="['form-control', frmEdit.ns_diaChi.$touched?frmEdit.ns_diaChi.$valid?'is-valid':'is-invalid':'']" ng-required="true" ng-minlength="3" ng-maxlength="100">
                             <div class="invalid-feedback">
-                                <span ng-show="frmEdit.qq_diaChi.$error.required">Bạn phải nhập vào trường này</span>
-                                <span ng-show="frmEdit.qq_diaChi.$error.maxlength">Bạn nhập quá dài</span>
-                                <span ng-show="frmEdit.qq_diaChi.$error.minlength">Bạn nhập quá ngắn</span>
+                                <span ng-show="frmEdit.ns_diaChi.$error.required">Bạn phải nhập vào trường này</span>
+                                <span ng-show="frmEdit.ns_diaChi.$error.maxlength">Bạn nhập quá dài</span>
+                                <span ng-show="frmEdit.ns_diaChi.$error.minlength">Bạn nhập quá ngắn</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary" ng-disabled="frmEdit.$invalid">Cập nhật</button>
-                            <a href="{{route('admin.quequan.index')}}" class="btn btn-secondary">Trở về</a>
+                            <a href="{{route('admin.noisinh.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
                     </form>
                 </div>
@@ -124,19 +124,19 @@ Cập nhật quê quán
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
-    app.controller('quequanthemmoiController', function($scope, $http) {
+    app.controller('noisinhthemmoiController', function($scope, $http) {
         $http({
             method: 'GET',
-            url: "{{route('api.huyen')}}?t_ma=" + "{{old('t_ma', $qq->t_ma)}}"
+            url: "{{route('api.huyen')}}?t_ma=" + "{{old('t_ma', $ns->t_ma)}}"
         }).then(function successCallback(response) {
             $scope.huyen = response.data.result;
-            $scope.h_ma = "{{old('h_ma', $qq->h_ma)}}";
+            $scope.h_ma = "{{old('h_ma', $ns->h_ma)}}";
             $http({
                 method: 'GET',
-                url: "{{route('api.xa')}}?h_ma=" + "{{old('h_ma', $qq->h_ma)}}"
+                url: "{{route('api.xa')}}?h_ma=" + "{{old('h_ma', $ns->h_ma)}}"
             }).then(function successCallback(response) {
                 $scope.xa = response.data.result;
-                $scope.x_ma = "{{old('x_ma', $qq->x_ma)}}";
+                $scope.x_ma = "{{old('x_ma', $ns->x_ma)}}";
             }, function errorCallback(response) {});
         }, function errorCallback(response) {});
         $scope.layHuyen = function() {
