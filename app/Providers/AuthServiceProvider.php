@@ -15,6 +15,11 @@ use App\Policies\QuaTrinhCongTacPolicy;
 use App\Policies\TuyenDungPolicy;
 use App\QuaTrinhCongTac;
 use App\TuyenDung;
+use App\Policies\QueQuanPolicy;
+use App\Policies\ThongTinChungPolicy;
+use App\QuaTrinhCongTac;
+use App\QueQuan;
+use App\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,7 +33,12 @@ class AuthServiceProvider extends ServiceProvider
         NhanVien::class => NhanVienPolicy::class,
         Luong::class => LuongPolicy::class,
         QuaTrinhCongTac::class => QuaTrinhCongTacPolicy::class,
+<<<<<<< HEAD
         TuyenDung::class => TuyenDungPolicy::class,
+=======
+        User::class => ThongTinChungPolicy::class,
+        QueQuan::class => QueQuanPolicy::class,
+>>>>>>> bbdd34e3e151088a7692ed00d5d85bf398f16ad3
     ];
 
     /**
