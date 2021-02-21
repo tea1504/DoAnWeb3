@@ -11,8 +11,11 @@ use App\TuyenDung;
 use Barryvdh\DomPDF\Facade as PDF;
 use Maatwebsite\Excel\Facades\Excel as Excel;
 use App\Exports\TuyenDungExport;
+use App\Http\Requests\TuyenDungCreateRequest;
 use App\NhanVien;
-
+use Carbon\Carbon;
+use Session;
+use Validator;
 class TuyenDungController extends Controller
 {
     /**
@@ -52,9 +55,24 @@ class TuyenDungController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TuyenDungCreateRequest $request)
     {
-        //
+        $this->authorize('create', TuyenDung::class);
+        $td = new TuyenDung();
+        $td->nv_ma=$request->nv_ma;
+        $td->td_ngay=$request->td_ngay;
+        $td->td_ngheTruocDay=$request->td_ngheTruocDay;
+        $td->dv_ma=$request->dv_ma;
+        $td->td_coQuanTuyen=$request->td_coQuanTuyen;
+        $td->cvu_ma=$request->cvu_ma;
+        $td->td_ngayLam=$request->td_ngayLam;
+        $td->cv_ma=$request->cv_ma;
+        $td->td_soTruong=$request->td_soTruong;
+        $td->td_taoMoi=Carbon::now();
+        $td->td_capNhat=Carbon::now();
+        $td->save();
+        Session::flash('alert','Thêm mới thành công dữ liệu tuyển dụng của nhân viên'. NhanVien::find($request->nv_ma)->nv_hoTen);
+        return redirect(route('admin.tuyendung.create'));
     }
 
     /**

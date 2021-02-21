@@ -41,10 +41,16 @@ Route::get('/admin/tuyendung/print', 'Admin\TuyenDungController@print')->name('a
 Route::get('/admin/tuyendung/pdf', 'Admin\TuyenDungController@pdf')->name('admin.tuyendung.pdf');
 Route::get('/admin/tuyendung/excel', 'Admin\TuyenDungController@excel')->name('admin.tuyendung.excel');
 Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin']);
+Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create');
 
 Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/quanhegiadinh/create_id/{id?}', 'Admin\QuanHeGiaDinhController@create_id')->name('admin.quanhegiadinh.create_id')->middleware('auth');
+Route::get('/admin/quanhegiadinh/print/{id?}', 'Admin\QuanHeGiaDinhController@print')->name('admin.quanhegiadinh.print')->middleware('auth');
+Route::get('/admin/quanhegiadinh/pdf/{id?}', 'Admin\QuanHeGiaDinhController@pdf')->name('admin.quanhegiadinh.pdf')->middleware('auth');
+Route::get('/admin/quanhegiadinh/excel', 'Admin\QuanHeGiaDinhController@excel')->name('admin.quanhegiadinh.excel')->middleware('auth');
 Route::resource('/admin/quanhegiadinh', 'Admin\QuanHeGiaDinhController', ['as' => 'admin'])->middleware('auth');
+
 
 Route::get('/admin/vanbang/create_id/{id?}', 'Admin\VanBangController@create_id')->name('admin.vanbang.create_id')->middleware('auth');
 Route::get('/admin/vanbang/print/{id?}', 'Admin\VanBangController@print')->name('admin.vanbang.print')->middleware('auth');
@@ -52,7 +58,7 @@ Route::get('/admin/vanbang/pdf/{id?}', 'Admin\VanBangController@pdf')->name('adm
 Route::get('/admin/vanbang/excel', 'Admin\VanBangController@excel')->name('admin.vanbang.excel')->middleware('auth');
 Route::resource('/admin/vanbang', 'Admin\VanBangController', ['as' => 'admin'])->middleware('auth');
 
-Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create');
+
 Route::get('/admin/luong/print', 'Admin\LuongController@print')->name('admin.luong.print')->middleware('auth');
 Route::get('/admin/luong/pdf', 'Admin\LuongController@pdf')->name('admin.luong.pdf')->middleware('auth');
 Route::get('/admin/luong/excel', 'Admin\LuongController@excel')->name('admin.luong.excel')->middleware('auth');

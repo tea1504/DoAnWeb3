@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\NhanVien;
 use App\QuanHeGiaDinh;
 use Carbon\Carbon;
+use Session;
+use App\Http\Requests\QuanHeGiaDinhCreateRequest;
 
 class QuanHeGiaDinhController extends Controller
 {
@@ -17,10 +19,10 @@ class QuanHeGiaDinhController extends Controller
      */
     public function index()
     {
-        $ds_qhgd = QuanHeGiaDinh::all();
-
+        $result = NhanVien::all();
+        
         return view('admin.quanhegiadinh.index')
-        ->with('danhsach_qhgd',$ds_qhgd);
+        ->with('dsnv', $result);
     }
 
     /**
@@ -35,13 +37,22 @@ class QuanHeGiaDinhController extends Controller
         ->with('danhsachnhanvien',$ds_nv);
     }
 
+   /*  public function create_id($id = null)
+    {
+        $this->authorize('create', VBCC::class);
+        return view('admin.vanbang.create')
+            ->with('dsnv', NhanVien::all())
+            ->with('dslvbcc', LoaiVBCC::all())
+            ->with('id', $id);
+    } */
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuanHeGiaDinhCreateRequest $request)
     {
         $qhgd = new QuanHeGiaDinh();
         $qhgd->nv_ma = $request->nv_ma;
@@ -53,9 +64,9 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->qhgd_nuocNgoai = $request->qhgd_nuocNgoai; 
         $qhgd->qhgd_taoMoi = Carbon::now(); 
         $qhgd->qhgd_capNhat = Carbon::now();
-
+        //dd($qhgd);
         $qhgd->save();
-
+        Session::flash('alert', 'Đã thêm mới thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.quanhegiadinh.index');
 
     }
