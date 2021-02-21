@@ -116,6 +116,8 @@ class KhenThuongController extends Controller
         $kt->kt_capNhat =  Carbon::now();
         //dd($kt->kt_ma);
         //dd($kt);
+        Session::flash('alert', 'Đã cập nhật thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+
         $kt->save();
         return redirect()->route('admin.khenthuong.index'); 
         

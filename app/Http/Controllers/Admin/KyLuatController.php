@@ -8,6 +8,8 @@ use App\KyLuat;
 use App\NhanVien;
 use Carbon\Carbon;
 use App\Http\Requests\KyLuatCreateRequest;
+use Session;
+
 class KyLuatController extends Controller
 {
     /**
@@ -55,6 +57,7 @@ class KyLuatController extends Controller
         $kl->kl_capNhat = Carbon::now();
 
         $kl->save();
+        Session::flash('alert', 'Đã thêm thành công kỷ luật cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.kyluat.index');
         dd($kl);
     }
@@ -105,6 +108,7 @@ class KyLuatController extends Controller
         $kl->kl_capNhat = Carbon::now();
         //dd($kl);
         $kl->save();
+        Session::flash('alert', 'Đã cập nhật thành công kỷ luật cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.kyluat.index'); 
 
     }

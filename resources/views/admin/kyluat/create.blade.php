@@ -107,21 +107,9 @@ Thêm khen thưởng
                                 </div>                            
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ $mytime }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ $mytime  }}" >
-                            </div>
-                        </div>
                         <div class="form-group">
                             <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Thêm mới</button>
-                            <a href="{{route('admin.vanbang.index')}}" class="btn btn-secondary">Trở về</a>
+                            <a href="{{route('admin.kyluat.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
                     </form>
                        

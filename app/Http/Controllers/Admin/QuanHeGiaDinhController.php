@@ -64,9 +64,9 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->qhgd_nuocNgoai = $request->qhgd_nuocNgoai; 
         $qhgd->qhgd_taoMoi = Carbon::now(); 
         $qhgd->qhgd_capNhat = Carbon::now();
-        //dd($qhgd);
+        dd($qhgd->nv_ma);
         $qhgd->save();
-        Session::flash('alert', 'Đã thêm mới thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+        //Session::flash('alert', 'Đã thêm mới thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.quanhegiadinh.index');
 
     }
@@ -117,10 +117,11 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->qhgd_diaChi = $request->qhgd_diaChi; 
         $qhgd->qhgd_ngheNghiep = $request->qhgd_ngheNghiep; 
         $qhgd->qhgd_nuocNgoai = $request->qhgd_nuocNgoai; 
-        $qhgd->qhgd_taoMoi = $request->qhgd_taoMoi; 
-        $qhgd->qhgd_capNhat = $request->qhgd_capNhat; 
+        $qhgd->qhgd_taoMoi = Carbon::now(); 
+        $qhgd->qhgd_capNhat = Carbon::now(); 
 
         $qhgd->save();
+        Session::flash('alert', 'Đã cập nhật thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
 
         return redirect()->route('admin.quanhegiadinh.index');
 

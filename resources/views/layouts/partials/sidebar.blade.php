@@ -98,7 +98,7 @@
             @endcan
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ (request()->is('admin/quanhegiadinh'))?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-medal"></i>
+                    <i class="nav-icon fas fa-home"></i>
                     <p>
                         Quan hệ gia đình
                         <i class="right fas fa-angle-left"></i>

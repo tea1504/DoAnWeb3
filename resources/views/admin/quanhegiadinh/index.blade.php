@@ -71,6 +71,7 @@ Danh sách quan hệ gia đình
                                 <th>Năm sinh</th>
                                 <th>Địa chỉ</th>
                                 <th>Nghề Nghiệp</th>
+                                <th>Quan hệ nước ngoài</th>
                                 <th>Thêm mới</th>
                                 <th>Cập nhật</th>
                                 <th width="100px">Action</th>
@@ -116,6 +117,9 @@ Danh sách quan hệ gia đình
             },
             {
                 data: "qhgd_ngheNghiep"
+            },
+            {
+                data: "qhgd_nuocNgoai"
             },
             {
                 data: "qhgd_taoMoi",
@@ -221,6 +225,12 @@ Danh sách quan hệ gia đình
             },
             {
                 targets: 9,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle text-center');
+                }
+            },
+            {
+                targets: 10,
                 createdCell: function(td, cellData, rowData, row, col) {
                     $(td).addClass('align-middle text-center');
                 }

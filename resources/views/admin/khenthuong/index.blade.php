@@ -95,12 +95,12 @@ Danh sách khen thưởng
                                 <td>{{$kt->kt_taoMoi->format('d/m/Y')}}</td>                         
                                 <td>{{$kt->kt_capNhat->format('d/m/Y')}}</td>                         
                                 <td>                               
-                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-danger pull-left" data-toggle="tooltip" data-placement="top" title="Sửa">Sửa</a>
+                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     
                                     <form class="fDelete btn p-0" method="POST" action="{{ route('admin.khenthuong.destroy', ['id' => $kt->kt_ma]) }}" data-id="{{ $kt->kt_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
                                     {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                                <button type="sumbit" class="btn btn-warning"  >Xóa</button>
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        <button type="sumbit" class="btn btn-danger"title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>

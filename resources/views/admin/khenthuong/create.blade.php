@@ -109,7 +109,7 @@ Thêm khen thưởng
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Thêm mới</button>
-                            <a href="{{route('admin.vanbang.index')}}" class="btn btn-secondary">Trở về</a>
+                            <a href="{{route('admin.khenthuong.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
                     </form>                      
                 </div>

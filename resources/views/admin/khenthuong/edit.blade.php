@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Chỉnh sửa văn bằng chứng chỉ
+Chỉnh sửa khen thưởng
 @endsection
 @section('custom-css')
 <style>
@@ -58,7 +58,10 @@ Chỉnh sửa văn bằng chứng chỉ
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label" >Ngày ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_ngayKy" name="kt_ngayKy" class="form-control" value="{{ old('kt_ngayKy', $kt->kt_ngayKy) }}" data-mask-datetime>
+                                <input type="text" id="kt_ngayKy" name="kt_ngayKy" value="{{ old('kt_ngayKy', $kt->kt_ngayKy) }}" ng-class="frmEdit.kt_ngayKy.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="kt_ngayKy" ng-required="true">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmEdit.kt_ngayKy.$error.required">Bạn phải điền tên mối quan hệ</span>
+                                </div>   
                             </div>
                         </div>
                             <!-- ------------------------------------------------------- -->
@@ -67,7 +70,7 @@ Chỉnh sửa văn bằng chứng chỉ
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <select name="nv_ma" class="form-control">
+                                <select name="nv_ma" id="kt_nguoiKy" ng-class="frmEdit.kt_nguoiKy.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="kt_nguoiKy" ng-required="true">
                                     @foreach($danhsachnhanvien as $nhanvien)
                                         @if($nhanvien->nv_ma == $kt->kt_nguoiKy)
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
@@ -76,29 +79,23 @@ Chỉnh sửa văn bằng chứng chỉ
                                         @endif
                                     @endforeach
                                 </select>
+                                 <div class="invalid-feedback">
+                                        <span ng-show="frmEdit.kt_nguoiKy.$error.required">Bạn phải chọn nhân viên</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Lý do : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_lyDo" name="kt_lyDo" class="form-control" value="{{ old('$kt_lyDo', $kt->kt_lyDo) }}" />
+                                <input type="text" id="kt_lyDo" name="kt_lyDo" value="{{ old('$kt_lyDo', $kt->kt_lyDo) }}" ng-class="frmEdit.kt_lyDo.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="kt_lyDo" ng-required="true" ng-minlength="3" ng-maxlength="100">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmEdit.kt_lyDo.$error.required">Bạn phải điền tên văn bằng</span>
+                                    <span ng-show="frmEdit.kt_lyDo.$error.minlength">Tên văn bằng quá ngắn, phải chứa ít nhất 3 ký tự</span>
+                                    <span ng-show="frmEdit.kt_lyDo.$error.maxlength">Tên văn bằng quá dài, chỉ chứa nhiều nhất 100 ký tự</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_taoMoi" name="kt_taoMoi" class="form-control" value="{{ $mytime }}" data-mask-datetime>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kt_capNhat" name="kt_capNhat" class="form-control" value="{{ $mytime }}" data-mask-datetime>
-                            </div>
-                        </div>
-                        
-                        
-                        <button type="sumbit" class="btn btn-primary">Thêm mới</button>
+                        </div>                       
+                        <button type="sumbit" class="btn btn-primary">Cập nhật</button>
                         <a href="{{route('admin.khenthuong.index')}}" class="btn btn-secondary">Trở về</a>
 
                     </form>
@@ -111,6 +108,11 @@ Chỉnh sửa văn bằng chứng chỉ
 @section('custom-scripts')
 <script>
     $('.toast').toast('show');
-    app.controller('khenthuongnhatController', function($scope, $http) {});
+    app.controller('khenthuongcapnhatController', function($scope, $http) {
+        $scope.kt_ngayKy = '{{$kt->kt_ngayKy}}';
+        $scope.kt_nguoiKy = '{{$kt->kt_nguoiKy}}';
+        $scope.kt_lyDo = '{{$kt->kt_lyDo}}';
+
+    });
 </script>
 @endsection

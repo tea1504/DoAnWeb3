@@ -37,6 +37,22 @@ Danh sách kỷ luật
 @endsection
 @section('content')
 <div class="container-fluid" ng-controller="khuyenthuongController" ng-init="start = 0;">
+    @if (Session::has('alert'))
+    <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
+        <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+            <div class="toast-header">
+                <img src="{{asset('storage/images/shin.gif')}}" class="rounded mr-2 bg-light" height="30px" alt="...">
+                <strong class="mr-auto">Thành công</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{Session::get('alert')}}
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col text-right">
             <div class="btn-group" role="group">
@@ -78,12 +94,12 @@ Danh sách kỷ luật
                                 <td>{{$kl->kl_taoMoi->format('d/m/Y')}}</td>                         
                                 <td>{{$kl->kl_capNhat->format('d/m/Y')}}</td>                         
                                 <td>
-                                    <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-danger pull-left" data-toggle="tooltip" data-placement="top" title="Sửa">Sửa</a>
+                                    <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     
                                     <form class="fDelete btn p-0" method="POST" action="{{ route('admin.kyluat.destroy', ['id' => $kl->kl_ma]) }}" data-id="{{ $kl->kl_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
                                     {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                                <button type="sumbit" class="btn btn-warning"  >Xóa</button>
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        <button type="sumbit" class="btn btn-danger"title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -103,6 +119,9 @@ Danh sách kỷ luật
 <script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script>
+
+    $('.toast').toast('show');  
+
     $(document).ready(function() {
         $("#sortable").sortable({
             cancel: '.card-body',

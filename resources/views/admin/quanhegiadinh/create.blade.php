@@ -91,7 +91,7 @@ Thêm quan hệ gia đình
                                 <div class="invalid-feedback">
                                     <span ng-show="frmCreate.qhgd_moiQuanHe.$error.required">Bạn phải điền mối quan hệ</span>
                                     <span ng-show="frmCreate.qhgd_moiQuanHe.$error.minlength">Mối quan hệ quá ngắn, phải chứa ít nhất 2 ký tự</span>
-                                    <span ng-show="frmCreate.qhgd_moiQuanHe.$error.minlength">Mối quan hệ, chỉ chứa nhiều nhất 30 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_moiQuanHe.$error.maxlength">Mối quan hệ, chỉ chứa nhiều nhất 30 ký tự</span>
                                 </div>   
                             </div>                  
                         </div>                 
@@ -102,7 +102,7 @@ Thêm quan hệ gia đình
                                 <div class="invalid-feedback">
                                     <span ng-show="frmCreate.qhgd_namSinh.$error.required">Bạn phải điền năm sinh</span>
                                     <span ng-show="frmCreate.qhgd_namSinh.$error.minlength">Năm sinh quá ngắn, phải chứa ít nhất 2 ký tự</span>
-                                    <span ng-show="frmCreate.qhgd_namSinh.$error.minlength">Mối quan hệ quá dày, chỉ chứa nhiều nhất 30 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_namSinh.$error.maxlength">Mối quan hệ quá dày, chỉ chứa nhiều nhất 30 ký tự</span>
                                 </div>   
                             </div>
                         </div>
@@ -112,8 +112,8 @@ Thêm quan hệ gia đình
                                 <input type="text" id="qhgd_diaChi" name="qhgd_diaChi" ng-class="frmCreate.qhgd_diaChi.$touched?frmCreate.qhgd_diaChi.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" value="{{old('qhgd_diaChi')}}" ng-model="qhgd_diaChi" ng-required="true" ng-minlength="3" ng-maxlength="100" >
                                 <div class="invalid-feedback">
                                     <span ng-show="frmCreate.qhgd_diaChi.$error.required">Bạn phải điền địa chỉ</span>
-                                    <span ng-show="frmCreate.qhgd_diaChi.$error.minlength">Địa chỉ quá ngắn, phải chứa ít nhất 2 ký tự</span>
-                                    <span ng-show="frmCreate.qhgd_diaChi.$error.minlength">Địa chỉ quá dày, chỉ chứa nhiều nhất 30 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_diaChi.$error.minlength">Địa chỉ quá ngắn, phải chứa ít nhất 3 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_diaChi.$error.maxlength">Địa chỉ quá dày, chỉ chứa nhiều nhất 100 ký tự</span>
                                 </div> 
                             </div>                            
                         </div>
@@ -124,7 +124,7 @@ Thêm quan hệ gia đình
                                 <div class="invalid-feedback">
                                     <span ng-show="frmCreate.qhgd_ngheNghiep.$error.required">Bạn phải điền ngề nghiệp</span>
                                     <span ng-show="frmCreate.qhgd_ngheNghiep.$error.minlength">Nghề nghiệp quá ngắn, phải chứa ít nhất 2 ký tự</span>
-                                    <span ng-show="frmCreate.qhgd_ngheNghiep.$error.minlength">Nghề nghiệp quá dày, chỉ chứa nhiều nhất 100 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_ngheNghiep.$error.maxlength">Nghề nghiệp quá dày, chỉ chứa nhiều nhất 100 ký tự</span>
                                 </div> 
                             </div>                             
                         </div>
