@@ -136,7 +136,7 @@ class TuyenDungController extends Controller
         $td->td_taoMoi=Carbon::now('Asia/Ho_Chi_Minh');
         $td->td_capNhat=Carbon::now('Asia/Ho_Chi_Minh');
         $td->save();
-        Session::flash('alert', 'Đã cập nhật thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
+        Session::flash('alert', 'Đã cập nhật thành công tuyển dụng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return view('admin.tuyendung.edit')
         ->with('dsnv',$dsnv)
         ->with('dscv',$dscv)
@@ -175,7 +175,7 @@ class TuyenDungController extends Controller
     }
     public function excel()
     {
-        // return view('admin.tuyendung.excel')->with("dstuyendung", TuyenDung::all());
+       
         return Excel::download(new TuyenDungExport, 'DanhSachTuyenDung.xlsx');
     }
 }

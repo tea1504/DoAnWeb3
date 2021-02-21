@@ -161,8 +161,6 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
-<<<<<<< HEAD
-=======
     public function layXa(Request $request)
     {
         $parameter = [
@@ -185,7 +183,6 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
->>>>>>> bbdd34e3e151088a7692ed00d5d85bf398f16ad3
 }
 
 
