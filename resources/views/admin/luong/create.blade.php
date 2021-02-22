@@ -74,10 +74,10 @@ Thêm mới lương/phụ cấp
                                 <div class="invalid-feedback">
                                     <span ng-show="frmCreate.b_ma.$error.required">Bạn phải chọn bậc lương</span>
                                 </div>
-                                <small id="b_ma" class="form-text text-muted" ng-if="!ng_ma">
+                                <small class="form-text text-muted" ng-if="!ng_ma">
                                     Bạn phải chọn ngạch trước mới có thể chọn bậc
                                 </small>
-                                <small id="b_ma" class="form-text text-muted" ng-if="b_ma">
+                                <small class="form-text text-muted" ng-if="b_ma">
                                     <strong>Hệ số lương là: </strong> <%dsbac[b_ma-1].nb_heSoLuong%>
                                 </small>
                             </div>

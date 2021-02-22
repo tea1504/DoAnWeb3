@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\ChucVu;
 use App\DanToc;
+use App\Exports\ThongTinChungExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ThongTinChungCreateRequest;
@@ -13,9 +14,12 @@ use App\NhomMau;
 use App\Role;
 use App\TonGiao;
 use App\TrinhDo;
+use App\User;
 use Carbon\Carbon;
 use Session;
 use Storage;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class ThongTinChungController extends Controller
 {
@@ -26,6 +30,7 @@ class ThongTinChungController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', User::class);
         return view('admin.thongtinchung.index')
             ->with('dsttc', NhanVien::all());
     }
@@ -37,6 +42,7 @@ class ThongTinChungController extends Controller
      */
     public function create()
     {
+        $this->authorize('view', User::class);
         return view('admin.thongtinchung.create')
             ->with('dsrole', Role::all())
             ->with('dscvu', ChucVu::all())
@@ -54,6 +60,7 @@ class ThongTinChungController extends Controller
      */
     public function store(ThongTinChungCreateRequest $request)
     {
+        $this->authorize('create', User::class);
         $ttc = new NhanVien();
         $ttc->nv_taoMoi = Carbon::now('Asia/Ho_Chi_Minh');
         $ttc->nv_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
@@ -117,6 +124,7 @@ class ThongTinChungController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', User::class);
         return view('admin.thongtinchung.edit')
             ->with('ttc', NhanVien::find($id))
             ->with('dsrole', Role::all())
@@ -136,6 +144,7 @@ class ThongTinChungController extends Controller
      */
     public function update(ThongTinChungUpdateRequest $request, $id)
     {
+        $this->authorize('update', User::class);
         $ttc = NhanVien::find($id);
         $ttc->nv_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
         $ttc->nv_hoTen = $request->nv_hoTen;
@@ -192,13 +201,33 @@ class ThongTinChungController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', User::class);
         $ttc = NhanVien::find($id);
         $ttc->delete();
     }
 
     public function print()
     {
+        $this->authorize('inAn', User::class);
         return view('admin.thongtinchung.print')
             ->with('dsttc', NhanVien::all());
+    }
+    public function pdf()
+    {
+        $this->authorize('inAn', User::class);
+        $result = NhanVien::all();
+        $data = [
+            'dsttc' => $result,
+        ];
+        // return view('admin.vanbang.pdf')->with("dsvbcc", $result);
+        $pdf = PDF::loadView('admin.thongtinchung.pdf', $data);
+        return $pdf->download('DanhSachThongTinChung.pdf');
+    }
+    public function excel()
+    {
+        $this->authorize('inAn', User::class);
+        // return view('admin.thongtinchung.excel')
+        //     ->with('dsttc', NhanVien::all());
+        return Excel::download(new ThongTinChungExport, 'DanhSachThongTinChung.xlsx');
     }
 }
