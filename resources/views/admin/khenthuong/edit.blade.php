@@ -68,19 +68,11 @@ Chỉnh sửa văn bằng chứng chỉ
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
                                 <select name="nv_ma" class="form-control">
-<<<<<<< HEAD
                                     @foreach($danhsachnhanvien as $nhanvien)
                                         @if($nhanvien->nv_ma == $kt->kt_nguoiKy)
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
                                         @else
                                         <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
-=======
-                                    @foreach($nv as $dsnv)
-                                        @if($dsnv->nv_ma == $kt->kt_nguoiKy)
-                                        <option value="{{ $dsnv->nv_ma }}" selected>{{ $dsnv->nv_hoTen }}</option>
-                                        @else
-                                        <option value="{{ $dsnv->nv_ma }}">{{ $dsnv->nv_hoTen }}</option>
->>>>>>> d8b89c1fd0a2b767a8a01827fbda04e311a6abb6
                                         @endif
                                     @endforeach
                                 </select>
