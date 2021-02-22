@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Danh sách quạn hệ gia đình
+Danh sách quan hệ gia đình
 @endsection
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -51,9 +51,9 @@ Danh sách quạn hệ gia đình
         <div class="col text-right">
             <div class="btn-group" role="group">
                 <a href="{{ route('admin.quanhegiadinh.create') }}" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
-                <a href="" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
+                <a href="{{ route('admin.quanhegiadinh.print') }}" id="" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
                 <a href="{{route('admin.quanhegiadinh.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
-                <a href="" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                <a href="{{route('admin.quanhegiadinh.pdf')}}" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
             </div>
         </div>
     </div>
@@ -301,13 +301,13 @@ Danh sách quạn hệ gia đình
         table.ajax.url("{{route('api.nhanvien.quanhegiadinh')}}" + "?nv_ma=" + $(this).val());
         table.ajax.reload();
         $('#add').attr('href', getLink() + "/" + $('#nhanVien').val())
-        $('#print').attr('href', "{{route('admin.quanhegiadinh.print')}}" + "/" + $('#nhanVien').val());
+        //$('#print').attr('href', "{{route('admin.quanhegiadinh.print')}}" + "/" + $('#nhanVien').val());
         $('#pdf').attr('href', "{{route('admin.quanhegiadinh.pdf')}}" + "/" + $('#nhanVien').val());
     });
 
     
     $('#add').attr('href', getLink() + "/" + $('#nhanVien').val());
-    $('#print').attr('href', "{{route('admin.quanhegiadinh.print')}}" + "/" + $('#nhanVien').val());
+    //$('#print').attr('href', "{{route('admin.quanhegiadinh.print')}}" + "/" + $('#nhanVien').val());
     $('#pdf').attr('href', "{{route('admin.quanhegiadinh.pdf')}}" + "/" + $('#nhanVien').val());
 
     function xoa(id) {

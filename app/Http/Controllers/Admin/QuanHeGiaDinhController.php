@@ -136,16 +136,15 @@ class QuanHeGiaDinhController extends Controller
 
     }
     
-    public function print($id = null)
+    public function print()
     {
-        $this->authorize('inAn', QuanHeGiaDinh::class);
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
         return view('admin.quanhegiadinh.print')
-            ->with('dsqhgd', QuanHeGiaDinh::all())
-            ->with('id', $id);
+            ->with('dsqhgd', QuanHeGiaDinh::all());
     }
     public function pdf($id = null)
     {
-        $this->authorize('inAn', QuanHeGiaDinh::class);
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
         $result = QuanHeGiaDinh::all();
         $data = [
             'dsqhgd' => $result,
@@ -157,7 +156,7 @@ class QuanHeGiaDinhController extends Controller
     }
     public function excel()
     {
-        $this->authorize('inAn', VBCC::class);
+        //$this->authorize('inAn', VBCC::class);
         // return view('admin.vanbang.excel')->with("dsvbcc", VBCC::all());
         return Excel::download(new QuanHeGiaDinhExport, 'DanhSachQuanHeGiaDinh.xlsx');
     }

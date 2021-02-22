@@ -32,3 +32,5 @@ Route::get('/nhanvien/daydu', 'Api\ApiController@layThongTinNhanVienDayDu')->nam
 Route::get('/huyen', 'Api\ApiController@layHuyen')->name('api.huyen');
 Route::get('/xa', 'Api\ApiController@layXa')->name('api.xa');
 Route::get('/quanhegiadinh', 'Api\ApiController@layQuanHeGiaDinh')->name('api.nhanvien.quanhegiadinh');
+Route::get('/khenthuong', 'Api\ApiController@layKhenThuong')->name('api.nhanvien.khenthuong');
+Route::get('/kyluat', 'Api\ApiController@layKyLuat')->name('api.nhanvien.kyluat');
