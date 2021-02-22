@@ -1,16 +1,16 @@
 @extends('print.layouts.paper')
 
 @section('title')
-Biểu mẫu Phiếu in danh sách quê quán
+Biểu mẫu Phiếu in danh sách nơi sinh
 @endsection
 
 @section('paper-size') A4 @endsection
 @section('paper-class') A4 landscape @endsection
 @section('paper-toolbar-top')
-<button onclick="window.location='{{route('admin.quequan.index')}}'">Quay về</button>
+<button onclick="window.location='{{route('admin.noisinh.index')}}'">Quay về</button>
 @endsection
 @section('paper-toolbar-bottom')
-<button onclick="window.location='{{route('admin.quequan.index')}}'">Quay về</button>
+<button onclick="window.location='{{route('admin.noisinh.index')}}'">Quay về</button>
 @endsection
 @section('custom-css')
 <style>
@@ -91,16 +91,16 @@ Biểu mẫu Phiếu in danh sách quê quán
                 </tr>
             </thead>
             <tbody>
-                @foreach($dsqq as $qq)
+                @foreach($dsns as $ns)
                 <tr>
                     <td align="center">{{$loop->index + 1}}</td>
-                    <td>{{$qq->nhanVien->nv_hoTen}}</td>
-                    <td>{{$qq->xa->x_ten}}</td>
-                    <td>{{$qq->huyen->h_ten}}</td>
-                    <td>{{$qq->tinh->t_ten}}</td>
-                    <td>{{$qq->qq_diaChi}}</td>
-                    <td align="center">{{$qq->qq_taoMoi->format('d/m/Y H:m:s')}}</td>
-                    <td align="center">{{$qq->qq_capNhat->format('d/m/Y H:m:s')}}</td>
+                    <td>{{$ns->nhanVien->nv_hoTen}}</td>
+                    <td>{{$ns->xa->x_ten}}</td>
+                    <td>{{$ns->huyen->h_ten}}</td>
+                    <td>{{$ns->tinh->t_ten}}</td>
+                    <td>{{$ns->ns_diaChi}}</td>
+                    <td align="center">{{$ns->ns_taoMoi->format('d/m/Y H:m:s')}}</td>
+                    <td align="center">{{$ns->ns_capNhat->format('d/m/Y H:m:s')}}</td>
                 </tr>
                 @endforeach
             </tbody>

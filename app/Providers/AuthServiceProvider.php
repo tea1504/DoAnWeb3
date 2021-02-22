@@ -7,10 +7,12 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Http\Controllers\Auth\CustomUserProvider;
 use App\Luong;
 use App\NhanVien;
+use App\NoiSinh;
 use App\Policies\LuongPolicy;
 use App\VBCC;
 use App\Policies\VanBangPolicy;
 use App\Policies\NhanVienPolicy;
+use App\Policies\NoiSinhPolicy;
 use App\Policies\QuaTrinhCongTacPolicy;
 use App\Policies\TuyenDungPolicy;
 use App\QuaTrinhCongTac;
@@ -35,6 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         TuyenDung::class => TuyenDungPolicy::class,
         User::class => ThongTinChungPolicy::class,
         QueQuan::class => QueQuanPolicy::class,
+        NoiSinh::class => NoiSinhPolicy::class,
     ];
 
     /**
