@@ -83,3 +83,5 @@ Route::get('/admin/noisinh/print', 'Admin\NoiSinhController@print')->name('admin
 Route::get('/admin/noisinh/pdf', 'Admin\NoiSinhController@pdf')->name('admin.noisinh.pdf')->middleware('auth');
 Route::get('/admin/noisinh/excel', 'Admin\NoiSinhController@excel')->name('admin.noisinh.excel')->middleware('auth');
 Route::resource('admin/noisinh', 'Admin\NoiSinhController', ['as' => 'admin'])->middleware('auth');
+
+Route::resource('admin/user', 'Admin\UserController')->middleware('auth');

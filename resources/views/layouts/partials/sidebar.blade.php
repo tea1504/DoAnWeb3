@@ -18,7 +18,7 @@
                     <img src="{{ Storage::exists('public/avatar/' . $user->nv_anh) ? asset('storage/avatar/' . $user->nv_anh) : asset('storage/avatar/default.png') }}" class="img-circle elevation-2 bg-white" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{$user->nv_hoTen}}</a>
+                <a href="{{route('user.index')}}" class="d-block">{{$user->nv_hoTen}}</a>
             </div>
         <?php
                 else :
@@ -72,6 +72,7 @@
             </li>
             @endcan
             @can('viewAny', App\QuaTrinhCongTac::class)
+            <li class="nav-header">Quản lý thông tin nhân viên</li>
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/thongtinchung')||request()->is('admin/thongtinchung/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>
@@ -287,7 +288,7 @@
             @can('view', App\QueQuan::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/quequan')||request()->is('admin/quequan/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-map-marker-alt"></i>
                     <p>
                         Quê quán
                         <i class="right fas fa-angle-left"></i>
@@ -312,7 +313,7 @@
             @can('view', App\NoiSinh::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/noisinh')||request()->is('admin/noisinh/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-baby"></i>
                     <p>
                         Nơi sinh
                         <i class="right fas fa-angle-left"></i>
@@ -334,7 +335,9 @@
                 </ul>
             </li>
             @endcan
+            <li class="nav-header">Quản lý thông tin chung</li>
             @can('xemThongKe')
+            <li class="nav-header">Thống kê thông tin nhân viên</li>
             <li class="nav-item">
                 <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
@@ -344,6 +347,7 @@
                 </a>
             </li>
             @endcan
+            <li class="nav-header">Liên hệ với quản trị viên</li>
             <li class="nav-item">
                 <a href="{{ route('admin.lienhe') }}" class="{{ request()->is('admin/lienhe')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-envelope"></i>
