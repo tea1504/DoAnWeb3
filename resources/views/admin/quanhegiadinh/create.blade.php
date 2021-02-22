@@ -1,144 +1,122 @@
 @extends('layouts.master')
 @section('title')
-Thêm danh sách quan hệ gia đình
+Thêm mới quan hệ gia đình
 @endsection
 @section('custom-css')
-<link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <style>
-    table#myTable {
-        height: 540px;
-        width: 100%;
-    }
-
-    table#myTable td {
-        width: 500px;
-    }
-
-    .my-card {
-        transition: .2s;
-    }
-
-    .my-card:hover {
-        transform: scale(1.05, 1.05);
-        z-index: 9999;
-        box-shadow: 0px 0px 20px #000;
-    }
-
-    .avatar {
-        background-color: #fff;
-    }
 </style>
 @endsection
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Thêm danh sách quan hệ gia đình</li>
+    <li class="breadcrumb-item"><a href="{{route('admin.quanhegiadinh.index')}}">Danh sách văn bằng chứng chỉ</a></li>
+    <li class="breadcrumb-item active">Thêm mới quan hệ gia đình</li>
 </ol>
 @endsection
 @section('content')
-<div class="col-xl-12 col-lg-9 col-md-8 accordion pt-sm-0 pt-3" id="vungChua">
-    <div class="collapse multi-collapse show" aria-labelledby="headingTwo" id="thongTinChung" data-parent="#vungChua">
-        <div class="">
-            <div class=" h1 bg-cyan font-weight-bold">Nhập thông tin mới</div>
-                <div class="">
-                    <form method="post" action="{{ route('admin.quanhegiadinh.store') }}"  enctype="multipart/form-data">
-                    {{ csrf_field() }}
+<div class="container-flu" ng-controller="trinhdothemmoiController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-cyan h1 font-weight-bold">Thêm mới văn bằng chứng chỉ</div>
+                <div class="card-body">
+                    <form name="frmCreate" id="frmCreate" method="POST" action="{{route('admin.quanhegiadinh.store')}}" novalidate>
+                        {{ csrf_field() }}
                         <div class="form-group row">
                                 <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên nhân viên : </label>
                                 <div class="col-lg-10 col-md-9 col-sm-8">
-                                    <select name="nv_ma" class="form-control">
+                                    <select name="nv_ma" id="nv_ma" ng-class="frmCreate.nv_ma.$touched?frmCreate.nv_ma.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="nv_ma" ng-required="true">
                                     @foreach($danhsachnhanvien as $nhanvien)
                                     <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                     @endforeach
                                     </select>
+                                    <div class="invalid-feedback">
+                                        <span ng-show="frmCreate.nv_ma.$error.required">Bạn phải chọn nhân viên</span>
+                                    </div>
                                 </div>
+                                
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tên quan hệ : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="qhgd_ten" name="qhgd_ten" class="form-control" value="{{ old('qhgd_ten') }}" >
+                            <input type="text" name="qhgd_ten" id="qhgd_ten" value="{{old('qhgd_ten')}}" ng-class="frmCreate.qhgd_ten.$touched?frmCreate.qhgd_ten.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_ten" ng-required="true" ng-minlength="3" ng-maxlength="100">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmCreate.qhgd_ten.$error.required">Bạn phải điền tên quan hệ</span>
+                                    <span ng-show="frmCreate.qhgd_ten.$error.minlength">Tên quan hệ quá ngắn, phải chứa ít nhất 3 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_ten.$error.maxlength">Tên quan hệ quá dài, chỉ chứa nhiều nhất 100 ký tự</span>
+                                </div>
                             </div>
+                           
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Mối quan hệ : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="qhgd_moiQuanHe" name="qhgd_moiQuanHe" class="form-control" value="{{ old('qhgd_moiQuanHe') }}" >
-                            </div>
+                                <input type="text" name="qhgd_moiQuanHe" id="qhgd_moiQuanHe" value="{{old('qhgd_moiQuanHe')}}" ng-class="frmCreate.qhgd_moiQuanHe.$touched?frmCreate.qhgd_moiQuanHe.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_moiQuanHe" ng-required="true" ng-minlength="2" ng-maxlength="30">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmCreate.qhgd_moiQuanHe.$error.required">Bạn phải điền mối quan hệ</span>
+                                    <span ng-show="frmCreate.qhgd_moiQuanHe.$error.minlength">Mối quan hệ quá ngắn, phải chứa ít nhất 2 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_moiQuanHe.$error.maxlength">Mối quan hệ quá dài, chỉ chứa nhiều nhất 30 ký tự</span>
+                                </div>
+                            </div>                 
                         </div>
-                   
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Năm sinh : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="qhgd_" name="qhgd_namSinh" class="form-control" value="{{ old('qhgd_namSinh') }}" >
+                            <input type="text" name="qhgd_namSinh" id="qhgd_namSinh" value="{{old('qhgd_namSinh')}}" ng-class="frmCreate.qhgd_namSinh.$touched?frmCreate.qhgd_namSinh.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_namSinh" ng-required="true" ng-minlength="4" ng-maxlength="4">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmCreate.qhgd_namSinh.$error.required">Bạn phải điền năm sinh</span>
+                                    <span ng-show="frmCreate.qhgd_namSinh.$error.minlength">Năm sinh quá ngắn, phải chứa ít nhất 4 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_namSinh.$error.maxlength">Năm sinh quá dài, chỉ chứa nhiều nhất 4 ký tự</span>
+                                </div>                         
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Địa chỉ : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="qhgd_diaChi" name="qhgd_diaChi" class="form-control" value="{{ old('qhgd_diaChi') }}" >
+                                <input type="text" name="qhgd_diaChi" id="qhgd_diaChi" value="{{old('qhgd_diaChi')}}" ng-class="frmCreate.qhgd_diaChi.$touched?frmCreate.qhgd_diaChi.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_diaChi" ng-required="true" ng-minlength="3" ng-maxlength="100">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmCreate.qhgd_diaChi.$error.required">Bạn phải điền địa chỉ</span>
+                                    <span ng-show="frmCreate.qhgd_diaChi.$error.minlength">Địa chỉ quá ngắn, phải chứa ít nhất 3 ký tự</span>
+                                    <span ng-show="frmCreate.qhgd_diaChi.$error.maxlength">Địa chỉ quá dài, chỉ chứa nhiều nhất 100 ký tự</span>
+                                </div>                            
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Nghề nghiệp : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="qhgd_ngheNghiep" name="qhgd_ngheNghiep" class="form-control" value="{{ old('qhgd_ngheNghiep') }}" >
+                                <input type="text" name="qhgd_ngheNghiep" id="qhgd_ngheNghiep" value="{{old('qhgd_ngheNghiep')}}" ng-class="frmCreate.qhgd_ngheNghiep.$touched?frmCreate.qhgd_ngheNghiep.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_ngheNghiep" ng-required="true" ng-minlength="3" ng-maxlength="100">
+                                    <div class="invalid-feedback">
+                                        <span ng-show="frmCreate.qhgd_ngheNghiep.$error.required">Bạn phải điền nghề nghiệp</span>
+                                        <span ng-show="frmCreate.qhgd_ngheNghiep.$error.minlength">Nghề nghiệp quá ngắn, phải chứa ít nhất 3 ký tự</span>
+                                        <span ng-show="frmCreate.qhgd_ngheNghiep.$error.maxlength">Nghề nghiệp quá dài, chỉ chứa nhiều nhất 100 ký tự</span>
+                                    </div>                            
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Nước ngoài : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                    <input type="number" id="qhgd_nuocNgoai" name="qhgd_nuocNgoai" min="0" max="10" class="form-control" value="{{ old('qhgd_nuocNgoai') }}" >                            
+                            <input type="number" name="qhgd_nuocNgoai" id="qhgd_nuocNgoaiqhgd_nuocNgoai" value="{{old('qhgd_nuocNgoai')}}" ng-class="frmCreate.qhgd_nuocNgoai.$touched?frmCreate.qhgd_nuocNgoai.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_nuocNgoai" ng-required="true">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmCreate.qhgd_nuocNgoai.$error.required">Bạn phải điền số người thân ở nước ngoài</span>
+                                </div>                         
                             </div>
+                        </div>                         
+                            <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Thêm mới</button>
+                            <a href="{{route('admin.quanhegiadinh.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Tạo mới : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="date" id="qhgd_taoMoi" name="qhgd_taoMoi" class="form-control" value="{{ old('qhgd_taoMoi') }}" >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Cập nhật : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="date" id="qhgd_capNhat" name="qhgd_capNhat" class="form-control" value="{{ old('qhgd_capNhat') }}" >
-                            </div>
-                        </div>
-                       
-                        
-                        
-                        <button type="sumbit" class="btn btn-primary">Thêm mới</button>
-
-                    </form>   
+                    </form>
                 </div>
-            </div>   
+            </div>
         </div>
-     </div>
-           
+    </div>
 </div>
 @endsection
 @section('custom-scripts')
-<script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<!-- Các script dành cho thư viện Mặt nạ nhập liệu InputMask -->
-<script src="{{ asset('vendor/input-mask/jquery.inputmask.min.js') }}"></script>
-<script src="{{ asset('vendor/input-mask/bindings/inputmask.binding.js') }}"></script>
 <script>
-  /* $(document).ready(function() {
-    
-   
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày tạo mới
-    $('#kt_taoMoi').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-
-    // Gắn mặt nạ nhập liệu cho các ô nhập liệu Ngày cập nhật
-    $('#kt_capNhat').inputmask({
-      alias: 'datetime',
-      inputFormat: 'yyyy-mm-dd' // Định dạng Năm-Tháng-Ngày
-    });
-  }); */
+    $('.toast').toast('show');
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    app.controller('trinhdothemmoiController', function($scope, $http) {});
 </script>
-
 @endsection

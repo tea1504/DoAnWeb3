@@ -188,6 +188,30 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    
+    public function layKhenThuong(Request $request)
+    {
+        $parameter = [
+            'nv_ma' => $request->nv_ma
+        ];
+        $result = DB::select('SELECT * FROM khenthuong AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma',$parameter);
+         return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
+    
+    public function layKyLuat(Request $request)
+    {
+        $parameter = [
+            'nv_ma' => $request->nv_ma
+        ];
+        $result = DB::select('SELECT * FROM kyluat AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma',$parameter);
+         return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }
 
 

@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 use App\NhanVien;
 use App\QuanHeGiaDinh;
 use Carbon\Carbon;
+use Session;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\QuanHeGiaDinhExport;
+use Maatwebsite\Excel\Facades\Excel as Excel;
+use App\Policies\QuanHeGiaDinhPolicy;
 
 class QuanHeGiaDinhController extends Controller
 {
@@ -16,11 +21,11 @@ class QuanHeGiaDinhController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $ds_qhgd = QuanHeGiaDinh::all();
-
+    { 
+        
+        $result = NhanVien::all();
         return view('admin.quanhegiadinh.index')
-        ->with('danhsach_qhgd',$ds_qhgd);
+            ->with('dsnv', $result);
     }
 
     /**
@@ -53,8 +58,9 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->qhgd_nuocNgoai = $request->qhgd_nuocNgoai; 
         $qhgd->qhgd_taoMoi = Carbon::now(); 
         $qhgd->qhgd_capNhat = Carbon::now();
-
+        
         $qhgd->save();
+        Session::flash('alert', 'Đã thêm mới thành công quan hệ gia đình cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
 
         return redirect()->route('admin.quanhegiadinh.index');
 
@@ -106,10 +112,11 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->qhgd_diaChi = $request->qhgd_diaChi; 
         $qhgd->qhgd_ngheNghiep = $request->qhgd_ngheNghiep; 
         $qhgd->qhgd_nuocNgoai = $request->qhgd_nuocNgoai; 
-        $qhgd->qhgd_taoMoi = $request->qhgd_taoMoi; 
-        $qhgd->qhgd_capNhat = $request->qhgd_capNhat; 
+        $qhgd->qhgd_taoMoi = Carbon::now();  
+        $qhgd->qhgd_capNhat = Carbon::now(); 
 
         $qhgd->save();
+        Session::flash('alert', 'Đã cập nhật  thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
 
         return redirect()->route('admin.quanhegiadinh.index');
 
@@ -127,5 +134,30 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->delete();
         return redirect()->route('admin.quanhegiadinh.index');
 
-    }   
+    }
+    
+    public function print()
+    {
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
+        return view('admin.quanhegiadinh.print')
+            ->with('dsqhgd', QuanHeGiaDinh::all());
+    }
+    public function pdf($id = null)
+    {
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
+        $result = QuanHeGiaDinh::all();
+        $data = [
+            'dsqhgd' => $result,
+            'id' => $id,
+        ];
+        // return view('admin.vanbang.pdf')->with("dsvbcc", $result);
+        $pdf = PDF::loadView('admin.quanhegiadinh.pdf', $data);
+        return $pdf->download('DanhSachQuanHeGiaDinh.pdf');
+    }
+    public function excel()
+    {
+        //$this->authorize('inAn', VBCC::class);
+        // return view('admin.vanbang.excel')->with("dsvbcc", VBCC::all());
+        return Excel::download(new QuanHeGiaDinhExport, 'DanhSachQuanHeGiaDinh.xlsx');
+    }
 }
