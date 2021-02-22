@@ -14,7 +14,7 @@ Danh sách tuyển dụng
         width: 540px;
     }
     .btn{
-        font-size:1.2rem;
+        font-size:small;
     }
 </style>
 @endsection
@@ -29,10 +29,14 @@ Danh sách tuyển dụng
     <div class="row">
         <div class="col text-right">
             <div class="btn-group" role="group">
+                @can('create', App\TuyenDung::class)
                 <a href="{{route('admin.tuyendung.create') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
-                    <a href="{{route('admin.tuyendung.print') }}" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
-                    <a href="{{route('admin.tuyendung.excel') }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></button>
-                        <a href="{{route('admin.tuyendung.pdf') }}" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                @endcan
+                @can('inAn', App\TuyenDung::class)
+                <a href="{{route('admin.tuyendung.print') }}" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
+                <a href="{{route('admin.tuyendung.excel') }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></button>
+                <a href="{{route('admin.tuyendung.pdf') }}" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+                @endcan
             </div>
         </div>
     </div>
@@ -54,13 +58,13 @@ Danh sách tuyển dụng
                                 <th width="20px">Sở trường</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
-                                <th  class="text-center">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($dstuyendung as $td)
                             <tr>
-                                <td>{{$td -> td_ma}}</td>
+                                <td class="text-center">{{$td -> td_ma}}</td>
                                 <td>{{$td -> nhanVien -> nv_hoTen}}</td>
                                 <td>{{$td -> td_ngay->format('d/m/Y')}}</td>
                                 <td>{{$td -> td_ngheTruocDay}}</td>
@@ -79,9 +83,7 @@ Danh sách tuyển dụng
                                         data-id="{{$td->td_ma}}" data-nv="{{$td -> nhanVien -> nv_hoTen}}"  novalidate>
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button> 
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>

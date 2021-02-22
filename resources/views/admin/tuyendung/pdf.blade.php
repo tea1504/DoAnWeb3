@@ -86,20 +86,21 @@
                 <th>Ngày vào làm</th>
                 <th>Công việc</th>
                 <th>Sở trường</th>
+                
             </tr>
         </thead>
         <tbody id="content">
             @foreach($dstuyendung as $td)
             <tr>
                 <td align="center">{{$td->td_ma}}</td>
-                <td>{{$td -> nv_ma}}</td>
-                <td></td>
-                <td>{{$td -> td_ngay}}</td>
+                <td>{{$td ->nv_ma}}</td>
+                <td>{{$td ->nhanVien -> nv_hoTen}}</td>
+                <td>{{$td -> td_ngay->format('d/m/Y')}}</td>
                 <td>{{$td -> td_ngheTruocDay}}</td>
                 <td>{{$td -> td_coQuanTuyen}}</td>
-                <td>{{$td -> cvu_ma}}</td>
-                <td>{{$td -> td_ngayLam}}</td>
-                <td>{{$td -> cv_ma}}</td>
+                <td>{{$td -> chucVu->cvu_ten}}</td>
+                <td>{{$td ->td_ngayLam->format('d/m/Y')}}</td>
+                <td>{{$td -> congViec->cv_ten}}</td>
                 <td>{{$td -> td_soTruong}}</td>
             </tr>
             @endforeach
