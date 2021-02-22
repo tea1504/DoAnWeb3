@@ -61,9 +61,7 @@ Chỉnh sửa văn bằng chứng chỉ
                                 <input type="text" id="kt_ngayKy" name="kt_ngayKy" class="form-control" value="{{ old('kt_ngayKy', $kt->kt_ngayKy) }}" data-mask-datetime>
                             </div>
                         </div>
-                            <!-- ------------------------------------------------------- -->
-                            
-                        
+                                             
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
