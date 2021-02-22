@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\NoiSinhExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NoiSinhCreateRequest;
@@ -11,6 +12,8 @@ use App\NoiSinh;
 use App\Tinh;
 use Carbon\Carbon;
 use Session;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class NoiSinhController extends Controller
 {
@@ -21,6 +24,7 @@ class NoiSinhController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', NoiSinh::class);
         return view('admin.noisinh.index')
             ->with('dsns', NoiSinh::all());
     }
@@ -32,6 +36,7 @@ class NoiSinhController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', NoiSinh::class);
         return view('admin.noisinh.create')
             ->with('dst', Tinh::all())
             ->with('dsnv', NhanVien::all());
@@ -45,6 +50,7 @@ class NoiSinhController extends Controller
      */
     public function store(NoiSinhCreateRequest $request)
     {
+        $this->authorize('create', NoiSinh::class);
         $ns = new NoiSinh();
         $ns->nv_ma = $request->nv_ma;
         $ns->t_ma = $request->t_ma;
@@ -77,6 +83,7 @@ class NoiSinhController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', NoiSinh::find($id));
         return view('admin.noisinh.edit')
             ->with('ns', NoiSinh::find($id))
             ->with('dst', Tinh::all())
@@ -93,6 +100,7 @@ class NoiSinhController extends Controller
     public function update(NoiSinhUpdateRequest $request, $id)
     {
         $ns = NoiSinh::find($id);
+        $this->authorize('update', $ns);
         $ns->t_ma = $request->t_ma;
         $ns->h_ma = $request->h_ma;
         $ns->x_ma = $request->x_ma;
@@ -115,6 +123,31 @@ class NoiSinhController extends Controller
     public function destroy($id)
     {
         $ns = NoiSinh::find($id);
+        $this->authorize('delete', $ns);
         $ns->delete();
+    }
+    public function print()
+    {
+        $this->authorize('inAn', NoiSinh::class);
+        return view('admin.noisinh.print')
+            ->with('dsns', NoiSinh::all());
+    }
+    public function pdf()
+    {
+        $this->authorize('inAn', NoiSinh::class);
+        $result = NoiSinh::all();
+        $data = [
+            'dsns' => $result,
+        ];
+        // return view('admin.noisinh.pdf')->with("dsns", $result);
+        $pdf = PDF::loadView('admin.noisinh.pdf', $data);
+        return $pdf->download('DanhSachNoiSinh.pdf');
+    }
+    public function excel()
+    {
+        $this->authorize('inAn', NoiSinh::class);
+        // return view('admin.noisinh.excel')
+        //     ->with('dsns', NoiSinh::all());
+        return Excel::download(new NoiSinhExport, 'DanhSachNoiSinh.xlsx');
     }
 }
