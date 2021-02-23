@@ -37,3 +37,4 @@ Route::get('/khenthuong', 'Api\ApiController@layKhenThuong')->name('api.nhanvien
 Route::get('/kyluat', 'Api\ApiController@layKyLuat')->name('api.nhanvien.kyluat');
 Route::get('/dantoc/thongke', 'Api\ApiController@thongKeDanToc')->name('api.dantoc.thongke');
 Route::get('/tongiao/thongke', 'Api\ApiController@thongKeTonGiao')->name('api.tongiao.thongke');
+Route::get('/donvi/thongke', 'Api\ApiController@thongKeDonVi')->name('api.donvi.thongke');

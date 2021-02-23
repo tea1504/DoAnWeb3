@@ -96,6 +96,26 @@ Thống kê
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="card bg-gradient-fuchsia">
+                <div class="card-header border-0">
+                    <h3 class="card-title">
+                        Đơn vị
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-light btn-sm" data-card-widget="collapse" data-toggle="tooltip" data-placement="top" title="Thu nhỏ/Phóng to">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-light btn-sm" data-card-widget="remove" data-toggle="tooltip" data-placement="top" title="Đóng">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body pt-0" style="display: block;">
+                    <canvas id="charDonVi" style="display: block; width: 635px; height: 317px;" class="bg-white"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -104,31 +124,56 @@ Thống kê
 <script>
     app.controller('thongkeController', function($scope, $http) {
         // Tuoi 
-        var dataTuoi = [];
+        var dataTuoiNam = [];
+        var dataTuoiNu = [];
         var labelTuoi = [];
         $http({
             method: 'GET',
             url: "{{route('api.nhanvien.tuoi.trongkhoang')}}?tu=0&&den=20"
         }).then(function successCallback(response) {
-            dataTuoi.push(response.data.result.soLuong)
+            if (response.data.result.length == 1) {
+                dataTuoiNam.push(response.data.result[0].soLuong);
+                dataTuoiNu.push(response.data.result[0].soLuong);
+            } else {
+                dataTuoiNam.push(response.data.result[0].soLuong);
+                dataTuoiNu.push(response.data.result[1].soLuong);
+            }
             labelTuoi.push('0 - 20')
             $http({
                 method: 'GET',
                 url: "{{route('api.nhanvien.tuoi.trongkhoang')}}?tu=21&&den=40"
             }).then(function successCallback(response) {
-                dataTuoi.push(response.data.result.soLuong)
+                if (response.data.result.length == 1) {
+                    dataTuoiNam.push(response.data.result[0].soLuong);
+                    dataTuoiNu.push(response.data.result[0].soLuong);
+                } else {
+                    dataTuoiNam.push(response.data.result[0].soLuong);
+                    dataTuoiNu.push(response.data.result[1].soLuong);
+                }
                 labelTuoi.push('21 - 40')
                 $http({
                     method: 'GET',
                     url: "{{route('api.nhanvien.tuoi.trongkhoang')}}?tu=41&&den=60"
                 }).then(function successCallback(response) {
-                    dataTuoi.push(response.data.result.soLuong)
+                    if (response.data.result.length == 1) {
+                        dataTuoiNam.push(response.data.result[0].soLuong);
+                        dataTuoiNu.push(response.data.result[0].soLuong);
+                    } else {
+                        dataTuoiNam.push(response.data.result[0].soLuong);
+                        dataTuoiNu.push(response.data.result[1].soLuong);
+                    }
                     labelTuoi.push('41 - 60')
                     $http({
                         method: 'GET',
                         url: "{{route('api.nhanvien.tuoi.trongkhoang')}}?tu=61&&den=100"
                     }).then(function successCallback(response) {
-                        dataTuoi.push(response.data.result.soLuong)
+                        if (response.data.result.length == 1) {
+                            dataTuoiNam.push(response.data.result[0].soLuong);
+                            dataTuoiNu.push(response.data.result[0].soLuong);
+                        } else {
+                            dataTuoiNam.push(response.data.result[0].soLuong);
+                            dataTuoiNu.push(response.data.result[1].soLuong);
+                        }
                         labelTuoi.push('>60')
                         var tuoi = document.getElementById('charTuoi').getContext('2d');
                         var charTuoi = new Chart(tuoi, {
@@ -136,22 +181,34 @@ Thống kê
                             data: {
                                 labels: labelTuoi,
                                 datasets: [{
-                                    label: 'Số lượng cán bộ',
-                                    data: dataTuoi,
-                                    backgroundColor: ['rgba(23, 120, 255, 1)', 'rgba(23, 120, 210, 1)', 'rgba(23, 120, 165, 1)', 'rgba(23, 120, 120, 1)'],
-                                    borderColor: ['rgba(23, 120, 255, 1)', 'rgba(23, 120, 210, 1)', 'rgba(23, 120, 165, 1)', 'rgba(23, 120, 120, 1)'],
-                                    borderWidth: 1
-                                }]
+                                        label: 'Số lượng cán bộ nam',
+                                        data: dataTuoiNam,
+                                        backgroundColor: ['rgba(23, 120, 255, 1)', 'rgba(23, 120, 210, 1)', 'rgba(23, 120, 165, 1)', 'rgba(23, 120, 120, 1)']
+                                    },
+                                    {
+                                        label: 'Số lượng cán bộ nữ',
+                                        data: dataTuoiNu,
+                                        backgroundColor: ['rgba(255, 99, 132, 1)', 'rgba(210, 99, 132, 1)', 'rgba(165, 99, 132, 1)', 'rgba(120, 99, 132, 1)'],
+                                    },
+                                ]
                             },
                             options: {
+                                tooltips: {
+                                    mode: 'index',
+                                    intersect: false
+                                },
                                 title: {
                                     display: true,
                                     text: 'Biểu đồ thống kê số tuổi cán bộ theo khoảng'
                                 },
                                 scales: {
+                                    xAxes: [{
+                                        stacked: true,
+                                    }],
                                     yAxes: [{
+                                        stacked: true,
                                         ticks: {
-                                            beginAtZero: true
+                                            beginAtZero: true,
                                         }
                                     }]
                                 }
@@ -280,6 +337,46 @@ Thống kê
             });
         });
         // End Tôn giáo 
+        // Đơn vị
+        var dataDonVi = [];
+        var labelDonVi = [];
+        $http({
+            method: 'GET',
+            url: "{{route('api.donvi.thongke')}}"
+        }).then(function successCallback(response) {
+            response.data.result.forEach(function(item, index, array) {
+                dataDonVi.push(item.soLuong);
+                labelDonVi.push(item.ten);
+            });
+            var donVi = document.getElementById('charDonVi').getContext('2d');
+            var charDonVi = new Chart(donVi, {
+                type: 'horizontalBar',
+                data: {
+                    labels: labelDonVi,
+                    datasets: [{
+                        label: '# số lượng cán bộ',
+                        data: dataDonVi,
+                        backgroundColor: 'rgba(23, 120, 247)',
+                        borderColor: 'rgba(23, 120, 247)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Biểu đồ thống kê số lượng nhân viên theo tôn giáo'
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+        // End Đơn vị
     });
 </script>
 @endsection

@@ -65,7 +65,7 @@ class ApiController extends Controller
     }
     public function laySoLuongNhanVienNu(Request $request)
     {
-        $result = DB::select('SELECT COUNT(*) AS soluong FROM nhanvien WHERE nv_gioiTinh = 1');
+        $result = DB::select('SELECT COUNT(*) AS soluong FROM nhanvien WHERE nv_gioiTinh = 0');
         return response()->json(array(
             'code'  => 200,
             'result' => $result,
@@ -218,11 +218,13 @@ class ApiController extends Controller
         $parameter = [
             'tu' => $request->tu,
             'den' => $request->den,
+            'tu1' => $request->tu,
+            'den1' => $request->den,
         ];
-        $result = DB::select('SELECT COUNT(*) as soLuong FROM nhanvien AS a WHERE YEAR(now()) - YEAR(nv_ngaySinh) BETWEEN :tu AND :den;',$parameter);
+        $result = DB::select('SELECT COUNT(*) as soLuong FROM nhanvien AS a WHERE YEAR(now()) - YEAR(a.nv_ngaySinh) BETWEEN :tu AND :den AND a.nv_gioiTinh = 1 UNION SELECT COUNT(*) as soLuong FROM nhanvien AS b WHERE YEAR(now()) - YEAR(b.nv_ngaySinh) BETWEEN :tu1 AND :den1 AND b.nv_gioiTinh = 0;',$parameter);
          return response()->json(array(
             'code'  => 200,
-            'result' => $result[0],
+            'result' => $result,
         ));
     }
     
@@ -238,6 +240,15 @@ class ApiController extends Controller
     public function thongKeTonGiao(Request $request)
     {
         $result = DB::select('SELECT COUNT(b.nv_ma) as soLuong, a.tg_ten FROM tongiao AS a LEFT JOIN nhanvien AS b on a.tg_ma = b.dt_ma GROUP BY a.tg_ma, a.tg_ten');
+         return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
+    
+    public function thongKeDonVi(Request $request)
+    {
+        $result = DB::select('SELECT b.dvql_ten as ten, COUNT(c.nv_ma) as soLuong FROM donvi as a JOIN donviquanly as b on a.dvql_ma = b.dvql_ma LEFT JOIN tuyendung as c on a.dv_ma = c.dv_ma GROUP BY b.dvql_ten');
          return response()->json(array(
             'code'  => 200,
             'result' => $result,

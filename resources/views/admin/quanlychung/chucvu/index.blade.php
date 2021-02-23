@@ -26,14 +26,7 @@ Danh sách quê quán
     <div class="row">
         <div class="col text-right">
             <div class="btn-group" role="group">
-            @can('create', App\QueQuan::class)
-                <a href="{{route('admin.quequan.create')}}" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
-                @endcan
-                @can('inAn', App\QueQuan::class)
-                <a href="{{route('admin.quequan.print')}}" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
-                <a href="{{route('admin.quequan.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
-                <a href="{{route('admin.quequan.pdf')}}" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
-                @endcan
+                <a href="{{route('admin.chucvu.create')}}" id="add" class="btn btn-dark"><i class="fas fa-plus-circle"></i> Thêm mới</a>
             </div>
         </div>
     </div>
@@ -45,17 +38,24 @@ Danh sách quê quán
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Tên chức vụ</th>
+                                <th>Mô tả chức vụ</th>
+                                <th>Ngày tạo mới</th>
+                                <th>Ngày cập nhật</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($dscvu as $cvu)
                             <tr>
                                 <td class="align-middle text-center">{{$loop->index + 1}}</td>
-                                <td class="align-middle text-center">{{$qq->qq_taoMoi->format('d/m/Y H:m:s')}}</td>
-                                <td class="align-middle text-center">{{$qq->qq_capNhat->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle">{{$cvu->cvu_ten}}</td>
+                                <td class="align-middle">{!! $cvu->cvu_moTa !!}</td>
+                                <td class="align-middle text-center">{{$cvu->cvu_taoMoi->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle text-center">{{$cvu->cvu_capNhat->format('d/m/Y H:m:s')}}</td>
                                 <td class="align-middle text-center">
-                                <a href="{{route('admin.quequan.edit', ['id' => $qq->qq_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.quequan.destroy', ['id'=>$qq->qq_ma])}}" data-nv="{{$qq->nhanVien->nv_hoTen}}">
+                                <a href="{{route('admin.chucvu.edit', ['id' => $cvu->cvu_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.chucvu.destroy', ['id'=>$cvu->cvu_ma])}}" data-nv="">
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
@@ -137,7 +137,7 @@ Danh sách quê quán
                             icon: 'success',
                             title: 'Đã xóa thành công'
                         }).then(function() {
-                            window.location = "{{route('admin.quequan.index')}}"
+                            window.location = "{{route('admin.chucvu.index')}}"
                         })
                     },
                     error: function(response) {

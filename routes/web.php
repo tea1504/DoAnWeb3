@@ -96,3 +96,5 @@ Route::resource('admin/lichsubanthan', 'Admin\LichSuBanThanController', ['as' =>
 
 Route::resource('admin/user', 'Admin\UserController')->middleware('auth');
 Route::get('admin/thongke', 'Admin\ThongKeController@index')->name('admin.thongke.index')->middleware('auth');
+
+Route::resource('admin/chucvu', 'Admin\ChucVuController', ['as' => 'admin'])->middleware('auth');

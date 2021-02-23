@@ -359,6 +359,29 @@
                 </ul>
             </li>
             <li class="nav-header">Quản lý thông tin chung</li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/chucvu')||request()->is('admin/chucvu/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-baby"></i>
+                    <p>
+                        Chức vụ
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.chucvu.index')}}" class="{{ request()->is('admin/chucvu')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.chucvu.create')}}" class="{{ request()->is('admin/chucvu/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             @can('xemThongKe')
             <li class="nav-header">Thống kê thông tin nhân viên</li>
             <li class="nav-item">
