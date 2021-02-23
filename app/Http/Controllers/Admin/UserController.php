@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\LichSuBanThan;
 use App\Luong;
 use App\NhanVien;
 use App\NoiSinh;
@@ -21,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $id = Session::get('user')[0]->nv_ma;
-        if (Luong::where('nv_ma', $id)->first() == null || TuyenDung::where('nv_ma', $id)->first() == null || QueQuan::where('nv_ma', $id)->first() == null || NoiSinh::where('nv_ma', $id)->first() == null) {
+        if (Luong::where('nv_ma', $id)->first() == null || TuyenDung::where('nv_ma', $id)->first() == null || QueQuan::where('nv_ma', $id)->first() == null || NoiSinh::where('nv_ma', $id)->first() == null || LichSuBanThan::where('nv_ma', $id)->first() == null) {
             Session::flash('alert-error', 'Tài khoản chưa đủ thông tin hãy liên hệ với quản trị viên để bổ sung thông tin');
             return redirect(route('admin'));
         }

@@ -335,6 +335,29 @@
                 </ul>
             </li>
             @endcan
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/lichsubanthan')||request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-baby"></i>
+                    <p>
+                        Lịch sử bản thân
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.lichsubanthan.index')}}" class="{{ request()->is('admin/lichsubanthan')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.lichsubanthan.create')}}" class="{{ request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-header">Quản lý thông tin chung</li>
             @can('xemThongKe')
             <li class="nav-header">Thống kê thông tin nhân viên</li>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\CustomUserProvider;
 use App\Luong;
 use App\NhanVien;
 use App\NoiSinh;
+use App\Policies\LichSuBanThanPolicy;
 use App\Policies\LuongPolicy;
 use App\VBCC;
 use App\Policies\VanBangPolicy;
@@ -38,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => ThongTinChungPolicy::class,
         QueQuan::class => QueQuanPolicy::class,
         NoiSinh::class => NoiSinhPolicy::class,
+        LichSuBanThan::class => LichSuBanThanPolicy::class,
     ];
 
     /**
