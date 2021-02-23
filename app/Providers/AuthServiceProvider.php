@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Http\Controllers\Auth\CustomUserProvider;
 use App\Luong;
+use App\LichSuBanThan;
 use App\NhanVien;
 use App\NoiSinh;
 use App\Policies\LichSuBanThanPolicy;

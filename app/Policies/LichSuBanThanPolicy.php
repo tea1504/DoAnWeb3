@@ -25,8 +25,7 @@ class LichSuBanThanPolicy
      */
     public function view(Nhanvien $user)
     {
-        return true;
-        // return $user->userRole->roleQuyen->where('q_ma', 5)->first() !== null;
+        return $user->userRole->roleQuyen->where('q_ma', 5)->first() !== null;
     }
 
     /**

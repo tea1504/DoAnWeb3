@@ -54,7 +54,7 @@ Cập nhật nơi sinh
                         </div>
                         <div class="form-group">
                             <label for="lsbt_hanhViPhamToi">Khai rõ: bị bắt, bị tù (từ ngày tháng năm nào đến ngày tháng năm nào, ở đâu), đã khai báo cho ai, những vấn đề gì? Bản thân có làm việc trong chế độ cũ (cơ quan, đơn vị nào, địa điểm, chức danh, chức vụ, thời gian làm việc…).</label>
-                            <textarea name="lsbt_hanhViPhamToi" id="lsbt_hanhViPhamToi" cols="30" rows="10" class="textarea">{{old('lsbt_hanhViPhamToi', $lsbt->lsbt_hanhViPhamToi)==null?'Không có':old('lsbt_hanhViPhamToi', $lsbt->lsbt_hanhViPhamToi)}}</textarea>
+                            <textarea name="lsbt_hanhViPhamToi" id="lsbt_hanhViPhamToi" cols="30" rows="10" class="textarea">{!! old('lsbt_hanhViPhamToi', $lsbt->lsbt_hanhViPhamToi)==null?'Không có':old('lsbt_hanhViPhamToi', $lsbt->lsbt_hanhViPhamToi) !!}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="lsbt_thamGiaToChucChinhTri">Thời gian hoặc có quan hệ với các tổ chức chính trị, kinh tế, xã hội nào ở nước ngoài (làm gì, tổ chức nào, đặt trụ sở ở đâu…?)</label>

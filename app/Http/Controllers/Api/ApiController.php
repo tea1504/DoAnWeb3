@@ -212,6 +212,37 @@ class ApiController extends Controller
             'result' => $result,
         ));
     }
+    
+    public function layTuoiTrongKhoang(Request $request)
+    {
+        $parameter = [
+            'tu' => $request->tu,
+            'den' => $request->den,
+        ];
+        $result = DB::select('SELECT COUNT(*) as soLuong FROM nhanvien AS a WHERE YEAR(now()) - YEAR(nv_ngaySinh) BETWEEN :tu AND :den;',$parameter);
+         return response()->json(array(
+            'code'  => 200,
+            'result' => $result[0],
+        ));
+    }
+    
+    public function thongKeDanToc(Request $request)
+    {
+        $result = DB::select('SELECT COUNT(nv_ma) as soLuong, a.dt_ten FROM dantoc AS a LEFT JOIN nhanvien AS b ON a.dt_ma = b.dt_ma GROUP BY a.dt_ten');
+         return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
+    
+    public function thongKeTonGiao(Request $request)
+    {
+        $result = DB::select('SELECT COUNT(b.nv_ma) as soLuong, a.tg_ten FROM tongiao AS a LEFT JOIN nhanvien AS b on a.tg_ma = b.dt_ma GROUP BY a.tg_ma, a.tg_ten');
+         return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
 }
 
 

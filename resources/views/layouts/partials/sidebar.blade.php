@@ -362,7 +362,7 @@
             @can('xemThongKe')
             <li class="nav-header">Thống kê thông tin nhân viên</li>
             <li class="nav-item">
-                <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
+                <a href="{{route('admin.thongke.index')}}" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
                     <p>
                         Thống kê
