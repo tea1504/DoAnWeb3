@@ -100,7 +100,6 @@ class TuyenDungController extends Controller
         $dscviec= CongViec :: all();
         $dsdv= DonVi :: all();
         $td = TuyenDung::find($id);
-        dd($td);die();
         $this->authorize('update', $td);
         return view('admin.tuyendung.edit')
         ->with('dsnv',$dsnv)

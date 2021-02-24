@@ -340,7 +340,7 @@
                 <a href="#" class="{{ request()->is('admin/role')||request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-baby"></i>
                     <p>
-                        Nơi sinh
+                        Role
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
