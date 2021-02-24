@@ -18,7 +18,7 @@
                     <img src="{{ Storage::exists('public/avatar/' . $user->nv_anh) ? asset('storage/avatar/' . $user->nv_anh) : asset('storage/avatar/default.png') }}" class="img-circle elevation-2 bg-white" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{$user->nv_hoTen}}</a>
+                <a href="{{route('user.index')}}" class="d-block">{{$user->nv_hoTen}}</a>
             </div>
         <?php
                 else :
@@ -72,6 +72,7 @@
             </li>
             @endcan
             @can('viewAny', App\QuaTrinhCongTac::class)
+            <li class="nav-header">Quản lý thông tin nhân viên</li>
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/thongtinchung')||request()->is('admin/thongtinchung/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>
@@ -212,7 +213,7 @@
             @can('view', App\Luong::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/luong')||request()->is('admin/luong/*')?'active nav-link':'nav-link' }}">
-                <i class="nav-icon fas fa-money-bill-wave"></i>
+                    <i class="nav-icon fas fa-money-bill-wave"></i>
                     <p>
                         Lương/phụ cấp
                         <i class="right fas fa-angle-left"></i>
@@ -287,7 +288,7 @@
             @can('view', App\QueQuan::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/quequan')||request()->is('admin/quequan/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-map-marker-alt"></i>
                     <p>
                         Quê quán
                         <i class="right fas fa-angle-left"></i>
@@ -312,7 +313,7 @@
             @can('view', App\NoiSinh::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/noisinh')||request()->is('admin/noisinh/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-baby"></i>
                     <p>
                         Nơi sinh
                         <i class="right fas fa-angle-left"></i>
@@ -337,9 +338,9 @@
             @can('view', App\Role::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/role')||request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-baby"></i>
                     <p>
-                        Role
+                        Nơi sinh
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -359,9 +360,242 @@
                 </ul>
             </li>
             @endcan
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/lichsubanthan')||request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-baby"></i>
+                    <p>
+                        Lịch sử bản thân
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.lichsubanthan.index')}}" class="{{ request()->is('admin/lichsubanthan')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.lichsubanthan.create')}}" class="{{ request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @can('admin')
+            <li class="nav-header">Quản lý thông tin chung</li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/chucvu')||request()->is('admin/chucvu/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Chức vụ
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.chucvu.index')}}" class="{{ request()->is('admin/chucvu')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.chucvu.create')}}" class="{{ request()->is('admin/chucvu/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/congviec')||request()->is('admin/congviec/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Công việc
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.congviec.index')}}" class="{{ request()->is('admin/congviec')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.congviec.create')}}" class="{{ request()->is('admin/congviec/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/dantoc')||request()->is('admin/dantoc/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Dân tộc
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.dantoc.index')}}" class="{{ request()->is('admin/dantoc')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.dantoc.create')}}" class="{{ request()->is('admin/dantoc/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/tongiao')||request()->is('admin/tongiao/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Tôn giáo
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.tongiao.index')}}" class="{{ request()->is('admin/tongiao')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.tongiao.create')}}" class="{{ request()->is('admin/tongiao/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/donvi')||request()->is('admin/donvi/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Đơn vị
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.donvi.index')}}" class="{{ request()->is('admin/donvi')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.donvi.create')}}" class="{{ request()->is('admin/donvi/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/donviquanly')||request()->is('admin/donviquanly/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Đơn vị quản lý
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.donviquanly.index')}}" class="{{ request()->is('admin/donviquanly')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.donviquanly.create')}}" class="{{ request()->is('admin/donviquanly/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/tinh')||request()->is('admin/tinh/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Tỉnh
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.tinh.index')}}" class="{{ request()->is('admin/tinh')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.tinh.create')}}" class="{{ request()->is('admin/tinh/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/huyen')||request()->is('admin/huyen/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Huyện
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.huyen.index')}}" class="{{ request()->is('admin/huyen')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.huyen.create')}}" class="{{ request()->is('admin/huyen/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/xa')||request()->is('admin/xa/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Xã
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.xa.index')}}" class="{{ request()->is('admin/xa')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.xa.create')}}" class="{{ request()->is('admin/xa/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
             @can('xemThongKe')
             <li class="nav-item">
-                <a href="#" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
+                <a href="{{route('admin.thongke.index')}}" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
                     <p>
                         Thống kê
@@ -369,6 +603,7 @@
                 </a>
             </li>
             @endcan
+            <li class="nav-header">Liên hệ với quản trị viên</li>
             <li class="nav-item">
                 <a href="{{ route('admin.lienhe') }}" class="{{ request()->is('admin/lienhe')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-envelope"></i>
