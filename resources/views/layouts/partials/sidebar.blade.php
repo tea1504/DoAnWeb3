@@ -35,7 +35,7 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item has-treeview menu-open">
@@ -337,7 +337,7 @@
             @endcan
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/lichsubanthan')||request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-baby"></i>
+                    <i class="nav-icon fas fa-history"></i>
                     <p>
                         Lịch sử bản thân
                         <i class="right fas fa-angle-left"></i>
@@ -561,6 +561,52 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.xa.create')}}" class="{{ request()->is('admin/xa/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/loaivbcc')||request()->is('admin/loaivbccxa/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Loại văn bằng chứng chỉ
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.loaivbcc.index')}}" class="{{ request()->is('admin/loaivbcc')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.loaivbcc.create')}}" class="{{ request()->is('admin/loaivbcc/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/phucap')||request()->is('admin/phucap/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Phụ cấp
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.phucap.index')}}" class="{{ request()->is('admin/phucap')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.phucap.create')}}" class="{{ request()->is('admin/phucap/*')?'active nav-link':'nav-link' }}">
                             <i class="nav-icon fas fa-plus-circle"></i>
                             <p>Thêm mới</p>
                         </a>

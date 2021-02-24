@@ -106,3 +106,5 @@ Route::resource('admin/donviquanly', 'Admin\DonViQuanLyController', ['as' => 'ad
 Route::resource('admin/tinh', 'Admin\TinhController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
 Route::resource('admin/huyen', 'Admin\HuyenController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
 Route::resource('admin/xa', 'Admin\XaController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/loaivbcc', 'Admin\LoaiVBCCController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/phucap', 'Admin\PhuCapController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
