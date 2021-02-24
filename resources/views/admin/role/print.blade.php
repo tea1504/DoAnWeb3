@@ -1,16 +1,16 @@
 @extends('print.layouts.paper')
 
 @section('title')
-Phiếu in danh sách tuyển dụng
+Phiếu in danh sách role
 @endsection
 
 @section('paper-size') A4 @endsection
 @section('paper-class') A4 landscape @endsection
 @section('paper-toolbar-top')
-<input type="button" value="Quay về" onClick="window.location='{{route('admin.tuyendung.index')}}'" /><br>
+<input type="button" value="Quay về" onClick="window.location='{{route('admin.role.index')}}'" /><br>
 @endsection
 @section('paper-toolbar-bottom')
-<input type="button" value="Quay về" onClick="window.location='{{route('admin.tuyendung.index')}}'" /><br>
+<input type="button" value="Quay về" onClick="window.location='{{route('admin.role.index')}}'" /><br>
 @endsection
 @section('custom-css')
 <style>
@@ -77,34 +77,20 @@ Phiếu in danh sách tuyển dụng
         <table border="1" id="printTable" cellspacing="0" cellpadding="3" style="border: none; margin-top: 20px;" >
             <thead>
                 <tr>
-                    <th colspan="10" style="font-size: 20px;">Danh sách tuyển dụng</th>
+                    <th colspan="10" style="font-size: 20px;">Danh sách role</th>
                 </tr>
                 <tr>
-                    <th>Mã tuyển dụng</th>
-                    <th>Mã các bộ</th>
-                    <th>Tên cán bộ</th>
-                    <th>Ngày tuyển dụng</th>
-                    <th>Nghề nghiệp trước đó</th>
-                    <th>Cơ quan tuyển dụng</th>
-                    <th>Chức vụ</th>
-                    <th>Ngày vào làm</th>
-                    <th>Công việc</th>
-                    <th>Sở trường</th>
+                    <th width="5%">Mã role</th>
+                    <th width="25%">Tên role</th>
+                    <th width="100%">Mô Tả</th>
                 </tr>
             </thead>
             <tbody id="content">
-                @foreach($dstuyendung as $td)
+                @foreach($dsrole as $role)
                 <tr>
-                    <td align="center">{{$td->td_ma}}</td>
-                    <td>{{$td ->nv_ma}}</td>
-                    <td>{{$td ->nhanVien -> nv_hoTen}}</td>
-                    <td>{{$td -> td_ngay->format('d/m/Y')}}</td>
-                    <td>{{$td -> td_ngheTruocDay}}</td>
-                    <td>{{$td -> td_coQuanTuyen}}</td>
-                    <td>{{$td -> chucVu->cvu_ten}}</td>
-                    <td>{{$td ->td_ngayLam->format('d/m/Y')}}</td>
-                    <td>{{$td -> congViec->cv_ten}}</td>
-                    <td>{{$td -> td_soTruong}}</td>
+                    <td align="center">{{$role->role_ma}}</td>
+                    <td align="center">{{$role ->role_ten}}</td>
+                    <td>{{$role ->role_mota}}</td>
                 </tr>
                 @endforeach
             </tbody>

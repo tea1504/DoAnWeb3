@@ -21,7 +21,8 @@ use App\Policies\QueQuanPolicy;
 use App\Policies\ThongTinChungPolicy;
 use App\QueQuan;
 use App\User;
-
+use App\Policies\RolePolicy;
+use App\Role;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -38,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => ThongTinChungPolicy::class,
         QueQuan::class => QueQuanPolicy::class,
         NoiSinh::class => NoiSinhPolicy::class,
+        Role::class => RolePolicy::class,
     ];
 
     /**

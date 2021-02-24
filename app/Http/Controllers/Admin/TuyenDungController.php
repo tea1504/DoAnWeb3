@@ -37,6 +37,7 @@ class TuyenDungController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', TuyenDung::class);
         $dsnv= NhanVien :: all();
         $dscv= ChucVu :: all();
         $dscviec= CongViec :: all();
@@ -99,6 +100,7 @@ class TuyenDungController extends Controller
         $dscviec= CongViec :: all();
         $dsdv= DonVi :: all();
         $td = TuyenDung::find($id);
+        dd($td);die();
         $this->authorize('update', $td);
         return view('admin.tuyendung.edit')
         ->with('dsnv',$dsnv)
