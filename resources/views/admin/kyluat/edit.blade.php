@@ -15,7 +15,7 @@ Chỉnh sửa danh sách kỷ luật
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="khenthuongcapnhatController">
+<div class="container-fluid" ng-controller="KyluatcapnhatController">
     @if (Session::has('alert'))
     <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
         <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
@@ -52,23 +52,22 @@ Chỉnh sửa danh sách kỷ luật
                                         <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_hoTen }}</option>
                                         @endif
                                     @endforeach
-                                    </select>
-                                   
+                                    </select>                                  
                                 </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label" >Ngày ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_ngayKy" name="kl_ngayKy" class="form-control" value="{{ old('kl_ngayKy', $kl->kl_ngayKy) }}" data-mask-datetime>
+                                <input type="text" id="kl_ngayKy" name="kl_ngayKy" class="form-control" value="{{ old('kl_ngayKy', $kl->kl_ngayKy) }}" ng-class="frmEdit.kl_ngayKy.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="kl_ngayKy" ng-required="true">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmEdit.kl_ngayKy.$error.required">Bạn phải điền ngày ký</span>
+                                </div>
                             </div>
-                        </div>
-                            <!-- ------------------------------------------------------- -->
-                            
-                        
+                        </div>                                                 
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <select name="nv_ma" class="form-control">
+                                <select name="nv_ma" ng-class="frmEdit.nv_ma.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="nv_ma" ng-required="true">
                                     @foreach($danhsachnhanvien as $nhanvien)
                                         @if($nhanvien->nv_ma == $kl->kl_nguoiKy)
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>
@@ -77,29 +76,23 @@ Chỉnh sửa danh sách kỷ luật
                                         @endif
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmEdit.nv_ma.$error.required">Bạn phải chọn người ký</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Lý do : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_lyDo" name="kl_lyDo" class="form-control" value="{{ old('$kl_lyDo', $kl->kl_lyDo) }}" />
+                                <input type="text" id="kl_lyDo" name="kl_lyDo" class="form-control" value="{{ old('$kl_lyDo', $kl->kl_lyDo) }}" ng-class="frmEdit.kl_lyDo.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="kl_lyDo" ng-required="true" ng-minlength="3" ng-maxlength="100">
+                                <div class="invalid-feedback">
+                                    <span ng-show="frmEdit.kl_lyDo.$error.required">Bạn phải điền lý do</span>
+                                    <span ng-show="frmEdit.kl_lyDo.$error.minlength">Lý do quá ngắn, phải chứa ít nhất 3 ký tự</span>
+                                    <span ng-show="frmEdit.kl_lyDo.$error.maxlength">Lý do quá dài, chỉ chứa nhiều nhất 100 ký tự</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày tạo mới : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_taoMoi" name="kl_taoMoi" class="form-control" value="{{ $mytime }}" data-mask-datetime>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Ngày cập nhật : </label>
-                            <div class="col-lg-10 col-md-9 col-sm-8">
-                                <input type="text" id="kl_capNhat" name="kl_capNhat" class="form-control" value="{{ $mytime }}" data-mask-datetime>
-                            </div>
-                        </div>
-                        
-                        
-                        <button type="sumbit" class="btn btn-primary">Thêm mới</button>
+                        </div>                                        
+                        <button type="sumbit" class="btn btn-primary">Cập nhật</button>
                         <a href="{{route('admin.kyluat.index')}}" class="btn btn-secondary">Trở về</a>
 
                     </form>
@@ -112,6 +105,10 @@ Chỉnh sửa danh sách kỷ luật
 @section('custom-scripts')
 <script>
     $('.toast').toast('show');
-    app.controller('khenthuongnhatController', function($scope, $http) {});
+    app.controller('KyluatcapnhatController', function($scope, $http) {
+        $scope.kl_ngayKy = '{{$kl->kl_ngayKy}}';
+        $scope.nv_ma = '{{$kl->kl_nguoiKy}}';
+        $scope.kl_lyDo = '{{$kl->kl_lyDo}}';
+    });
 </script>
 @endsection

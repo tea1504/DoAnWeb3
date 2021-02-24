@@ -9,10 +9,13 @@ class Xa extends Model
     public      $timestamps     = false;
 
     protected   $table          = 'xa';
-    protected   $fillable       = ['x_ten', 'h_ma'];
+    protected   $fillable       = ['x_ten', 'h_ma', 'x_taoMoi', 'x_capNhat'];
     protected   $guarded        = ['x_ma'];
 
     protected   $primaryKey     = 'x_ma';
+
+    protected $dates        = ['x_taoMoi', 'x_capNhat'];
+    protected $dateFormat   = 'Y-m-d H:i:s';
 
     public function dsQueQuan(){
         return $this->hasMany('App\QueQuan', 'x_ma', 'x_ma');

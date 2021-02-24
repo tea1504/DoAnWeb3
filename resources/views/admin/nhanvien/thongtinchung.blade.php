@@ -285,4 +285,17 @@
             <input type="text" class="form-control" value="{{$nv->nv_bhxh}}" disabled>
         </div>
     </div>
+    <hr>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Hành vi phạm tội : </label>
+        <div class="col-md-10">
+            <textarea class="form-control" rows="10" disabled>{{$nv->lichSuBanThan->lsbt_hanhViPhamToi}}</textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Tham gia tổ chức chính trị : </label>
+        <div class="col-md-10">
+            <textarea class="form-control" rows="10" disabled>{{$nv->lichSuBanThan->lsbt_thamGiaToChucChinhTri}}</textarea>
+        </div>
+    </div>
 </form>

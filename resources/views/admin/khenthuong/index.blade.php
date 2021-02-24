@@ -4,28 +4,10 @@ Danh sách khen thưởng
 @endsection
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/toastr/toastr.min.css') }}">
 <style>
     table#myTable {
         height: 540px;
-        width: 100%;
-    }
-
-    table#myTable td {
-        width: 500px;
-    }
-
-    .my-card {
-        transition: .2s;
-    }
-
-    .my-card:hover {
-        transform: scale(1.05, 1.05);
-        z-index: 9999;
-        box-shadow: 0px 0px 20px #000;
-    }
-
-    .avatar {
-        background-color: #fff;
     }
 </style>
 @endsection
@@ -36,218 +18,337 @@ Danh sách khen thưởng
 </ol>
 @endsection
 @section('content')
-<div class="container-fluid" ng-controller="khuyenthuongController" ng-init="start = 0;">
-    <div class="row">
-        <div class="col text-right">
-            <div class="btn-group" role="group">
-                <a href="{{ route('admin.khenthuong.create') }}">
-                    <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
-                </a>
-                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></button>
-                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excell"><i class="fas fa-file-excel"></i></button>
-                <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></button>
+<div class="container-fluid" ng-controller="trinhdoController">
+    @if (Session::has('alert'))
+    <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
+        <div class="toast bg-success m-2" data-delay="2000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+            <div class="toast-header">
+                <img src="{{asset('storage/images/shin.gif')}}" class="rounded mr-2 bg-light" height="30px" alt="...">
+                <strong class="mr-auto">Thành công</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{Session::get('alert')}}
             </div>
         </div>
     </div>
-    <div class="row" ng-show="show">
-        <div class="col-md-12">
+    @endif
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-md-6">
+                    <select name="nhanVien" id="nhanVien" class="form-control">
+                        <option value="" selected>Tất cả</option>
+                        @foreach($dsnv as $nv)
+                        <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col text-right">
+            <div class="btn-group" role="group">
+                <a href="{{ route('admin.khenthuong.create') }}" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
+                <a href="" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
+                <a href="{{route('admin.khenthuong.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
+                <a href="" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mt-3">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-responsive table-head-fixed" id="myTable">
+                    <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100  order-column" id="myTable" onmouseover="showtooltip()">
                         <thead>
-                            <tr>
+                            <tr class="w-100">
                                 <th>#</th>
-                                <th>Mã khen thưởng</th>
-                                <th>Tên</th> 
+                                <th>Nhân viên</th>
                                 <th>Ngày ký</th>
                                 <th>Người ký</th>
                                 <th>Lý do</th>
-                                <th>Tạo mới</th>
+                                <th>Thêm mới</th>
                                 <th>Cập nhật</th>
-                                <th>Action</th>
+                                <th width="100px">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($danhsachkhenthuong as $kt)
-                            <tr>
-                                <td>{{$loop->index+1}}</td>
-                                <td>{{$kt->kt_ma}}</td>
-                                <td>{{$kt->nhanVien->nv_hoTen}}</td>
-                                <td>{{$kt->kt_ngayKy->format('d/m/Y')}}</td>
-                                <td>{{$kt->nguoiKy->nv_hoTen}}</td>
-                                <td>{{$kt->kt_lyDo}}</td>                         
-                                <td>{{$kt->kt_taoMoi->format('d/m/Y')}}</td>                         
-                                <td>{{$kt->kt_capNhat->format('d/m/Y')}}</td>                         
-                                <td>                               
-                                    <a href="{{ route('admin.khenthuong.edit', ['id' => $kt->kt_ma]) }}" class="btn btn-danger pull-left" data-toggle="tooltip" data-placement="top" title="Sửa">Sửa</a>
-                                    
-                                    <form class="fDelete btn p-0" method="POST" action="{{ route('admin.khenthuong.destroy', ['id' => $kt->kt_ma]) }}" data-id="{{ $kt->kt_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
-                                    {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                                <button type="sumbit" class="btn btn-warning"  >Xóa</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
-
-
 </div>
 @endsection
 @section('custom-scripts')
 <script src="{{ asset('themes/AdminLTE/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('themes/AdminLTE/plugins/toastr/toastr.min.js') }}"></script>
 <script>
-    $(document).ready(function() {
-        $("#sortable").sortable({
-            cancel: '.card-body',
-        });
-        $("#sortable").sortable({
-            cancel: '.card-footer',
-        });
-        $("#sortable").disableSelection();
-        $('#myTable').DataTable({
-            dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ],
-            language: {
-                "sProcessing": "Đang xử lý...",
-                "sLengthMenu": "Xem _MENU_ mục",
-                "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
-                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-                "sInfoPostFix": "",
-                "sSearch": "Tìm:",
-                "sUrl": "",
-                "oPaginate": {
-                    "sFirst": "Đầu",
-                    "sPrevious": "Trước",
-                    "sNext": "Tiếp",
-                    "sLast": "Cuối"
-                },
-                buttons: {
-                    "copy": "Sao chép",
-                    "excel": "Xuất ra file Excel",
-                    "pdf": "Xuất ra file PDF",
+    $('.toast').toast('show');
+
+    var table = $('#myTable').DataTable({
+        ajax: {
+            url: "{{route('api.nhanvien.khenthuong')}}",
+            dataSrc: 'result'
+        },
+        columns: [{
+                data: null
+            },
+            
+            {
+                data: "nv_hoTen"
+            },
+            
+            {
+                data: "kt_ngayKy",
+                render: function(data, type, row, meta) {
+                    var d = new Date(data);
+                    // return d.getMonth().padding();
+                    return [d.getDate(),
+                            (d.getMonth() + 1),
+                            d.getFullYear()
+                        ].join('/') +
+                        ' ' + [d.getHours(),
+                            d.getMinutes(),
+                            d.getSeconds()
+                        ].join(':');
+                }            
+            },
+            {
+                data: "nv_hoTen"
+            },
+            {
+                data: "kt_lyDo"
+            },
+            {
+                data: "kt_taoMoi",
+                render: function(data, type, row, meta) {
+                    var d = new Date(data);
+                    // return d.getMonth().padding();
+                    return [d.getDate(),
+                            (d.getMonth() + 1),
+                            d.getFullYear()
+                        ].join('/') +
+                        ' ' + [d.getHours(),
+                            d.getMinutes(),
+                            d.getSeconds()
+                        ].join(':');
                 }
             },
-            "lengthMenu": [
-                [10, 15, 20, 25, 50, 100, -1],
-                [10, 15, 20, 25, 50, 100, "Tất cả"]
-            ]
-        });
-        document.getElementById('check').selected = "true";
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-    });
-    app.directive('fallbackSrc', function() {
-        return {
-            link: function postLink(scope, element, attrs) {
-                element.bind('error', function() {
-                    angular.element(this).attr("src", attrs.fallbackSrc);
-                });
-            }
-        }
-    });
-    app.controller('khuyenthuongController', function($scope, $http) {
-        $scope.show = true;
-        $scope.number_card = 6;
-        $scope.field = 1;
-        $scope.icon = 'fa-th-large';
-        $scope.showTable = function() {
-            $scope.show = !$scope.show;
-            if ($scope.show)
-                $scope.icon = 'fa-bars';
-            else
-                $scope.icon = 'fa-th-large';
-        }
-        $scope.countPage = function(n) {
-            var n = Math.ceil(n / $scope.number_card);
-            var arr = [];
-            for (var i = 0; i < n; i++)
-                arr.push(i);
-            return arr;
-        }
-        $scope.page = function(i) {
-            $scope.start = i;
-        }
-        $scope.reset = function() {
-            $scope.keyWord.nv_hoTen = '';
-            $scope.keyWord.nv_sdt = '';
-            $scope.keyWord.nv_noiOHienNay = '';
-            $scope.keyWord.nv_email = '';
-        }
-        $scope.an = function(n, i, max) {
-            if (n == 0 && (i == 0 || i == 1 || i == 2))
-                return false;
-            if (n == max - 1 && (i == max - 1 || i == max - 2 || i == max - 3))
-                return false;
-            if ((Math.abs(n - i) <= 1))
-                return false;
-            return true;
-        }
-        $http({
-                url: "{{route('api.thongtin.nhanvien')}}",
-                method: "GET",
-            })
-            .then(
-                function success(respone) {
-                    // console.table(respone.data.result);
-                    $scope.data = respone.data.result;
+            {
+                data: "kt_capNhat",
+                render: function(data, type, row, meta) {
+                    var d = new Date(data);
+                    // return d.getMonth().padding();
+                    return [d.getDate(),
+                            (d.getMonth() + 1),
+                            d.getFullYear()
+                        ].join('/') +
+                        ' ' + [d.getHours(),
+                            d.getMinutes(),
+                            d.getSeconds()
+                        ].join(':');
+                }
+            },
+            {
+                data: {
+                    'nv_ma': 'nv_ma',
+                    'nv_hoTen': 'nv_hoTen',
+                    'kt_ma': 'kt_ma'
                 },
-                function error(respone) {
-
+                render: function(data, type, row, meta) {
+                    return `
+                            <a href="/admin/khenthuong/${data['kt_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                
+                                <form class="fDelete btn p-0" method="POST" action="khenthuong/${data['kt_ma']}" data-id="${data['kt_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['kt_ma']}" onclick="xoa(${data['kt_ma']})" onmouseleave="hidetooltip()">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </form>`;
                 }
-            );
-        
-        
-        
-        
-        /* $('.fDelete').click(function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Bạn muốn xóa?',
-                text: "Dữ liệu sẽ không thể phục hồi lại được",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Chấp nhận',
-                cancelButtonText: 'Hủy bỏ'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: $(this).attr('method'),
-                        url: $(this).attr('action'),
-                        data: {
-                            id: $(this).data('id'),
-                            _token: $(this).find('[name="_token"]').val(),
-                            _method: $(this).find('[name="_method"]').val()
-                        },
-                        success: function(data, textStatus, jqXHR) {
-                            location.href = "{{ route('admin.khenthuong.index') }}";
-                        }
-                    })
-                } else {
-                    Swal.fire(
-                        'Đã hủy xóa!'
-                    )
+            },
+        ],
+        columnDefs: [{
+                targets: 0,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle text-center');
                 }
-            })
-        }); */
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+            },
+            {
+                targets: 1,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle');
+                }
+            },
+            {
+                targets: 2,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle');
+                }
+            },
+            {
+                targets: 3,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle');
+                }
+            },
+            {
+                targets: 4,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle');
+                }
+            },
+            {
+                targets: 5,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle');
+                }
+            },
+            {
+                targets: 6,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle');
+                }
+            },
+            {
+                targets: 7,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).addClass('align-middle text-center');
+                }
+            },
+        ],
+        dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
+        buttons: [
+            'copy', 'excel', 'pdf'
+        ],
+        language: {
+            "sProcessing": "Đang xử lý...",
+            "sLengthMenu": "Xem _MENU_ mục",
+            "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+            "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+            "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+            "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+            "sInfoPostFix": "",
+            "sSearch": "Tìm:",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "Đầu",
+                "sPrevious": "Trước",
+                "sNext": "Tiếp",
+                "sLast": "Cuối"
+            },
+            buttons: {
+                "copy": "Sao chép",
+                "excel": "Xuất ra file Excel",
+                "pdf": "Xuất ra file PDF",
+            }
+        },
+        "lengthMenu": [
+            [10, 15, 20, 25, 50, 100, -1],
+            [10, 15, 20, 25, 50, 100, "Tất cả"]
+        ]
     });
-</script>
+    table.on('order.dt search.dt', function() {
+        table.column(0, {
+            search: 'applied',
+            order: 'applied'
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
+    table.ajax.url("{{route('api.nhanvien.khenthuong')}}" + "?nv_ma=" + $('#nhanVien').val());
+    table.ajax.reload();
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 
+    function showtooltip() {
+        $('[data-toggle="tooltip"]').hover(function() {
+            var that = $(this)
+            that.tooltip('show');
+            setTimeout(function() {
+                that.tooltip('hide');
+            }, 1000);
+        });
+    }
+
+    function hidetooltip() {
+        $('[data-toggle="tooltip"]').mouseleave(function() {
+            $(this).tooltip('hide');
+        });
+    }
+
+    $('#nhanVien').change(function(e) {
+        e.preventDefault();
+        table.ajax.url("{{route('api.nhanvien.khenthuong')}}" + "?nv_ma=" + $(this).val());
+        table.ajax.reload();
+        $('#add').attr('href', getLink() + "/" + $('#nhanVien').val())
+        $('#print').attr('href', "{{route('admin.khenthuong.print')}}" + "/" + $('#nhanVien').val());
+        $('#pdf').attr('href', "{{route('admin.khenthuong.pdf')}}" + "/" + $('#nhanVien').val());
+    });
+
+    
+    $('#add').attr('href', getLink() + "/" + $('#nhanVien').val());
+    $('#print').attr('href', "{{route('admin.khenthuong.print')}}" + "/" + $('#nhanVien').val());
+    $('#pdf').attr('href', "{{route('admin.khenthuong.pdf')}}" + "/" + $('#nhanVien').val());
+
+    function xoa(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa ?',
+            html: 'Dữ liệu văn bằng của nhân viên <strong>' + $('#vb_' + id).data('nv') + '</strong> sẽ không thể phục hồi lại được',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'post',
+                    url: $('#vb_' + id).attr('action'),
+                    data: {
+                        'id': $('#vb_' + id).data('id'),
+                        '_token': $('#vb_' + id + ' input[name="_token"]').val(),
+                        '_method': $('#vb_' + id + ' input[name="_method"]').val()
+                    },
+                    success: function(response) {
+                        table.ajax.url("{{route('api.nhanvien.khenthuong')}}" + "?nv_ma=" + $('#nhanVien').val());
+                        table.ajax.reload();
+                        // Toast.fire({
+                        //     icon: 'success',
+                        //     title: 'Đã xóa thành công'
+                        // })
+                        $(document).Toasts('create', {
+                            class: 'bg-success',
+                            title: '<i class="fas fa-check-circle"></i> Thành công',
+                            autohide: true,
+                            delay: 2000,
+                            body: "Đã xóa dữ liệu thành công"
+                        })
+                    },
+                    error: function(response) {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger',
+                            title: '<i class="fas fa-exclamation-circle"></i> Thất bại',
+                            autohide: true,
+                            delay: 2000,
+                            body: "Đã xảy ra lỗi trong khi xóa dữ liệu. Hãy thử lại sau."
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Đã hủy xóa',
+                    icon: 'info',
+                    timer: 1000,
+                })
+            }
+        })
+
+    }
+    app.controller('trinhdoController', function($scope, $http) {});
+</script>
 @endsection

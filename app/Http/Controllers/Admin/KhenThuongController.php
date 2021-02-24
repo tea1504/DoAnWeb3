@@ -21,10 +21,9 @@ class KhenThuongController extends Controller
      */
     public function index()
     {
-        $ds_kt = KhenThuong::all();
-        //$ds_kt = KhenThuong::paginate(5);
+        $result = NhanVien::all();
         return view('admin.khenthuong.index')
-        ->with('danhsachkhenthuong',$ds_kt);
+            ->with('dsnv', $result);
     }
 
     /**
@@ -58,8 +57,7 @@ class KhenThuongController extends Controller
         $kt->kt_capNhat = Carbon::now();
 
         $kt->save();
-        Session::flash('alert', 'Đã thêm mới thành công văn bằng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
-
+        Session::flash('alert', 'Đã thêm mới thành công khen thưởng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.khenthuong.index');
         
 
@@ -90,9 +88,7 @@ class KhenThuongController extends Controller
         return view('admin.khenthuong.edit')
         ->with('kt',$ds_kt)
         ->with('danhsachnhanvien',$ds_nv)
-        ->with('mytime',$mytime);
-        
-        
+        ->with('mytime',$mytime);    
     }
 
     /**
@@ -117,13 +113,8 @@ class KhenThuongController extends Controller
         //dd($kt->kt_ma);
         //dd($kt);
         $kt->save();
+        Session::flash('alert', 'Đã cập nhật thành công khen thưởng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.khenthuong.index'); 
-        
-       
-       
-
-        $kt->kt_taoMoi = $request->kt_taoMoi;
-        $kt->kt_capNhat = $request->kt_capNhat;
     }
 
     /**

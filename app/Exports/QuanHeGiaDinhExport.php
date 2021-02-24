@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\QuaTrinhCongTac;
+use App\QuanHeGiaDinh;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
@@ -18,13 +18,13 @@ use Maatwebsite\Excel\Events\BeforeImport;
 use Maatwebsite\Excel\Events\BeforeWriting;
 use Storage;
 
-class QuaTrinhCongTacExport implements FromView, WithDrawings, WithEvents, ShouldAutoSize
+class QuanHeGiaDinhExport implements FromView, WithDrawings, WithEvents, ShouldAutoSize
 {
     use Exportable, RegistersEventListeners;
     public function view(): View
     {
-        return view('admin.quatrinhcongtac.excel')
-            ->with('dsqtct', QuaTrinhCongTac::all());
+        return view('admin.quanhegiadinh.excel')
+            ->with('dsqhgd', QuanHeGiaDinh::all());
     }
     public function drawings()
     {
@@ -35,8 +35,8 @@ class QuaTrinhCongTacExport implements FromView, WithDrawings, WithEvents, Shoul
         $drawingLogo->setDescription('Logo');
         $drawingLogo->setPath(public_path('storage/images/logo.png'));
         $drawingLogo->setHeight(100);
-        $drawingLogo->setCoordinates('F1');
-        $offsetX = 70; //pixels
+        $drawingLogo->setCoordinates('D1');
+        $offsetX = 140; //pixels
         $offsetY = 10; //pixels
         $drawingLogo->setOffsetX($offsetX); //pixels
         $drawingLogo->setOffsetY($offsetY); //pixels
@@ -72,7 +72,7 @@ class QuaTrinhCongTacExport implements FromView, WithDrawings, WithEvents, Shoul
         $event->sheet->getDelegate()->getPageSetup()
             ->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
         $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(100);
-        $event->sheet->getDelegate()->getStyle('A6:H6')->applyFromArray(
+        $event->sheet->getDelegate()->getStyle('A6:I6')->applyFromArray(
             [
                 'font' => [
                     'bold' => true,
@@ -89,12 +89,12 @@ class QuaTrinhCongTacExport implements FromView, WithDrawings, WithEvents, Shoul
             ]
         );
         $startRow = 7;
-        $dsqtct = QuaTrinhCongTac::all();
-        foreach ($dsqtct as $index => $qtct) {
+        $dsnv = QuanHeGiaDinh::all();
+        foreach ($dsnv as $index => $qh) {
             $currentRow = $startRow + $index;
-            // $event->sheet->getDelegate()->getRowDimension($currentRow)->setRowHeight(80);
+            $event->sheet->getDelegate()->getRowDimension($currentRow)->setRowHeight(80);
 
-            $coordinate = "A${currentRow}:H${currentRow}";
+            $coordinate = "A${currentRow}:I${currentRow}";
             $event->sheet->getDelegate()->getStyle($coordinate)->applyFromArray(
                 [
                     'alignment' => [
