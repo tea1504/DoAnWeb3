@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Danh sách chức vụ
+Danh sách tôn giáo
 @endsection
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -18,7 +18,7 @@ Danh sách chức vụ
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Danh sách chức vụ</li>
+    <li class="breadcrumb-item active">Danh sách tôn giáo</li>
 </ol>
 @endsection
 @section('content')
@@ -26,7 +26,7 @@ Danh sách chức vụ
     <div class="row">
         <div class="col text-right">
             <div class="btn-group" role="group">
-                <a href="{{route('admin.chucvu.create')}}" id="add" class="btn btn-dark"><i class="fas fa-plus-circle"></i> Thêm mới</a>
+                <a href="{{route('admin.tongiao.create')}}" id="add" class="btn btn-dark"><i class="fas fa-plus-circle"></i> Thêm mới</a>
             </div>
         </div>
     </div>
@@ -38,24 +38,22 @@ Danh sách chức vụ
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tên chức vụ</th>
-                                <th>Mô tả chức vụ</th>
+                                <th>Tên tôn giáo</th>
                                 <th>Ngày tạo mới</th>
                                 <th>Ngày cập nhật</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dscvu as $cvu)
+                            @foreach($dstg as $tg)
                             <tr>
                                 <td class="align-middle text-center">{{$loop->index + 1}}</td>
-                                <td class="align-middle">{{$cvu->cvu_ten}}</td>
-                                <td class="align-middle">{!! $cvu->cvu_moTa !!}</td>
-                                <td class="align-middle text-center">{{$cvu->cvu_taoMoi->format('d/m/Y H:m:s')}}</td>
-                                <td class="align-middle text-center">{{$cvu->cvu_capNhat->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle">{{$tg->tg_ten}}</td>
+                                <td class="align-middle text-center">{{$tg->tg_taoMoi->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle text-center">{{$tg->tg_capNhat->format('d/m/Y H:m:s')}}</td>
                                 <td class="align-middle text-center">
-                                <a href="{{route('admin.chucvu.edit', ['id' => $cvu->cvu_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.chucvu.destroy', ['id'=>$cvu->cvu_ma])}}" data-nv="">
+                                <a href="{{route('admin.tongiao.edit', ['id' => $tg->tg_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.tongiao.destroy', ['id'=>$tg->tg_ma])}}">
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
@@ -119,7 +117,7 @@ Danh sách chức vụ
         };
         Swal.fire({
             title: 'Bạn có chắc chắn muốn xóa ?',
-            html: 'Dữ liệu văn bằng của nhân viên <strong>' + $(this).data('nv') + '</strong> sẽ không thể phục hồi lại được',
+            html: 'Dữ liệu sẽ không thể phục hồi lại được',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -137,7 +135,7 @@ Danh sách chức vụ
                             icon: 'success',
                             title: 'Đã xóa thành công'
                         }).then(function() {
-                            window.location = "{{route('admin.chucvu.index')}}"
+                            window.location = "{{route('admin.tongiao.index')}}"
                         })
                     },
                     error: function(response) {

@@ -358,10 +358,11 @@
                     </li>
                 </ul>
             </li>
+            @can('admin')
             <li class="nav-header">Quản lý thông tin chung</li>
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/chucvu')||request()->is('admin/chucvu/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-baby"></i>
+                    <i class="nav-icon fas fa-circle"></i>
                     <p>
                         Chức vụ
                         <i class="right fas fa-angle-left"></i>
@@ -382,7 +383,77 @@
                     </li>
                 </ul>
             </li>
-            @can('xemThongKe')
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/congviec')||request()->is('admin/congviec/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Công việc
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.congviec.index')}}" class="{{ request()->is('admin/congviec')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.congviec.create')}}" class="{{ request()->is('admin/congviec/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/dantoc')||request()->is('admin/dantoc/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Dân tộc
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.dantoc.index')}}" class="{{ request()->is('admin/dantoc')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.dantoc.create')}}" class="{{ request()->is('admin/dantoc/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/tongiao')||request()->is('admin/tongiao/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Tôn giáo
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.tongiao.index')}}" class="{{ request()->is('admin/tongiao')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.tongiao.create')}}" class="{{ request()->is('admin/tongiao/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+            @can('admin')
             <li class="nav-header">Thống kê thông tin nhân viên</li>
             <li class="nav-item">
                 <a href="{{route('admin.thongke.index')}}" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">

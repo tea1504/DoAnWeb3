@@ -97,4 +97,7 @@ Route::resource('admin/lichsubanthan', 'Admin\LichSuBanThanController', ['as' =>
 Route::resource('admin/user', 'Admin\UserController')->middleware('auth');
 Route::get('admin/thongke', 'Admin\ThongKeController@index')->name('admin.thongke.index')->middleware('auth');
 
-Route::resource('admin/chucvu', 'Admin\ChucVuController', ['as' => 'admin'])->middleware('auth');
+Route::resource('admin/chucvu', 'Admin\ChucVuController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/congviec', 'Admin\CongViecController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/dantoc', 'Admin\DanTocController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/tongiao', 'Admin\TonGiaoController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-Danh sách chức vụ
+Danh sách công việc
 @endsection
 @section('custom-css')
 <link rel="stylesheet" href="{{ asset('themes/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -18,7 +18,7 @@ Danh sách chức vụ
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Danh sách chức vụ</li>
+    <li class="breadcrumb-item active">Danh sách công việc</li>
 </ol>
 @endsection
 @section('content')
@@ -26,7 +26,7 @@ Danh sách chức vụ
     <div class="row">
         <div class="col text-right">
             <div class="btn-group" role="group">
-                <a href="{{route('admin.chucvu.create')}}" id="add" class="btn btn-dark"><i class="fas fa-plus-circle"></i> Thêm mới</a>
+                <a href="{{route('admin.congviec.create')}}" id="add" class="btn btn-dark"><i class="fas fa-plus-circle"></i> Thêm mới</a>
             </div>
         </div>
     </div>
@@ -46,16 +46,16 @@ Danh sách chức vụ
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dscvu as $cvu)
+                            @foreach($dscv as $cv)
                             <tr>
                                 <td class="align-middle text-center">{{$loop->index + 1}}</td>
-                                <td class="align-middle">{{$cvu->cvu_ten}}</td>
-                                <td class="align-middle">{!! $cvu->cvu_moTa !!}</td>
-                                <td class="align-middle text-center">{{$cvu->cvu_taoMoi->format('d/m/Y H:m:s')}}</td>
-                                <td class="align-middle text-center">{{$cvu->cvu_capNhat->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle">{{$cv->cv_ten}}</td>
+                                <td class="align-middle">{!! $cv->cv_moTa !!}</td>
+                                <td class="align-middle text-center">{{$cv->cv_taoMoi->format('d/m/Y H:m:s')}}</td>
+                                <td class="align-middle text-center">{{$cv->cv_capNhat->format('d/m/Y H:m:s')}}</td>
                                 <td class="align-middle text-center">
-                                <a href="{{route('admin.chucvu.edit', ['id' => $cvu->cvu_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.chucvu.destroy', ['id'=>$cvu->cvu_ma])}}" data-nv="">
+                                <a href="{{route('admin.congviec.edit', ['id' => $cv->cv_ma])}}" class="btn btn-success btn-sm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <form class="fDelete btn p-0" method="POST" action="{{route('admin.congviec.destroy', ['id'=>$cv->cv_ma])}}" data-nv="">
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
@@ -137,7 +137,7 @@ Danh sách chức vụ
                             icon: 'success',
                             title: 'Đã xóa thành công'
                         }).then(function() {
-                            window.location = "{{route('admin.chucvu.index')}}"
+                            window.location = "{{route('admin.congviec.index')}}"
                         })
                     },
                     error: function(response) {

@@ -54,7 +54,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //
         
-        Gate::define('xemThongKe', function($user){
+        Gate::define('admin', function($user){
             return $user->role_ma === 1;
         });
         $this->app->auth->provider('custom', function ($app, array $config) {
