@@ -248,7 +248,7 @@ class ApiController extends Controller
     
     public function thongKeDonVi(Request $request)
     {
-        $result = DB::select('SELECT b.dvql_ten as ten, COUNT(c.nv_ma) as soLuong FROM donvi as a JOIN donviquanly as b on a.dvql_ma = b.dvql_ma LEFT JOIN tuyendung as c on a.dv_ma = c.dv_ma GROUP BY b.dvql_ten');
+        $result = DB::select('SELECT b.dvql_ten as ten, COUNT(c.nv_ma) as soLuong FROM donvi as a RIGHT JOIN donviquanly as b on a.dvql_ma = b.dvql_ma LEFT JOIN tuyendung as c on a.dv_ma = c.dv_ma GROUP BY b.dvql_ten');
          return response()->json(array(
             'code'  => 200,
             'result' => $result,
