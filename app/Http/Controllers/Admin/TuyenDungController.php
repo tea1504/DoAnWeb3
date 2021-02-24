@@ -37,6 +37,7 @@ class TuyenDungController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', TuyenDung::class);
         $dsnv= NhanVien :: all();
         $dscv= ChucVu :: all();
         $dscviec= CongViec :: all();

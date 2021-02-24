@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Danh sách thông tin tuyển dụng</title>
+    <title>Danh sách Role</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
         * {
@@ -70,39 +70,24 @@
             </td>
         </tr>
     </table>
-    <table border="1" cellspacing="0" cellpadding="3" style="border: none;">
+    <table border="1" cellspacing="0" cellpadding="5" id="container" style="border: none; width:100%;" align="center">
         <thead>
             <tr>
-                <th colspan="10" style="font-size: 20px;">Danh sách cán bộ</th>
+                <th colspan="3" style="font-size: 20px;">Danh sách role</th>
             </tr>
             <tr>
-                <th width="100px">Mã tuyển dụng</th>
-                <th width="50px">Mã các bộ</th>
-                <th>Tên cán bộ</th>
-                <th width="120px">Ngày tuyển dụng</th>
-                <th>Nghề nghiệp trước đó</th>
-                <th width="100px">Cơ quan tuyển dụng</th>
-                <th width="130px">Chức vụ</th>
-                <th>Ngày vào làm</th>
-                <th>Công việc</th>
-                <th>Sở trường</th>
-                
+                <th>Mã role</th>
+                <th>Tên role</th>
+                <th>Mô Tả</th>
             </tr>
         </thead>
         <tbody id="content">
-            @foreach($dstuyendung as $td)
-            <tr>
-                <td align="center">{{$td->td_ma}}</td>
-                <td>{{$td ->nv_ma}}</td>
-                <td>{{$td ->nhanVien -> nv_hoTen}}</td>
-                <td>{{$td -> td_ngay->format('d/m/Y')}}</td>
-                <td>{{$td -> td_ngheTruocDay}}</td>
-                <td>{{$td -> td_coQuanTuyen}}</td>
-                <td>{{$td -> chucVu->cvu_ten}}</td>
-                <td>{{$td ->td_ngayLam->format('d/m/Y')}}</td>
-                <td>{{$td -> congViec->cv_ten}}</td>
-                <td>{{$td -> td_soTruong}}</td>
-            </tr>
+            @foreach($dsrole as $role)
+                <tr>
+                    <td align="center">{{$role->role_ma}}</td>
+                    <td>{{$role ->role_ten}}</td>
+                    <td>{{$role ->role_mota}}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>

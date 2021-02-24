@@ -335,6 +335,31 @@
                 </ul>
             </li>
             @endcan
+            @can('view', App\Role::class)
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/role')||request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-baby"></i>
+                    <p>
+                        Role
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.role.index')}}" class="{{ request()->is('admin/role')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.role.create')}}" class="{{ request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/lichsubanthan')||request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-history"></i>
@@ -614,8 +639,7 @@
                 </ul>
             </li>
             @endcan
-            @can('admin')
-            <li class="nav-header">Thống kê thông tin nhân viên</li>
+            @can('xemThongKe')
             <li class="nav-item">
                 <a href="{{route('admin.thongke.index')}}" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
