@@ -1,95 +1,153 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="vn">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <title>ShinHRM</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="icon" href="{{ asset('storage/images/shin.png') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro';
+        }
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+        body {
+            background-color: blanchedalmond;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
 
-            .full-height {
-                height: 100vh;
-            }
+        .navbar {
+            position: fixed;
+            width: 100%;
+            height: 50px;
+            top: 0;
+            z-index: 100;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        .navbar ul {
+            list-style-type: none;
+        }
 
-            .position-ref {
-                position: relative;
-            }
+        .navbar ul li {
+            float: right;
+            line-height: 50px;
+            margin: 0 10px;
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .navbar ul li a {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
 
-            .content {
-                text-align: center;
-            }
+        .body {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .content {
+            position: relative;
+            padding: 20px;
+        }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        #logo {
+            font-size: 100px;
+            font-weight: lighter;
+            padding: 0px 40px 0px 20px;
+            border-radius: 0px 60px 60px 0px;
+        }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+        #logo span{
+            position: relative;
+            display: inline-block;
+        }
+        #slogan {
+            text-align: right;
+            padding-right: 40px;
+        }
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+        #slogan span{
+            position: relative;
+            display: inline-block;
+        }
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+        .content img {
+            position: absolute;
+            height: 300px;
+            left: -200px;
+            top: -40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <ul>
+            @auth
+            <li><a href="{{ route('admin') }}">Dashboard</a></li>
+            @else
+            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+            @endauth
+            <li><a href="">Liên hệ</a></li>
+        </ul>
+    </div>
+    <div class="body">
+        <div class="content">
+            <img src="{{asset('storage/images/shin.png')}}" alt="">
+            <div id="logo">ShinHRM</div>
+            <div id="slogan">Shin Human Resource Management</div>
         </div>
-    </body>
+    </div>
+    <script src="{{asset('vendor/animejs/anime.min.js')}}"></script>
+    <script>
+        const text = document.querySelector('#slogan');
+        text.innerHTML = text.textContent.replace(/\S/g, '<span>$&</span>');
+        const text2 = document.querySelector('#logo');
+        text2.innerHTML = text2.textContent.replace(/\S/g, '<span>$&</span>');
+        anime({
+            targets: '.content img',
+            translateX: [-100, 0],
+            easing: 'easeOutExpo',
+            duration: 1500
+        });
+        anime({
+            targets: '#logo span',
+            translateX: [-100, 0],
+            opacity: [0, 1],
+            easing: 'easeOutExpo',
+            duration: 1500,
+            delay: anime.stagger(100),
+        })
+        anime({
+            targets: '#slogan span',
+            easing: 'easeInOutExpo',
+            translateX: [function(){
+                return anime.random(-100, 100)
+            }, 0],
+            translateY: [function(){
+                return anime.random(-100, 100)
+            }, 0],
+            rotate: [function(){
+                return anime.random(-360, 360)
+            }, 0],
+            opacity: [0, 1],
+            duration: 1500,
+            delay: anime.stagger(20),
+        })
+    </script>
+</body>
+
 </html>

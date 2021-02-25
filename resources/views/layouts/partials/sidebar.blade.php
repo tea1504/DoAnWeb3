@@ -360,6 +360,7 @@
                 </ul>
             </li>
             @endcan
+            @can('view', App\LichSuBanThan::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/lichsubanthan')||request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-history"></i>
@@ -383,6 +384,7 @@
                     </li>
                 </ul>
             </li>
+            @endcan
             @can('admin')
             <li class="nav-header">Quản lý thông tin chung</li>
             <li class="nav-item has-treeview">

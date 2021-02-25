@@ -22,7 +22,7 @@ class RolePolicy
      * @param  \App\Role  $role
      * @return mixed
      */
-    public function view(Nhanvien $user, Role $role)
+    public function view(Nhanvien $user)
     {
         return $user->role_ma === 1;
     }
