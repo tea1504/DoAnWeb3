@@ -72,6 +72,8 @@ Liên hệ
                     "mes": $scope.frmLienHe.mes.$viewValue,
                     "_token": "{{ csrf_token() }}",
                 };
+                $scope.email = '';
+                $scope.mes = '';
                 $http({
                         url: "{{ route('admin.lienhe.guiloinhan') }}",
                         method: "POST",

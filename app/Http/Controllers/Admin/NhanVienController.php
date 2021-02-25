@@ -63,23 +63,23 @@ class NhanVienController extends Controller
         $result = NhanVien::find($id);
         if (Luong::where('nv_ma', $id)->first() == null) {
             Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về LƯƠNG');
-            return redirect(route('admin.nhanvien.index'));
+            return redirect()->back();
         }
         if (TuyenDung::where('nv_ma', $id)->first() == null) {
             Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về TUYỂN DỤNG');
-            return redirect(route('admin.nhanvien.index'));
+            return redirect()->back();
         }
         if (QueQuan::where('nv_ma', $id)->first() == null) {
             Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về QUÊ QUÁN');
-            return redirect(route('admin.nhanvien.index'));
+            return redirect()->back();
         }
         if (NoiSinh::where('nv_ma', $id)->first() == null) {
             Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về NƠI SINH');
-            return redirect(route('admin.nhanvien.index'));
+            return redirect()->back();
         }
         if (LichSuBanThan::where('nv_ma', $id)->first() == null) {
             Session::flash('alert-error', 'Tài khoản chưa đủ thông tin cần cập nhật thông tin về LỊCH SỬ BẢN THÂN');
-            return redirect(route('admin.nhanvien.index'));
+            return redirect()->back();
         }
         return view('admin.nhanvien.show')
             ->with('nv', $result);

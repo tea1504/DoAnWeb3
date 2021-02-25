@@ -130,8 +130,8 @@
                                 <button type="submit" class="btn btn-primary" ng-disabled="dangNhap.$invalid">
                                     Đăng nhập
                                 </button>
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Quên mật khẩu?
+                                <a class="btn btn-link" href="{{route('lienhe')}}">
+                                    Liên hệ với quản trị viên để được cấp tài khoản mới.
                                 </a>
                             </div>
                         </div>

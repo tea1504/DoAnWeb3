@@ -24,6 +24,6 @@ class Bac extends Model
         return $this->hasMany('App\Luong', 'b_ma', 'b_ma');
     }
     public function dsNgach(){
-        return $this->belongsToMany('App\Ngach', 'ngach_bac', 'ng_ma', 'b_ma');
+        return $this->belongsToMany('App\Ngach', 'ngach_bac', 'b_ma', 'ng_ma')->withPivot('nb_heSoLuong');
     }
 }

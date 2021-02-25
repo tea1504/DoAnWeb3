@@ -116,3 +116,7 @@ Route::resource('admin/huyen', 'Admin\HuyenController', ['as' => 'admin'])->midd
 Route::resource('admin/xa', 'Admin\XaController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
 Route::resource('admin/loaivbcc', 'Admin\LoaiVBCCController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
 Route::resource('admin/phucap', 'Admin\PhuCapController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+
+Route::get('/lienhe', function(){
+    return view('lienhe');
+})->name('lienhe');

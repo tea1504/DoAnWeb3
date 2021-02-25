@@ -24,7 +24,7 @@ class UserController extends Controller
         $id = Session::get('user')[0]->nv_ma;
         if (Luong::where('nv_ma', $id)->first() == null || TuyenDung::where('nv_ma', $id)->first() == null || QueQuan::where('nv_ma', $id)->first() == null || NoiSinh::where('nv_ma', $id)->first() == null || LichSuBanThan::where('nv_ma', $id)->first() == null) {
             Session::flash('alert-error', 'Tài khoản chưa đủ thông tin hãy liên hệ với quản trị viên để bổ sung thông tin');
-            return redirect(route('admin'));
+            return redirect()->back();
         }
         return view('user.index')
             ->with('d', NhanVien::find($id));

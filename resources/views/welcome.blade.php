@@ -70,16 +70,17 @@
             border-radius: 0px 60px 60px 0px;
         }
 
-        #logo span{
+        #logo span {
             position: relative;
             display: inline-block;
         }
+
         #slogan {
             text-align: right;
             padding-right: 40px;
         }
 
-        #slogan span{
+        #slogan span {
             position: relative;
             display: inline-block;
         }
@@ -101,12 +102,12 @@
             @else
             <li><a href="{{ route('login') }}">Đăng nhập</a></li>
             @endauth
-            <li><a href="">Liên hệ</a></li>
+            <li><a href="{{ route('lienhe') }}">Liên hệ</a></li>
         </ul>
     </div>
     <div class="body">
         <div class="content">
-            <img src="{{asset('storage/images/shin.png')}}" alt="">
+            <img src="{{asset('storage/images/shin.png')}}" id="anh" alt="">
             <div id="logo">ShinHRM</div>
             <div id="slogan">Shin Human Resource Management</div>
         </div>
@@ -119,7 +120,8 @@
         text2.innerHTML = text2.textContent.replace(/\S/g, '<span>$&</span>');
         anime({
             targets: '.content img',
-            translateX: [-100, 0],
+            translateX: [-1000, 0],
+            opacity: [0, 1],
             easing: 'easeOutExpo',
             duration: 1500
         });
@@ -127,28 +129,39 @@
             targets: '#logo span',
             translateX: [-100, 0],
             opacity: [0, 1],
-            easing: 'easeOutExpo',
+            color: [function() {
+                return "#" + Math.floor(Math.random() * 16777215).toString(16);
+            }, '#000000'],
+            easing: 'easeOutElastic',
             duration: 1500,
             delay: anime.stagger(100),
         })
         anime({
             targets: '#slogan span',
-            easing: 'easeInOutExpo',
-            translateX: [function(){
+            easing: 'easeOutElastic',
+            translateX: [function() {
                 return anime.random(-1000, 1000)
             }, 0],
-            translateY: [function(){
+            translateY: [function() {
                 return anime.random(-1000, 1000)
             }, 0],
-            rotate: [function(){
+            rotate: [function() {
                 return anime.random(-360, 360)
             }, 0],
-            scale: [function(){
-                return anime.random(5, 10)
+            scale: [function() {
+                return anime.random(5, 20)
             }, 1],
+            color: [function() {
+                return "#" + Math.floor(Math.random() * 16777215).toString(16);
+            }, function() {
+                return "#" + Math.floor(Math.random() * 16777215).toString(16);
+            }, function() {
+                return "#" + Math.floor(Math.random() * 16777215).toString(16);
+            }, '#000000'],
+            fontWeight: ['bold', 'bold', 'normal'],
             opacity: [0, 1],
             duration: 1500,
-            delay: anime.stagger(50),
+            delay: anime.stagger(50)
         })
     </script>
 </body>

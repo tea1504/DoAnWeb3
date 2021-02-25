@@ -363,7 +363,7 @@ Biểu mẫu Phiếu in danh sách cán bộ
                     <?php
                     $result = "";
                     foreach ($nv->dsKyLuat as $kl) {
-                        $result = $kl->kl_lyDo . ', năm ' . (getdate(strtotime($kt->kl_ngayKy))['year']);
+                        $result = $kl->kl_lyDo . ', năm ' . (getdate(strtotime($kl->kl_ngayKy))['year']);
                     }
                     echo $result
                     ?>
