@@ -32,7 +32,8 @@ Thêm khen thưởng
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Danh sách khen thưởng</li>
+    <li class="breadcrumb-item"><a href="{{route('admin.khenthuong.index')}}">Danh sách khen thưởng</a></li>
+    <li class="breadcrumb-item active">Thêm mới danh sách khen thưởng</li>
 </ol>
 @endsection
 @section('content')

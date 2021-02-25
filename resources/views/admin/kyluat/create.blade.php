@@ -32,7 +32,8 @@ Thêm khen thưởng
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Danh sách khen thưởng</li>
+    <li class="breadcrumb-item"><a href="{{route('admin.kyluat.index')}}">Danh sách kỷ luật</a></li>
+    <li class="breadcrumb-item active">Danh sách kỷ luật</li>
 </ol>
 @endsection
 @section('content')
@@ -109,7 +110,7 @@ Thêm khen thưởng
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Thêm mới</button>
-                            <a href="{{route('admin.vanbang.index')}}" class="btn btn-secondary">Trở về</a>
+                            <a href="{{route('admin.kyluat.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
                     </form>
                        

@@ -36,18 +36,6 @@ Danh sách khen thưởng
     </div>
     @endif
     <div class="row">
-        <div class="col">
-            <div class="row">
-                <div class="col-md-6">
-                    <select name="nhanVien" id="nhanVien" class="form-control">
-                        <option value="" selected>Tất cả</option>
-                        @foreach($dsnv as $nv)
-                        <option value="{{$nv->nv_ma}}">{{$nv->nv_hoTen}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </div>
         <div class="col text-right">
             <div class="btn-group" role="group">
                 <a href="{{ route('admin.khenthuong.create') }}" id="add" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>

@@ -95,10 +95,11 @@ Danh sách kỷ luật
                                 <td>
                                     <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     
-                                    <form class="fDelete btn p-0" method="POST" action="{{ route('admin.kyluat.destroy', ['id' => $kl->kl_ma]) }}" data-id="{{ $kl->kl_ma }}" data-toggle="tooltip" data-placement="top" title="Xóa">
-                                    {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                                <button type="sumbit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <form name="frmDelete" id="frmDelete" class="frmDelete btn p-0"  action="{{route('admin.kyluat.destroy', ['id'=>$kl->kl_ma])}}" method="POST"
+                                        data-id="{{$kl->kl_ma}}" data-nv="{{$kl -> nhanVienKL -> nv_hoTen}}"  novalidate>
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -225,6 +226,55 @@ Danh sách kỷ luật
 
                 }
             );
+    });
+    $('.frmDelete').click(function(e) {
+        e.preventDefault();
+        var dataSend = {
+            'id': $(this).data('id'),
+            '_token': '{{csrf_token()}}',
+            '_method': 'DELETE'
+        };
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa ?',
+            html: 'Dữ liệu tuyển dụng của nhân viên <strong>' + $(this).data('nv') + '</strong> sẽ không thể phục hồi lại được',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'post',
+                    url: $(this).attr('action'),
+                    data: dataSend,
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Đã xóa thành công'
+                        }).then(function() {
+                            window.location = "{{route('admin.kyluat.index')}}"
+                        })
+                    },
+                    error: function(response) {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger',
+                            title: '<i class="fas fa-exclamation-circle"></i> Thất bại',
+                            autohide: true,
+                            delay: 2000,
+                            body: "Đã xảy ra lỗi trong khi xóa dữ liệu. Hãy thử lại sau."
+                        })
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Đã hủy xóa',
+                    icon: 'info',
+                    timer: 1000,
+                })
+            }
+        })
     });
 </script>
 
