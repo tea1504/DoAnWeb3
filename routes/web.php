@@ -47,7 +47,10 @@ Route::get('/admin/tuyendung/excel', 'Admin\TuyenDungController@excel')->name('a
 Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin'])->middleware('auth');
 Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create')->middleware('auth');
 
-Route::resource('/admin/kyluat', 'Admin\kyLuatController', ['as' => 'admin'])->middleware('auth');
+Route::get('/admin/kyluat/print', 'Admin\KyLuatController@print')->name('admin.kyluat.print');
+Route::get('/admin/kyluat/pdf', 'Admin\KyLuatController@pdf')->name('admin.kyluat.pdf');
+Route::get('/admin/kyluat/excel', 'Admin\KyLuatController@excel')->name('admin.kyluat.excel');
+Route::resource('/admin/kyluat', 'Admin\KyLuatController', ['as' => 'admin'])->middleware('auth');
 
 
 Route::get('/admin/quanhegiadinh/print', 'Admin\QuanHeGiaDinhController@print')->name('admin.quanhegiadinh.print');

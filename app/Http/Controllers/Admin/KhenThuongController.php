@@ -9,7 +9,10 @@ use App\NhanVien;
 use Carbon\Carbon;
 use Session;
 use App\Http\Requests\KhenThuongCreateRequest;
-
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\KhenThuongExport;
+use Maatwebsite\Excel\Facades\Excel as Excel;
+use App\Policies\KhenThuongPolicy;
 
 
 class KhenThuongController extends Controller
@@ -35,8 +38,10 @@ class KhenThuongController extends Controller
     {
         $mytime = Carbon::now();
         $ds_nv = NhanVien::all();
+        $ds_kt = KhenThuong::all();
         return view('admin.khenthuong.create')
         ->with('danhsachnhanvien',$ds_nv)
+        ->with('kt',$ds_kt)
         ->with('mytime',$mytime);
     }
 
@@ -51,11 +56,11 @@ class KhenThuongController extends Controller
         $kt = new KhenThuong();
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
-        $kt->kt_nguoiKy = $request->nv_ma;
+        $kt->kt_nguoiKy = $request->kt_nguoiKy;
         $kt->kt_lyDo = $request->kt_lyDo;
         $kt->kt_taoMoi = Carbon::now();
         $kt->kt_capNhat = Carbon::now();
-
+        //dd($kt->kt_nguoiKy);
         $kt->save();
         Session::flash('alert', 'Đã thêm mới thành công khen thưởng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.khenthuong.index');
@@ -102,11 +107,9 @@ class KhenThuongController extends Controller
     {
 
         $kt = KhenThuong::find($id);
-
-        $kt = KhenThuong::where("kt_ma", $id)->first();
         $kt->nv_ma = $request->nv_ma;
         $kt->kt_ngayKy = $request->kt_ngayKy;
-        $kt->kt_nguoiKy = $request->nv_ma;
+        $kt->kt_nguoiKy = $request->kt_nguoiKy;
         $kt->kt_lyDo = $request->kt_lyDo;
         $kt->kt_taoMoi =  Carbon::now();
         $kt->kt_capNhat =  Carbon::now();
@@ -132,5 +135,30 @@ class KhenThuongController extends Controller
         $kt2->delete();
         return redirect()->route('admin.khenthuong.index');
 
+    }
+
+    public function print()
+    {
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
+        return view('admin.khenthuong.print')
+            ->with('dskt', KhenThuong::all());
+    }
+    public function pdf($id = null)
+    {
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
+        $result = KhenThuong::all();
+        $data = [
+            'dskt' => $result,
+            'id' => $id,
+        ];
+        // return view('admin.vanbang.pdf')->with("dsvbcc", $result);
+        $pdf = PDF::loadView('admin.khenthuong.pdf', $data);
+        return $pdf->download('DanhSachKhenThuong.pdf');
+    }
+    public function excel()
+    {
+        //$this->authorize('inAn', VBCC::class);
+        // return view('admin.vanbang.excel')->with("dsvbcc", VBCC::all());
+        return Excel::download(new KhenThuongExport, 'DanhSachKhenThuong.xlsx');
     }
 }

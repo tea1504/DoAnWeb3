@@ -67,7 +67,7 @@ Chỉnh sửa danh sách kỷ luật
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Người ký : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                                <select name="nv_ma" ng-class="frmEdit.nv_ma.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="nv_ma" ng-required="true">
+                                <select name="kl_nguoiKy" id="nv_ma" value="{{$kl->nguoiKy}}" ng-class="frmEdit.nv_ma.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="nv_ma" ng-required="true">
                                     @foreach($danhsachnhanvien as $nhanvien)
                                         @if($nhanvien->nv_ma == $kl->kl_nguoiKy)
                                         <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_hoTen }}</option>

@@ -99,7 +99,7 @@
             @endcan
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ (request()->is('admin/quanhegiadinh'))?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-medal"></i>
+                    <i class="nav-icon fas fa-home"></i>
                     <p>
                         Quan hệ gia đình
                         <i class="right fas fa-angle-left"></i>
@@ -107,27 +107,17 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route('admin.quanhegiadinh.index') }}" class="{{ request()->is('admin/quanhegiadinh')?'active nav-link':'nav-link' }}">
-                            <i class="nav-icon fas fa-check-circle"></i>
-                            <p>Quan hệ gia đình</p>
-                            <i class="right ple ple-angle-left"></i>
+                        <a href="{{route('admin.quanhegiadinh.index')}}" class="{{ request()->is('admin/quanhegiadinh')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.quanhegiadinh.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-list-alt"></i>
-                                    <p>Danh sách</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/charts/flot.html" class="nav-link">
-                                    <i class="nav-icon fas fa-plus-circle"></i>
-                                    <p>Thêm mới</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{route('admin.quanhegiadinh.create')}}" class="{{ request()->is('admin/quanhegiadinh/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item has-treeview">
