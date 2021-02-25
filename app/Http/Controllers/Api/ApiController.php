@@ -194,8 +194,8 @@ class ApiController extends Controller
         $parameter = [
             'nv_ma' => $request->nv_ma
         ];
-        $result = DB::select('SELECT * FROM khenthuong AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma',$parameter);
-         return response()->json(array(
+        $result = DB::select('SELECT *,b.nv_hoTen AS nhanvien,c.nv_hoTen AS nguoiky FROM khenthuong AS a, nhanvien AS b, nhanvien AS c WHERE a.nv_ma = b.nv_ma and a.kt_nguoiKy=c.nv_ma',$parameter);
+        return response()->json(array(
             'code'  => 200,
             'result' => $result,
         ));

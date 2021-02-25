@@ -50,7 +50,7 @@ class KyLuatController extends Controller
         $kl = new KyLuat();
         $kl->nv_ma = $request->nv_ma;
         $kl->kl_ngayKy = $request->kl_ngayKy;
-        $kl->kl_nguoiKy = $request->nv_ma;
+        $kl->kl_nguoiKy = $request->kl_nguoiKy;
         $kl->kl_lyDo = $request->kl_lyDo;
         $kl->kl_taoMoi = Carbon::now();
         $kl->kl_capNhat = Carbon::now();
@@ -102,7 +102,7 @@ class KyLuatController extends Controller
         $kl->kl_lyDo = $request->kl_lyDo;
         $kl->kl_taoMoi = $request->kl_taoMoi;
         $kl->kl_capNhat = $request->kl_capNhat;
-
+        dd($kl);
         $kl->save();
         Session::flash('alert', 'Đã cập nhật thành công kỷ luật cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.kyluat.index');
