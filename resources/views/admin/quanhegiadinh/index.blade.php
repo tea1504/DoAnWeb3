@@ -89,7 +89,7 @@ Danh sách quan hệ gia đình
 <script src="{{ asset('themes/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('themes/AdminLTE/plugins/toastr/toastr.min.js') }}"></script>
 <script>
-    $('.toast').toast('show');
+    //$('.toast').toast('show');
 
     var table = $('#myTable').DataTable({
         ajax: {
@@ -302,7 +302,7 @@ Danh sách quan hệ gia đình
         table.ajax.reload();
         $('#add').attr('href', getLink() + "/" + $('#nhanVien').val())
         //$('#print').attr('href', "{{route('admin.quanhegiadinh.print')}}" + "/" + $('#nhanVien').val());
-        $('#pdf').attr('href', "{{route('admin.quanhegiadinh.pdf')}}" + "/" + $('#nhanVien').val());
+        //$('#pdf').attr('href', "{{route('admin.quanhegiadinh.pdf')}}" + "/" + $('#nhanVien').val());
     });
 
     

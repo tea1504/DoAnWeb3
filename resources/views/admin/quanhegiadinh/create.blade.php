@@ -9,7 +9,7 @@ Thêm mới quan hệ gia đình
 @section('duongdan')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{route('admin.quanhegiadinh.index')}}">Danh sách văn bằng chứng chỉ</a></li>
+    <li class="breadcrumb-item"><a href="{{route('admin.quanhegiadinh.index')}}">Danh sách quan hệ gia đình</a></li>
     <li class="breadcrumb-item active">Thêm mới quan hệ gia đình</li>
 </ol>
 @endsection
@@ -18,7 +18,7 @@ Thêm mới quan hệ gia đình
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-cyan h1 font-weight-bold">Thêm mới văn bằng chứng chỉ</div>
+                <div class="card-header bg-cyan h1 font-weight-bold">Thêm mới quan hệ gia đình</div>
                 <div class="card-body">
                     <form name="frmCreate" id="frmCreate" method="POST" action="{{route('admin.quanhegiadinh.store')}}" novalidate>
                         {{ csrf_field() }}

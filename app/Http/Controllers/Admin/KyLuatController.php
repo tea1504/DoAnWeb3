@@ -123,9 +123,8 @@ class KyLuatController extends Controller
     public function destroy($id)
     {
         $kl = KyLuat::find($id);
-
-
         $kl->delete();
+        Session::flash('alert', 'Đã xóa dữ liệu thành công ');
         return redirect()->route('admin.kyluat.index'); 
     }
 
