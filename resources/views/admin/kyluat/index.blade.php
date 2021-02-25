@@ -58,9 +58,10 @@ Danh sách kỷ luật
             <div class="btn-group" role="group">
                 <a href="{{ route('admin.kyluat.create') }}">
                     <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
-                </a>                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></button>
-                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excell"><i class="fas fa-file-excel"></i></button>
-                <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></button>
+                </a> 
+                <a href="{{ route('admin.kyluat.print') }}" id="print" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
+                <a href="{{route('admin.kyluat.excel')}}" id="excel" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
+                <a href="{{route('admin.kyluat.pdf')}}" id="pdf" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
             </div>
         </div>
     </div>
@@ -72,8 +73,7 @@ Danh sách kỷ luật
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Mã kỷ luật</th>
-                                <th>Tên</th>
+                                <th>Nhân viên</th>
                                 <th>Ngày ký</th>
                                 <th>Người ký</th>
                                 <th>Lý do</th>
@@ -86,7 +86,6 @@ Danh sách kỷ luật
                             @foreach($danhsachkyluat as $kl)
                             <tr>
                                 <td>{{$loop->index+1}}</td>
-                                <td>{{$kl->kl_ma}}</td>
                                 <td>{{$kl->nhanVienKL->nv_hoTen}}</td>
                                 <td>{{$kl->kl_ngayKy->format('d/m/Y')}}</td>
                                 <td>{{$kl->nguoiKy->nv_hoTen }}</td>

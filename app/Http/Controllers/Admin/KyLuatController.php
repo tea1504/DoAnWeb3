@@ -9,6 +9,12 @@ use App\NhanVien;
 use Carbon\Carbon;
 use Session;
 use App\Http\Requests\KyLuatCreateRequest;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\KyLuatExport;
+use Maatwebsite\Excel\Facades\Excel as Excel;
+use App\Policies\KyLuatPolicy;
+
+
 class KyLuatController extends Controller
 {
     /**
@@ -98,11 +104,11 @@ class KyLuatController extends Controller
         $kl = KyLuat::where("kl_ma", $id)->first();
         $kl->nv_ma = $request->nv_ma;
         $kl->kl_ngayKy = $request->kl_ngayKy;
-        $kl->kl_nguoiKy = $request->nv_ma;
+        $kl->kl_nguoiKy = $request->kl_nguoiKy;
         $kl->kl_lyDo = $request->kl_lyDo;
         $kl->kl_taoMoi = $request->kl_taoMoi;
         $kl->kl_capNhat = $request->kl_capNhat;
-        dd($kl);
+        //dd($kl);
         $kl->save();
         Session::flash('alert', 'Đã cập nhật thành công kỷ luật cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);
         return redirect()->route('admin.kyluat.index');
@@ -121,5 +127,30 @@ class KyLuatController extends Controller
 
         $kl->delete();
         return redirect()->route('admin.kyluat.index'); 
+    }
+
+    public function print()
+    {
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
+        return view('admin.kyluat.print')
+            ->with('dskl', KyLuat::all());
+    }
+    public function pdf($id = null)
+    {
+        //$this->authorize('inAn', QuanHeGiaDinh::class);
+        $result = KyLuat::all();
+        $data = [
+            'dskl' => $result,
+            'id' => $id,
+        ];
+        // return view('admin.vanbang.pdf')->with("dsvbcc", $result);
+        $pdf = PDF::loadView('admin.kyluat.pdf', $data);
+        return $pdf->download('DanhSachKyLuat.pdf');
+    }
+    public function excel()
+    {
+        //$this->authorize('inAn', VBCC::class);
+        // return view('admin.vanbang.excel')->with("dsvbcc", VBCC::all());
+        return Excel::download(new KyLuatExport, 'DanhSachKyLuat.xlsx');
     }
 }

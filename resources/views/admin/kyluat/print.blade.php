@@ -1,7 +1,7 @@
 @extends('print.layouts.paper')
 
 @section('title')
-Biểu mẫu Phiếu in danh sách khen thưởng
+Biểu mẫu Phiếu in danh sách kỷ luật
 @endsection
 
 @section('paper-size') A4 @endsection
@@ -99,26 +99,26 @@ Biểu mẫu Phiếu in danh sách khen thưởng
             <tbody>
                 <?php $i=1; ?>
                 @if(isset($id))
-                @foreach($dskt as $kt)
-                @if($id==$qhgd->nv_ma)
+                @foreach($dskl as $kl)
+                @if($id==$kl->nv_ma)
                 <tr>
                     <td align="center">{{$i++}}</td>
-                    <td>{{$kt->nhanVienKL->nv_hoTen}}</td>
-                    <td>{{$kt->kt_ngayKy}}</td>
-                    <td>{{$kt->nguoiKy->nv_hoTen}}</td>
-                    <td>{{$kt->kt_lyDo}}</td>
+                    <td>{{$kl->nhanVienKL->nv_hoTen}}</td>
+                    <td>{{$kl->kl_ngayKy->format('d/m/Y')}}</td>
+                    <td>{{$kl->nguoiKy->nv_hoTen }}</td>
+                    <td>{{$kl->kl_lyDo}}</td>
                 </tr>
                 @endif
                 @endforeach
                 @else
-                @foreach($dskt as $kt)
+                @foreach($dskl as $kl)
                 <tr>
                 <tr>
                     <td align="center">{{$i++}}</td>
-                    <td>{{$kt->nhanVien->nv_hoTen}}</td>
-                    <td>{{$kt->kt_ngayKy}}</td>
-                    <td>{{$kt->nguoiKy->nv_hoTen}}</td>
-                    <td>{{$kt->kt_lyDo}}</td>
+                    <td>{{$kl->nhanVienKL->nv_hoTen}}</td>
+                    <td align="center">{{$kl->kl_ngayKy->format('d/m/Y')}}</td>
+                    <td>{{$kl->nguoiKy->nv_hoTen }}</td>
+                    <td>{{$kl->kl_lyDo}}</td>
                 </tr>
                 @endforeach
                 @endif
