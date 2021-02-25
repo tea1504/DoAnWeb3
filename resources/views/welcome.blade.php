@@ -135,17 +135,20 @@
             targets: '#slogan span',
             easing: 'easeInOutExpo',
             translateX: [function(){
-                return anime.random(-100, 100)
+                return anime.random(-1000, 1000)
             }, 0],
             translateY: [function(){
-                return anime.random(-100, 100)
+                return anime.random(-1000, 1000)
             }, 0],
             rotate: [function(){
                 return anime.random(-360, 360)
             }, 0],
+            scale: [function(){
+                return anime.random(5, 10)
+            }, 1],
             opacity: [0, 1],
             duration: 1500,
-            delay: anime.stagger(20),
+            delay: anime.stagger(50),
         })
     </script>
 </body>
