@@ -34,6 +34,22 @@ Dashboard
 @endsection
 @section('content')
 <div class="container-fluid" ng-controller="dashboardController">
+    @if (Session::has('alert-error'))
+    <div aria-live="polite" aria-atomic="true" class="flex-column justify-content-center align-items-center" style="position: fixed; top:0; right:0; z-index: 100000;">
+        <div class="toast bg-danger m-2" data-delay="10000" role="alert" aria-live="assertive" aria-atomic="true" style="width: 400px;">
+            <div class="toast-header">
+                <img src="{{asset('storage/images/shin.gif')}}" class="rounded mr-2 bg-light" height="30px" alt="...">
+                <strong class="mr-auto">Lỗi</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" style="outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{Session::get('alert-error')}}
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col-lg-3 col-6">
             <div class="small-box bg-purple">
@@ -75,7 +91,9 @@ Dashboard
                 <div class="icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
+                @can('viewAny', App\TuyenDung::class)
                 <a href="{{route('admin.tuyendung.index')}}" class="small-box-footer">Thông tin thêm <i class="fas fa-arrow-circle-right"></i></a>
+                @endcan
             </div>
         </div>
         <div class="col-lg-3 col-6">
@@ -107,11 +125,11 @@ Dashboard
                             <img src="{{asset('storage/avatar/'.Session::get('user')[0]->nv_anh)}}" alt="user image" ng-class="['img-circle elevation-2 bg-white', {'opacity-50': show}]" height="100px">
                         </div>
                         <div ng-class="{detail: show, 'hide-detail': !show}" style="height: 100%; width:100%; background-color: #0008; display: flex; justify-content: center; align-items: center; position: absolute; top: 0; left: 0; transition: .2s;">
-                            <a href="" class="text-white">
+                            <a href="{{route('user.index')}}" class="text-white">
                                 <h1>Đi đến <i class="fas fa-arrow-circle-right"></i></h1>
                             </a>
                         </div>
-                        <a href="" ng-class="['small-box-footer', {'opacity-50': show}]">Đi đến</a>
+                        <a href="{{route('user.index')}}" ng-class="['small-box-footer', {'opacity-50': show}]">Đi đến</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -188,6 +206,7 @@ Dashboard
 @endsection
 @section('custom-scripts')
 <script>
+    $('.toast').toast('show');
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })

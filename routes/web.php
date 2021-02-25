@@ -41,11 +41,11 @@ Route::get('/admin/nhanvien/pdf', 'Admin\NhanVienController@pdf')->name('admin.n
 Route::get('/admin/nhanvien/excel', 'Admin\NhanVienController@excel')->name('admin.nhanvien.excel');
 Route::resource('/admin/nhanvien', 'Admin\NhanVienController', ['as' => 'admin']);
 
-Route::get('/admin/tuyendung/print', 'Admin\TuyenDungController@print')->name('admin.tuyendung.print');
-Route::get('/admin/tuyendung/pdf', 'Admin\TuyenDungController@pdf')->name('admin.tuyendung.pdf');
-Route::get('/admin/tuyendung/excel', 'Admin\TuyenDungController@excel')->name('admin.tuyendung.excel');
-Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin']);
-Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create');
+Route::get('/admin/tuyendung/print', 'Admin\TuyenDungController@print')->name('admin.tuyendung.print')->middleware('auth');
+Route::get('/admin/tuyendung/pdf', 'Admin\TuyenDungController@pdf')->name('admin.tuyendung.pdf')->middleware('auth');
+Route::get('/admin/tuyendung/excel', 'Admin\TuyenDungController@excel')->name('admin.tuyendung.excel')->middleware('auth');
+Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin'])->middleware('auth');
+Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create')->middleware('auth');
 
 Route::get('/admin/kyluat/print', 'Admin\KyLuatController@print')->name('admin.kyluat.print');
 Route::get('/admin/kyluat/pdf', 'Admin\KyLuatController@pdf')->name('admin.kyluat.pdf');
@@ -95,4 +95,24 @@ Route::get('/admin/noisinh/pdf', 'Admin\NoiSinhController@pdf')->name('admin.noi
 Route::get('/admin/noisinh/excel', 'Admin\NoiSinhController@excel')->name('admin.noisinh.excel')->middleware('auth');
 Route::resource('admin/noisinh', 'Admin\NoiSinhController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/role/print', 'Admin\RoleController@print')->name('admin.role.print')->middleware('auth');
+Route::get('/admin/role/pdf', 'Admin\RoleController@pdf')->name('admin.role.pdf')->middleware('auth');
+Route::get('/admin/role/excel', 'Admin\RoleController@excel')->name('admin.role.excel')->middleware('auth');
+Route::resource('/admin/role','Admin\RoleController', ['as' => 'admin'])->middleware('auth');
+
+Route::resource('admin/lichsubanthan', 'Admin\LichSuBanThanController', ['as' => 'admin'])->middleware('auth');
+
 Route::resource('admin/user', 'Admin\UserController')->middleware('auth');
+Route::get('admin/thongke', 'Admin\ThongKeController@index')->name('admin.thongke.index')->middleware('auth');
+
+Route::resource('admin/chucvu', 'Admin\ChucVuController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/congviec', 'Admin\CongViecController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/dantoc', 'Admin\DanTocController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/tongiao', 'Admin\TonGiaoController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/donvi', 'Admin\DonViController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/donviquanly', 'Admin\DonViQuanLyController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/tinh', 'Admin\TinhController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/huyen', 'Admin\HuyenController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/xa', 'Admin\XaController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/loaivbcc', 'Admin\LoaiVBCCController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
+Route::resource('admin/phucap', 'Admin\PhuCapController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);

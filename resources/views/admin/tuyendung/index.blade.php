@@ -13,8 +13,8 @@ Danh sách tuyển dụng
     table#myTable tr th {
         width: 540px;
     }
-    .btn{
-        font-size:small;
+    a .btn{
+        font-size:medium;
     }
 </style>
 @endsection
@@ -48,7 +48,7 @@ Danh sách tuyển dụng
                         <thead>
                             <tr>
                                 <th width="5px">Mã tuyển dụng</th>
-                                <th>Mã nhân viên</th>
+                                <th>Tên nhân viên</th>
                                 <th>Ngày tuyển dụng</th>
                                 <th>Nghề nghiệp trước đó</th>
                                 <th>Cơ quan tuyển dụng</th>

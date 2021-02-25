@@ -37,6 +37,15 @@ Phiếu in danh sách tuyển dụng
     b {
         font-family: Arial, Helvetica, sans-serif;
     }
+    thead tr {
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    #printTable tbody tr:nth-child(odd) {
+        background-color: #ddd;
+    }
+
 </style>
 @endsection
 
@@ -65,7 +74,7 @@ Phiếu in danh sách tuyển dụng
                 </td>
             </tr>
         </table>
-        <table border="1" cellspacing="0" cellpadding="3" style="border: none; margin-top: 20px;" class="table table-striped table-hover table-responsive">
+        <table border="1" id="printTable" cellspacing="0" cellpadding="3" style="border: none; margin-top: 20px;" >
             <thead>
                 <tr>
                     <th colspan="10" style="font-size: 20px;">Danh sách tuyển dụng</th>

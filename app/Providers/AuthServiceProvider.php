@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Http\Controllers\Auth\CustomUserProvider;
 use App\Luong;
+use App\LichSuBanThan;
 use App\NhanVien;
 use App\NoiSinh;
+use App\Policies\LichSuBanThanPolicy;
 use App\Policies\LuongPolicy;
 use App\VBCC;
 use App\Policies\VanBangPolicy;
@@ -21,7 +23,8 @@ use App\Policies\QueQuanPolicy;
 use App\Policies\ThongTinChungPolicy;
 use App\QueQuan;
 use App\User;
-
+use App\Policies\RolePolicy;
+use App\Role;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -38,6 +41,8 @@ class AuthServiceProvider extends ServiceProvider
         User::class => ThongTinChungPolicy::class,
         QueQuan::class => QueQuanPolicy::class,
         NoiSinh::class => NoiSinhPolicy::class,
+        Role::class => RolePolicy::class,
+        LichSuBanThan::class => LichSuBanThanPolicy::class,
     ];
 
     /**
@@ -51,7 +56,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //
         
-        Gate::define('xemThongKe', function($user){
+        Gate::define('admin', function($user){
             return $user->role_ma === 1;
         });
         $this->app->auth->provider('custom', function ($app, array $config) {
