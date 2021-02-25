@@ -95,11 +95,13 @@ Thêm mới quan hệ gia đình
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Nước ngoài : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                            <input type="number" name="qhgd_nuocNgoai" id="qhgd_nuocNgoaiqhgd_nuocNgoai" value="{{old('qhgd_nuocNgoai')}}" ng-class="frmCreate.qhgd_nuocNgoai.$touched?frmCreate.qhgd_nuocNgoai.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_nuocNgoai" ng-required="true">
-                                <div class="invalid-feedback">
-                                    <span ng-show="frmCreate.qhgd_nuocNgoai.$error.required">Bạn phải điền số người thân ở nước ngoài</span>
-                                </div>                         
-                            </div>
+                            <select name="qhgd_nuocNgoai" id="qhgd_nuocNgoai" value="{{old('qhgd_nuocNgoai')}}" ng-class="frmCreate.qhgd_nuocNgoai.$touched?frmCreate.qhgd_nuocNgoai.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" ng-model="qhgd_nuocNgoai" ng-required="true">
+                                <option value="1">Có người thân ở nước ngoài</option>
+                                <option value="2">Không có người thân ở nước ngoài</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                    <span ng-show="frmCreate.qhgd_nuocNgoai.$error.required">Bạn phải chọn mối quan hệ ở nước ngoài</span>
+                            </div>  
                         </div>                         
                             <button class="btn btn-primary" ng-disabled="frmCreate.$invalid">Thêm mới</button>
                             <a href="{{route('admin.quanhegiadinh.index')}}" class="btn btn-secondary">Trở về</a>

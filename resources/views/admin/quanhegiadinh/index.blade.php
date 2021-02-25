@@ -90,6 +90,7 @@ Danh sách quan hệ gia đình
 <script src="{{ asset('themes/AdminLTE/plugins/toastr/toastr.min.js') }}"></script>
 <script>
     //$('.toast').toast('show');
+    $('.toast').toast('show');
 
     var table = $('#myTable').DataTable({
         ajax: {
@@ -118,7 +119,11 @@ Danh sách quan hệ gia đình
                 data: "qhgd_ngheNghiep"
             },
             {
-                data: "qhgd_nuocNgoai"
+                data: "qhgd_nuocNgoai",
+                render: function(data, type, row, meta) {
+                    return data==1?"có quan hệ ở nước ngoài":"không có quan hệ ở nước ngoài";
+                  
+                }          
             },
             {
                 data: "qhgd_taoMoi",

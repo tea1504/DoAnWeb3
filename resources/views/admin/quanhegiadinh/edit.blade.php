@@ -114,12 +114,15 @@ Sửa đổi quan hệ gia đình
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Nước ngoài : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
-                            <input type="number" name="qhgd_nuocNgoai" id="qhgd_nuocNgoai" value="{{old('qhgd_nuocNgoai',$qhgd->qhgd_nuocNgoai)}}" ng-class="frmEdit.qhgd_nuocNgoai.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="qhgd_nuocNgoai" ng-required="true">
+                            <select name="qhgd_nuocNgoai" id="qhgd_nuocNgoai" value="{{old('qhgd_nuocNgoai',$qhgd->qhgd_nuocNgoai)}}" ng-class="frmEdit.qhgd_nuocNgoai.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="qhgd_nuocNgoai" ng-required="true">
+                                <option value="1" {{ $qhgd->qhgd_nuocNgoai == 1 ? 'selected' : '' }}>Có quan hệ ở nước ngoài</option>
+                                <option value="2" {{ $qhgd->qhgd_nuocNgoai == 2 ? 'selected' : '' }}>Không có quan hệ ở nước ngoài</option>
+                            </select>                               
                                 <div class="invalid-feedback">
-                                    <span ng-show="frmEdit.qhgd_nuocNgoai.$error.required">Bạn phải điền số người thân ở nước ngoài</span>
-                                </div>                         
+                                    <span ng-show="frmEdit.qhgd_nuocNgoai.$error.required">Bạn phải chọn quan hệ ở nước ngoài</span>
+                                </div>
                             </div>
-                        </div>                         
+                                              
                             <button class="btn btn-primary" ng-disabled="frmEdit.$invalid">Cập nhật</button>
                             <a href="{{route('admin.quanhegiadinh.index')}}" class="btn btn-secondary">Trở về</a>
                         </div>
