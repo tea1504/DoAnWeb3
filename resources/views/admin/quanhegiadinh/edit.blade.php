@@ -115,8 +115,8 @@ Sửa đổi quan hệ gia đình
                             <label class="col-lg-2 col-md-3 col-sm-4 col-form-label">Nước ngoài : </label>
                             <div class="col-lg-10 col-md-9 col-sm-8">
                                 <select name="qhgd_nuocNgoai" id="qhgd_nuocNgoai" value="{{old('qhgd_nuocNgoai',$qhgd->qhgd_nuocNgoai)}}" ng-class="frmEdit.qhgd_nuocNgoai.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="qhgd_nuocNgoai" ng-required="true">
-                                    <option value="1">Có quan hệ ở nước ngoài</option>
-                                    <option value="0">Không có quan hệ ở nước ngoài</option>
+                                    <option value="1">Sống ở nước ngoài</option>
+                                    <option value="0">Sống ở trong nước</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     <span ng-show="frmEdit.qhgd_nuocNgoai.$error.required">Bạn phải chọn quan hệ ở nước ngoài</span>

@@ -112,7 +112,6 @@ class QuanHeGiaDinhController extends Controller
         $qhgd->qhgd_diaChi = $request->qhgd_diaChi; 
         $qhgd->qhgd_ngheNghiep = $request->qhgd_ngheNghiep; 
         $qhgd->qhgd_nuocNgoai = $request->qhgd_nuocNgoai; 
-        $qhgd->qhgd_taoMoi = Carbon::now();  
         $qhgd->qhgd_capNhat = Carbon::now(); 
 
         $qhgd->save();
