@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,9 +9,13 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Maatwebsite\Excel\Facades\Excel as Excel;
 use App\Exports\RoleExport;
 use App\Http\Requests\RoleCreateRequest;
+use App\Quyen;
+use App\RoleQuyen;
 use Carbon\Carbon;
 use Session;
 use Validator;
+use DB;
+
 class RoleController extends Controller
 {
     /**
@@ -20,9 +25,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $dsrole=Role::all();
+        $dsrole = Role::all();
         return view('admin.role.index')
-        ->with('dsrole',$dsrole);
+            ->with('dsrole', $dsrole);
     }
 
     /**
@@ -33,7 +38,8 @@ class RoleController extends Controller
     public function create()
     {
         $this->authorize('create', Role::class);
-        return view('admin.role.create');
+        return view('admin.role.create')
+            ->with('dsq', Quyen::all());
     }
 
     /**
@@ -46,13 +52,22 @@ class RoleController extends Controller
     {
         $this->authorize('create', Role::class);
         $role = new Role();
-        $role->role_ten=$request->role_ten;
-        $role->role_mota=$request->role_mota;
-        $role->role_taoMoi=Carbon::now('Asia/Ho_Chi_Minh');
-        $role->role_capNhat=Carbon::now('Asia/Ho_Chi_Minh');
+        $role->role_ten = $request->role_ten;
+        $role->role_mota = $request->role_mota;
+        $role->role_taoMoi = Carbon::now('Asia/Ho_Chi_Minh');
+        $role->role_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
         $role->save();
-        Session::flash('alert','Thêm mới thành công dữ liệu vai trò!');
+        if ($request->has('quyen')) {
+            foreach ($request->quyen as $q) {
+                $role_quyen = new RoleQuyen();
+                $role_quyen->role_ma = $role->role_ma;
+                $role_quyen->q_ma = $q;
+                $role_quyen->save();
+            }
+        }
+        Session::flash('alert', 'Thêm mới thành công dữ liệu vai trò!');
         return redirect(route('admin.role.create'));
+        return $request->all();
     }
 
     /**
@@ -74,11 +89,12 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        
+
         $role = Role::find($id);
         $this->authorize('update', $role);
         return view('admin.role.edit')
-        ->with('role', $role);
+            ->with('role', $role)
+            ->with('dsq', Quyen::all());
     }
     /**
      * Update the specified resource in storage.
@@ -91,14 +107,26 @@ class RoleController extends Controller
     {
         $role = role::find($id);
         $this->authorize('update', $role);
-        $role->role_ten=$request->role_ten;
-        $role->role_mota=$request->role_mota;
-        $role->role_taoMoi=Carbon::now('Asia/Ho_Chi_Minh');
-        $role->role_capNhat=Carbon::now('Asia/Ho_Chi_Minh');
+        $role->role_ten = $request->role_ten;
+        $role->role_mota = $request->role_mota;
+        $role->role_capNhat = Carbon::now('Asia/Ho_Chi_Minh');
         $role->save();
+        foreach ($role->roleQuyen as $rq){
+            DB::select('DELETE FROM role_quyen WHERE role_ma = ? AND q_ma = ?', [$rq->role_ma, $rq->q_ma]);
+        }
+        if ($request->has('quyen')) {
+            foreach ($request->quyen as $q) {
+                $role_quyen = new RoleQuyen();
+                $role_quyen->role_ma = $role->role_ma;
+                $role_quyen->q_ma = $q;
+                $role_quyen->save();
+            }
+        }
         Session::flash('alert', 'Đã cập nhật thành công vai trò! ');
-        return view('admin.role.edit')
-        ->with('role', $role);
+        // return view('admin.role.edit')
+        //     ->with('role', $role)
+        //     ->with('dsq', Quyen::all());
+        return redirect(route('admin.role.edit', ['id'=>$role->role_ma]));
     }
 
     /**
@@ -131,7 +159,7 @@ class RoleController extends Controller
     }
     public function excel()
     {
-       
+
         return Excel::download(new RoleExport, 'DanhSachRole.xlsx');
     }
 }

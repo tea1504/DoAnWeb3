@@ -46,7 +46,7 @@
                     </p>
                 </a>
             </li>
-            @can('viewAny', App\VBCC::class)
+            @can('viewAny', App\NhanVien::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/nhanvien')||request()->is('admin/nhanvien/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-users"></i>
@@ -97,6 +97,7 @@
                 </ul>
             </li>
             @endcan
+            @can('admin')
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ (request()->is('admin/quanhegiadinh'))?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-home"></i>
@@ -120,6 +121,8 @@
                     </li>
                 </ul>
             </li>
+            @endcan
+            @can('admin')
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ (request()->is('admin/khenthuong')||request()->is('admin/kyluat'))||(request()->is('admin/khenthuong/*')||request()->is('admin/kyluat/*'))?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-medal"></i>
@@ -175,6 +178,7 @@
                     </li>
                 </ul>
             </li>
+            @endcan
             @can('viewAny', App\VBCC::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/vanbang')||request()->is('admin/vanbang/*')?'active nav-link':'nav-link' }}">
@@ -228,7 +232,7 @@
             @can('viewAny', App\QuaTrinhCongTac::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/quatrinhcongtac')||request()->is('admin/quatrinhcongtac/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-briefcase"></i>
                     <p>
                         Quá trình công tác
                         <i class="right fas fa-angle-left"></i>
@@ -253,7 +257,7 @@
             @can('viewAny', App\TuyenDung::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/tuyendung')||request()->is('admin/tuyendung/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-user-tie"></i>
                     <p>
                         Tuyển dụng
                         <i class="right fas fa-angle-left"></i>

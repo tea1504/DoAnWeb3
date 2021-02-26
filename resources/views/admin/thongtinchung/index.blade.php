@@ -63,7 +63,7 @@ Danh sách thông tin chung
                 </div>
                 <div class="modal-footer bg-cyan">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="" class="btn btn-success" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i> Thêm mới</a>
+                    <a href="/admin/thongtinchung/<%thongTin.nv_ma%>/edit" class="btn btn-success" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i> Chỉnh sửa</a>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ class Role extends Model
     protected $table ='role';
     protected $filltable = ['role_ten','role_mota','role_taoMoi','role_capNhat'];
     protected $guarded = ['role_ma'];
-    protected $primarykey ='role_ma';
+    protected $primaryKey ='role_ma';
     protected $dates = ['role_taoMoi','role_capNhat'];
     protected $dateFormat = 'Y-m-d H:i:s';
 

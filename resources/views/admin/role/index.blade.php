@@ -42,6 +42,7 @@ Danh sách role
                                 <th width="5px" class="text-center">Mã role</th>
                                 <th>Tên role</th>
                                 <th>Mô tả</th>
+                                <th>Quyền</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày cập nhật</th>
                                 <th class="text-center">Action</th>
@@ -53,8 +54,15 @@ Danh sách role
                                 <td class="text-center">{{$role -> role_ma}}</td>
                                 <td>{{$role -> role_ten}}</td>
                                 <td>{{$role -> role_mota}}</td>
-                                <td>{{$role -> role_taoMoi->format('d/m/Y  H:i:s')}}</td>
-                                <td>{{$role -> role_capNhat->format('d/m/Y H:i:s')}}</td>
+                                <td>
+                                    <ul>
+                                        @foreach($role->roleQuyen as $q)
+                                        <li>{{$q->quyen->q_ten}}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>{{$role->role_taoMoi->format('d/m/Y  H:i:s')}}</td>
+                                <td>{{$role->role_capNhat->format('d/m/Y H:i:s')}}</td>
                                 <td class="text-center align-middle">
                                     <a href="{{route('admin.role.edit',['id' => $role->role_ma])}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Sửa">
                                         <i class="fa fa-edit" aria-hidden="true"></i>

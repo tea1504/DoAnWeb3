@@ -24,8 +24,7 @@ class RoleCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_ten' => 'required|min:5|max:50',
-            'role_mota' => 'required|min:5|max:100',
+            'role_ten' => 'required|min:3|max:50',
         ];
     }
     public function messages()

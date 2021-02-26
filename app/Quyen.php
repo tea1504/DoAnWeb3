@@ -12,9 +12,11 @@ class Quyen extends Model
     protected $table ='quyen';
     protected $filltable = ['q_ten','q_mota','q_taoMoi','q_capNhat'];
     protected $guarded = ['q_ma'];
-    protected $primarykey ='q_ma';
+
+    protected $primaryKey ='q_ma';
+
     protected $dates = ['q_taoMoi','q_capNhat'];
-    protected $dateFormat = ['Y-m-d H:i:s'];
+    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function userQuyen(){
         return $this->hasMany('App\UserQuyen','q_ma','q_ma');

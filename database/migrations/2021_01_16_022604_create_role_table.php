@@ -19,7 +19,7 @@ class CreateRoleTable extends Migration
             $table->unsignedInteger('role_ma')
                     ->autoIncrement();
             $table->string('role_ten', 50);
-            $table->text('role_mota');
+            $table->text('role_mota')->nullable();
             $table->timestamp('role_taoMoi') 
                     ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('role_capNhat') 

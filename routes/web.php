@@ -28,11 +28,10 @@ Route::get('/admin/nhanvien/pdf', 'Admin\NhanVienController@pdf')->name('admin.n
 Route::get('/admin/nhanvien/excel', 'Admin\NhanVienController@excel')->name('admin.nhanvien.excel')->middleware('auth');
 Route::resource('/admin/nhanvien', 'Admin\NhanVienController', ['as' => 'admin'])->middleware('auth');
 
-Route::get('/admin/khenthuong/print', 'Admin\KhenthuongController@print')->name('admin.khenthuong.print');
-Route::get('/admin/khenthuong/pdf', 'Admin\KhenthuongController@pdf')->name('admin.khenthuong.pdf');
-Route::get('/admin/khenthuong/excel', 'Admin\KhenthuongController@excel')->name('admin.khenthuong.excel');
-Route::resource('/admin/khenthuong','Admin\KhenthuongController', ['as' => 'admin']);
-Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'admin'])->middleware('auth');
+Route::get('/admin/khenthuong/print', 'Admin\KhenthuongController@print')->name('admin.khenthuong.print')->middleware(['auth', 'can:admin']);
+Route::get('/admin/khenthuong/pdf', 'Admin\KhenthuongController@pdf')->name('admin.khenthuong.pdf')->middleware(['auth', 'can:admin']);
+Route::get('/admin/khenthuong/excel', 'Admin\KhenthuongController@excel')->name('admin.khenthuong.excel')->middleware(['auth', 'can:admin']);
+Route::resource('/admin/khenthuong', 'Admin\KhenThuongController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
 
 Route::get('/admin/nhanvien/print-chitiet/{id}', 'Admin\NhanVienController@printDetail')->name('admin.nhanvien.print.chitiet');
 Route::get('/admin/nhanvien/print', 'Admin\NhanVienController@print')->name('admin.nhanvien.print');
@@ -47,16 +46,16 @@ Route::get('/admin/tuyendung/excel', 'Admin\TuyenDungController@excel')->name('a
 Route::resource('/admin/tuyendung','Admin\TuyenDungController', ['as' => 'admin'])->middleware('auth');
 Route::get('/admin/tuyendung/create','Admin\TuyenDungController@create')->name('admin.tuyendung.create')->middleware('auth');
 
-Route::get('/admin/kyluat/print', 'Admin\KyLuatController@print')->name('admin.kyluat.print');
-Route::get('/admin/kyluat/pdf', 'Admin\KyLuatController@pdf')->name('admin.kyluat.pdf');
-Route::get('/admin/kyluat/excel', 'Admin\KyLuatController@excel')->name('admin.kyluat.excel');
-Route::resource('/admin/kyluat', 'Admin\KyLuatController', ['as' => 'admin'])->middleware('auth');
+Route::get('/admin/kyluat/print', 'Admin\KyLuatController@print')->name('admin.kyluat.print')->middleware(['auth', 'can:admin']);
+Route::get('/admin/kyluat/pdf', 'Admin\KyLuatController@pdf')->name('admin.kyluat.pdf')->middleware(['auth', 'can:admin']);
+Route::get('/admin/kyluat/excel', 'Admin\KyLuatController@excel')->name('admin.kyluat.excel')->middleware(['auth', 'can:admin']);
+Route::resource('/admin/kyluat', 'Admin\KyLuatController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
 
 
-Route::get('/admin/quanhegiadinh/print', 'Admin\QuanHeGiaDinhController@print')->name('admin.quanhegiadinh.print');
-Route::get('/admin/quanhegiadinh/pdf/{id?}', 'Admin\QuanHeGiaDinhController@pdf')->name('admin.quanhegiadinh.pdf');
-Route::get('/admin/quanhegiadinh/excel', 'Admin\QuanHeGiaDinhController@excel')->name('admin.quanhegiadinh.excel');
-Route::resource('/admin/quanhegiadinh', 'Admin\QuanHeGiaDinhController', ['as' => 'admin'])->middleware('auth');
+Route::get('/admin/quanhegiadinh/print', 'Admin\QuanHeGiaDinhController@print')->name('admin.quanhegiadinh.print')->middleware(['auth', 'can:admin']);
+Route::get('/admin/quanhegiadinh/pdf/{id?}', 'Admin\QuanHeGiaDinhController@pdf')->name('admin.quanhegiadinh.pdf')->middleware(['auth', 'can:admin']);
+Route::get('/admin/quanhegiadinh/excel', 'Admin\QuanHeGiaDinhController@excel')->name('admin.quanhegiadinh.excel')->middleware(['auth', 'can:admin']);
+Route::resource('/admin/quanhegiadinh', 'Admin\QuanHeGiaDinhController', ['as' => 'admin'])->middleware(['auth', 'can:admin']);
 
 Route::get('/admin/vanbang/create_id/{id?}', 'Admin\VanBangController@create_id')->name('admin.vanbang.create_id')->middleware('auth');
 Route::get('/admin/vanbang/print/{id?}', 'Admin\VanBangController@print')->name('admin.vanbang.print')->middleware('auth');

@@ -19,7 +19,7 @@ class CreateQuyenTable extends Migration
             $table->unsignedInteger('q_ma')
                     ->autoIncrement();
             $table->string('q_ten', 50);
-            $table->text('q_mota');
+            $table->text('q_mota')->nullable();
             $table->timestamp('q_taoMoi') 
                     ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('q_capNhat') 
