@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\LichSuBanThanExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\LichSuBanThan;
 use App\NhanVien;
 use Session;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class LichSuBanThanController extends Controller
 {
@@ -121,5 +124,30 @@ class LichSuBanThanController extends Controller
         $lsbt = LichSuBanThan::find($id);
         $this->authorize('delete', $lsbt);
         $lsbt->delete();
+    }
+
+    public function print()
+    {
+        // $this->authorize('inAn', LichSuBanThan::class);
+        return view('admin.lichsubanthan.print')
+            ->with('dslsbt', LichSuBanThan::all());
+    }
+
+    public function pdf()
+    {
+        // $this->authorize('inAn', LichSuBanThan::class);
+        $result = LichSuBanThan::all();
+        $data = [
+            'dslsbt' => $result,
+        ];
+        $pdf = PDF::loadView('admin.lichsubanthan.pdf', $data);
+        return $pdf->download('DanhSachLichSuBanThan.pdf');
+    }
+
+    public function excel()
+    {
+        // $this->authorize('inAn', LichSuBanThan::class);
+        // return view('admin.luong.excel')->with("dsl", Luong::all());
+        return Excel::download(new LichSuBanThanExport, 'DanhSachLichSuBanThan.xlsx');
     }
 }

@@ -94,7 +94,7 @@ Danh sách quan hệ gia đình
 
     var table = $('#myTable').DataTable({
         ajax: {
-            url: "{{route('api.nhanvien.quanhegiadinh')}}",
+            url: "{{route('api.nhanvien.quanhegiadinh')}}?nv_ma",
             dataSrc: 'result'
         },
         columns: [{
@@ -163,12 +163,12 @@ Danh sách quan hệ gia đình
                 },
                 render: function(data, type, row, meta) {
                     return `
-                            <a href="/admin/quanhegiadinh/${data['qhgd_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                            <a href="/admin/quanhegiadinh/${data['qhgd_ma']}/edit" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 
                                 <form class="fDelete btn p-0" method="POST" action="quanhegiadinh/${data['qhgd_ma']}" data-id="${data['qhgd_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['qhgd_ma']}" onclick="xoa(${data['qhgd_ma']})" onmouseleave="hidetooltip()">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE" />
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </form>`;
                 }
             },
@@ -303,17 +303,11 @@ Danh sách quan hệ gia đình
 
     $('#nhanVien').change(function(e) {
         e.preventDefault();
+        console.log(1);
         table.ajax.url("{{route('api.nhanvien.quanhegiadinh')}}" + "?nv_ma=" + $(this).val());
         table.ajax.reload();
-        $('#add').attr('href', getLink() + "/" + $('#nhanVien').val())
-        //$('#print').attr('href', "{{route('admin.quanhegiadinh.print')}}" + "/" + $('#nhanVien').val());
-        //$('#pdf').attr('href', "{{route('admin.quanhegiadinh.pdf')}}" + "/" + $('#nhanVien').val());
     });
 
-    
-    $('#add').attr('href', getLink() + "/" + $('#nhanVien').val());
-    //$('#print').attr('href', "{{route('admin.quanhegiadinh.print')}}" + "/" + $('#nhanVien').val());
-    $('#pdf').attr('href', "{{route('admin.quanhegiadinh.pdf')}}" + "/" + $('#nhanVien').val());
 
     function xoa(id) {
         Swal.fire({

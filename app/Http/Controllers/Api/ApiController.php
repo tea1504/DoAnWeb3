@@ -110,8 +110,7 @@ class ApiController extends Controller
     {
         if (!isset($request->nv_ma)) {
             $result = DB::select('SELECT * FROM quatrinhcongtac AS a, chucvu AS b, donvi AS c, donviquanly AS d, ngach_bac AS e, ngach AS f, bac AS g, nhanvien AS h WHERE a.cvu_ma = b.cvu_ma AND a.dv_ma = c.dv_ma AND c.dvql_ma = d.dvql_ma AND a.nb_ma = e.nb_ma AND e.ng_ma = f.ng_ma AND e.b_ma = g.b_ma AND a.nv_ma = h.nv_ma');
-        }
-        else{
+        } else {
             $parameter = [
                 'nv_ma' => $request->nv_ma
             ];
@@ -179,40 +178,45 @@ class ApiController extends Controller
     }
     public function layQuanHeGiaDinh(Request $request)
     {
-        $parameter = [
-            'nv_ma' => $request->nv_ma
-        ];
-        $result = DB::select('SELECT * FROM quanhegiadinh AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma',$parameter);
-         return response()->json(array(
-            'code'  => 200,
-            'result' => $result,
-        ));
-    }
-    
-    public function layKhenThuong(Request $request)
-    {
-        $parameter = [
-            'nv_ma' => $request->nv_ma
-        ];
-        $result = DB::select('SELECT *,b.nv_hoTen AS nhanvien,c.nv_hoTen AS nguoiky FROM khenthuong AS a, nhanvien AS b, nhanvien AS c WHERE a.nv_ma = b.nv_ma and a.kt_nguoiKy=c.nv_ma',$parameter);
+        if (isset($request->nv_ma)) {
+            $parameter = [
+                'nv_ma' => $request->nv_ma
+            ];
+            $result = DB::select('SELECT * FROM quanhegiadinh AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma AND a.nv_ma = :nv_ma', $parameter);
+        }
+        else{
+            $result = DB::select('SELECT * FROM quanhegiadinh AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma');
+        }
         return response()->json(array(
             'code'  => 200,
             'result' => $result,
         ));
     }
-    
+
+    public function layKhenThuong(Request $request)
+    {
+        $parameter = [
+            'nv_ma' => $request->nv_ma
+        ];
+        $result = DB::select('SELECT *,b.nv_hoTen AS nhanvien,c.nv_hoTen AS nguoiky FROM khenthuong AS a, nhanvien AS b, nhanvien AS c WHERE a.nv_ma = b.nv_ma and a.kt_nguoiKy=c.nv_ma', $parameter);
+        return response()->json(array(
+            'code'  => 200,
+            'result' => $result,
+        ));
+    }
+
     public function layKyLuat(Request $request)
     {
         $parameter = [
             'nv_ma' => $request->nv_ma
         ];
-        $result = DB::select('SELECT * FROM kyluat AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma',$parameter);
-         return response()->json(array(
+        $result = DB::select('SELECT * FROM kyluat AS a, nhanvien AS b WHERE a.nv_ma = b.nv_ma', $parameter);
+        return response()->json(array(
             'code'  => 200,
             'result' => $result,
         ));
     }
-    
+
     public function layTuoiTrongKhoang(Request $request)
     {
         $parameter = [
@@ -221,39 +225,37 @@ class ApiController extends Controller
             'tu1' => $request->tu,
             'den1' => $request->den,
         ];
-        $result = DB::select('SELECT COUNT(*) as soLuong FROM nhanvien AS a WHERE YEAR(now()) - YEAR(a.nv_ngaySinh) BETWEEN :tu AND :den AND a.nv_gioiTinh = 1 UNION SELECT COUNT(*) as soLuong FROM nhanvien AS b WHERE YEAR(now()) - YEAR(b.nv_ngaySinh) BETWEEN :tu1 AND :den1 AND b.nv_gioiTinh = 0;',$parameter);
-         return response()->json(array(
+        $result = DB::select('SELECT COUNT(*) as soLuong FROM nhanvien AS a WHERE YEAR(now()) - YEAR(a.nv_ngaySinh) BETWEEN :tu AND :den AND a.nv_gioiTinh = 1 UNION SELECT COUNT(*) as soLuong FROM nhanvien AS b WHERE YEAR(now()) - YEAR(b.nv_ngaySinh) BETWEEN :tu1 AND :den1 AND b.nv_gioiTinh = 0;', $parameter);
+        return response()->json(array(
             'code'  => 200,
             'result' => $result,
         ));
     }
-    
+
     public function thongKeDanToc(Request $request)
     {
         $result = DB::select('SELECT COUNT(nv_ma) as soLuong, a.dt_ten FROM dantoc AS a LEFT JOIN nhanvien AS b ON a.dt_ma = b.dt_ma GROUP BY a.dt_ten');
-         return response()->json(array(
+        return response()->json(array(
             'code'  => 200,
             'result' => $result,
         ));
     }
-    
+
     public function thongKeTonGiao(Request $request)
     {
         $result = DB::select('SELECT COUNT(b.nv_ma) as soLuong, a.tg_ten FROM tongiao AS a LEFT JOIN nhanvien AS b on a.tg_ma = b.dt_ma GROUP BY a.tg_ma, a.tg_ten');
-         return response()->json(array(
+        return response()->json(array(
             'code'  => 200,
             'result' => $result,
         ));
     }
-    
+
     public function thongKeDonVi(Request $request)
     {
         $result = DB::select('SELECT b.dvql_ten as ten, COUNT(c.nv_ma) as soLuong FROM donvi as a RIGHT JOIN donviquanly as b on a.dvql_ma = b.dvql_ma LEFT JOIN tuyendung as c on a.dv_ma = c.dv_ma GROUP BY b.dvql_ten');
-         return response()->json(array(
+        return response()->json(array(
             'code'  => 200,
             'result' => $result,
         ));
     }
 }
-
-

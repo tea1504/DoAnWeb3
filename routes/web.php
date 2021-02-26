@@ -100,6 +100,9 @@ Route::get('/admin/role/pdf', 'Admin\RoleController@pdf')->name('admin.role.pdf'
 Route::get('/admin/role/excel', 'Admin\RoleController@excel')->name('admin.role.excel')->middleware('auth');
 Route::resource('/admin/role','Admin\RoleController', ['as' => 'admin'])->middleware('auth');
 
+Route::get('/admin/lichsubanthan/print', 'Admin\LichSuBanThanController@print')->name('admin.lichsubanthan.print')->middleware('auth');
+Route::get('/admin/lichsubanthan/pdf', 'Admin\LichSuBanThanController@pdf')->name('admin.lichsubanthan.pdf')->middleware('auth');
+Route::get('/admin/lichsubanthan/excel', 'Admin\LichSuBanThanController@excel')->name('admin.lichsubanthan.excel')->middleware('auth');
 Route::resource('admin/lichsubanthan', 'Admin\LichSuBanThanController', ['as' => 'admin'])->middleware('auth');
 
 Route::resource('admin/user', 'Admin\UserController')->middleware('auth');

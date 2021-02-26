@@ -13,8 +13,9 @@ Danh sách role
     table#myTable tr th {
         width: 540px;
     }
-    a .btn{
-        font-size:medium;
+
+    a .btn {
+        font-size: medium;
     }
 </style>
 @endsection
@@ -28,26 +29,17 @@ Danh sách role
 <div class="container-fluid" ng-controller="roleController">
     <div class="row">
         <div class="col text-right">
-            <div class="btn-group" role="group">
-                @can('create', App\Role::class)
-                <a href="{{route('admin.role.create') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
-                @endcan
-                @can('inAn', App\Role::class)
-                <a href="{{route('admin.role.print') }}" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
-                <a href="{{route('admin.role.excel') }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></button>
-                <a href="{{route('admin.role.pdf') }}" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
-                @endcan
-            </div>
+            <a href="{{route('admin.role.create') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i> Thêm mới</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-3">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100" id="myTable">
                         <thead>
                             <tr>
-                                <th width="5px"class="text-center">Mã role</th>
+                                <th width="5px" class="text-center">Mã role</th>
                                 <th>Tên role</th>
                                 <th>Mô tả</th>
                                 <th>Ngày tạo</th>
@@ -64,7 +56,7 @@ Danh sách role
                                 <td>{{$role -> role_taoMoi->format('d/m/Y  H:i:s')}}</td>
                                 <td>{{$role -> role_capNhat->format('d/m/Y H:i:s')}}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{route('admin.role.edit',['id' => $role->role_ma])}}"  class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Sửa">
+                                    <a href="{{route('admin.role.edit',['id' => $role->role_ma])}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Sửa">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
                                     <form name="frmDelete" class="frmDelete btn p-0" method="POST" action="{{route('admin.role.destroy', ['id'=>$role->role_ma])}}" data-id="{{$role->role_ma}}" data-name="{{$role->role_ten}}" novalidate>
@@ -90,7 +82,7 @@ Danh sách role
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     });
-   $(document).ready(function() {
+    $(document).ready(function() {
         var table = $('#myTable').DataTable({
             dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
             buttons: [

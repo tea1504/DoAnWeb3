@@ -281,9 +281,9 @@
             </tr>
             <tr>
                 <td colspan="7">16. Ngày vào Đảng cộng sản Việt Nam</td>
-                <td colspan="3">{{$nv->nv_ngayVaoDang->format('d/m/Y')}}</td>
+                <td colspan="3">{{isset($nv->nv_ngayVaoDang)?$nv->nv_ngayVaoDang->format('d/m/Y'):''}}</td>
                 <td colspan="4">, Ngày chính thức:</td>
-                <td colspan="6">{{$nv->nv_ngayVaoDangChinhThuc->format('d/m/Y')}}</td>
+                <td colspan="6">{{isset($nv->nv_ngayVaoDangChinhThuc)?$nv->nv_ngayVaoDangChinhThuc->format('d/m/Y'):''}}</td>
             </tr>
             <tr>
                 <td colspan="7">17. Ngày tham gia tổ chức chính trị - xã hội:</td>
@@ -319,9 +319,9 @@
             </tr>
             <tr>
                 <td colspan="4">18. Ngày nhập ngũ :</td>
-                <td colspan="2">{{$nv->nv_ngayNhapNgu->format('d/m/Y')}}</td>
+                <td colspan="2">{{isset($nv->nv_ngayNhapNgu)?$nv->nv_ngayNhapNgu->format('d/m/Y'):''}}</td>
                 <td colspan="3">, Ngày xuất ngũ :</td>
-                <td colspan="2">{{$nv->nv_ngayXuatNgu->format('d/m/Y')}}</td>
+                <td colspan="2">{{isset($nv->nv_ngayXuatNgu)?$nv->nv_ngayXuatNgu->format('d/m/Y'):''}}</td>
                 <td colspan="4">, Quân hàm cao nhất :</td>
                 <td colspan="5">{{$nv->nv_quanHam}}</td>
             </tr>

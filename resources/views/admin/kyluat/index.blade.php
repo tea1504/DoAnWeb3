@@ -66,7 +66,7 @@ Danh sách kỷ luật
         </div>
     </div>
     <div class="row" ng-show="show">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-3">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-responsive table-head-fixed" id="myTable">
@@ -93,13 +93,13 @@ Danh sách kỷ luật
                                 <td>{{$kl->kl_taoMoi->format('d/m/Y')}}</td>                         
                                 <td>{{$kl->kl_capNhat->format('d/m/Y')}}</td>                         
                                 <td>
-                                    <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     
                                     <form name="frmDelete" id="frmDelete" class="frmDelete btn p-0"  action="{{route('admin.kyluat.destroy', ['id'=>$kl->kl_ma])}}" method="POST"
                                         data-id="{{$kl->kl_ma}}" data-nv="{{$kl -> nhanVienKL -> nv_hoTen}}"  novalidate>
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </td>
                             </tr>

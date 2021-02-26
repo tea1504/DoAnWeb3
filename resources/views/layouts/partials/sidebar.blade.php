@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{route('welcome')}}" class="brand-link">
         <img src="{{ asset('storage/images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light h3"><b>Shin</b>HRM</span>
     </a>
@@ -325,31 +325,6 @@
                 </ul>
             </li>
             @endcan
-            @can('view', App\Role::class)
-            <li class="nav-item has-treeview">
-                <a href="#" class="{{ request()->is('admin/role')||request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-baby"></i>
-                    <p>
-                        Role
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('admin.role.index')}}" class="{{ request()->is('admin/role')?'active nav-link':'nav-link' }}">
-                            <i class="nav-icon fas fa-list-alt"></i>
-                            <p>Danh sách</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.role.create')}}" class="{{ request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
-                            <i class="nav-icon fas fa-plus-circle"></i>
-                            <p>Thêm mới</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            @endcan
             @can('view', App\LichSuBanThan::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/lichsubanthan')||request()->is('admin/lichsubanthan/*')?'active nav-link':'nav-link' }}">
@@ -624,6 +599,29 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.phucap.create')}}" class="{{ request()->is('admin/phucap/*')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-plus-circle"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="{{ request()->is('admin/role')||request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
+                    <i class="nav-icon fas fa-circle"></i>
+                    <p>
+                        Role
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.role.index')}}" class="{{ request()->is('admin/role')?'active nav-link':'nav-link' }}">
+                            <i class="nav-icon fas fa-list-alt"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.role.create')}}" class="{{ request()->is('admin/role/*')?'active nav-link':'nav-link' }}">
                             <i class="nav-icon fas fa-plus-circle"></i>
                             <p>Thêm mới</p>
                         </a>

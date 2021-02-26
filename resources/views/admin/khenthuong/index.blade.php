@@ -148,12 +148,12 @@ Danh sách khen thưởng
                 },
                 render: function(data, type, row, meta) {
                     return `
-                            <a href="/admin/khenthuong/${data['kt_ma']}/edit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                            <a href="/admin/khenthuong/${data['kt_ma']}/edit" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Sửa" onmouseleave="hidetooltip()"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 
                                 <form class="fDelete btn p-0" method="POST" action="khenthuong/${data['kt_ma']}" data-id="${data['kt_ma']}" data-nv="${data['nv_hoTen']}" id="vb_${data['kt_ma']}" onclick="xoa(${data['kt_ma']})" onmouseleave="hidetooltip()">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE" />
-                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </form>`;
                 }
             },
