@@ -90,8 +90,8 @@ Danh sách kỷ luật
                                 <td>{{$kl->kl_ngayKy->format('d/m/Y')}}</td>
                                 <td>{{$kl->nguoiKy->nv_hoTen }}</td>
                                 <td>{{$kl->kl_lyDo}}</td>                         
-                                <td>{{$kl->kl_taoMoi->format('d/m/Y')}}</td>                         
-                                <td>{{$kl->kl_capNhat->format('d/m/Y')}}</td>                         
+                                <td>{{$kl->kl_taoMoi->format('d/m/Y H:m:s')}}</td>                         
+                                <td>{{$kl->kl_capNhat->format('d/m/Y H:m:s')}}</td>                         
                                 <td>
                                     <a href="{{ route('admin.kyluat.edit', ['id' => $kl->kl_ma]) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     

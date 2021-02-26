@@ -55,11 +55,11 @@ Danh sách nhân viên
     @endif
     <div class="row">
         <div class="col">
-            <button class="btn btn-dark mb-3" ng-click="showTable()"><i class="fas <%icon%>"></i></button>
+            <button class="btn btn-dark mb-2" ng-click="showTable()"><i class="fas <%icon%>"></i></button>
         </div>
         <div class="col text-right">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></button>
+                <a href="{{route('admin.thongtinchung.create')}}" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Thêm mới"><i class="fas fa-plus-circle"></i></a>
                 <a href="{{route('admin.nhanvien.print')}}" class="btn btn-secondary text-white" data-toggle="tooltip" data-placement="top" title="In ấn"><i class="fas fa-print"></i></a>
                 <a href="{{route('admin.nhanvien.excel')}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Xuất Excel"><i class="fas fa-file-excel"></i></a>
                 <a href="{{route('admin.nhanvien.pdf')}}" class="btn btn-warning text-white" data-toggle="tooltip" data-placement="top" title="Xuất PDF"><i class="fas fa-file-pdf"></i></a>
@@ -69,7 +69,7 @@ Danh sách nhân viên
     <div class="card" ng-show="!show">
         <div class="card-header">
             <form name="frmChucNang" class="row" novalidate>
-                <div class="col-sm-4 text-sm-left text-center mb-sm-0 mb-1">
+                <div class="col-sm-4 text-sm-left text-center mb-sm-0">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Xem</div>
@@ -105,11 +105,12 @@ Danh sách nhân viên
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <select name="" id="" class="form-control" style="border-radius: .25rem 0 0 .25rem;" ng-model="field" ng-change="reset()">
-                                <option value="1" id="check">Name</option>
+                                <option value="1" id="check">Tên</option>
                                 <option value="2">Số ĐT</option>
                                 <option value="3">Địa chỉ</option>
                                 <option value="4">Email</option>
                                 <option value="5">Chức vụ</option>
+                                <option value="6">Mã số</option>
                             </select>
                         </div>
                         <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_hoTen" ng-show="field==1">
@@ -117,6 +118,7 @@ Danh sách nhân viên
                         <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_noiOHienNay" ng-show="field==3">
                         <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_email" ng-show="field==4">
                         <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.cvu_ten" ng-show="field==5">
+                        <input type="text" placeholder="Tìm kiếm" class="form-control" style="border-radius: 0 .25rem .25rem 0;" ng-model="keyWord.nv_ma" ng-show="field==6">
                     </div>
                 </div>
             </form>

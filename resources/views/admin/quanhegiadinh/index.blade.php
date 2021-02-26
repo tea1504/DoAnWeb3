@@ -121,7 +121,7 @@ Danh sách quan hệ gia đình
             {
                 data: "qhgd_nuocNgoai",
                 render: function(data, type, row, meta) {
-                    return data==1?"có quan hệ ở nước ngoài":"không có quan hệ ở nước ngoài";
+                    return data!=0?"Sống ở nước ngoài":"";
                   
                 }          
             },

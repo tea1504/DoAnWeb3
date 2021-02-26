@@ -71,11 +71,11 @@
                 </ul>
             </li>
             @endcan
-            @can('viewAny', App\QuaTrinhCongTac::class)
+            @can('view', App\User::class)
             <li class="nav-header">Quản lý thông tin nhân viên</li>
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/thongtinchung')||request()->is('admin/thongtinchung/*')?'active nav-link':'nav-link' }}">
-                    <i class="nav-icon fas fa-graduation-cap"></i>
+                    <i class="nav-icon fas fa-user"></i>
                     <p>
                         Thông tin chung
                         <i class="right fas fa-angle-left"></i>
@@ -225,7 +225,7 @@
                 </ul>
             </li>
             @endcan
-            @can('viewAny', App\User::class)
+            @can('viewAny', App\QuaTrinhCongTac::class)
             <li class="nav-item has-treeview">
                 <a href="#" class="{{ request()->is('admin/quatrinhcongtac')||request()->is('admin/quatrinhcongtac/*')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-graduation-cap"></i>

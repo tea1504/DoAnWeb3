@@ -54,13 +54,9 @@ Thêm mới tuyển dụng
               <div class="col">
                 <div class="form-group">
                   <label for="td_ngay">Ngày tuyển dụng</label>
-                  <input type="text" class="form-control"ng-class="frmCreate.td_ngay.$touched?frmCreate.td_ngay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" id="td_ngay" name="td_ngay" value="{{ old('td_ngay')}}" ng-model="td_ngay" ng-required="true" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/" 
-                  data-toggle="tooltip" data-placement="top" title="Điền theo định dạng năm-tháng-ngày. VD:2020-01-20" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"</div></div>'>
+                  <input type="date" class="form-control"ng-class="frmCreate.td_ngay.$touched?frmCreate.td_ngay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" id="td_ngay" name="td_ngay" value="{{ old('td_ngay')}}" ng-model="td_ngay" ng-required="true">
                   <div class="invalid-feedback">
-                      <span ng-show="frmCreate.td_ngay.$error.required">Bạn phải điền ngày tuyển dụng</span>
-                      <span ng-show="frmCreate.td_ngay.$error.minlength">Giá trị quá ngắn</span>
-                      <span ng-show="frmCreate.td_ngay.$error.maxlength">Giá trị quá dài</span>
-                      <span ng-show="frmCreate.td_ngay.$error.pattern&&!(frmCreate.td_ngay.$error.minlength||frmCreate.td_ngay.$error.maxlength)">Từ ngày không hợp lệ</span>
+                      <span ng-show="frmCreate.td_ngay.$error.required">Bạn phải điền ngày tuyển dụng</span> không hợp lệ</span>
                   </div>
                 </div>
               </div>
@@ -123,13 +119,9 @@ Thêm mới tuyển dụng
               <div class="col">
                 <div class="form-group">
                   <label for="td_ngayLam">Ngày làm việc</label>
-                  <input type="text"  ng-class="frmCreate.td_ngayLam.$touched?frmCreate.td_ngayLam.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'"  class="form-control" id="td_ngayLam" name="td_ngayLam" value="{{old('td_ngayLam')}} " ng-model="td_ngayLam" ng-minlength="10"
-                        ng-maxlength="10" ng-required=true ng-pattern="/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/" data-toggle="tooltip" data-placement="top" title="Điền theo định dạng năm-tháng-ngày. VD:2020-01-20" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"</div></div>'>
+                  <input type="date"  ng-class="frmCreate.td_ngayLam.$touched?frmCreate.td_ngayLam.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'"  class="form-control" id="td_ngayLam" name="td_ngayLam" value="{{old('td_ngayLam')}} " ng-model="td_ngayLam" ng-required=true>
                   <div class="invalid-feedback">
                     <span ng-show="frmCreate.td_ngayLam.$error.required">Bạn phải điền ngày làm việc</span>
-                    <span ng-show="frmCreate.td_ngayLam.$error.minlength">Giá trị quá ngắn</span>
-                    <span ng-show="frmCreate.td_ngayLam.$error.maxlength">Giá trị quá dài</span>
-                    <span ng-show="frmCreate.td_ngayLam.$error.pattern&&!(frmCreate.td_ngayLam.$error.minlength||frmCreate.td_ngayLam.$error.maxlength)">Từ ngày không hợp lệ</span>
                   </div>
                 </div>
               </div>

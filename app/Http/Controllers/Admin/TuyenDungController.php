@@ -134,7 +134,6 @@ class TuyenDungController extends Controller
         $td->td_ngayLam=$request->td_ngayLam;
         $td->cv_ma=$request->cv_ma;
         $td->td_soTruong=$request->td_soTruong;
-        $td->td_taoMoi=Carbon::now('Asia/Ho_Chi_Minh');
         $td->td_capNhat=Carbon::now('Asia/Ho_Chi_Minh');
         $td->save();
         Session::flash('alert', 'Đã cập nhật thành công tuyển dụng cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);

@@ -106,8 +106,7 @@ class KyLuatController extends Controller
         $kl->kl_ngayKy = $request->kl_ngayKy;
         $kl->kl_nguoiKy = $request->kl_nguoiKy;
         $kl->kl_lyDo = $request->kl_lyDo;
-        $kl->kl_taoMoi = $request->kl_taoMoi;
-        $kl->kl_capNhat = $request->kl_capNhat;
+        $kl->kl_capNhat = Carbon::now();
         //dd($kl);
         $kl->save();
         Session::flash('alert', 'Đã cập nhật thành công kỷ luật cho nhân viên ' . NhanVien::find($request->nv_ma)->nv_hoTen);

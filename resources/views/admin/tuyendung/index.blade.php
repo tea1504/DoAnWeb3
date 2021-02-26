@@ -41,7 +41,7 @@ Danh sách tuyển dụng
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-3">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-striped table-hover table-responsive table-bordered table-head-fixed w-100" id="myTable">

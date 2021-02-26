@@ -52,26 +52,22 @@ Cập nhật tuyển dụng
               <div class="col">
                 <div class="form-group">
                   <label for="td_ngay">Ngày tuyển dụng</label>
-                  <input type="text" class="form-control" ng-class="frmCreate.td_ngay.$touched?frmCreate.td_ngay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" id="td_ngay" name="td_ngay" value="{{ old('td_ngay',$td->td_ngay)}}" ng-model="td_ngay" ng-required="true" ng-pattern="/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/" 
-                  ng-minlength="10" ng-maxlength="10" data-toggle="tooltip" data-placement="top" title="Điền theo định dạng năm-tháng-ngày. VD:2020-01-20" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"</div></div>'>
+                  <input type="date" class="form-control" ng-class="frmCreate.td_ngay.$touched?frmCreate.td_ngay.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" id="td_ngay" name="td_ngay" value="{{ old('td_ngay',$td->td_ngay)}}" ng-model="td_ngay" ng-required="true">
                   <div class="invalid-feedback">
                     <span ng-show="frmEdit.td_ngay.$error.required">Bạn phải điền ngày tuyển dụng</span>
-                    <span ng-show="frmEdit.td_ngay.$error.minlength">Giá trị quá ngắn</span>
-                    <span ng-show="frmEdit.td_ngay.$error.maxlength">Giá trị quá dài</span>
-                    <span ng-show="frmEdit.td_ngay.$error.pattern&&!(frmEdit.td_ngay.$error.minlength||frmEdit.td_ngay.$error.maxlength)">Từ ngày không hợp lệ</span>
                   </div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="td_ngheTruocDay">Nghề nghiệp trước đó</label>
-                  <input type="text" class="form-control" id="td_ngheTruocDay" name="td_ngheTruocDay" value="{{old('td_ngheTruocDay',$td->td_ngheTruocDay)}}"  ng-class="frmEdit.td_ngheTruocDay.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="td_ngheTruocDay" ng-required="true" ng-minlength="5" ng-maxlength="50">    
+                  <input type="text" class="form-control" id="td_ngheTruocDay" name="td_ngheTruocDay" value="{{old('td_ngheTruocDay',$td->td_ngheTruocDay)}}" ng-class="frmEdit.td_ngheTruocDay.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="td_ngheTruocDay" ng-required="true" ng-minlength="5" ng-maxlength="50">
                   <div class="invalid-feedback">
                     <span ng-show="frmEdit.td_ngheTruocDay.$error.required">Bạn phải điền nghề nghiệp trước đó</span>
                     <span ng-show="frmEdit.td_ngheTruocDay.$error.minlength">Nghề nghiệp trước đó phải chứa ít nhất 5 ký tự</span>
                     <span ng-show="frmEdit.td_ngheTruocDay.$error.maxlength">Nghề nghiệp trước đó chỉ chứa nhiều nhất 50 ký tự</span>
                   </div>
-                </div> 
+                </div>
               </div>
             </div>
             <div class="row form-group">
@@ -92,7 +88,7 @@ Cập nhật tuyển dụng
               <div class="col">
                 <div class="form-group">
                   <label for="td_coQuanTuyen">Cơ quan tuyển dụng </label>
-                  <input type="text" class="form-control" name="td_coQuanTuyen" id="td_coQuanTuyen" value="{{old('td_coQuanTuyen',$td->td_coQuanTuyen)}}" ng-class="frmEdit.dv_ma.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="td_coQuanTuyen" ng-required="true" >
+                  <input type="text" class="form-control" name="td_coQuanTuyen" id="td_coQuanTuyen" value="{{old('td_coQuanTuyen',$td->td_coQuanTuyen)}}" ng-class="frmEdit.dv_ma.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="td_coQuanTuyen" ng-required="true">
                   <div class="invalid-feedback">
                     <span ng-show="frmEdit.td_coQuanTuyen.$error.required">Bạn phải điền cơ quan tuyển dụng</span>
                     <span ng-show="frmEdit.td_coQuanTuyen.$error.minlength">Cơ quan tuyển dụng phải chứa ít nhất 5 ký tự</span>
@@ -107,7 +103,7 @@ Cập nhật tuyển dụng
                 <div class="form-group">
                   <label for="cvu_ma">Chức vụ </label>
                   <select name="cvu_ma" ng-class="frmEdit.cvu_ma.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="cvu_ma" ng-required="true">
-                    <option value="" ></option>
+                    <option value=""></option>
                     @foreach($dscv as $cv)
                     <option value="{{ $cv->cvu_ma }}" {{old('cvu_ma', $cv->cvu_ma)==$cv->cvu_ma?'selected':''}}>{{ $cv->cvu_ten }}</option>
                     @endforeach
@@ -115,21 +111,17 @@ Cập nhật tuyển dụng
                   <div class="invalid-feedback">
                     <span ng-show="frmEdit.cvu_ma.$error.required">Bạn phải chọn chức vụ</span>
                   </div>
-                </div> 
+                </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="td_ngayLam">Ngày làm việc</label>
-                  <input type="text" class="form-control" ng-class="frmCreate.td_ngayLam.$touched?frmCreate.td_ngayLam.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" id="td_ngayLam" name="td_ngayLam" value="{{old('td_ngayLam',$td->td_ngayLam)}} " ng-model="td_ngayLam" ng-minlength="10"
-                        ng-maxlength="10" ng-required=true ng-pattern="/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/" data-toggle="tooltip" data-placement="top" title="Điền theo định dạng năm-tháng-ngày. VD:2020-01-20" data-html="true" data-template='<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-cyan border"</div></div>'>
+                  <input type="date" class="form-control" ng-class="frmCreate.td_ngayLam.$touched?frmCreate.td_ngayLam.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'" id="td_ngayLam" name="td_ngayLam" value="{{old('td_ngayLam',$td->td_ngayLam)}} " ng-model="td_ngayLam" ng-required=true>
                   <div class="invalid-feedback">
                     <span ng-show="frmEdit.td_ngayLam.$error.required">Bạn phải điền từ ngày</span>
-                    <span ng-show="frmEdit.td_ngayLam.$error.minlength">Giá trị quá ngắn</span>
-                    <span ng-show="frmEdit.td_ngayLam.$error.maxlength">Giá trị quá dài</span>
-                    <span ng-show="frmEdit.td_ngayLam.$error.pattern&&!(frmEdit.td_ngayLam.$error.minlength||frmEdit.td_ngayLam.$error.maxlength)">Từ ngày không hợp lệ</span>
                   </div>
                 </div>
-              </div>    
+              </div>
             </div>
             <div class="row form-group">
               <div class="col">
@@ -149,7 +141,7 @@ Cập nhật tuyển dụng
               <div class="col">
                 <div class="form-group">
                   <label for="td_soTruong">Sở trường</label>
-                  <input type="text" class="form-control" id="td_soTruong" name="td_soTruong" value="{{old('td_soTruong',$td->td_soTruong)}}"  ng-class="frmEdit.td_soTruong.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="td_soTruong" ng-required="true" ng-minlength="5" ng-maxlength="50">
+                  <input type="text" class="form-control" id="td_soTruong" name="td_soTruong" value="{{old('td_soTruong',$td->td_soTruong)}}" ng-class="frmEdit.td_soTruong.$invalid?'form-control is-invalid':'form-control is-valid'" ng-model="td_soTruong" ng-required="true" ng-minlength="5" ng-maxlength="50">
                   <div class="invalid-feedback">
                     <span ng-show="frmEdit.td_soTruong.$error.required">Bạn phải điền tên trường</span>
                     <span ng-show="frmEdit.td_soTruong.$error.minlength">Nhập quá ngắn, phải chứa ít nhất 5 ký tự</span>
@@ -174,20 +166,20 @@ Cập nhật tuyển dụng
 <script>
   $('.toast').toast('show');
   $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    app.controller('tuyendungcapnhatController', function($scope, $http) {
-        $scope.td_ma = '{{$td->td_ma}}';
-        $scope.nv_ma = '{{$td->nv_ma}}';
-        $scope.td_ngay = '{{$td->td_ngay}}';
-        $scope.td_ngheTruocDay = '{{$td->td_ngheTruocDay}}';
-        $scope.dv_ma = '{{$td->dv_ma}}';
-        $scope.td_coQuanTuyen = '{{$td->td_coQuanTuyen}}';
-        $scope.cvu_ma = '{{$td->cvu_ma}}';
-        $scope.td_ngayLam = '{{$td->td_ngayLam}}';
-        $scope.cv_ma = '{{$td->cv_ma}}';
-        $scope.td_soTruong = '{{$td->td_soTruong}}';
-    });
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  app.controller('tuyendungcapnhatController', function($scope, $http) {
+    $scope.td_ma = '{{$td->td_ma}}';
+    $scope.nv_ma = '{{$td->nv_ma}}';
+    $scope.td_ngay = new Date('{{$td->td_ngay}}');
+    $scope.td_ngheTruocDay = '{{$td->td_ngheTruocDay}}';
+    $scope.dv_ma = '{{$td->dv_ma}}';
+    $scope.td_coQuanTuyen = '{{$td->td_coQuanTuyen}}';
+    $scope.cvu_ma = '{{$td->cvu_ma}}';
+    $scope.td_ngayLam = new Date('{{$td->td_ngayLam}}');
+    $scope.cv_ma = '{{$td->cv_ma}}';
+    $scope.td_soTruong = '{{$td->td_soTruong}}';
+  });
 </script>
 
 @endsection
