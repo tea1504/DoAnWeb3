@@ -43,10 +43,10 @@ php artisan db:seed
 
 ## Step 6: thông tin tài khoản truy cập hệ thống
 Tài khoản Admin:
-admin / admin
+Admin / 12345
 
 Tài khoản Nhân viên:
-nhanvien / 123456
+user2 / 12345, user3 / 12345, 
 ...
 
 ## dbnhansu
