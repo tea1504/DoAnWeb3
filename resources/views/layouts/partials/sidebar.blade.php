@@ -63,7 +63,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="{{route('admin.thongtinchung.create')}}" class="nav-link">
                             <i class="fas fa-user-plus nav-icon"></i>
                             <p>Thêm mới</p>
                         </a>
