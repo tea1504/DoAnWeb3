@@ -633,7 +633,7 @@
                 </ul>
             </li>
             @endcan
-            @can('xemThongKe')
+            @can('admin')
             <li class="nav-item">
                 <a href="{{route('admin.thongke.index')}}" class="{{ request()->is('admin/thongke')?'active nav-link':'nav-link' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
