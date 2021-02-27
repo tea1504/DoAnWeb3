@@ -14,7 +14,7 @@ class ChucVuTableSeeder extends Seeder
         $list = [];
 
         $types = [
-            [1,'Giám đốc','Người đứng đầu công ti'],
+            [1,'Giám đốc','Người đứng đầu công ty'],
             [2,'Phó giám đốc','Người hộ trợ trực tiếp cho giám đốc'],
             [3,'Giám đốc điều hành',''],
             [4,'Giám đốc thông tin',''],

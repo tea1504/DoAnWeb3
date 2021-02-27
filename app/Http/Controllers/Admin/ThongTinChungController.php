@@ -42,7 +42,7 @@ class ThongTinChungController extends Controller
      */
     public function create()
     {
-        $this->authorize('view', User::class);
+        $this->authorize('create', User::class);
         return view('admin.thongtinchung.create')
             ->with('dsrole', Role::all())
             ->with('dscvu', ChucVu::all())

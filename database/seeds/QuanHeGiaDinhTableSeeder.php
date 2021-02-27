@@ -22,7 +22,7 @@ class QuanHeGiaDinhTableSeeder extends Seeder
         $nu  = ['Em', 'Chị', 'Cô' , 'Dì' , 'Mẹ' , 'Bà'];
         $nghe = ['Bác sĩ', 'Nha sĩ', 'Giáo viên', 'Đầu bếp', 'Thợ may', 'Phóng viên', 'Ca sĩ', 'Họa sĩ', 'Cảnh sát', 'Nông dân', 'Tự do', 'Nội trợ'];
         $k=1;
-        for ($i=1; $i <= 20; $i++) {
+        for ($i=1; $i <= 40; $i++) {
             $ma = 'CB';
             if ($i < 10)
                 $ma .= '000';
@@ -59,7 +59,7 @@ class QuanHeGiaDinhTableSeeder extends Seeder
                     'qhgd_namSinh' => $faker->year($max = '-25 years'),
                     'qhgd_diaChi' => $uPI->Address(),
                     'qhgd_ngheNghiep' => $nghe[$faker->numberBetween(0, count($nghe)-1)],
-                    'qhgd_nuocNgoai' => $faker->numberBetween(0, 1),
+                    'qhgd_nuocNgoai' => $faker->numberBetween(1, 100)%3==0?1:0,
                 ]);
             }
         }

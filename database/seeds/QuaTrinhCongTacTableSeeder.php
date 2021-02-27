@@ -14,7 +14,7 @@ class QuaTrinhCongTacTableSeeder extends Seeder
         $list = [];
         $faker = Faker\Factory::create('vi_VN');
         $k = 1;
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 40; $i++) {
             if ($faker->numberBetween(1, 100) >= 65) {
                 $ma = 'CB';
                 if ($i < 10)

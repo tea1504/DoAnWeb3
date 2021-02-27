@@ -92,7 +92,7 @@ class QuanHeGiaDinhExport implements FromView, WithDrawings, WithEvents, ShouldA
         $dsnv = QuanHeGiaDinh::all();
         foreach ($dsnv as $index => $qh) {
             $currentRow = $startRow + $index;
-            $event->sheet->getDelegate()->getRowDimension($currentRow)->setRowHeight(80);
+            // $event->sheet->getDelegate()->getRowDimension($currentRow)->setRowHeight(80);
 
             $coordinate = "A${currentRow}:I${currentRow}";
             $event->sheet->getDelegate()->getStyle($coordinate)->applyFromArray(

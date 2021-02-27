@@ -22,7 +22,7 @@ class NhanVienTableSeeder extends Seeder
         $trinhdo = ['Kỹ sư Công nghệ thông tin', 'Cử nhân Kinh tế', 'Cử nhân Luật hành chính', 'Cử nhân Toán ứng dụng', 'Cử nhân kế toán', 'Kỹ sư Quản lý công nghiệp'];
         $gdcs = ['Con thương binh', 'Con liệt sĩ', 'Người nhiễm chất độc da cam Dioxin'];
         $today = new DateTime();
-        for ($i = 2; $i <= 20; $i++) {
+        for ($i = 2; $i <= 40; $i++) {
             $percent = $faker->numberBetween(1, 100);
 
             // tao ma can bo

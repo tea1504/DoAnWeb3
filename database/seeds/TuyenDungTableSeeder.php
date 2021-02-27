@@ -13,7 +13,7 @@ class TuyenDungTableSeeder extends Seeder
     {
         $list = [];
         $faker = Faker\Factory::create('vi_VN');
-        for($i=1; $i<=20; $i++){
+        for($i=1; $i<=40; $i++){
             $ma = 'CB';
             if ($i < 10)
                 $ma .= '000';

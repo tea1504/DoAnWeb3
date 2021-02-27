@@ -12,22 +12,10 @@ class KyLuatTableSeeder extends Seeder
     public function run()
     {
         $list = [];
-        $types = [
-            'Lorem ipsum dolor sit amet',
-            'consectetur adipiscing elit',
-            'sed do eiusmod tempor incididunt',
-            'ut labore et dolore magna aliqua',
-            'In fermentum et sollicitudin ac',
-            'orci phasellus egestas',
-            'Dignissim convallis aenean et tortor at',
-            'Donec enim diam vulputate ut pharetra sit',
-            'Orci eu lobortis elementum nibh',
-            'Vitae tortor condimentum lacinia quis vel eros.',
-        ];
 
         $faker = Faker\Factory::create('vi_VN');
         $k = 1;
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 40; $i++) {
             if ($faker->numberBetween(1, 100) <= 5) {
                 $ma = 'CB';
                 if ($i < 10)
@@ -51,7 +39,7 @@ class KyLuatTableSeeder extends Seeder
                     'nv_ma' => $ma . $i,
                     'kl_ngayKy' => $faker->dateTimeBetween($startDate = '-3 years', $endDate = 'now', $timezone = null),
                     'kl_nguoiKy' => $ma2 . $i2,
-                    'kl_lyDo' => $types[$faker->numberBetween(0, count($types) - 1)]
+                    'kl_lyDo' => $faker->sentence($nbWords = $faker->numberBetween(6, 10), $variableNbWords = true)
                 ]);
             }
         }

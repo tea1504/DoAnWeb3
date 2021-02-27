@@ -14,7 +14,7 @@ class NoiSinhTableSeeder extends Seeder
         $list = [];
         $types = ["Nguyễn Văn Linh", "Đường 3/2", "Phạm Văn Bạch", "Dương Văn Dương", "Lê Văn Thọ", "Cầu Xéo", "Nguyễn Văn Cừ", "Tỉnh lộ 921", "Bùi Viện", "Cách Mạng Tháng 8", "Đề Thám", "Mậu Thân", "Trần Hưng Đạo", "Ngô Quyền", "Hùng Vương", "Đại lộ Hòa Bình", "Huỳnh Thúc Kháng", "Lê Lai", "Lê Lợi"];
         $faker = Faker\Factory::create('vi_VN');
-        for($i=1; $i<=20; $i++){
+        for($i=1; $i<=40; $i++){
             $ma = 'CB';
             if ($i < 10)
                 $ma .= '000';

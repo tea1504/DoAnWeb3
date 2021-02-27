@@ -46,7 +46,7 @@ class VbccTableSeeder extends Seeder
         $th = ['Chứng chỉ ứng dụng Công nghệ thông tin cơ bản', 'Chứng chỉ ứng dụng Công nghệ thông tin nâng cao', 'MOS'];
         $th_td = ['Specialist', 'Expert', 'Master'];
         $k = 1;
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 40; $i++) {
             $ma = 'CB';
             if ($i < 10)
                 $ma .= '000';
